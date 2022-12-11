@@ -1,5 +1,5 @@
 node_modules
-# Ignore artifacts:
+# Ignore artifacts
 build
 coverage
 vite-env.d
