@@ -1,0 +1,124 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+li {
+    list-style-type: none;
+    color: #FFFFFF;;
+  }
+
+.navbar{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 10vh;
+    box-shadow: rgba(50, 50, 93, 0.23) 0px 30px 30px -20px;
+}
+
+ .logotext{
+    font-size: 30px;
+}
+
+.navlinks {
+  display: flex;
+  justify-content: flex-end;
+  width: 75%;
+}
+
+.navlinks li{
+    color: #21334F;
+    font-size: 20px;
+    padding: 10px 20px;
+    margin: 0 10px;
+    cursor: pointer;
+    text-transform: capitalize;
+    text-decoration: none;
+}
+
+.mobile-menu-icon {
+    display: none;
+}
+
+button{
+    border: none;
+    text-decoration: none;
+    font-size: 20px;
+    background: none;
+}
+
+.togglebutton .bar{
+    height: 3px;
+    width: 100%;
+    background-color: white;
+    border-radius: 10px;
+}
+
+li:link{
+    text-decoration: none;
+}
+
+li:visited{
+    text-decoration: none;
+}
+
+li:hover{
+    text-decoration: none;
+}
+
+li:active{
+    text-decoration: none;
+}
+
+.getstarted{
+    padding: 2px;
+    gap: 10px;
+    background: #FD2959;
+    border-radius: 4px;
+}
+
+@media(max-width: 768px){
+    .logotext{
+        display: flex;
+        position: absolute;
+        top: 15px;
+        left: 35px;
+    }
+    .navlinks{
+        display: none;
+    }
+
+    .nav-links-mobile {
+        position: absolute;
+        display: block;
+        list-style: none;
+        box-shadow: rgba(50, 50, 93, 0.23) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+        left: 0;
+        top: 10%;
+        transition: all 0.5s ease-in-out;
+        width: 100%;
+        background-color: white;
+      }
+
+      ul li {
+        padding: 32px;
+        width: 100%;
+        transition: all 0.5s ease-in-out;
+        text-align: center;
+      }
+
+      .mobile-menu-icon {
+        position: absolute;
+        display: block;
+        right: 20px;
+      }
+}
+/*
+.container{
+    display: flex;
+}
+
+.navlinks{
+    display: flex;
+} */
