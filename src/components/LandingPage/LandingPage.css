@@ -1,0 +1,187 @@
+*{
+    box-sizing: border-box;
+  
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    overflow: auto; 
+    height: 100%; 
+}
+html {
+    overscroll-behavior: none;
+    overflow: hidden;
+    height: 100%;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    padding-left: 10px;
+    padding-right: 60px;
+}
+
+.brand-title{
+    font-size: 1.5rem;
+}
+
+.navbar-links ul{
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.navbar-links li {
+    list-style: none;
+    display: inline-block;
+    padding: 10px 20px;
+}
+
+.navbar-links li a {
+    text-decoration: none;
+    color: white;
+    padding: 1rem;
+    display: block;
+    font-weight: bold;
+font-family: "Inter";
+font-size: 16px;
+line-height: 20px;
+}
+
+.navbar-links li a:hover{
+    color: #FD2959;
+    transition: .3s;
+}
+.line{
+    border-left: 1px solid white;
+    top: 10px;
+  height: 70px;
+}
+button{
+    border: none;
+    color: white;
+    background:#FD2959 ;
+    padding: 14px 17px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 15px;
+    transition: .5s;
+}
+button:hover{
+    transform:scale(1.3);
+    cursor: pointer;
+}
+.toggle-button{
+    position: absolute;
+    top: .75rem;
+    right: 1rem;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+
+}
+.toggle-button .bar{
+    height: 3px;
+    width: 100%;
+    background-color: white;
+    border-radius: 10px;
+}
+.hamburger{
+    position: absolute;
+    top: 2.85rem;
+    right: 1rem;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    
+}
+.hamburger a{
+    color: white;
+    text-decoration: none;
+}
+
+.middletext{
+    display: flex;
+    flex-direction: column;
+    gap:34px;
+    position: absolute;
+    top: 10.85rem;
+    left: 5rem;
+}
+.m-text-heading{
+    font-size: 4em;
+}
+.m-button{
+    width: 16em;
+}
+.hero{
+   
+    height: 80vh;
+    width: 100%;
+    background-image: linear-gradient(rgb(0,0,0,0.6), rgb(0,0,0,0.6)), url(../../assets/background.svg);
+    background-repeat: no-repeat;
+    resize: both;
+    overflow: auto;
+    /* background-size: 125px 175px; */
+    /* background-size: auto 150px; */
+}
+
+@media (max-width:700px) {    
+    .toggle-button{
+        display: flex;
+
+    }
+    .navbar-links{
+        display: none;
+    }
+    .navbar{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navbar-links ul {
+        width: 100%;
+        flex-direction: column;
+    }
+    .navbar-links li{
+        text-align: left;
+    }
+    .navbar-links li a{
+        padding: .5rem 1rem;
+    }
+
+    .navbar-links.active{
+        display: flex;
+    }
+    .hamburger{
+        display: flex;
+    }
+    .hero{
+   
+        height: 400px;
+        /* max-height: fit-content; */
+        width: 100%;
+        max-width: 400px;
+        background-image: linear-gradient(rgb(0,0,0,0.6), rgb(0,0,0,0.6)), url(../../assets/background.svg);
+        background-repeat: no-repeat;
+
+        /* resize: both; */
+        /* overflow: auto; */
+    
+    }
+    .m-text-heading{
+        font-size: 30px;
+    }
+    .description{
+        font-size: 30px;
+    }
+
+   
+}
