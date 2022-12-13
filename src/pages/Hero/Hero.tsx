@@ -11,10 +11,8 @@ const Hero = ({ mystyle }: any) => {
 		<div className="hero">
 			<nav className="navbar">
 				<div className="brand-title">
+					<img src={tutorLogo} alt="logo" width="68px" />
 					<h4>
-						<span id="logoImage">
-							<img src={tutorLogo} alt="logo" width="43em" />
-						</span>{" "}
 						<span id="logoText">ILearning </span>
 					</h4>
 				</div>

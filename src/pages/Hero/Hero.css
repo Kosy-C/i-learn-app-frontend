@@ -31,13 +31,16 @@ html {
 
 .brand-title{
     /* font-size: 1.5rem; */
+    
     margin-left: 70px;
+    display: flex;
+    
     
 }
 #logoText{
     font-weight: 900;
     font-size: 24px;
-    line-height: 29px;
+  
 }
 
 .navbar-links ul{
