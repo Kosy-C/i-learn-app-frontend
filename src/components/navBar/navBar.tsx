@@ -27,37 +27,35 @@ const NavBar = () => {
       {
         !getSignature ? (<>
 
-         <Link to={'/tutors'} className='tutors'>
+         <Link to={'/tutors'} className='nav-link'>
         <li> Tutors</li>
         </Link>
 
-        <Link to={'/about'} className='about'>
+        <Link to={'/about'} className='nav-link'>
         <li> About Us</li>
         </Link>
 
-        <li>|</li>
-
-        <Link to={'/login'} className='login'>
+        <Link to={'/login'} className='nav-link'>
         <li> Login</li>
         </Link>
 
-        <Link to={'/getstarted'} className='getstarted'>
+        <Link to={'/getstarted'} className='nav-link'>
         <li> Get Started</li>
         </Link>
 
         </>) : (<>
 
-        <Link to={'/dashboard'} className='dashboard'>
+        <Link to={'/dashboard'} className='nav-link'>
         <li> Dashboard</li>
         </Link>
       
       
-         <Link to={'/reminder'} className='reminder'>
+         <Link to={'/reminder'} className='nav-link'>
         <li> Reminder</li>
           </Link>
       
       
-        <Link to={'/notification'} className='notification' >
+        <Link to={'/notification'} className='nav-link' >
         <li> Notification</li>
          </Link>
 
@@ -71,7 +69,7 @@ const NavBar = () => {
    
       
       <li>
-        <img src='src/assets/images/profilepic.svg'/> 
+        <img src='src/assets/images/profilepic.svg' className='profilepic'/> 
       </li>
 
       </ul>
