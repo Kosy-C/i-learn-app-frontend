@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./Hero.css";
+import tutorLogo from "../../assets/logo.png";
 
-const Hero = () => {
+const Hero = ({ mystyle }: any) => {
 	const [show, setShow] = useState(false);
 	const handleClick = () => {
 		setShow(!show);
@@ -10,7 +11,12 @@ const Hero = () => {
 		<div className="hero">
 			<nav className="navbar">
 				<div className="brand-title">
-					<h1> ILEARNING</h1>
+					<h4>
+						<span>
+							<img src={tutorLogo} />
+						</span>{" "}
+						<span id="logoText">ILEARNING </span>
+					</h4>
 				</div>
 				<a href="#" className="toggle-button" onClick={handleClick}>
 					<span className="bar"></span>
@@ -37,7 +43,11 @@ const Hero = () => {
 							<a href="#"> Login</a>
 						</li>
 
-						<button type="button">Get Started</button>
+						<li id="hove">
+							<a href="#" className="button">
+								Get Started
+							</a>
+						</li>
 					</ul>
 				</div>
 				<div className="middletext">
@@ -46,12 +56,14 @@ const Hero = () => {
 						Find the best online <br />
 						tutor for you.
 					</h1>
-					<p className="description">
-						Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quibusdam{" "}
+					<p id="description">
+						Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
 						<br />
-						blanditiis enim voluptatem voluptatibus illo nostrum illum placeat.
+						Quibusdam blanditiis enim voluptatem voluptatibus illo
+						<br />
+						nostrum illum placeat.
 					</p>
-					<button type="button" className="m-button">
+					<button type="button" id="m-button">
 						Get Started
 					</button>
 				</div>
