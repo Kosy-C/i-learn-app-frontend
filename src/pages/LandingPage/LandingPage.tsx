@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Footer from "../../components/Footer/Footer";
 import "./LandingPage.css";
 
 const LandingPage = () => {
@@ -59,6 +60,7 @@ const LandingPage = () => {
 					</button>
 				</div>
 			</nav>
+			<Footer />
 		</div>
 	);
 };
