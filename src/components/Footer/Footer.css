@@ -41,3 +41,21 @@
     /* right: 80.54%; */
     top: 92%;
 }
+#footerGroup{
+    position: absolute;
+    display: flex;
+    width: 10em;
+    justify-content: space-around;
+    /* border: 2px solid white; */
+    left: 44%;
+    /* right: 80.54%; */
+    top: 80%;
+}
+#footerText{
+    color: white;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 29px;
+    padding: 0;
+    margin: auto;
+}

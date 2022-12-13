@@ -12,10 +12,10 @@ const Hero = ({ mystyle }: any) => {
 			<nav className="navbar">
 				<div className="brand-title">
 					<h4>
-						<span>
-							<img src={tutorLogo} />
+						<span id="logoImage">
+							<img src={tutorLogo} alt="logo" width="43em" />
 						</span>{" "}
-						<span id="logoText">ILEARNING </span>
+						<span id="logoText">ILearning </span>
 					</h4>
 				</div>
 				<a href="#" className="toggle-button" onClick={handleClick}>
@@ -57,7 +57,7 @@ const Hero = ({ mystyle }: any) => {
 						tutor for you.
 					</h1>
 					<p id="description">
-						Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
+						Lorem ipsum dolor sit amet consectetur, adipisicing elit.
 						<br />
 						Quibusdam blanditiis enim voluptatem voluptatibus illo
 						<br />
