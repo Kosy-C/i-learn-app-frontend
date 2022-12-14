@@ -1,8 +1,7 @@
 import { useState } from "react";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 import "./Hero.css";
 import tutorLogo from "../../assets/logo.png";
-
 const Hero = ({ mystyle }: any) => {
 	const [show, setShow] = useState(false);
 	const handleClick = () => {
@@ -12,66 +11,64 @@ const Hero = ({ mystyle }: any) => {
 		<div className="hero">
 			<nav className="navbar">
 				<div className="brand-title">
-					<img src={tutorLogo} alt="logo" width="68px" />
-					<h4>
-						<span id="logoText">  ILearn </span>
-					</h4>
+					<Link to="/#">
+						<img src={tutorLogo} alt="logo" />
+					</Link>
+					<span>iLearn</span>
 				</div>
-				<a href="#" className="toggle-button" onClick={handleClick}>
-					<span className="bar"></span>
-					<span className="bar"></span>
-					<span className="bar"></span>
-				</a>
-				{show && (
-					<div className="hamburger">
-						<a href="#">Tutors</a>
-						<a href="#">About Us</a>
-						<a href="#"> Login</a>
-					</div>
-				)}
+				{/* <a href="#" className="toggle-button" onClick={handleClick}>
+                    <span className="bar"></span>
+                    <span className="bar"></span>
+                    <span className="bar"></span>
+                </a> */}
+				{/* {show && (
+                    <div className="hamburger">
+                        <a href="#">Tutors</a>
+                        <a href="#">About Us</a>
+                        <a href="#"> Login</a>
+                    </div>
+                )} */}
 				<div className="navbar-links">
 					<ul>
 						<li>
-							<a href="#">Tutors</a>
+							<Link to="/Tutors">Tutors</Link>
 						</li>
 						<li>
-							<a href="#">About Us</a>
+							<Link to="/About-us">About Us</Link>
+							{/* <a href="#">About Us</a> */}
 						</li>
 						<span className="line"></span>
 						<li>
-						<Link to="/login" className="login-link">
-									Login
-								</Link>
+							<Link to="/login">Login</Link>
 						</li>
-
 						<li id="hove">
-							{/* <a href="#" className="button">
-								Get Started
-							</a> */}
-							<Link to="/sign-up" className="button">Get Started</Link>
+							<Link to="/sign-up">Get Started</Link>
 						</li>
 					</ul>
 				</div>
-				<div className="middletext">
-					<h1 className="m-text-heading">
-						{" "}
+			</nav>
+			<div className="body-content">
+				<div className="card firstCard">
+					<h1>
 						Find the best online <br />
 						tutor for you.
 					</h1>
-					<p id="description">
-						Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-						<br />
-						Quibusdam blanditiis enim voluptatem voluptatibus illo
-						<br />
-						nostrum illum placeat.
-					</p>
-					
-					<Link to="/sign-up" id="m-button">Get Started</Link>
-					
 				</div>
-			</nav>
+				<div className="card">
+					Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+					<br />
+					Quibusdam blanditiis enim voluptatem voluptatibus illo
+					<br />
+					nostrum illum placeat.
+				</div>
+
+				<div className="card buttonCard">
+					<Link to="/sign-up">
+					<a href="/sign-up">Get Started</a>
+					</Link>
+				</div>
+			</div>
 		</div>
 	);
 };
-
 export default Hero;

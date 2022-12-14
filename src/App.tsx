@@ -9,7 +9,7 @@ import LandingPage from "./pages/LandingPage/LandingPage";
 import NavBar from "./components/navBar/navBar";
 // import "./App.css";
 
-import ResetPassword from "./components/ResetPassword/resetPassword";
+import ResetPassword from "./pages/Home/Home";
 
 function App() {
 	return (
@@ -22,7 +22,7 @@ function App() {
 					<Route path="/sign-up" element={<SignUpForm />} />
 					<Route path="/login" element={<LoginForm />} />
 					<Route path="/reset-password" element={<ResetPassword />} />
-					<Route path="/users/forgot-password" element={<ResetPassword />} />
+					{/* <Route path="/users/forgot-password" element={<ResetPassword />} /> */}
 				</Routes>
 			</Router>
 		</React.Fragment>
