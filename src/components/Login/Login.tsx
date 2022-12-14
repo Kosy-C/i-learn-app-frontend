@@ -5,8 +5,6 @@ import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import logo from "../../assets/logo.png";
 import { signInWithGooglePopup } from "../../utils/firebaseAuth/firebase";
-import axios from "axios";
-
 
 function SignUpForm() {
 	const googleSignIn = async () => {
@@ -27,23 +25,11 @@ function SignUpForm() {
         else if(interest.length == 0) return setError("Please Select an area of Interest");
     }
 
-	const handleSubmit = async(event: ChangeEvent<HTMLFormElement>) => {
+	const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
 		event.preventDefault();
         validate(emailRef.current?.value, passwordRef.current?.value, interestRef.current?.value,userTypeRef.current?.value)
-        const data = {
-            email: `${emailRef.current?.value}`,
-            password: `${passwordRef.current?.value}`,
-            interest: `${interestRef.current?.value}`,
-            usertype: `${userTypeRef.current?.value}`,
-
-        }
-        // const response = await axios.post("http://localhost:4000/users/sign-up", data)
-        // console.log(response.data.json())
+        // const { name, value } = event.target
         console.log(emailRef.current?.value)
-        console.log(passwordRef.current?.value)
-        console.log(interestRef.current?.value)
-        console.log(userTypeRef.current?.value)
-        //message, signature and verified status will be sent from the backend
 	};
 
 
@@ -55,27 +41,17 @@ function SignUpForm() {
 						<img src={logo} alt="Logo" />
 					</div>
 					<div>
-						<h2>iLearn </h2>
+						<h2> iLearn </h2>
 					</div>
 				</div>
 				<div>
 					<div className="formBody">
 						<div className="formHead">
-							<h3>Create an account </h3>
-							<p>Create your account to connect with students</p>
+							<h3>Login </h3>
 						</div>
 
 						<form onSubmit={handleSubmit} className="formInputs">
-							<div>
-								<label className="formLabel" id="userType">
-									User Type
-								</label>
-								<select id="userType" name="userType" ref={userTypeRef}>
-									<option value="">Select</option>
-									<option value="Tutor">Tutor</option>
-									<option value="Student">Student</option>
-								</select>
-							</div>
+							
                             
                             {(error.length > 0 && error.includes("user")) && <div className="errorMsg">{error}</div>}
 							<div className="formLabel">
@@ -99,28 +75,17 @@ function SignUpForm() {
 									required
 								/>
 							</div>
+                            <div>Forgot password?</div>
                             {(error.length > 0 && error.includes("Password")) && <div className="errorMsg">{error}</div>}
-							<div className="formLabel">
-								<label id="interest">Area of Interest</label>
-								<select id="interest" name="interest" ref={interestRef}>
-									<option value="">Select</option>
-									<option value="Tutor">Mathematics</option>
-									<option value="physics">Physics</option>
-									<option value="coding">Coding</option>
-									<option value="graphics">Graphics design</option>
-									<option value="video">Video Editing</option>
-									<option value="chemistry">Chemistry</option>
-									<option value="digital">Digital Marketing</option>
-								</select>
-							</div>
+							
                             {(error.length > 0 && error.includes("Interest")) && <div className="errorMsg">{error}</div>}
 							<button type="submit" className="signUp-button">
-								Sign Up
+								Login
 							</button>
 							<div className="formAlt">
-								Already have an account?
-								<Link to="/login" className="login-link">
-									Login
+								Don't have an account?
+								<Link to="/sign-up" className="login-link">
+									Create
 								</Link>
 							</div>
 							<div className="socialIcons">

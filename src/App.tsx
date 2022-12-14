@@ -2,6 +2,7 @@ import React from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import "./App.css";
 import SignUpForm from "./components/signUp/signUp";
+import LoginForm from "./components/Login/Login";
 // import Footer from "./components/Footer/Footer";
 // import Home from "./pages/Home/Home";
 import LandingPage from "./pages/LandingPage/LandingPage";
@@ -16,6 +17,7 @@ function App() {
 
 					<Route path="/navbar" element={<NavBar />} />
 					<Route path="/sign-up" element={<SignUpForm />} />
+					<Route path="/login" element={<LoginForm />} />
 				</Routes>
 			</Router>
 		</React.Fragment>

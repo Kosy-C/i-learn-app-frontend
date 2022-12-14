@@ -14,7 +14,7 @@ const Hero = ({ mystyle }: any) => {
 				<div className="brand-title">
 					<img src={tutorLogo} alt="logo" width="68px" />
 					<h4>
-						<span id="logoText">ILearning </span>
+						<span id="logoText">  ILearn </span>
 					</h4>
 				</div>
 				<a href="#" className="toggle-button" onClick={handleClick}>
@@ -39,14 +39,16 @@ const Hero = ({ mystyle }: any) => {
 						</li>
 						<span className="line"></span>
 						<li>
-							<a href="#"> Login</a>
+						<Link to="/login" className="login-link">
+									Login
+								</Link>
 						</li>
 
 						<li id="hove">
 							{/* <a href="#" className="button">
 								Get Started
 							</a> */}
-							<Link to="/sign-up">Get Started</Link>
+							<Link to="/sign-up" className="button">Get Started</Link>
 						</li>
 					</ul>
 				</div>
@@ -63,9 +65,9 @@ const Hero = ({ mystyle }: any) => {
 						<br />
 						nostrum illum placeat.
 					</p>
-					<button type="button" id="m-button">
-						Get Started
-					</button>
+					
+					<Link to="/sign-up" id="m-button">Get Started</Link>
+					
 				</div>
 			</nav>
 		</div>
