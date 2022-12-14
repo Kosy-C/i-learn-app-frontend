@@ -37,7 +37,7 @@ function SignUpForm() {
             usertype: `${userTypeRef.current?.value}`,
 
         }
-        // const response = await axios.post("http://localhost:4000/users/sign-up", data)
+        // const response = await axios.post("http://localhost:4000/users/signup", data)
         // console.log(response.data.json())
         console.log(emailRef.current?.value)
         console.log(passwordRef.current?.value)
