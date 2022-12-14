@@ -1,4 +1,5 @@
 import { useState } from "react";
+import {Link} from "react-router-dom"
 import "./Hero.css";
 import tutorLogo from "../../assets/logo.png";
 
@@ -42,9 +43,10 @@ const Hero = ({ mystyle }: any) => {
 						</li>
 
 						<li id="hove">
-							<a href="#" className="button">
+							{/* <a href="#" className="button">
 								Get Started
-							</a>
+							</a> */}
+							<Link to="/sign-up">Get Started</Link>
 						</li>
 					</ul>
 				</div>
