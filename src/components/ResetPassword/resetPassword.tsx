@@ -1,6 +1,8 @@
 import "./resetPassword.css";
 import React from "react";
-import Group from "../../../assets/Group.svg";
+import Group from "../../assets/Group.svg";
+// import { toast } from "react-toastify";
+
 const ResetPassword = () => {
 	return (
 		<div className="overallDiv">

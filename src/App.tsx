@@ -8,7 +8,7 @@ import LandingPage from "./pages/LandingPage/LandingPage";
 import NavBar from "./components/navBar/navBar";
 // import "./App.css";
 
-import ResetPassword from "./pages/Home/ResetPassword/resetPassword";
+import ResetPassword from "./components/ResetPassword/resetPassword";
 
 function App() {
 	return (
