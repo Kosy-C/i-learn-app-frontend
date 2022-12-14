@@ -20,6 +20,7 @@ function App() {
 					<Route path="/navbar" element={<NavBar />} />
 					<Route path="/sign-up" element={<SignUpForm />} />
 					<Route path="/reset-password" element={<ResetPassword />} />
+					<Route path="/users/forgot-password" element={<ResetPassword />} />
 				</Routes>
 			</Router>
 		</React.Fragment>
