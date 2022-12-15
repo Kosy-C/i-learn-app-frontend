@@ -5,16 +5,17 @@ import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import logo from "../../assets/logo.png";
 import { signInWithGooglePopup } from "../../utils/firebaseAuth/firebase";
+import axios from "axios";
 
-function SignUpForm() {
+const baseUrl = "http://localhost:4000";
+
+function LoginForm() {
 	const googleSignIn = async () => {
 		await signInWithGooglePopup();
 	};
 
 	const emailRef = useRef<HTMLInputElement>(null);
 	const passwordRef = useRef<HTMLInputElement>(null);
-	const interestRef = useRef<HTMLSelectElement>(null);
-	const userTypeRef = useRef<HTMLSelectElement>(null);
 
 	const [error, setError] = useState("");
 
@@ -24,24 +25,28 @@ function SignUpForm() {
 		interest: string = "",
 		userType: string = ""
 	) => {
-		if (userType.length == 0) return setError("Please select a user type");
-		else if (email.length == 0) return setError("Please Enter your email");
+		if (email.length === 0) return setError("Please Enter your email");
 		else if (password.length < 8)
 			return setError("Password character cannot be less than 8");
-		else if (interest.length == 0)
-			return setError("Please Select an area of Interest");
 	};
 
-	const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
+	const handleSubmit = async (event: ChangeEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		validate(
-			emailRef.current?.value,
-			passwordRef.current?.value,
-			interestRef.current?.value,
-			userTypeRef.current?.value
-		);
+		validate(emailRef.current?.value, passwordRef.current?.value);
 		// const { name, value } = event.target
 		console.log(emailRef.current?.value);
+		const data = {
+			email: emailRef.current?.value,
+			password: passwordRef.current?.value,
+		};
+
+		const response = await axios.post(`${baseUrl}/users/login`, data);
+		console.log(response.data);
+		const signature = response.data.signature;
+		localStorage.setItem("signature", signature);
+		setTimeout(() => {
+			window.location.href = "/navbar";
+		}, 1000);
 	};
 
 	return (
@@ -121,4 +126,4 @@ function SignUpForm() {
 	);
 }
 
-export default SignUpForm;
+export default LoginForm;

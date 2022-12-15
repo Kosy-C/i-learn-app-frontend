@@ -5,6 +5,9 @@ import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import logo from "../../assets/logo.png";
 import { signInWithGooglePopup } from "../../utils/firebaseAuth/firebase";
+import axios from "axios";
+
+const baseUrl = "http://localhost:4000";
 function SignUpForm() {
 	const googleSignIn = async () => {
 		await signInWithGooglePopup();
@@ -27,7 +30,7 @@ function SignUpForm() {
 		else if (interest.length === 0)
 			return setError("Please Select an area of Interest");
 	};
-	const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
+	const handleSubmit = async (event: ChangeEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		validate(
 			emailRef.current?.value,
@@ -35,6 +38,20 @@ function SignUpForm() {
 			interestRef.current?.value,
 			userTypeRef.current?.value
 		);
+		const data = {
+			email: emailRef.current?.value,
+			password: passwordRef.current?.value,
+			areaOfInterest: interestRef.current?.value,
+			userType: userTypeRef.current?.value,
+		};
+
+		const response = await axios.post(`${baseUrl}/users/signup`, data);
+		console.log(response.data);
+		const signature = response.data.signature;
+		localStorage.setItem("signature", signature);
+		setTimeout(() => {
+			window.location.href = "/login";
+		}, 1000);
 	};
 	return (
 		<Fragment>
