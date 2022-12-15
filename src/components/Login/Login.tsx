@@ -93,7 +93,8 @@ function LoginForm() {
 									required
 								/>
 							</div>
-							<div>Forgot password?</div>
+							<div>
+								<Link to="/reset-password">Forgot password?</Link></div>
 							{error.length > 0 && error.includes("Password") && (
 								<div className="errorMsg">{error}</div>
 							)}
