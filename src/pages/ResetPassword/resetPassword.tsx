@@ -2,6 +2,7 @@ import "./resetPassword.css";
 import React from "react";
 import Group from "../../assets/Group.svg";
 // import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 const ResetPassword = () => {
 	return (
@@ -9,7 +10,7 @@ const ResetPassword = () => {
 			<div className="resetPassword">
 				<div className="tutor-buddy">
 					<img src={Group} />
-					<h3 className="learn">ILearn</h3>
+					<h3 className="learn">iLearn</h3>
 				</div>
 				<div className="form-con">
 					<div className="form-box">
@@ -29,12 +30,14 @@ const ResetPassword = () => {
 								/>
 							</div>
 							<button type="submit" className="btn-primary">
-								Send Reset Link
+								<Link to="/set-new-password" className="btn">
+									Send Reset Link
+								</Link>
 							</button>
 							<p>
 								Already have an account?{" "}
 								<span className="login">
-									<a href="/login">Login</a>
+									<Link to="/login">Login</Link>{" "}
 								</span>
 							</p>
 						</form>
