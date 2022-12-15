@@ -98,16 +98,34 @@
     background-color: #fd2929d8;
     padding: 10px;
     width: 250px;
+    height: 3em;
     text-align: center;
     text-decoration: none;
     color: white;
     margin: 10px 0px;
-    border-radius: 3px;
+    border-radius: 18px;
     }
+    .buttonCardOne{
+        background-color: #fd2929d8;
+    padding: 14px;
+    width: 250px;
+    height: 3em;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    margin: 10px 0px;
+    border-radius: 18px;
+        }
     .buttonCard a{
     text-decoration: none;
     color: white;
     font-weight: 700;
+    }
+    .buttonCardOne a{
+        text-decoration: none;
+    color: white;
+    font-weight: 700;
+    margin-bottom: 3.4em;
     }
     /* .button{
     border: none;

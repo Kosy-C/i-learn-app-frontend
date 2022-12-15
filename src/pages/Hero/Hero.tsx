@@ -16,18 +16,18 @@ const Hero = ({ mystyle }: any) => {
 					</Link>
 					<span>iLearn</span>
 				</div>
-				{/* <a href="#" className="toggle-button" onClick={handleClick}>
-                    <span className="bar"></span>
-                    <span className="bar"></span>
-                    <span className="bar"></span>
-                </a> */}
-				{/* {show && (
-                    <div className="hamburger">
-                        <a href="#">Tutors</a>
-                        <a href="#">About Us</a>
-                        <a href="#"> Login</a>
-                    </div>
-                )} */}
+				<a href="#" className="toggle-button" onClick={handleClick}>
+					<span className="bar"></span>
+					<span className="bar"></span>
+					<span className="bar"></span>
+				</a>
+				{show && (
+					<div className="hamburger">
+						<a href="#">Tutors</a>
+						<a href="#">About Us</a>
+						<a href="#"> Login</a>
+					</div>
+				)}
 				<div className="navbar-links">
 					<ul>
 						<li>
@@ -41,9 +41,11 @@ const Hero = ({ mystyle }: any) => {
 						<li>
 							<Link to="/login">Login</Link>
 						</li>
-						<li id="hove">
-							<Link to="/sign-up">Get Started</Link>
-						</li>
+						<div className="buttonCardOne">
+							<Link to="/sign-up">
+								<a href="/sign-up">Get Started</a>
+							</Link>
+						</div>
 					</ul>
 				</div>
 			</nav>
@@ -64,7 +66,7 @@ const Hero = ({ mystyle }: any) => {
 
 				<div className="card buttonCard">
 					<Link to="/sign-up">
-					<a href="/sign-up">Get Started</a>
+						<a href="/sign-up">Get Started</a>
 					</Link>
 				</div>
 			</div>

@@ -5,48 +5,37 @@ import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import logo from "../../assets/logo.png";
 import { signInWithGooglePopup } from "../../utils/firebaseAuth/firebase";
-import axios from "axios";
-
-
 function SignUpForm() {
 	const googleSignIn = async () => {
 		await signInWithGooglePopup();
 	};
-    
 	const emailRef = useRef<HTMLInputElement>(null);
 	const passwordRef = useRef<HTMLInputElement>(null);
 	const interestRef = useRef<HTMLSelectElement>(null);
 	const userTypeRef = useRef<HTMLSelectElement>(null);
-
 	const [error, setError] = useState("");
-   
-    const validate = (email:string = "", password:string="", interest:string="", userType:string="") => {
-        if(userType.length == 0) return setError("Please select a user type");
-        else if(email.length == 0) return setError("Please Enter your email");
-        else if(password.length < 8) return setError("Password character cannot be less than 8");
-        else if(interest.length == 0) return setError("Please Select an area of Interest");
-    }
-
-	const handleSubmit = async(event: ChangeEvent<HTMLFormElement>) => {
-		event.preventDefault();
-        validate(emailRef.current?.value, passwordRef.current?.value, interestRef.current?.value,userTypeRef.current?.value)
-        const data = {
-            email: `${emailRef.current?.value}`,
-            password: `${passwordRef.current?.value}`,
-            interest: `${interestRef.current?.value}`,
-            usertype: `${userTypeRef.current?.value}`,
-
-        }
-        // const response = await axios.post("http://localhost:4000/users/signup", data)
-        // console.log(response.data.json())
-        console.log(emailRef.current?.value)
-        console.log(passwordRef.current?.value)
-        console.log(interestRef.current?.value)
-        console.log(userTypeRef.current?.value)
-        //message, signature and verified status will be sent from the backend
+	const validate = (
+		email: string = "",
+		password: string = "",
+		interest: string = "",
+		userType: string = ""
+	) => {
+		if (userType.length === 0) return setError("Please select a user type");
+		else if (email.length === 0) return setError("Please Enter your email");
+		else if (password.length < 8)
+			return setError("Password character cannot be less than 8");
+		else if (interest.length === 0)
+			return setError("Please Select an area of Interest");
 	};
-
-
+	const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		validate(
+			emailRef.current?.value,
+			passwordRef.current?.value,
+			interestRef.current?.value,
+			userTypeRef.current?.value
+		);
+	};
 	return (
 		<Fragment>
 			<div className="formContainer">
@@ -55,16 +44,15 @@ function SignUpForm() {
 						<img src={logo} alt="Logo" />
 					</div>
 					<div>
-						<h2>iLearn </h2>
+						<h2>iLearn</h2>
 					</div>
 				</div>
 				<div>
 					<div className="formBody">
 						<div className="formHead">
-							<h3>Create an account </h3>
+							<h2>Create an account </h2>
 							<p>Create your account to connect with students</p>
 						</div>
-
 						<form onSubmit={handleSubmit} className="formInputs">
 							<div>
 								<label className="formLabel" id="userType">
@@ -76,8 +64,9 @@ function SignUpForm() {
 									<option value="Student">Student</option>
 								</select>
 							</div>
-                            
-                            {(error.length > 0 && error.includes("user")) && <div className="errorMsg">{error}</div>}
+							{error.length > 0 && error.includes("user") && (
+								<div className="errorMsg">{error}</div>
+							)}
 							<div className="formLabel">
 								<label>Email</label>
 								<input
@@ -85,10 +74,11 @@ function SignUpForm() {
 									name="email"
 									ref={emailRef}
 									placeholder="Enter your email"
-									required
 								/>
 							</div>
-                            {(error.length > 0 && error.includes("email")) && <div className="errorMsg">{error}</div>}
+							{error.length > 0 && error.includes("email") && (
+								<div className="errorMsg">{error}</div>
+							)}
 							<div className="formLabel">
 								<label>Password</label>
 								<input
@@ -96,10 +86,11 @@ function SignUpForm() {
 									name="password"
 									ref={passwordRef}
 									placeholder="Enter your password..."
-									required
 								/>
 							</div>
-                            {(error.length > 0 && error.includes("Password")) && <div className="errorMsg">{error}</div>}
+							{error.length > 0 && error.includes("Password") && (
+								<div className="errorMsg">{error}</div>
+							)}
 							<div className="formLabel">
 								<label id="interest">Area of Interest</label>
 								<select id="interest" name="interest" ref={interestRef}>
@@ -113,7 +104,9 @@ function SignUpForm() {
 									<option value="digital">Digital Marketing</option>
 								</select>
 							</div>
-                            {(error.length > 0 && error.includes("Interest")) && <div className="errorMsg">{error}</div>}
+							{error.length > 0 && error.includes("Interest") && (
+								<div className="errorMsg">{error}</div>
+							)}
 							<button type="submit" className="signUp-button">
 								Sign Up
 							</button>
@@ -138,5 +131,4 @@ function SignUpForm() {
 		</Fragment>
 	);
 }
-
 export default SignUpForm;

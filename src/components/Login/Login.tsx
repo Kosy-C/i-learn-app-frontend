@@ -10,28 +10,39 @@ function SignUpForm() {
 	const googleSignIn = async () => {
 		await signInWithGooglePopup();
 	};
-    
+
 	const emailRef = useRef<HTMLInputElement>(null);
 	const passwordRef = useRef<HTMLInputElement>(null);
 	const interestRef = useRef<HTMLSelectElement>(null);
 	const userTypeRef = useRef<HTMLSelectElement>(null);
 
 	const [error, setError] = useState("");
-   
-    const validate = (email:string = "", password:string="", interest:string="", userType:string="") => {
-        if(userType.length == 0) return setError("Please select a user type");
-        else if(email.length == 0) return setError("Please Enter your email");
-        else if(password.length < 8) return setError("Password character cannot be less than 8");
-        else if(interest.length == 0) return setError("Please Select an area of Interest");
-    }
+
+	const validate = (
+		email: string = "",
+		password: string = "",
+		interest: string = "",
+		userType: string = ""
+	) => {
+		if (userType.length == 0) return setError("Please select a user type");
+		else if (email.length == 0) return setError("Please Enter your email");
+		else if (password.length < 8)
+			return setError("Password character cannot be less than 8");
+		else if (interest.length == 0)
+			return setError("Please Select an area of Interest");
+	};
 
 	const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
 		event.preventDefault();
-        validate(emailRef.current?.value, passwordRef.current?.value, interestRef.current?.value,userTypeRef.current?.value)
-        // const { name, value } = event.target
-        console.log(emailRef.current?.value)
+		validate(
+			emailRef.current?.value,
+			passwordRef.current?.value,
+			interestRef.current?.value,
+			userTypeRef.current?.value
+		);
+		// const { name, value } = event.target
+		console.log(emailRef.current?.value);
 	};
-
 
 	return (
 		<Fragment>
@@ -51,9 +62,9 @@ function SignUpForm() {
 						</div>
 
 						<form onSubmit={handleSubmit} className="formInputs">
-							
-                            
-                            {(error.length > 0 && error.includes("user")) && <div className="errorMsg">{error}</div>}
+							{error.length > 0 && error.includes("user") && (
+								<div className="errorMsg">{error}</div>
+							)}
 							<div className="formLabel">
 								<label>Email</label>
 								<input
@@ -64,7 +75,9 @@ function SignUpForm() {
 									required
 								/>
 							</div>
-                            {(error.length > 0 && error.includes("email")) && <div className="errorMsg">{error}</div>}
+							{error.length > 0 && error.includes("email") && (
+								<div className="errorMsg">{error}</div>
+							)}
 							<div className="formLabel">
 								<label>Password</label>
 								<input
@@ -75,10 +88,14 @@ function SignUpForm() {
 									required
 								/>
 							</div>
-                            <div>Forgot password?</div>
-                            {(error.length > 0 && error.includes("Password")) && <div className="errorMsg">{error}</div>}
-							
-                            {(error.length > 0 && error.includes("Interest")) && <div className="errorMsg">{error}</div>}
+							<div>Forgot password?</div>
+							{error.length > 0 && error.includes("Password") && (
+								<div className="errorMsg">{error}</div>
+							)}
+
+							{error.length > 0 && error.includes("Interest") && (
+								<div className="errorMsg">{error}</div>
+							)}
 							<button type="submit" className="signUp-button">
 								Login
 							</button>
