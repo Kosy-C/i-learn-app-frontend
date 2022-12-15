@@ -109,7 +109,7 @@ function SignUpForm() {
 								<button type="submit" onClick={googleSignIn}>
 									<FcGoogle />
 								</button>
-								<button type="submit">
+								<button type="submit" className="fbBtn">
 									<FaFacebook />
 								</button>
 							</div>
