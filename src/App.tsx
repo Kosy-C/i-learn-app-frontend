@@ -11,9 +11,13 @@ import NavBar from "./components/navBar/navBar";
 
 import ResetPassword from "./pages/ResetPassword/resetPassword";
 import SetNewPassword from "./pages/ResetPassword/setNewPassword";
+import Home from "./pages/Home/Home";
+import StudentHistoryPage from "./components/studentHistoryPage/studentHistoryPage";
+
 
 function App() {
 	return (
+		
 		<React.Fragment>
 			<Router>
 				<Routes>
@@ -24,9 +28,14 @@ function App() {
 					<Route path="/login" element={<LoginForm />} />
 					<Route path="/reset-password" element={<ResetPassword />} />
 					<Route path="/set-new-password" element={<SetNewPassword />} />
+					
+					<Route path="/history-page" element={<StudentHistoryPage/>} />
+
 				</Routes>
 			</Router>
 		</React.Fragment>
+		
+		
 	);
 }
 

@@ -1,14 +1,18 @@
 import React from "react";
+import StudentHistoryPage from "../../components/studentHistoryPage/studentHistoryPage";
 
-import ResetPassword from "../../components/ResetPassword/resetPassword";
-import SetNewPassword from "../../components/ResetPassword/setNewPassword";
+import ResetPassword from "../ResetPassword/resetPassword";
+import SetNewPassword from "../ResetPassword/setNewPassword";
 
 const Home = () => {
 	return (
-		<div>
+		<><div>
 			<ResetPassword />
 			<SetNewPassword />
-		</div>
+		</div><StudentHistoryPage /></>
+
+	
+	
 	);
 };
 
