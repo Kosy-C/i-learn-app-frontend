@@ -6,13 +6,11 @@ import SetNewPassword from "../ResetPassword/setNewPassword";
 
 const Home = () => {
 	return (
-		<><div>
+		<div>
+			<StudentHistoryPage />
 			<ResetPassword />
 			<SetNewPassword />
-		</div><StudentHistoryPage /></>
-
-	
-	
+		</div>
 	);
 };
 
