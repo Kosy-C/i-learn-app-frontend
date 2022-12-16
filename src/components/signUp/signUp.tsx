@@ -6,6 +6,8 @@ import { FcGoogle } from "react-icons/fc";
 import logo from "../../assets/logo.png";
 import { signInWithGooglePopup } from "../../utils/firebaseAuth/firebase";
 import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const baseUrl = "http://localhost:4000";
 function SignUpForm() {
@@ -31,27 +33,33 @@ function SignUpForm() {
 			return setError("Please Select an area of Interest");
 	};
 	const handleSubmit = async (event: ChangeEvent<HTMLFormElement>) => {
-		event.preventDefault();
-		validate(
-			emailRef.current?.value,
-			passwordRef.current?.value,
-			interestRef.current?.value,
-			userTypeRef.current?.value
-		);
-		const data = {
-			email: emailRef.current?.value,
-			password: passwordRef.current?.value,
-			areaOfInterest: interestRef.current?.value,
-			userType: userTypeRef.current?.value,
-		};
+		try {
+			event.preventDefault();
+			validate(
+				emailRef.current?.value,
+				passwordRef.current?.value,
+				interestRef.current?.value,
+				userTypeRef.current?.value
+			);
+			const data = {
+				email: emailRef.current?.value,
+				password: passwordRef.current?.value,
+				areaOfInterest: interestRef.current?.value,
+				userType: userTypeRef.current?.value,
+			};
 
-		const response = await axios.post(`${baseUrl}/users/signup`, data);
-		console.log(response.data);
-		const signature = response.data.signature;
-		localStorage.setItem("signature", signature);
-		setTimeout(() => {
-			window.location.href = "/login";
-		}, 1000);
+			await axios.post(`${baseUrl}/users/signup`, data).then((res) => {
+				console.log(res.data.message);
+				const signature = res.data.signature;
+				toast.success(res.data.message);
+				localStorage.setItem("signature", signature);
+				setTimeout(() => {
+					window.location.href = "/login";
+				}, 1000);
+			});
+		} catch (err: any) {
+			toast.error(err.response.data.Error);
+		}
 	};
 	return (
 		<Fragment>
