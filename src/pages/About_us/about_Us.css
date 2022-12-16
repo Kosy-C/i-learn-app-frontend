@@ -9,6 +9,7 @@ body {
     padding: 0;
     overflow: hidden;
     height: 100%;
+
 }
 
 .brand-title {
@@ -123,8 +124,25 @@ body {
     background-repeat: no-repeat;
     resize: both;
     overflow: auto;
-    /* background-size: 125px 175px; */
+
     background-size: 100% 100%;
+}
+
+#num {
+    font-weight: 900;
+    color: gold;
+    font-size: larger;
+
+}
+
+#naming {
+    color: lightseagreen;
+    font-weight: bolder;
+
+}
+
+#us {
+    font-size: large;
 }
 
 @media (max-width:700px) {
@@ -164,13 +182,11 @@ body {
 
     .hero {
         height: 400px;
-        /* max-height: fit-content; */
         width: 100%;
         max-width: 400px;
         background-image: linear-gradient(rgb(0, 0, 0, 0.6), rgb(0, 0, 0, 0.6)), url('../../assets/background.svg');
         background-repeat: no-repeat;
-        /* resize: both; */
-        /* overflow: auto; */
+
     }
 
     .m-text-heading {

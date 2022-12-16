@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import "./Hero.css";
+import "./about_Us.css";
 import tutorLogo from "../../assets/logo.png";
-const Hero = ({ mystyle }: any) => {
+const About = ({ mystyle }: any) => {
 	const [show, setShow] = useState(false);
 	const handleClick = () => {
 		setShow(!show);
@@ -24,14 +24,14 @@ const Hero = ({ mystyle }: any) => {
 				{show && (
 					<div className="hamburger">
 						<a href="#">Tutors</a>
-						<a href="">About Us</a>
+						<a href="#">About Us</a>
 						<a href="#"> Login</a>
 					</div>
 				)}
 				<div className="navbar-links">
 					<ul>
 						<li>
-							<Link to="/">Tutors</Link>
+							<Link to="/Tutors">Tutors</Link>
 						</li>
 						<li>
 							<Link to="/contact_us">About Us</Link>
@@ -51,26 +51,29 @@ const Hero = ({ mystyle }: any) => {
 			</nav>
 			<div className="body-content">
 				<div className="card firstCard">
-					<h1>
-						Find the best online <br />
-						tutor for you.
-					</h1>
-				</div>
-				<div className="card">
-					Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-					<br />
-					Quibusdam blanditiis enim voluptatem voluptatibus illo
-					<br />
-					nostrum illum placeat.
+					<h1>OUR TEAM</h1>
 				</div>
 
-				<div className="card buttonCard">
-					<Link to="/sign-up">
-						<a href="/sign-up">Get Started</a>
-					</Link>
+				<div>
+					<p>
+						We are made up of <span id="num">18</span> team members by names:{" "}
+					</p>
+					<p id="us">
+						Samuel Adigun, <span id="naming">Ifiok Inyang, </span> Charles
+						Chijuka, Chiemeka Elumeziem,
+						<br />
+						<span id="naming">Kosisochukwu Chinweuba, </span> Zinat Sanni,
+						Olaitan Olanrewaju, <span id="naming">Victor Olufade</span>
+						<br />
+						Oluwatobiloba Akinrimisi, Mercy Ogbenjuwa, Theresa Oyim,{" "}
+						<span id="naming">Oluwaseyi Makinde</span>,
+						<br />
+						Samuel Ajalode, Kingsley Ogbonnaya, Mustapha Muhammed,
+						<span id="naming">Daniel Iwegbue</span> Abdullahi Aliyu
+					</p>
 				</div>
 			</div>
 		</div>
 	);
 };
-export default Hero;
+export default About;
