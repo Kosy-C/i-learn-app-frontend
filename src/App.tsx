@@ -7,7 +7,7 @@ import LoginForm from "./components/Login/Login";
 
 import LandingPage from "./pages/LandingPage/LandingPage";
 import NavBar from "./components/navBar/navBar";
-// import "./App.css";
+import Contact from "./pages/Contact/Contact";
 
 import ResetPassword from "./pages/ResetPassword/resetPassword";
 import SetNewPassword from "./pages/ResetPassword/setNewPassword";
@@ -20,6 +20,7 @@ function App() {
 					<Route path="/" element={<LandingPage />} />
 
 					<Route path="/navbar" element={<NavBar />} />
+					<Route path="/contact_us" element={<Contact />} />
 					<Route path="/sign-up" element={<SignUpForm />} />
 					<Route path="/login" element={<LoginForm />} />
 					<Route path="/reset-password" element={<ResetPassword />} />

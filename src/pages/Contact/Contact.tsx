@@ -1,10 +1,10 @@
 import Footer from "../../components/Footer/Footer";
-import Hero from "../Hero/Hero";
+import About from "../About_us/about_Us";
 
-const LandingPage = () => {
+const Contact = () => {
 	return (
 		<div>
-			<Hero mystyle={style} />
+			<About mystyle={style} />
 			<Footer />
 		</div>
 	);
@@ -13,4 +13,4 @@ const style = {
 	border: ".1px solid grey",
 };
 
-export default LandingPage;
+export default Contact;
