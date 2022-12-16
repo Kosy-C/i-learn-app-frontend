@@ -23,7 +23,7 @@ function App() {
 					<Route path="/sign-up" element={<SignUpForm />} />
 					<Route path="/login" element={<LoginForm />} />
 					<Route path="/reset-password" element={<ResetPassword />} />
-					<Route path="/set-new-password" element={<SetNewPassword />} />
+					<Route path="/users/resetpassword" element={<SetNewPassword />} />
 				</Routes>
 			</Router>
 		</React.Fragment>

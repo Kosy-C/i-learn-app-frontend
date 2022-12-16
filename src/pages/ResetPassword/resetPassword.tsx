@@ -1,10 +1,41 @@
 import "./resetPassword.css";
-import React from "react";
+import React, { useState } from "react";
 import Group from "../../assets/Group.svg";
 // import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import axios from "axios";
+const baseUrl = "http://127.0.0.1:4000";
 
 const ResetPassword = () => {
+	const [createForm, setCreateForm] = useState({});
+	const submitDetails = (e: any) => {
+		e.preventDefault();
+		const { name, value } = e.target;
+		console.log({ name, value });
+		setCreateForm({
+			...createForm,
+			[name]: value,
+		});
+	};
+
+	const fetchLink = async () => {
+		try {
+			console.log("async function");
+			const response = await axios.post(
+				`http://localhost:4000/users/forgot-password`,
+				createForm
+			);
+			console.log(baseUrl);
+			window.alert(response.data.message);
+			// http://localhost:4000/users/forgot-password
+
+			console.log("response is ", response.data);
+		} catch (error) {
+			console.log(error);
+			window.alert(error)
+		}
+	};
+
 	return (
 		<div className="overallDiv">
 			<div className="resetPassword">
@@ -19,20 +50,34 @@ const ResetPassword = () => {
 							<p>Send a link to your email to resend password</p>
 						</div>
 						<form>
-							<div className="form-group">
+							{/* <div className="form-group">
 								<label htmlFor="email">Email</label>
 								<br />
 								<input
 									type="email"
 									className="form-control"
 									id="email"
+									name="email"
+									onChange={submitDetails}
+									placeholder="Enter email"
+								/>
+							</div> */}
+							<div>
+								<label htmlFor="email">Email</label>
+								<br />
+								<input
+									type="email"
+									name="email"
+									onChange={submitDetails}
 									placeholder="Enter email"
 								/>
 							</div>
-							<button type="submit" className="btn-primary">
-								<Link to="/set-new-password" className="btn">
-									Send Reset Link
-								</Link>
+							<button
+								type="submit"
+								onClick={async () => await fetchLink()}
+								className="btn-primary"
+							>
+								<Link className="btn">Send Reset Link</Link>
 							</button>
 							<p>
 								Already have an account?{" "}

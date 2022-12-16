@@ -68,6 +68,7 @@
     width: 100%;
     border: 1px solid #FD2959;
     margin-bottom: 20px;
+    cursor: pointer;
   }
   .formAlt{
     text-align: center;
@@ -100,3 +101,15 @@
   .fbBtn{
     color: rgb(49, 49, 166);
   }
+  /* .resetPassword{
+    margin-bottom: 1em;
+  } */
+#forgot{
+  margin-top: 1em;
+  margin-bottom: 2em;
+
+}
+.forgot-link{
+  text-decoration: none;
+  color: blue;
+}

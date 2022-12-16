@@ -47,11 +47,12 @@ function SignUpForm() {
 				areaOfInterest: interestRef.current?.value,
 				userType: userTypeRef.current?.value,
 			};
-
+			console.log(data)
 			await axios.post(`${baseUrl}/users/signup`, data).then((res) => {
 				console.log(res.data.message);
 				const signature = res.data.signature;
 				toast.success(res.data.message);
+				window.alert(res.data.message);
 				localStorage.setItem("signature", signature);
 				setTimeout(() => {
 					window.location.href = "/login";
@@ -59,6 +60,7 @@ function SignUpForm() {
 			});
 		} catch (err: any) {
 			toast.error(err.response.data.Error);
+			window.alert(err.response.data.Error);
 		}
 	};
 	return (
@@ -142,7 +144,7 @@ function SignUpForm() {
 								</Link>
 							</div>
 							<div className="socialIcons">
-								<button type="submit" onClick={googleSignIn}>
+								<button type="submit" onClick={() => googleSignIn}>
 									<FcGoogle />
 								</button>
 								<button type="submit" className="fbBtn">

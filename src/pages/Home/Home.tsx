@@ -1,7 +1,7 @@
 import React from "react";
 
-import ResetPassword from "../../components/ResetPassword/resetPassword";
-import SetNewPassword from "../../components/ResetPassword/setNewPassword";
+import ResetPassword from "../../pages/ResetPassword/resetPassword";
+import SetNewPassword from "../../pages/ResetPassword/setNewPassword";
 
 const Home = () => {
 	return (

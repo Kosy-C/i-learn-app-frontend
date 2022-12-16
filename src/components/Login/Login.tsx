@@ -39,14 +39,20 @@ function LoginForm() {
 			email: emailRef.current?.value,
 			password: passwordRef.current?.value,
 		};
+		console.log(data);
 
-		const response = await axios.post(`${baseUrl}/users/login`, data);
-		console.log(response.data);
-		const signature = response.data.signature;
-		localStorage.setItem("signature", signature);
-		setTimeout(() => {
-			window.location.href = "/navbar";
-		}, 1000);
+		try {
+			const response = await axios.post(`${baseUrl}/users/login`, data);
+			console.log(response);
+			const signature = response.data.signature;
+			localStorage.setItem("signature", signature);
+			setTimeout(() => {
+				window.location.href = "/navbar";
+			}, 1000);
+		} catch (err:any) {
+			console.log(err.response.data);
+			window.alert(err.response.data);
+		}
 	};
 
 	return (
@@ -93,8 +99,9 @@ function LoginForm() {
 									required
 								/>
 							</div>
-							<div>
-								<Link to="/reset-password">Forgot password?</Link></div>
+							<h5 id="forgot">
+								<Link to="/reset-password" className="forgot-link">Forgot password?</Link>
+							</h5>
 							{error.length > 0 && error.includes("Password") && (
 								<div className="errorMsg">{error}</div>
 							)}
@@ -102,10 +109,11 @@ function LoginForm() {
 							{error.length > 0 && error.includes("Interest") && (
 								<div className="errorMsg">{error}</div>
 							)}
+
 							<button type="submit" className="signUp-button">
 								Login
 							</button>
-							<div className="formAlt">
+							<div className="login-formAlt">
 								Don't have an account?
 								<Link to="/sign-up" className="login-link">
 									Create
