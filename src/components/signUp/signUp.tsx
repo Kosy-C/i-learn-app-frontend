@@ -19,6 +19,7 @@ function SignUpForm() {
 	const interestRef = useRef<HTMLSelectElement>(null);
 	const userTypeRef = useRef<HTMLSelectElement>(null);
 	const [error, setError] = useState("");
+	const [show, setShow] = useState(false)
 	const validate = (
 		email: string = "",
 		password: string = "",
@@ -32,6 +33,9 @@ function SignUpForm() {
 		else if (interest.length === 0)
 			return setError("Please Select an area of Interest");
 	};
+	const display = () => {
+		setShow(!show)
+	}
 	const handleSubmit = async (event: ChangeEvent<HTMLFormElement>) => {
 		try {
 			event.preventDefault();
@@ -47,7 +51,7 @@ function SignUpForm() {
 				areaOfInterest: interestRef.current?.value,
 				userType: userTypeRef.current?.value,
 			};
-			console.log(data)
+			console.log(emailRef.current?.value);
 			await axios.post(`${baseUrl}/users/signup`, data).then((res) => {
 				console.log(res.data.message);
 				const signature = res.data.signature;
@@ -60,7 +64,7 @@ function SignUpForm() {
 			});
 		} catch (err: any) {
 			toast.error(err.response.data.Error);
-			window.alert(err.response.data.Error);
+			// window.alert(err.response.data.Error);
 		}
 	};
 	return (
@@ -92,7 +96,9 @@ function SignUpForm() {
 								</select>
 							</div>
 							{error.length > 0 && error.includes("user") && (
-								<div className="errorMsg">{error}</div>
+								<div className="errorMsg">
+									{error}
+								</div>
 							)}
 							<div className="formLabel">
 								<label>Email</label>

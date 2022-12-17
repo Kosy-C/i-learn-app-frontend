@@ -15,14 +15,11 @@ import Contact from "./pages/Contact/Contact";
 import ResetPassword from "./pages/ResetPassword/resetPassword";
 import SetNewPassword from "./pages/ResetPassword/setNewPassword";
 
-
 function App() {
 	return (
-		
 		<React.Fragment>
 			<Router>
 				<Routes>
-
 					<Route path="/" element={<LandingPage />} />
 
 					<Route path="/navbar" element={<NavBar />} />
@@ -31,14 +28,11 @@ function App() {
 					<Route path="/login" element={<LoginForm />} />
 					<Route path="/reset-password" element={<ResetPassword />} />
 					<Route path="/users/resetpassword" element={<SetNewPassword />} />
-					
-					<Route path="/history-page" element={<StudentHistoryPage/>} />
 
+					<Route path="/history-page" element={<StudentHistoryPage />} />
 				</Routes>
 			</Router>
 		</React.Fragment>
-		
-		
 	);
 }
 

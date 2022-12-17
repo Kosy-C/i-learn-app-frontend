@@ -6,7 +6,6 @@
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
     line-height: 1.5;
-    /* font-family: Inter; */
     
 }
 
@@ -20,27 +19,22 @@
     font-family: Inter;
     box-shadow: rgba(0, 0, 0, 0.45) 25px 0px 0px;
 
-
 }
 .card-container{
     display: flex;
     flex-wrap: wrap;
     margin: 0px 30px;
-    /* justify-content: space-between; */
 }
-.card{
+/* .card{
     width: 30%;
     height: 380px;
-    /* border-radius: 10px; */
    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     margin: 20px 30px;
-    /* padding: 20px; */
     background-color: #FFFFFF;
     display: flex;
     flex-direction: column;
-    /* justify-content: space-between; */
     overflow: none;
-}
+} */
 .card-details div{
     padding: 20px;
     font-size: 15px;
