@@ -3,6 +3,10 @@ Arguments:
 
 PATH: 
   /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+  /usr/local/bin/node /usr/local/bin/yarn add axious
+
+PATH: 
+  /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools
 
 Yarn version: 
   1.22.19
@@ -17,6 +21,9 @@ Trace:
   Error: https://registry.yarnpkg.com/@types%2freact-hook-form: Not found
       at Request.params.callback [as _callback] (/usr/local/lib/node_modules/yarn/lib/cli.js:66145:18)
       at Request.self.callback (/usr/local/lib/node_modules/yarn/lib/cli.js:140890:22)
+  Error: https://registry.yarnpkg.com/axious: Not found
+      at params.callback [as _callback] (/usr/local/lib/node_modules/yarn/lib/cli.js:66145:18)
+      at self.callback (/usr/local/lib/node_modules/yarn/lib/cli.js:140890:22)
       at Request.emit (node:events:513:28)
       at Request.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:141862:10)
       at Request.emit (node:events:513:28)

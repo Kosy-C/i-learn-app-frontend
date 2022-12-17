@@ -1,5 +1,11 @@
+
 import axios from "axios";
-
-// const baseUrl: "http://localhost:4000"
-
-const apiGet = (path: any, config: any, auth: boolean = true) => {};
+const baseUrl = "http://localhost:4000";
+export const apiGet = (path: string) => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("signature")}`,
+        },
+    };
+    return axios.get(`${baseUrl}${path}`, config);
+};
