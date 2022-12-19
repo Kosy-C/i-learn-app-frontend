@@ -30,7 +30,6 @@ function App() {
 					<Route path="/login" element={<LoginForm />} />
 					<Route path="/reset-password" element={<ResetPassword />} />
 					<Route path="/users/resetpassword" element={<SetNewPassword />} />
-					{/* <Route path="/profile-modal" element={<ProfileModal />} /> */}
 					<Route path="/history-page" element={<StudentHistoryPage />} />
 				</Routes>
 			</Router>

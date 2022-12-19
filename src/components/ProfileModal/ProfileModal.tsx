@@ -6,12 +6,17 @@ import { BiCategory } from "react-icons/bi";
 import { RiAccountCircleLine } from "react-icons/ri";
 import { FiLogOut } from "react-icons/fi";
 import { GrBook } from "react-icons/gr";
+import { Link } from "react-router-dom";
+import studentHistoryPage from "../studentHistoryPage/studentHistoryPage";
 
 interface Props {
   userName: string;
   userEmail: string;
   userPicture: string;
 }
+const logout = () => {
+  localStorage.clear();
+};
 
 const ProfileModal: React.FC<Props> = ({
   userName,
@@ -35,35 +40,38 @@ const ProfileModal: React.FC<Props> = ({
               <li>
                 <div className="category">
                   <BiCategory className="bicategory" />
-                  <a href="/categories" className="categories">
-                    Category
-                  </a>
+                  <Link to={"/categories"} className="categories">
+                    <li>Categories</li>
+                  </Link>
                 </div>
               </li>
               <li>
                 <div className="mycourses-div">
                   <GrBook className="book-logo" />
-                  <a href="/mycourses" className="mycourses">
-                    My courses
-                  </a>
+                  <Link
+                    to={"/history-page"}
+                    className="mycourses"
+                    onClick={studentHistoryPage}
+                  >
+                    <li>My Courses</li>
+                  </Link>
                 </div>
               </li>
               <div className="group">
                 <li>
                   <div className="account-div">
                     <RiAccountCircleLine className="account-logo" />
-                    <a href="/account" className="account">
-                      {" "}
-                      Account
-                    </a>
+                    <Link to={"/account"} className="account">
+                      <li>Account</li>
+                    </Link>
                   </div>
                 </li>
                 <li>
                   <div className="logout-div">
                     <FiLogOut className="logout-logo" />
-                    <a href="/logout" className="logout">
-                      Logout
-                    </a>
+                    <Link to={"/login"} className="logout" onClick={logout}>
+                      <li> Logout</li>
+                    </Link>
                   </div>
                 </li>
               </div>
