@@ -13,7 +13,7 @@ const NavBar = () => {
 	const getSignature = localStorage.getItem("signature");
 
 	return (
-		<nav className="navbar">
+		<nav className="navbarAllPages">
 			<div className="logotext">
 				<img src="src/assets/images/fulllogo.svg" />
 				<h3>iLearn</h3>
