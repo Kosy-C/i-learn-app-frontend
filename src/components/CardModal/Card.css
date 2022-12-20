@@ -1,0 +1,10 @@
+.Card-Area {
+  position: absolute;
+  display: flex;
+  left: 66%;
+  top: 80px;
+  width: 25%;
+  overflow: auto;
+  background-color: #ffffff;
+  animation: mymove 2s 1;
+}
