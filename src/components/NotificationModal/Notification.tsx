@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
-import ellipse from "../../assets/ellipse.svg";
+// import notImage from "../../assets/images/notImage.svg";
 import Card from "../CardModal/Card";
 import "./Notification.css";
+import { posts } from "./dataPosts";
+// import { Direction } from "react-toastify/dist/utils";
 
-interface NotificationM {
-  id: number;
-  message: string;
-  date: string;
-}
+// interface NotificationM {
+//   name: string;
+//   message: string;
+//   time: string;
+// }
 
 const Notification: React.FC = () => {
   // const [notifications, setNotifications] = useState<Notification[]>([]);
@@ -41,64 +43,25 @@ const Notification: React.FC = () => {
   return (
     <div>
       <Card>
-        <div className="notification-user">
-          <img src={ellipse} alt="userImage" />
-          <div className="notification-profile">
-            <h1>John Doe</h1>
-            <p>20 mins ago</p>
-            <div className="notification-message">
-              <p>Has accepted your study request</p>
-            </div>
-          </div>
-        </div>
-        <hr className="notification-line" />
-        <div className="notification-user">
-          <img src={ellipse} alt="userImage" />
-          <div className="notification-profile">
-            <h1>John Doe</h1>
-            <p>10 mins ago</p>
-            <div className="notification-message">
-              <p>Has accepted your study request</p>
-            </div>
-          </div>
-        </div>
-        <hr className="notification-line" />
-        <div className="notification-user">
-          <img src={ellipse} alt="userImage" />
-          <div className="notification-profile">
-            <h1>John Doe</h1>
-            <p>1 day ago</p>
-            <div className="notification-message">
-              <p>Has accepted your study request</p>
-            </div>
-          </div>
-        </div>
-        <hr className="notification-line" />
-        <div className="notification-user">
-          <img src={ellipse} alt="userImage" />
-          <div className="notification-profile">
-            <h1>John Doe</h1>
-            <p>2 days ago</p>
-            <div className="notification-message">
-              <p>Has accepted your study request</p>
-            </div>
-          </div>
-        </div>
-        <hr className="notification-line" />
-        <div className="notification-user">
-          <img src={ellipse} alt="userImage" />
-          <div className="notification-profile">
-            <h1>John Doe</h1>
-            <p>2 days ago</p>
-            <div className="notification-message">
-              <p>Has accepted your study request</p>
-            </div>
-          </div>
-        </div>
-        <hr className="notification-line" />
+        {posts.map((post: any, index) => {
+          return (
+            <>
+              <div key={index} className="notification-user">
+                <img src={post.image} alt="userImage" />
+                <div className="notification-profile">
+                  <h1>{post.name}</h1>
+                  <p>{post.time}</p>
+                  <div className="notification-message">
+                    <p>{post.message}</p>
+                  </div>
+                </div>
+              </div>
+              <hr className="notification-line" />
+            </>
+          );
+        })}
       </Card>
     </div>
   );
 };
-
 export default Notification;
