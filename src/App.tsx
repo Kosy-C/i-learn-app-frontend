@@ -14,6 +14,8 @@ import SetNewPassword from "./pages/ResetPassword/setNewPassword";
 import AllCoursesPage from "./pages/AllCourses/AllCourses";
 import VerifyPage from "./pages/VerifyPage/Verify";
 
+
+
 function App() {
 	return (
 		<React.Fragment>
