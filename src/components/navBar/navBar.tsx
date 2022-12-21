@@ -3,9 +3,18 @@ import { Link } from "react-router-dom";
 import "./navBar.css";
 import { FaBars } from "react-icons/fa";
 import { ImCross } from "react-icons/im";
+import Profile from "../profileDetails/profile";
+import { Modal } from 'react-responsive-modal';
+import 'react-responsive-modal/styles.css';
+
 
 const NavBar = () => {
 	const [Mobile, setMobile] = useState(false);
+	const [profile, setProfile] = useState(false)
+
+
+	const onOpenProfile = () => setProfile(true);
+ 	const onCloseProfile = () => setProfile(false);
 
 	const logout = () => {
 		localStorage.clear();
@@ -62,10 +71,19 @@ const NavBar = () => {
 				)}
 
 				<li>
-					<img src="src/assets/images/profilepic.svg" className="profilepic" />
+					<button type="submit" onClick={onOpenProfile}>
+							<img src="src/assets/images/profilepic.svg" className="profilepic" />
+						</button>
+					<Modal open={profile} onClose={onCloseProfile}>
+						<Profile/>
+					</Modal>
 				</li>
+				{/* <div>
+					{profile && <Profile/>}
+				</div> */}
+				
 			</ul>
-
+					
 			<button className="mobile-menu-icon" onClick={() => setMobile(!Mobile)}>
 				{Mobile ? <ImCross /> : <FaBars />}
 			</button>

@@ -22,8 +22,7 @@ function LoginForm() {
 	const validate = (
 		email: string = "",
 		password: string = "",
-		interest: string = "",
-		userType: string = ""
+		
 	) => {
 		if (email.length === 0) return setError("Please Enter your email");
 		else if (password.length < 8)

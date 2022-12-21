@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import "./App.css";
+// import "./App.css";
 import Home from "./pages/Home/Home";
 import StudentHistoryPage from "./components/studentHistoryPage/studentHistoryPage";
 
@@ -14,6 +14,7 @@ import Contact from "./pages/Contact/Contact";
 
 import ResetPassword from "./pages/ResetPassword/resetPassword";
 import SetNewPassword from "./pages/ResetPassword/setNewPassword";
+import Profile from "./components/profileDetails/profile";
 
 function App() {
 	return (
@@ -28,6 +29,7 @@ function App() {
 					<Route path="/login" element={<LoginForm />} />
 					<Route path="/reset-password" element={<ResetPassword />} />
 					<Route path="/users/resetpassword" element={<SetNewPassword />} />
+					<Route path="/tutor-profile" element={<Profile/>} />
 
 					<Route path="/history-page" element={<StudentHistoryPage />} />
 				</Routes>
