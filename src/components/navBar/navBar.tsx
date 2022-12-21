@@ -13,10 +13,18 @@ const NavBar = () => {
     setShowModal(!showModal);
   };
 
+
   const logout = () => {
     localStorage.clear();
   };
   const getSignature = localStorage.getItem("signature");
+	return (
+		<nav className="navbarAllPages">
+			<div className="logotext">
+				<img src="src/assets/images/fulllogo.svg" />
+				<h3>iLearn</h3>
+			</div>
+
 
   return (
     <nav className="navbar">
