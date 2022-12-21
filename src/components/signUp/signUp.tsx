@@ -59,7 +59,7 @@ function SignUpForm() {
 				window.alert(res.data.message);
 				localStorage.setItem("signature", signature);
 				setTimeout(() => {
-					window.location.href = "/";
+					window.location.href = "/login";
 				}, 1000);
 			});
 		} catch (err: any) {
