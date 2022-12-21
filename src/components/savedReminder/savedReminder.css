@@ -1,0 +1,21 @@
+
+.savedReminder-container{
+
+    box-sizing: border-box;
+      text-align: center;
+      align-items: center;
+      margin: 0px;
+      padding: 0px;
+      max-width: 500px;
+      align-content: center;
+      margin-right: auto;
+      margin-left: auto;
+}
+
+.saved-return-container{
+
+    margin-top: 10%;
+        justify-content: left;
+        margin-bottom: 40px;
+        color: grey;
+}
