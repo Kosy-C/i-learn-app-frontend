@@ -40,8 +40,8 @@ const ProfileModal: React.FC<Props> = ({
               <li>
                 <div className="category">
                   <BiCategory className="bicategory" />
-                  <Link to={"/categories"} className="categories">
-                    <li>Categories</li>
+                  <Link to={"/category"} className="categories">
+                    <li>Category</li>
                   </Link>
                 </div>
               </li>
