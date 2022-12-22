@@ -49,7 +49,7 @@ const About = ({ mystyle }: any) => {
 					</ul>
 				</div>
 			</nav>
-			<div className="body-content">
+			<div className="heroContent">
 				<div className="card firstCard">
 					<h1>OUR TEAM</h1>
 				</div>
@@ -60,15 +60,14 @@ const About = ({ mystyle }: any) => {
 					</p>
 					<p id="us">
 						Samuel Adigun, <span id="naming">Ifiok Inyang, </span> Charles
-						Chijuka, Chiemeka Elumeziem,
-						<br />
-						<span id="naming">Kosisochukwu Chinweuba, </span> Zinat Sanni,
+						Chijuka, <br/> Chiemeka Elumeziem,
+						<span id="naming">Kosisochukwu Chinweuba, <br/></span> Zinat Sanni,
 						Olaitan Olanrewaju, <span id="naming">Victor Olufade</span>
 						<br />
-						Oluwatobiloba Akinrimisi, Mercy Ogbenjuwa, Theresa Oyim,{" "}
+						Oluwatobiloba Akinrimisi, Mercy Ogbenjuwa, Theresa Oyim,<br />{" "}
 						<span id="naming">Oluwaseyi Makinde</span>,
-						<br />
-						Samuel Ajalode, Kingsley Ogbonnaya, Mustapha Muhammed,
+					
+						Samuel Ajalode, Kingsley Ogbonnaya, <br />Mustapha Muhammed,
 						<span id="naming">Daniel Iwegbue</span> Abdullahi Aliyu
 					</p>
 				</div>

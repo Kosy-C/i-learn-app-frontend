@@ -12,12 +12,12 @@ const Footer = () => {
 					<span>
 						<img src={footerLogo} alt="footerImage" width="19em" />
 					</span>
-					<span id="footerText">ILearning </span>
+					<span id="footerText">iLearn </span>
 				</h4>
 			</div>
 
 			<div>
-				<h4 id="reserved">© 2022 ILearning. All rights reserved</h4>
+				<h4 id="reserved">© 2022 iLearn. All rights reserved</h4>
 				<SocialMedia />
 			</div>
 		</div>

@@ -17,14 +17,23 @@ li {
     justify-content: space-around;
     align-items: center;
     height: 10vh;
+    /* background-color: #FFFFFF; */
     box-shadow: rgba(50, 50, 93, 0.23) 0px 30px 30px -20px;
 }
-
+.navbarAllPages{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 10vh;
+    background-color: #FFFFFF;
+    box-shadow: rgba(50, 50, 93, 0.23) 0px 30px 30px -20px;
+}
  .logotext{
     font-size: 30px;
     display: flex;
     padding-bottom: 15px;
     padding-top: 5px;
+    margin-left: 4em;
     /* padding: 15px; */
 }
 
