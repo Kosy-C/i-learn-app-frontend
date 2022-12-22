@@ -1,26 +1,24 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./navBar.css";
 import { FaBars } from "react-icons/fa";
 import { ImCross } from "react-icons/im";
-import ProfileModal from "../ProfileModal/ProfileModal";
+import Notification from "../NotificationModal/Notification";
 
 const NavBar = () => {
 	const [Mobile, setMobile] = useState(false);
-	const navigate = useNavigate();
-	const [showModal, setShowModal] = useState(false);
+	const [notificationModal, setNotificationModal] = useState(false);
 
-	const togglePopup = () => {
-		setShowModal(!showModal);
+	const toggleModal = () => {
+		setNotificationModal(!notificationModal);
 	};
-
 	const logout = () => {
 		localStorage.clear();
-		navigate("/login");
 	};
 	const getSignature = localStorage.getItem("signature");
+
 	return (
-		<nav className="navbarAllPages">
+		<nav className="navbar">
 			<div className="logotext">
 				<img src="src/assets/images/fulllogo.svg" />
 				<h3>iLearn</h3>
@@ -57,11 +55,11 @@ const NavBar = () => {
 						<Link to={"/reminder"} className="nav-link">
 							<li> Reminder</li>
 						</Link>
-
-						<Link to={"/notification"} className="nav-link">
-							<li> Notification</li>
-						</Link>
-
+						<li>
+							<button onClick={toggleModal}>
+								{notificationModal && <Notification />}Notification
+							</button>
+						</li>
 						<Link to={"/login"} className="nav-link" onClick={logout}>
 							<li> Logout</li>
 						</Link>
@@ -69,15 +67,7 @@ const NavBar = () => {
 				)}
 
 				<li>
-					<button onClick={togglePopup}>
-						{showModal && (
-							<ProfileModal userName={""} userEmail={""} userPicture={""} />
-						)}
-						<img
-							src="src/assets/images/profilepic.svg"
-							className="profilepic"
-						/>
-					</button>
+					<img src="src/assets/images/profilepic.svg" className="profilepic" />
 				</li>
 			</ul>
 

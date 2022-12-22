@@ -9,7 +9,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const baseUrl = "http://localhost:4000";
+const baseUrl: string = import.meta.env.SERVER_URL;
 function SignUpForm() {
 	const googleSignIn = async () => {
 		await signInWithGooglePopup();
@@ -33,6 +33,7 @@ function SignUpForm() {
 		else if (interest.length === 0)
 			return setError("Please Select an area of Interest");
 	};
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const display = () => {
 		setShow(!show);
 	};
@@ -84,6 +85,7 @@ function SignUpForm() {
 							<h2>Create an account </h2>
 							<p>Create your account to connect with students</p>
 						</div>
+						{/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
 						<form onSubmit={handleSubmit} className="formInputs">
 							<div>
 								<label className="formLabel" id="userType">
