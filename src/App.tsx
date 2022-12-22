@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import "./App.css";
-import Home from "./pages/Home/Home";
+// import Home from "./pages/Home/Home";
 import StudentHistoryPage from "./components/studentHistoryPage/studentHistoryPage";
 import SignUpForm from "./components/signUp/signUp";
 import LoginForm from "./components/Login/Login";
@@ -13,13 +13,14 @@ import ResetPassword from "./pages/ResetPassword/resetPassword";
 import SetNewPassword from "./pages/ResetPassword/setNewPassword";
 import AllCoursesPage from "./pages/AllCourses/AllCourses";
 import VerifyPage from "./pages/VerifyPage/Verify";
-
-
+import Reminder from "./components/reminder/reminder";
+import Calender from "./components/calender/calender";
+import SavedReminder from "./components/savedReminder/savedReminder";
 
 function App() {
 	return (
 		<React.Fragment>
-			   <ToastContainer />
+			<ToastContainer />
 			<Router>
 				<Routes>
 					<Route path="/" element={<LandingPage />} />
@@ -32,6 +33,9 @@ function App() {
 					<Route path="/history-page" element={<StudentHistoryPage />} />
 					<Route path="/all-courses" element={<AllCoursesPage />} />
 					<Route path="/verify" element={<VerifyPage />} />
+					<Route path="/reminder" element={<Reminder />} />
+					<Route path="/calender" element={<Calender />} />
+					<Route path="/savedReminder" element={<SavedReminder />} />
 				</Routes>
 			</Router>
 		</React.Fragment>

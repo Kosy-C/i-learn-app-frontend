@@ -12,6 +12,7 @@
     background-color: #cfcfcf;
     text-align: center;
     color: rgb(50, 49, 49);
+    overflow: scroll;
   }
   .logo{
     display: flex;

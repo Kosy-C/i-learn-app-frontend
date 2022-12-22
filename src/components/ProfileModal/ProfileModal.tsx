@@ -10,18 +10,18 @@ import { Link } from "react-router-dom";
 import studentHistoryPage from "../studentHistoryPage/studentHistoryPage";
 
 interface Props {
-  userName: string;
-  userEmail: string;
-  userPicture: string;
+	userName: string;
+	userEmail: string;
+	userPicture: string;
 }
 const logout = () => {
-  localStorage.clear();
+	localStorage.clear();
 };
 
 const ProfileModal: React.FC<Props> = ({
-  userName,
-  userEmail,
-  userPicture,
+	userName,
+	userEmail,
+	userPicture,
 }) => {
   return (
     <div>
