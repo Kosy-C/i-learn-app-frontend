@@ -1,27 +1,50 @@
-import React from "react";
+import React, { useState } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
+import { IoMdAddCircleOutline } from "react-icons/io";
 import { Link } from "react-router-dom";
 import NavBar from "../navBar/navBar";
+import "react-calendar/dist/Calendar.css";
 import "./savedReminder.css";
-// import ReminderCalendar from "react-remindar-calendar/dist"
+import { Calendar } from "react-calendar";
 
 function SavedReminder() {
+	const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+
+	const handleDateClick = (date: Date) => {
+		setSelectedDate(date);
+	};
 	return (
 		<>
 			<NavBar />
 			<div className="savedReminder-container">
-				<div className="saved-return-container">
-					<Link to="/calender" className="calender-return-link">
-						<AiOutlineArrowLeft /> Back
-					</Link>
-				</div>
-				<p>All reminder will appear here</p>
-				<div>
-					{/* <p>{new Date().getMonth() + 1} {new Date().getDate()}, {new Date().getFullYear()}</p> */}
-
-					<p>
-						<b>Today</b>
-					</p>
+				<div className="savedReminder-container">
+					<div className="saved-return-container">
+						<Link to="/calender" className="calender-return-link">
+							<AiOutlineArrowLeft /> Back
+						</Link>
+					</div>
+					<div>
+						<h1>All reminder will appear here</h1>
+					</div>
+					<div className="reminderContainer">
+						<div className="today">
+							<p>
+								<b>Today</b>
+							</p>
+						</div>
+						<div className="calander">
+							<Calendar onChange={handleDateClick} value={selectedDate} />
+						</div>
+						<div className="backend">backend</div>
+						<div>
+							{" "}
+							<button className="addNew">
+								<Link to="/Calender" className="addNew">
+									<IoMdAddCircleOutline /> Add New
+								</Link>
+							</button>
+						</div>
+					</div>
 				</div>
 			</div>
 		</>
@@ -29,35 +52,3 @@ function SavedReminder() {
 }
 
 export default SavedReminder;
-
-// import React, { useState, useEffect } from 'react';
-
-// interface Props {
-//   // Props go here
-// }
-
-// const SavedReminder: React.FC<Props> = (props) => {
-//   const [currentDate, setCurrentDate] = useState(new Date());
-
-//   useEffect(() => {
-//     const interval = setInterval(() => {
-//       setCurrentDate(new Date());
-//     }, 1000);
-//     return () => clearInterval(interval);
-//   }, []);
-
-//   const date = currentDate;
-//   const day = date.getDate().toString().padStart(2, '0');
-//   const month = (date.getMonth() + 1).toString().padStart(2, '0');
-//   const hour = date.getHours().toString().padStart(2, '0');
-//   const minute = date.getMinutes().toString().padStart(2, '0');
-//   const ampm = date.getHours() < 12 ? 'AM' : 'PM';
-
-//   return (
-//     <div>
-//       {day} {month} {hour} {minute} {ampm}
-//     </div>
-//   );
-// };
-
-// export default SavedReminder;
