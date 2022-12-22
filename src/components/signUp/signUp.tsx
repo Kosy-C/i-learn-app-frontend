@@ -19,7 +19,7 @@ function SignUpForm() {
 	const interestRef = useRef<HTMLSelectElement>(null);
 	const userTypeRef = useRef<HTMLSelectElement>(null);
 	const [error, setError] = useState("");
-	const [show, setShow] = useState(false)
+	const [show, setShow] = useState(false);
 	const validate = (
 		email: string = "",
 		password: string = "",
@@ -34,8 +34,8 @@ function SignUpForm() {
 			return setError("Please Select an area of Interest");
 	};
 	const display = () => {
-		setShow(!show)
-	}
+		setShow(!show);
+	};
 	const handleSubmit = async (event: ChangeEvent<HTMLFormElement>) => {
 		try {
 			event.preventDefault();
@@ -96,9 +96,7 @@ function SignUpForm() {
 								</select>
 							</div>
 							{error.length > 0 && error.includes("user") && (
-								<div className="errorMsg">
-									{error}
-								</div>
+								<div className="errorMsg">{error}</div>
 							)}
 							<div className="formLabel">
 								<label>Email</label>

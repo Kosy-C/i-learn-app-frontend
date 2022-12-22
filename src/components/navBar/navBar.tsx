@@ -1,14 +1,16 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./navBar.css";
 import { FaBars } from "react-icons/fa";
 import { ImCross } from "react-icons/im";
 
 const NavBar = () => {
 	const [Mobile, setMobile] = useState(false);
+	const navigate = useNavigate();
 
 	const logout = () => {
 		localStorage.clear();
+		navigate("/login");
 	};
 	const getSignature = localStorage.getItem("signature");
 

@@ -1,24 +1,20 @@
 import React, { Fragment, ChangeEvent, useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../signUp/signUp.css";
 import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import logo from "../../assets/logo.png";
 import { signInWithGooglePopup } from "../../utils/firebaseAuth/firebase";
 import axios from "axios";
-
 const baseUrl = "http://localhost:4000";
-
 function LoginForm() {
+	const navigate = useNavigate();
 	const googleSignIn = async () => {
 		await signInWithGooglePopup();
 	};
-
 	const emailRef = useRef<HTMLInputElement>(null);
 	const passwordRef = useRef<HTMLInputElement>(null);
-
 	const [error, setError] = useState("");
-
 	const validate = (
 		email: string = "",
 		password: string = "",
@@ -29,7 +25,6 @@ function LoginForm() {
 		else if (password.length < 8)
 			return setError("Password character cannot be less than 8");
 	};
-
 	const handleSubmit = async (event: ChangeEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		validate(emailRef.current?.value, passwordRef.current?.value);
@@ -40,21 +35,18 @@ function LoginForm() {
 			password: passwordRef.current?.value,
 		};
 		console.log(data);
-
 		try {
 			const response = await axios.post(`${baseUrl}/users/login`, data);
 			console.log(response);
 			const signature = response.data.signature;
 			localStorage.setItem("signature", signature);
-			setTimeout(() => {
-				window.location.href = "/navbar";
-			}, 1000);
-		} catch (err:any) {
+			localStorage.setItem("user", response.data.user.areaOfInterest);
+			navigate("/dashboard");
+		} catch (err: any) {
 			console.log(err.response.data);
 			window.alert(err.response.data);
 		}
 	};
-
 	return (
 		<Fragment>
 			<div className="formContainer">
@@ -71,7 +63,6 @@ function LoginForm() {
 						<div className="formHead">
 							<h3>Login </h3>
 						</div>
-
 						<form onSubmit={handleSubmit} className="formInputs">
 							{error.length > 0 && error.includes("user") && (
 								<div className="errorMsg">{error}</div>
@@ -100,16 +91,16 @@ function LoginForm() {
 								/>
 							</div>
 							<h5 id="forgot">
-								<Link to="/reset-password" className="forgot-link">Forgot password?</Link>
+								<Link to="/reset-password" className="forgot-link">
+									Forgot password?
+								</Link>
 							</h5>
 							{error.length > 0 && error.includes("Password") && (
 								<div className="errorMsg">{error}</div>
 							)}
-
 							{error.length > 0 && error.includes("Interest") && (
 								<div className="errorMsg">{error}</div>
 							)}
-
 							<button type="submit" className="signUp-button">
 								Login
 							</button>
@@ -134,5 +125,4 @@ function LoginForm() {
 		</Fragment>
 	);
 }
-
 export default LoginForm;
