@@ -1,0 +1,30 @@
+.Card-Area {
+  position: absolute;
+  display: flex;
+  left: 66%;
+  top: 80px;
+  width: 25%;
+  overflow: auto;
+  background-color: #ffffff;
+  animation: mymove 2s 1;
+}
+
+@media (max-width: 768px) {
+  .Card-Area {
+    position: relative;
+    left: 25%;
+    top: 20px;
+    background-color: #ffffff;
+    width: 100%;
+  }
+}
+@media ((min-width: 500px) and (max-width: 1000px)) {
+  .Card-Area {
+    position: relative;
+    left: 25%;
+    top: 300px;
+    /* line-height: 70rem */
+    background-color: #ffffff;
+    width: 100%;
+  }
+}
