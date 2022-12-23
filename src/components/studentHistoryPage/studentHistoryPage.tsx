@@ -7,14 +7,13 @@ import { apiGet } from "../../utils/api/axios";
 const studentHistoryPage = () => {
 	const [courses, setCourses] = useState<any>([]);
 	const getHistory = async () => {
-        try {
-            const id = localStorage.getItem("id");
-		const { data } = await apiGet(`/courses/getStudentHistory`);
-		setCourses(data.courses);
-        } catch (error) {
-            console.log(error)
-        }
-		
+		try {
+			const id = localStorage.getItem("id");
+			const { data } = await apiGet(`/courses/getStudentHistory`);
+			setCourses(data.courses);
+		} catch (error) {
+			console.log(error);
+		}
 	};
 	useEffect(() => {
 		getHistory();

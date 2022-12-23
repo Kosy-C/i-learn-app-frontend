@@ -1,31 +1,22 @@
  .savedReminder-container{
 
     max-width: 70%;
-    border: 1px solid rgb(120, 119, 119);
+    margin: 0 auto;
+    /* border: 1px solid rgb(120, 119, 119); */
  }
-
-      
-     
-
 
 .saved-return-container{
 
     margin-top: 10%;
-        justify-content: left;
-        margin-bottom: 40px;
-        color: grey;
+    justify-content: left;
+    margin-bottom: 40px;
+    color: grey;
 }
 
 .reminderContainer{
     border: solid 1px black;
     width: 40rem;
     height: 50rem;
-}
-.backend{
-    background-color: red;
-    width: 30rem;
-    height: 10rem;
-    margin-top: 30px;
 }
 
 .addNew{
@@ -40,12 +31,55 @@
     font-size: medium;
 }
 .today{
-    width: 80%;
-    height: 5rem;
-    background-color: red;
-    margin-top: 20px;
+    width: 75.2%;
+    height: 4.5rem;
+    background-color: #E5E5E5;
+    opacity: 0.75px;
+    margin-top: 40px;
     margin-bottom: 20px;
+    position: relative;
+    left: 12%;  
+}
+
+.today p{
+    font-size: 20px;
+    font-weight: bolder;
+    float:left;
+    padding-left: 15px;
+}
+.today span{
+    font-size: 12px;
+    float:left;
+    padding-left: 15px;
+    position: relative;
+    top: 10px;
 }
 .calander{
-    width: 30rem
+    width: 30rem;
+    margin: 0 auto;
+}
+.react-calendar {
+    width: 700px;
+    max-width: 100%;
+    background: white;
+    border: 1px solid #a0a096;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.125em;
+}
+.savedDetails{
+    display: flex;
+    justify-content: space-between;
+    width: 75.2%;
+    margin: 0 auto;
+}
+.savedDuration{
+    width: 10rem;
+    height: 10rem;
+    margin-top: 30px;
+}
+.savedCard {
+    background-color: red;
+    width: 30rem;
+    height: 10rem;
+    margin-top: 30px;
 }

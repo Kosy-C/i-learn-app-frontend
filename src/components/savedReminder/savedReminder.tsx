@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { Link } from "react-router-dom";
@@ -6,13 +6,25 @@ import NavBar from "../navBar/navBar";
 import "react-calendar/dist/Calendar.css";
 import "./savedReminder.css";
 import { Calendar } from "react-calendar";
+import axios from "axios";
+const jsonUrl = "http://localhost:8000";
 
 function SavedReminder() {
-	const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-
-	const handleDateClick = (date: Date) => {
-		setSelectedDate(date);
+	const [reminder, setReminder] = useState([]);
+	const getReminder = async () => {
+		try {
+			const response = await axios.get(jsonUrl);
+			console.log("response data is ", response.data);
+			setReminder(response.data);
+		} catch (error) {
+			console.log(error);
+		}
 	};
+
+	useEffect(() => {
+		getReminder();
+	}, []);
+
 	return (
 		<>
 			<NavBar />
@@ -28,14 +40,34 @@ function SavedReminder() {
 					</div>
 					<div className="reminderContainer">
 						<div className="today">
-							<p>
-								<b>Today</b>
-							</p>
+							<span>
+								{new Date().getMonth()} {new Date().getDate()},{" "}
+								{new Date().getFullYear()}
+							</span>
+							<br />
+							<p>Today</p>
 						</div>
 						<div className="calander">
-							<Calendar onChange={handleDateClick} value={selectedDate} />
+							<Calendar />
 						</div>
-						<div className="backend">backend</div>
+						<div className="savedDetails">
+							<div className="savedDuration">
+								<p>
+									{new Date().getMonth()} {new Date().getDate()},{" "}
+									{new Date().getFullYear()}
+								</p>
+								<p>
+									{new Date().getMonth()} {new Date().getDate()},{" "}
+									{new Date().getFullYear()}
+								</p>
+							</div>
+							<div className="savedCard">
+								<p>Learn Coding</p>
+								<br />
+								<span>Javascript coding practice</span>
+							</div>
+						</div>
+
 						<div>
 							{" "}
 							<button className="addNew">
