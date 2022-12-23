@@ -4,10 +4,17 @@ import './navBar.css'
 import { FaBars } from 'react-icons/fa'
 import { ImCross } from 'react-icons/im'
 import Notification from '../NotificationModal/Notification'
+import Profile from '../profileDetails/profile'
+import { Modal } from 'react-responsive-modal'
+import 'react-responsive-modal/styles.css'
 
 const NavBar = () => {
   const [Mobile, setMobile] = useState(false)
   const [notificationModal, setNotificationModal] = useState(false)
+  const [profile, setProfile] = useState(false)
+
+  const onOpenProfile = () => setProfile(true)
+  const onCloseProfile = () => setProfile(false)
 
   const toggleModal = () => {
     setNotificationModal(!notificationModal)
@@ -67,7 +74,15 @@ const NavBar = () => {
         )}
 
         <li>
-          <img src='src/assets/images/profilepic.svg' className='profilepic' />
+          <button type='submit' onClick={onOpenProfile}>
+            <img
+              src='src/assets/images/profilepic.svg'
+              className='profilepic'
+            />
+          </button>
+          <Modal open={profile} onClose={onCloseProfile}>
+            <Profile />
+          </Modal>
         </li>
       </ul>
 

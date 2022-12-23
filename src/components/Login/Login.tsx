@@ -20,12 +20,7 @@ function LoginForm() {
 
   const [error, setError] = useState('')
 
-  const validate = (
-    email: string = '',
-    password: string = '',
-    interest: string = '',
-    userType: string = ''
-  ) => {
+  const validate = (email: string = '', password: string = '') => {
     if (email.length === 0) return setError('Please Enter your email')
     else if (password.length < 8)
       return setError('Password character cannot be less than 8')
