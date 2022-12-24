@@ -6,6 +6,7 @@ import { FcGoogle } from "react-icons/fc";
 import logo from "../../assets/logo.png";
 import { signInWithGooglePopup } from "../../utils/firebaseAuth/firebase";
 import axios from "axios";
+import { toast } from "react-toastify";
 // eslint-disable-next-line @typescript-eslint/no-unused-expressions
 import.meta.env;
 
@@ -42,14 +43,15 @@ function LoginForm() {
 
 		try {
 			const response = await axios.post(`${baseUrl}/users/login`, data);
-			console.log("find me");
-			console.log("bug:", response);
 			const signature = response.data.signature;
+			console.log(response.data, "response is")
 			localStorage.setItem("signature", signature);
+			localStorage.setItem("user", response.data.areaOfInterest || "physics");
 			navigate("/dashboard");
 		} catch (err: any) {
-			console.log(err.response?.data);
-			window.alert(err.response?.data);
+			console.log(err.response.data, "error message");
+			toast.error(err.response?.data?.Error || "Something went wrong")
+			
 		}
 	};
 
