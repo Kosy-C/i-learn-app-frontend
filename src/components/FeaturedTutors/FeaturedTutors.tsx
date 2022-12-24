@@ -1,12 +1,9 @@
-/* eslint-disable @typescript-eslint/no-floating-promises */
 import React, { useEffect, useState } from "react";
 import "./FeaturedTutors.css";
 import { Link } from "react-router-dom";
 import { apiGet } from "../../utils/api/axios";
-// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
-type Props = {};
 
-const FeaturedTutors = (props: Props) => {
+const FeaturedTutors = () => {
 	const [tutors, setTutors] = useState([]);
 
 	useEffect(() => {
@@ -19,7 +16,7 @@ const FeaturedTutors = (props: Props) => {
 				console.log(error);
 			}
 		};
-		fetch();
+		void fetch();
 	}, []);
 	return (
 		<>
