@@ -1,0 +1,12 @@
+.container {
+    /* margin: 0 5rem; */
+    /* margin: 2rem 2rem;
+     */
+     /* margin-left: 4rem;
+     margin-right: 4rem; */
+     margin: 0 4rem;
+     /* background-color: brown; */
+     width: 100vw;
+     height: 70vh;
+    overflow: scroll;  
+}
