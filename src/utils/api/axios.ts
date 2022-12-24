@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseUrl: string = import.meta.env.SERVER_URL;
+const baseUrl: string = import.meta.env.VITE_SERVER_URL;
 
 export const apiGet = async (path: string) => {
 	const config = {
@@ -7,5 +7,6 @@ export const apiGet = async (path: string) => {
 			Authorization: `Bearer ${localStorage.getItem("signature") as string}`,
 		},
 	};
-	return await axios.get(`${baseUrl}${path}`, config);
+	const result = await axios.get(`${baseUrl}${path}`, config);
+	return result;
 };

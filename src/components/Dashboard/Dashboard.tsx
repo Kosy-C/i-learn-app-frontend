@@ -14,7 +14,7 @@ const Dashboard = (props: Props) => {
 			<NavBar />
 			<SubNavbar />
 			<div className="container">
-				{/* <FeaturedTutors /> */}
+				<FeaturedTutors />
 				<RecommendedCourses />
 			</div>
 		</div>

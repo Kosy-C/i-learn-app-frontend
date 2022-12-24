@@ -1,5 +1,5 @@
 import React, { Fragment, ChangeEvent, useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../signUp/signUp.css";
 import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
@@ -9,12 +9,14 @@ import axios from "axios";
 // eslint-disable-next-line @typescript-eslint/no-unused-expressions
 import.meta.env;
 
-const baseUrl: string = import.meta.env.SERVER_URL;
+const baseUrl: string = import.meta.env.VITE_SERVER_URL;
 
 function LoginForm() {
 	const googleSignIn = async () => {
 		await signInWithGooglePopup();
 	};
+
+	const navigate = useNavigate();
 
 	const emailRef = useRef<HTMLInputElement>(null);
 	const passwordRef = useRef<HTMLInputElement>(null);
@@ -40,15 +42,14 @@ function LoginForm() {
 
 		try {
 			const response = await axios.post(`${baseUrl}/users/login`, data);
-			console.log(response);
+			console.log("find me");
+			console.log("bug:", response);
 			const signature = response.data.signature;
 			localStorage.setItem("signature", signature);
-			setTimeout(() => {
-				window.location.href = "/navbar";
-			}, 1000);
+			navigate("/dashboard");
 		} catch (err: any) {
-			console.log(err.response.data);
-			window.alert(err.response.data);
+			console.log(err.response?.data);
+			window.alert(err.response?.data);
 		}
 	};
 
