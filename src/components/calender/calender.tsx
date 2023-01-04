@@ -14,7 +14,7 @@ import {
 function Calender() {
 	const [months] = useState(reminder);
 	const [days, setDays] = useState(reminder[1]);
-	const [hours, setHour] = useState(Hours);
+	const [hours] = useState(Hours);
 	const [minutes] = useState(Minutes);
 	return (
 		<>
