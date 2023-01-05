@@ -1,10 +1,12 @@
-import axios from 'axios'
-const baseUrl = import.meta.env.SERVER_URL
-export const apiGet = (path: string) => {
-  const config = {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem('signature')}`,
-    },
-  }
-  return axios.get(`${baseUrl}${path}`, config)
-}
+import axios from "axios";
+const baseUrl: string = import.meta.env.VITE_SERVER_URL;
+
+export const apiGet = async (path: string) => {
+	const config = {
+		headers: {
+			Authorization: `Bearer ${localStorage.getItem("signature") as string}`,
+		},
+	};
+	const result = await axios.get(`${baseUrl}${path}`, config);
+	return result;
+};

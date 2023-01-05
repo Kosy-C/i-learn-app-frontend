@@ -34,9 +34,9 @@ function SavedReminder() {
 						<Link to="/calender" className="calender-return-link">
 							<AiOutlineArrowLeft /> Back
 						</Link>
-					</div>
-					<div>
-						<h1>All reminder will appear here</h1>
+						<div>
+							<h1>All reminder will appear here</h1>
+						</div>
 					</div>
 					<div className="reminderContainer">
 						<div className="today">
@@ -51,8 +51,8 @@ function SavedReminder() {
 							<Calendar />
 						</div>
 						<div className="savedDetails">
-							<div className="savedDuration">
-								<p>
+							{/* <div className="savedDuration"> */}
+							{/* <p>
 									{new Date().getMonth()} {new Date().getDate()},{" "}
 									{new Date().getFullYear()}
 								</p>
@@ -60,12 +60,24 @@ function SavedReminder() {
 									{new Date().getMonth()} {new Date().getDate()},{" "}
 									{new Date().getFullYear()}
 								</p>
-							</div>
-							<div className="savedCard">
+							</div> */}
+							{/* <div className="savedCard">
 								<p>Learn Coding</p>
 								<br />
 								<span>Javascript coding practice</span>
+							</div> */}
+							<div className="taskContainer">
+								<div>
+									<h4>10:15</h4>
+									<p>10:30</p>
+								</div>
+								<hr />
+								<div>
+									<h5>Learn Coding</h5>
+									<p>Javascript is a thing we know </p>
+								</div>
 							</div>
+
 						</div>
 
 						<div>

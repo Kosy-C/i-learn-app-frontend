@@ -17,6 +17,8 @@ import Reminder from "./components/reminder/reminder";
 import Calender from "./components/calender/calender";
 import SavedReminder from "./components/savedReminder/savedReminder";
 
+import Dashboard from "./components/Dashboard/Dashboard";
+
 function App() {
 	return (
 		<React.Fragment>
@@ -31,7 +33,7 @@ function App() {
 					<Route path="/reset-password" element={<ResetPassword />} />
 					<Route path="/users/resetpassword" element={<SetNewPassword />} />
 					<Route path="/tutor-profile" element={<Profile />} />
-
+					<Route path="/dashboard" element={<Dashboard />} />
 					<Route path="/history-page" element={<StudentHistoryPage />} />
 					<Route path="/all-courses" element={<AllCoursesPage />} />
 					<Route path="/verify" element={<VerifyPage />} />

@@ -4,6 +4,7 @@ import "./student.css";
 import maths from "../../assets/maths.jpg";
 import axios from "axios";
 import { apiGet } from "../../utils/api/axios";
+
 const studentHistoryPage = () => {
 	const [courses, setCourses] = useState<any>([]);
 	const getHistory = async () => {
