@@ -10,3 +10,7 @@ export const apiGet = async (path: string) => {
 	const result = await axios.get(`${baseUrl}${path}`, config);
 	return result;
 };
+export const apiPost = async (path: string, conf: {}) => {
+	const result = await axios.post(`${baseUrl}${path}`, conf);
+	return result;
+};
