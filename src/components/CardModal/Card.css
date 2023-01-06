@@ -7,7 +7,7 @@
   overflow: auto;
   background-color: #ffffff;
   animation: mymove 2s 1;
-  margin-top: 10px;
+  margin-top: 5px;
 }
 
 @media (max-width: 768px) {
