@@ -14,9 +14,9 @@
   width: 40px;
 }
 
-.notification-user:hover {
+/* .notification-user:hover {
   background-color: rgba(20, 168, 0, 0.05);
-}
+} */
 
 .notification-profile {
   font-size: 12px;
