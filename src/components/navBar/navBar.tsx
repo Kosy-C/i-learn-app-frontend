@@ -7,17 +7,22 @@ import Notification from "../NotificationModal/Notification";
 import Profile from "../profileDetails/profile";
 import { Modal } from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
+import ProfileModal from "../ProfileModal/ProfileModal";
 
 const NavBar = () => {
 	const [Mobile, setMobile] = useState(false);
 	const [notificationModal, setNotificationModal] = useState(false);
 	const [profile, setProfile] = useState(false);
+	const [showModal, setShowModal] = useState(false);
 
 	const onOpenProfile = () => setProfile(true);
 	const onCloseProfile = () => setProfile(false);
 
 	const toggleModal = () => {
 		setNotificationModal(!notificationModal);
+	};
+	const togglePopup = () => {
+		setShowModal(!showModal);
 	};
 	const logout = () => {
 		localStorage.clear();
@@ -67,13 +72,10 @@ const NavBar = () => {
 								{notificationModal && <Notification />}Notification
 							</button>
 						</li>
-						<Link to={"/login"} className="nav-link" onClick={logout}>
-							<li> Logout</li>
-						</Link>
 					</>
 				)}
 
-				<li>
+				{/* <li>
 					<button type="submit" onClick={onOpenProfile}>
 						<img
 							src="src/assets/images/profilepic.svg"
@@ -83,6 +85,17 @@ const NavBar = () => {
 					<Modal open={profile} onClose={onCloseProfile}>
 						<Profile />
 					</Modal>
+				</li> */}
+				<li>
+					<button onClick={togglePopup}>
+						{showModal && (
+							<ProfileModal userName={""} userEmail={""} userPicture={""} />
+						)}
+						<img
+							src="src/assets/images/profilepic.svg"
+							className="profilepic"
+						/>
+					</button>
 				</li>
 			</ul>
 

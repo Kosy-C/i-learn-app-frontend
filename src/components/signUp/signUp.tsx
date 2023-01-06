@@ -1,8 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
-import React, { Fragment, ChangeEvent, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, {
+	Fragment,
+	ChangeEvent,
+	useState,
+	useRef,
+	useEffect,
+} from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "../signUp/signUp.css";
 import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
@@ -34,6 +40,18 @@ function SignUpForm() {
 	const googleSignIn = async () => {
 		await signInWithGooglePopup();
 	};
+	const navigate = useNavigate();
+	const nameRef = useRef<HTMLInputElement>(null);
+	const passwordRef = useRef<HTMLInputElement>(null);
+	const interestRef = useRef<HTMLSelectElement>(null);
+	const userTypeRef = useRef<HTMLSelectElement>(null);
+
+	const [formError, setFormError] = useState({});
+	const [formDetails, setFormDetails] = useState(formField);
+	const { userType, email, password, password2, interest } = formDetails;
+	const [isSubmit, setIsSubmit] = useState(false);
+	const [show, setShow] = useState(false);
+
 	const handleChange = async (
 		event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>
 	) => {
@@ -41,16 +59,10 @@ function SignUpForm() {
 		const { name, value } = event.target;
 		setFormDetails({ ...formDetails, [name]: value });
 	};
-	const [show, setShow] = useState(false);
 
 	const display = () => {
 		setShow(!show);
 	};
-
-	const [formDetails, setFormDetails] = useState(formField);
-	const { userType, email, password, password2, interest } = formDetails;
-	const [formError, setFormError] = useState({});
-	const [isSubmit, setIsSubmit] = useState(false);
 
 	useEffect(() => {
 		console.log(formError);
@@ -89,6 +101,22 @@ function SignUpForm() {
 			event.preventDefault();
 			setFormError(validate(formDetails));
 			setIsSubmit(true);
+			console.log("nameref is ", nameRef.current?.value);
+			console.log("passwordref is ", passwordRef.current?.value);
+			console.log(interestRef.current?.value);
+			console.log(userTypeRef.current?.value);
+			// const data = {
+			// 	email: emailRef.current?.value,
+			// 	password: passwordRef.current?.value,
+			// };
+			// console.log(data);
+
+			// const response = await axios.post(`${baseUrl}/users/login`, data);
+			// const signature = response.data.signature;
+			// console.log(response.data, "response is")
+			// localStorage.setItem("signature", signature);
+			// localStorage.setItem("user", response.data.areaOfInterest || "physics");
+			// navigate("/login");
 		} catch (err: any) {
 			toast.error(err.response.data.Error);
 		}
