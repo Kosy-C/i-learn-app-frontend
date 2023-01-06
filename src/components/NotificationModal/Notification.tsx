@@ -43,7 +43,7 @@ const Notification: React.FC = () => {
   return (
     <div>
       <Card>
-        {posts.map((post: any, index) => {
+        {posts.slice(0, 5).map((post: any, index) => {
           return (
             <>
               <div key={index} className="notification-user">
