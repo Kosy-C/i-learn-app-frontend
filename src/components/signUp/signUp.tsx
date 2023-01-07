@@ -1,35 +1,25 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-misused-promises */
-/* eslint-disable @typescript-eslint/strict-boolean-expressions */
-import React, { Fragment, ChangeEvent, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { Fragment, ChangeEvent, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "../signUp/signUp.css";
 import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import logo from "../../assets/logo.png";
 import { signInWithGooglePopup } from "../../utils/firebaseAuth/firebase";
-import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-const baseUrl: string = import.meta.env.VITE_SERVER_URL;
-
+import { apiPost } from "../../utils/api/axios";
 interface formFieldType {
 	userType: string;
 	email: string;
 	password: string;
-	password2: string;
-	interest: string;
+	areaOfInterest: string;
 }
-
 const formField: formFieldType = {
 	userType: "",
 	email: "",
 	password: "",
-	password2: "",
-	interest: "",
+	areaOfInterest: "",
 };
-
 function SignUpForm() {
 	const googleSignIn = async () => {
 		await signInWithGooglePopup();
@@ -42,55 +32,23 @@ function SignUpForm() {
 		setFormDetails({ ...formDetails, [name]: value });
 	};
 	const [show, setShow] = useState(false);
-
 	const display = () => {
 		setShow(!show);
 	};
-
 	const [formDetails, setFormDetails] = useState(formField);
-	const { userType, email, password, password2, interest } = formDetails;
-	const [formError, setFormError] = useState({});
-	const [isSubmit, setIsSubmit] = useState(false);
-
-	useEffect(() => {
-		console.log(formError);
-		if (Object.keys(formError).length === 0 && isSubmit) {
-			console.log(formDetails);
-		}
-	}, [formError]);
-
-	const validate = (values: formFieldType) => {
-		const errors: formFieldType = {
-			userType: "",
-			email: "",
-			password: "",
-			interest: "",
-			password2: "",
-		};
-		if (!values.userType) {
-			errors.userType = "User Type is required";
-		}
-		if (!values.email) {
-			errors.email = "Email is required";
-		}
-
-		if (!values.password) {
-			errors.password = "Password is required";
-		}
-
-		if (!values.interest) {
-			errors.interest = "Area of Interest is required";
-		}
-		return errors;
-	};
-
+	const { userType, email, password, areaOfInterest } = formDetails;
+	const navigate = useNavigate();
 	const handleSubmit = async (event: ChangeEvent<HTMLFormElement>) => {
 		try {
 			event.preventDefault();
-			setFormError(validate(formDetails));
-			setIsSubmit(true);
+			const response = await apiPost("/users/signup", formDetails);
+			toast.success(response.data.message);
+			setTimeout(() => {
+				// window.location.href = "/login"
+				navigate("/login");
+			}, 3000);
 		} catch (err: any) {
-			toast.error(err.response.data.Error);
+			toast.error(err.response.data.message);
 		}
 	};
 	return (
@@ -110,7 +68,6 @@ function SignUpForm() {
 							<h2>Create an account </h2>
 							<p>Create your account to connect with students</p>
 						</div>
-
 						<form onSubmit={handleSubmit} className="formInputs">
 							<div>
 								<label className="formLabel" id="userType">
@@ -127,7 +84,6 @@ function SignUpForm() {
 									<option value="Student">Student</option>
 								</select>
 							</div>
-
 							<div className="formLabel">
 								<label>Email</label>
 								<input
@@ -138,7 +94,6 @@ function SignUpForm() {
 									placeholder="Enter your email"
 								/>
 							</div>
-
 							<div className="formLabel">
 								<label>Password</label>
 								<input
@@ -149,13 +104,22 @@ function SignUpForm() {
 									placeholder="Enter your password..."
 								/>
 							</div>
-
+							{/* <div className="formLabel">
+								<label>Confirm Password</label>
+								<input
+									type="password"
+									name="confirm_password"
+									value={confirm_password}
+									onChange={handleChange}
+									placeholder="Re-enter your password..."
+								/>
+							</div> */}
 							<div className="formLabel">
 								<label id="interest">Area of Interest</label>
 								<select
 									id="interest"
-									name="interest"
-									value={interest}
+									name="areaOfInterest"
+									value={areaOfInterest}
 									onChange={handleChange}
 								>
 									<option value="">Select</option>
@@ -168,7 +132,6 @@ function SignUpForm() {
 									<option value="digital">Digital Marketing</option>
 								</select>
 							</div>
-
 							<button type="submit" className="signUp-button">
 								Sign Up
 							</button>

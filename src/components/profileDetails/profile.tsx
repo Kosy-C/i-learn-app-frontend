@@ -1,12 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import "../profileDetails/profile.css";
 import Ellipse4 from "../../assets/images/Ellipse 4.svg";
 import {AiOutlineSafetyCertificate} from "react-icons/ai"
 import {CiLocationOn} from "react-icons/ci"
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import { apiGet } from '../../utils/api/axios';
 
 
 function Profile() {
+    const [tutor, setTutor] = useState <any> ({})
+
+        const params = useParams()
+        useEffect(() => {
+            const fetch = async () => {
+                const {data} = await apiGet(`/users/atutordetail/${params.id}`)
+                console.log(data)
+    
+                setTutor(data.message)
+            }
+            fetch();
+        }, [])
+
     return (
+
         <>
         <body className='profile-body'>
         <div className='profile-container'>
@@ -16,11 +33,11 @@ function Profile() {
                 </div>
                 <hr />
                 <div className='profile-tutor'>
-                    <img src={Ellipse4} alt="avatar"  />
+                    <img src={tutor.image} alt="avatar"  />
                     <div className='profile-tutor-details'>
-                        <h2>Chukwu Di</h2>
+                        <h2>{tutor.name}</h2>
                         <p> <AiOutlineSafetyCertificate className='certify-icon'/> Certified Tutor</p>
-                        <p> <CiLocationOn/> Location</p>
+                        <p> <CiLocationOn/> {tutor.email}</p>
                     </div>
                 </div>
                 <div className='profile-about'>
@@ -36,10 +53,7 @@ function Profile() {
                     <h3>Expertise</h3>
                     <div>
                         <ul className='profile-expertise-list'>
-                            <li>Physics</li>
-                            <li>Physics</li>
-                            <li>Coding</li>
-                            <li>Music</li>
+                            <li>{tutor.areaOfInterest}</li>
                         </ul>
                     </div>
                 </div>
@@ -51,3 +65,5 @@ function Profile() {
 }
 
 export default Profile;
+
+
