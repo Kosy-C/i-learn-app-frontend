@@ -1,4 +1,3 @@
-import React from "react";
 import StudentHistoryPage from "../../components/studentHistoryPage/studentHistoryPage";
 
 import ResetPassword from "../../pages/ResetPassword/resetPassword";

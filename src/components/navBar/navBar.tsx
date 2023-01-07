@@ -3,10 +3,30 @@ import { Link } from "react-router-dom";
 import "./navBar.css";
 import { FaBars } from "react-icons/fa";
 import { ImCross } from "react-icons/im";
+import Notification from "../NotificationModal/Notification";
+import Profile from "../profileDetails/profile";
+import { Modal } from "react-responsive-modal";
+import "react-responsive-modal/styles.css";
+import ProfileModal from "../ProfileModal/ProfileModal";
 
 const NavBar = () => {
 	const [Mobile, setMobile] = useState(false);
+	const [notificationModal, setNotificationModal] = useState(false);
+	const [profile, setProfile] = useState(false);
+	const [showModal, setShowModal] = useState(false);
 
+	const onOpenModal = () => {
+		setNotificationModal(true);
+	};
+
+	const onCloseModal = () => setNotificationModal(false);
+
+	// const toggleModal = () => {
+	// 	setNotificationModal(!notificationModal);
+	// };
+	const togglePopup = () => {
+		setShowModal(!showModal);
+	};
 	const logout = () => {
 		localStorage.clear();
 	};
@@ -50,19 +70,46 @@ const NavBar = () => {
 						<Link to={"/reminder"} className="nav-link">
 							<li> Reminder</li>
 						</Link>
-
-						<Link to={"/notification"} className="nav-link">
-							<li> Notification</li>
-						</Link>
-
-						<Link to={"/login"} className="nav-link" onClick={logout}>
-							<li> Logout</li>
-						</Link>
+						<li>
+							<button onClick={onOpenModal}>
+								{notificationModal && <Notification />}Notification
+							</button>
+							<Modal
+								open={notificationModal}
+								onClose={onCloseModal}
+								showCloseIcon={false}
+								styles={{
+									overlay: { display: "none" },
+									closeButton: { display: "none" },
+								}}
+							>
+								<Notification />
+							</Modal>
+						</li>
 					</>
 				)}
 
+				{/* <li>
+					<button type="submit" onClick={onOpenProfile}>
+						<img
+							src="src/assets/images/profilepic.svg"
+							className="profilepic"
+						/>
+					</button>
+					<Modal open={profile} onClose={onCloseProfile}>
+						<Profile />
+					</Modal>
+				</li> */}
 				<li>
-					<img src="src/assets/images/profilepic.svg" className="profilepic" />
+					<button onClick={togglePopup}>
+						{showModal && (
+							<ProfileModal userName={""} userEmail={""} userPicture={""} />
+						)}
+						<img
+							src="src/assets/images/profilepic.svg"
+							className="profilepic"
+						/>
+					</button>
 				</li>
 			</ul>
 

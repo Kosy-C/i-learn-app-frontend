@@ -11,7 +11,7 @@ const Hero = ({ mystyle }: any) => {
 		<div className="hero">
 			<nav className="navbar">
 				<div className="brand-title">
-					<Link to="/#">
+					<Link to="/">
 						<img src={tutorLogo} alt="logo" />
 					</Link>
 					<span>iLearn</span>
@@ -49,14 +49,14 @@ const Hero = ({ mystyle }: any) => {
 					</ul>
 				</div>
 			</nav>
-			<div className="body-content">
+			<div className="heroContent">
 				<div className="card firstCard">
 					<h1>
 						Find the best online <br />
 						tutor for you.
 					</h1>
 				</div>
-				<div className="card">
+				<div className="heroSecondCard">
 					Lorem ipsum dolor sit amet consectetur, adipisicing elit.
 					<br />
 					Quibusdam blanditiis enim voluptatem voluptatibus illo
@@ -64,10 +64,8 @@ const Hero = ({ mystyle }: any) => {
 					nostrum illum placeat.
 				</div>
 
-				<div className="card buttonCard">
-					<Link to="/sign-up">
-						<a href="/sign-up">Get Started</a>
-					</Link>
+				<div className="buttonCard">
+					<Link to="/sign-up">Get Started</Link>
 				</div>
 			</div>
 		</div>

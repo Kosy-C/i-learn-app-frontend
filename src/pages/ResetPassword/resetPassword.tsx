@@ -4,7 +4,7 @@ import Group from "../../assets/Group.svg";
 // import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import axios from "axios";
-const baseUrl = "http://127.0.0.1:4000";
+const baseUrl = import.meta.env.SERVER_URL;
 
 const ResetPassword = () => {
 	const [createForm, setCreateForm] = useState({});
@@ -32,7 +32,7 @@ const ResetPassword = () => {
 			console.log("response is ", response.data);
 		} catch (error) {
 			console.log(error);
-			window.alert(error)
+			window.alert(error);
 		}
 	};
 
@@ -77,7 +77,9 @@ const ResetPassword = () => {
 								onClick={async () => await fetchLink()}
 								className="btn-primary"
 							>
-								<Link className="btn">Send Reset Link</Link>
+								<Link to="" className="btn">
+									Send Reset Link
+								</Link>
 							</button>
 							<p>
 								Already have an account?{" "}

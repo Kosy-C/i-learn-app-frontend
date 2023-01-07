@@ -1,30 +1,30 @@
 import React, { Fragment, ChangeEvent, useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../signUp/signUp.css";
 import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import logo from "../../assets/logo.png";
 import { signInWithGooglePopup } from "../../utils/firebaseAuth/firebase";
 import axios from "axios";
+import { toast } from "react-toastify";
+// eslint-disable-next-line @typescript-eslint/no-unused-expressions
+import.meta.env;
 
-const baseUrl = "http://localhost:4000";
+const baseUrl: string = import.meta.env.VITE_SERVER_URL;
 
 function LoginForm() {
 	const googleSignIn = async () => {
 		await signInWithGooglePopup();
 	};
 
+	const navigate = useNavigate();
+
 	const emailRef = useRef<HTMLInputElement>(null);
 	const passwordRef = useRef<HTMLInputElement>(null);
 
 	const [error, setError] = useState("");
 
-	const validate = (
-		email: string = "",
-		password: string = "",
-		interest: string = "",
-		userType: string = ""
-	) => {
+	const validate = (email: string = "", password: string = "") => {
 		if (email.length === 0) return setError("Please Enter your email");
 		else if (password.length < 8)
 			return setError("Password character cannot be less than 8");
@@ -43,15 +43,14 @@ function LoginForm() {
 
 		try {
 			const response = await axios.post(`${baseUrl}/users/login`, data);
-			console.log(response);
 			const signature = response.data.signature;
+			console.log(response.data, "response is");
 			localStorage.setItem("signature", signature);
-			setTimeout(() => {
-				window.location.href = "/navbar";
-			}, 1000);
-		} catch (err:any) {
-			console.log(err.response.data);
-			window.alert(err.response.data);
+			localStorage.setItem("user", response.data.areaOfInterest || "physics");
+			navigate("/dashboard");
+		} catch (err: any) {
+			console.log(err.response.data, "error message");
+			toast.error(err.response?.data?.Error || "Something went wrong");
 		}
 	};
 
@@ -72,6 +71,7 @@ function LoginForm() {
 							<h3>Login </h3>
 						</div>
 
+						{/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
 						<form onSubmit={handleSubmit} className="formInputs">
 							{error.length > 0 && error.includes("user") && (
 								<div className="errorMsg">{error}</div>
@@ -100,7 +100,9 @@ function LoginForm() {
 								/>
 							</div>
 							<h5 id="forgot">
-								<Link to="/reset-password" className="forgot-link">Forgot password?</Link>
+								<Link to="/reset-password" className="forgot-link">
+									Forgot password?
+								</Link>
 							</h5>
 							{error.length > 0 && error.includes("Password") && (
 								<div className="errorMsg">{error}</div>
@@ -120,6 +122,7 @@ function LoginForm() {
 								</Link>
 							</div>
 							<div className="socialIcons">
+								{/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
 								<button type="submit" onClick={googleSignIn}>
 									<FcGoogle />
 								</button>
