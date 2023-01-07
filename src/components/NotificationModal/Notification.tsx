@@ -43,10 +43,18 @@ const Notification: React.FC = () => {
   return (
     <div>
       <Card>
-        {posts.map((post: any, index) => {
+        {posts.slice(0, 5).map((post: any, index) => {
           return (
             <>
-              <div key={index} className="notification-user">
+              <div
+                key={index}
+                className="notification-user"
+                style={
+                  post.status === "unread"
+                    ? { backgroundColor: "rgba(20, 168, 0, 0.05)" }
+                    : { backgroundColor: "#ffffff" }
+                }
+              >
                 <img src={post.image} alt="userImage" />
                 <div className="notification-profile">
                   <h1>{post.name}</h1>
