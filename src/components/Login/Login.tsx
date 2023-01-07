@@ -46,7 +46,7 @@ function LoginForm() {
 			const signature = response.data.signature;
 			console.log(response.data, "response is");
 			localStorage.setItem("signature", signature);
-			localStorage.setItem("user", response.data.areaOfInterest || "physics");
+			localStorage.setItem("user", response.data.areaOfInterest || "backend");
 			navigate("/dashboard");
 		} catch (err: any) {
 			console.log(err.response.data, "error message");
