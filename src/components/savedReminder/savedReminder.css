@@ -35,7 +35,7 @@
 .saved-return-container{
     margin-top: 2%;
     text-align: left;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     line-height: 4;
 }
 
@@ -43,7 +43,7 @@
 .reminderContainer{
     border: solid 1px black;
     width: 40rem;
-    height: 50rem;
+    height: 45rem;
 }
 
 .addNew{
