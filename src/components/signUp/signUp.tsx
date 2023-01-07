@@ -1,13 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-misused-promises */
-/* eslint-disable @typescript-eslint/strict-boolean-expressions */
-import React, {
-	Fragment,
-	ChangeEvent,
-	useState,
-	useRef,
-	useEffect,
-} from "react";
+import React, { Fragment, ChangeEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../signUp/signUp.css";
 import { FaFacebook } from "react-icons/fa";
@@ -17,108 +8,62 @@ import { signInWithGooglePopup } from "../../utils/firebaseAuth/firebase";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import {apiPost} from "../../utils/api/axios";
 
-const baseUrl: string = import.meta.env.VITE_SERVER_URL;
 
-interface formFieldType {
-	userType: string;
-	email: string;
-	password: string;
-	password2: string;
-	interest: string;
+
+
+
+type formFieldType = { 
+    userType: string,
+    email: string,
+    password: string,
+    areaOfInterest: string
 }
 
-const formField: formFieldType = {
-	userType: "",
-	email: "",
-	password: "",
-	password2: "",
-	interest: "",
-};
-
+const formField:formFieldType = { 
+    userType: "",
+    email: "",
+    password: "",
+    areaOfInterest: ""
+}
 function SignUpForm() {
 	const googleSignIn = async () => {
 		await signInWithGooglePopup();
 	};
-	const navigate = useNavigate();
-	const nameRef = useRef<HTMLInputElement>(null);
-	const passwordRef = useRef<HTMLInputElement>(null);
-	const interestRef = useRef<HTMLSelectElement>(null);
-	const userTypeRef = useRef<HTMLSelectElement>(null);
-
-	const [formError, setFormError] = useState({});
-	const [formDetails, setFormDetails] = useState(formField);
-	const { userType, email, password, password2, interest } = formDetails;
-	const [isSubmit, setIsSubmit] = useState(false);
-	const [show, setShow] = useState(false);
-
-	const handleChange = async (
-		event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>
-	) => {
+	const handleChange= async(event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>) =>{
 		event.preventDefault();
-		const { name, value } = event.target;
-		setFormDetails({ ...formDetails, [name]: value });
-	};
-
+		const {name, value} = event.target;
+        setFormDetails({...formDetails, [name]: value})
+	}
+	
+	const [show, setShow] = useState(false)
+	
 	const display = () => {
-		setShow(!show);
-	};
+		setShow(!show)
+	}
 
-	useEffect(() => {
-		console.log(formError);
-		if (Object.keys(formError).length === 0 && isSubmit) {
-			console.log(formDetails);
-		}
-	}, [formError]);
+	const [formDetails, setFormDetails] = useState(formField);
+    const {userType, email, password, areaOfInterest} = formDetails;
+   
+	
+	const navigate = useNavigate();
 
-	const validate = (values: formFieldType) => {
-		const errors: formFieldType = {
-			userType: "",
-			email: "",
-			password: "",
-			interest: "",
-			password2: "",
-		};
-		if (!values.userType) {
-			errors.userType = "User Type is required";
-		}
-		if (!values.email) {
-			errors.email = "Email is required";
-		}
-
-		if (!values.password) {
-			errors.password = "Password is required";
-		}
-
-		if (!values.interest) {
-			errors.interest = "Area of Interest is required";
-		}
-		return errors;
-	};
-
-	const handleSubmit = async (event: ChangeEvent<HTMLFormElement>) => {
+	const handleSubmit = async (event: ChangeEvent<HTMLFormElement> ) => {
+		
 		try {
 			event.preventDefault();
-			setFormError(validate(formDetails));
-			setIsSubmit(true);
-			console.log("nameref is ", nameRef.current?.value);
-			console.log("passwordref is ", passwordRef.current?.value);
-			console.log(interestRef.current?.value);
-			console.log(userTypeRef.current?.value);
-			// const data = {
-			// 	email: emailRef.current?.value,
-			// 	password: passwordRef.current?.value,
-			// };
-			// console.log(data);
-
-			// const response = await axios.post(`${baseUrl}/users/login`, data);
-			// const signature = response.data.signature;
-			// console.log(response.data, "response is")
-			// localStorage.setItem("signature", signature);
-			// localStorage.setItem("user", response.data.areaOfInterest || "physics");
-			// navigate("/login");
+			const response = await apiPost("/users/signup", formDetails);
+			console.log(response.data)
+			toast.success(response.data.message)
+			// redirect
+			setTimeout(() => {
+				window.location.href = "/login"
+				// navigate("/login")
+			},3000)
+			
 		} catch (err: any) {
-			toast.error(err.response.data.Error);
+			toast.error(err.response.data.Error)
 		}
 	};
 	return (
@@ -138,18 +83,12 @@ function SignUpForm() {
 							<h2>Create an account </h2>
 							<p>Create your account to connect with students</p>
 						</div>
-
 						<form onSubmit={handleSubmit} className="formInputs">
 							<div>
 								<label className="formLabel" id="userType">
 									User Type
 								</label>
-								<select
-									id="userType"
-									name="userType"
-									value={userType}
-									onChange={handleChange}
-								>
+								<select id="userType" name="userType" value={userType} onChange={handleChange}>
 									<option value="">Select</option>
 									<option value="Tutor">Tutor</option>
 									<option value="Student">Student</option>
@@ -166,7 +105,7 @@ function SignUpForm() {
 									placeholder="Enter your email"
 								/>
 							</div>
-
+							
 							<div className="formLabel">
 								<label>Password</label>
 								<input
@@ -177,15 +116,21 @@ function SignUpForm() {
 									placeholder="Enter your password..."
 								/>
 							</div>
-
+							
+							{/* <div className="formLabel">
+								<label>Confirm Password</label>
+								<input
+									type="password"
+									name="password2"
+									value={password2}
+									onChange={handleChange}
+									placeholder="Re-enter your password..."
+								/>
+							</div> */}
+							
 							<div className="formLabel">
 								<label id="interest">Area of Interest</label>
-								<select
-									id="interest"
-									name="interest"
-									value={interest}
-									onChange={handleChange}
-								>
+								<select id="interest" name="areaOfInterest" value={areaOfInterest} onChange={handleChange}>
 									<option value="">Select</option>
 									<option value="Tutor">Mathematics</option>
 									<option value="physics">Physics</option>
@@ -196,7 +141,7 @@ function SignUpForm() {
 									<option value="digital">Digital Marketing</option>
 								</select>
 							</div>
-
+							
 							<button type="submit" className="signUp-button">
 								Sign Up
 							</button>
