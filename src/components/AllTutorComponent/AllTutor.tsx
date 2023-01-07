@@ -5,7 +5,7 @@ import axios from "axios";
 // import coloredStar from "../../assets/colored-star.png";
 import "./AllTutor.css";
 
-const jsonUrl = "http://localhost:8000/tutors";
+const jsonUrl = "http://localhost:7100/tutors";
 const AllTutor = () => {
 	const [show, setShow] = useState(false);
 	const [tutors, setTutor] = useState([]);

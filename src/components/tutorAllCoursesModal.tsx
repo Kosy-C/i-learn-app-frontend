@@ -28,7 +28,7 @@ const TutorAllCoursesModal = (tutors: any) => {
 	return (
 		<div className="tutor_all_courses_container">
 			<div className="tutor_all_courses_background_div"></div>
-			{tutor.courses.map()}
+			{/* {tutor.courses.map()} */}
 		</div>
 	);
 };
