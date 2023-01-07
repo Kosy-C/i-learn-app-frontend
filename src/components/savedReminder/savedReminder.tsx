@@ -71,7 +71,7 @@ function SavedReminder() {
 									<h4>10:15</h4>
 									<p>10:30</p>
 								</div>
-								<hr />
+								<hr className="line" />
 								<div>
 									<h5>Learn Coding</h5>
 									<p>Javascript is a thing we know </p>
