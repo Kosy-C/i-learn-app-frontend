@@ -44,14 +44,13 @@ function LoginForm() {
 		try {
 			const response = await axios.post(`${baseUrl}/users/login`, data);
 			const signature = response.data.signature;
-			console.log(response.data, "response is")
+			console.log(response.data, "response is");
 			localStorage.setItem("signature", signature);
 			localStorage.setItem("user", response.data.areaOfInterest || "backend");
 			navigate("/dashboard");
 		} catch (err: any) {
 			console.log(err.response.data, "error message");
-			toast.error(err.response?.data?.Error || "Something went wrong")
-			
+			toast.error(err.response?.data?.Error || "Something went wrong");
 		}
 	};
 

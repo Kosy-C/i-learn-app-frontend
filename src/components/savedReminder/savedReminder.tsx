@@ -77,7 +77,6 @@ function SavedReminder() {
 									<p>Javascript is a thing we know </p>
 								</div>
 							</div>
-
 						</div>
 
 						<div>

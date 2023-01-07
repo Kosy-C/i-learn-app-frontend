@@ -65,9 +65,7 @@ const Hero = ({ mystyle }: any) => {
 				</div>
 
 				<div className="buttonCard">
-					<Link to="/sign-up">
-						Get Started
-					</Link>
+					<Link to="/sign-up">Get Started</Link>
 				</div>
 			</div>
 		</div>

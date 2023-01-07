@@ -1,7 +1,6 @@
 import React, { createContext } from "react";
 // import { apiGet } from "../utils/api/axios";
 
-
 // type History= {
 //     coursetitle: string;
 //     subtitle: string;
@@ -11,7 +10,7 @@ import React, { createContext } from "react";
 // export const userContext = createContext<History>({coursetitle: "", subtitle: "", name: ""});
 
 // const DataProvider = ({ children }: any) => {
-   
+
 //   const getStudentHistory = async () => {
 //     try {
 //         const { data } = await apiGet("/student/history");
@@ -19,16 +18,15 @@ import React, { createContext } from "react";
 //       }
 //      catch (error: unknown) {
 //         console.log(error);
-        
+
 //     }
-   
+
 //   return (
 //     <userContext.Provider value={{ getStudentHistory }}>
 //       {children}
 //     </userContext.Provider>
 //   );
 // };
-
 
 // export const useAuth = () => {
 //     const context = React.useContext(userContext);
