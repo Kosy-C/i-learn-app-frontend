@@ -56,6 +56,7 @@ function SignUpForm() {
 			const response = await apiPost("/users/signup", formDetails);
 			console.log(response.data)
 			toast.success(response.data.message)
+			// redirect
 			setTimeout(() => {
 				window.location.href = "/login"
 				// navigate("/login")
