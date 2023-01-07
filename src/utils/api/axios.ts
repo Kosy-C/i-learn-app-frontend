@@ -19,31 +19,29 @@ export const apiGet = async (path: string) => {
 //     };
 //     return axios.get(`${baseUrl}${path}`, config);
 // };
-export const apiPost = (path: string, conf={}) => {
-	console.log("conf is ", conf)
-    const config = {
-        ...conf,
-        headers: {
-            Authorization: `Bearer ${localStorage.getItem("signature")}`,
-        },
-    };
-	console.log("config is ", config)
-    return axios.post(`${baseUrl}${path}`, conf);
+export const apiPost = async (path: string, conf = {}) => {
+	const config = {
+		...conf,
+		headers: {
+			Authorization: `Bearer ${localStorage.getItem("signature") as string}`,
+		},
+	};
+	return await axios.post(`${baseUrl}${path}`, conf);
 };
-export const apiUpdate = (path: string, conf={}, auth=true) => {
-    const config = {
-        ...conf,
-        headers: {
-            Authorization: `Bearer ${localStorage.getItem("signature")}`,
-        },
-    };
-    return axios.put(`${baseUrl}${path}`, config);
+export const apiUpdate = async (path: string, conf = {}, auth = true) => {
+	const config = {
+		...conf,
+		headers: {
+			Authorization: `Bearer ${localStorage.getItem("signature") as string}`,
+		},
+	};
+	return await axios.put(`${baseUrl}${path}`, config);
 };
-export const apiDelete = (path: string, auth=true) => {
-    const config = {
-        headers: {
-            Authorization: `Bearer ${localStorage.getItem("signature")}`,
-        },
-    };
-    return axios.delete(`${baseUrl}${path}`, config);
+export const apiDelete = async (path: string, auth = true) => {
+	const config = {
+		headers: {
+			Authorization: `Bearer ${localStorage.getItem("signature") as string}`,
+		},
+	};
+	return await axios.delete(`${baseUrl}${path}`, config);
 };
