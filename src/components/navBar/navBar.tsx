@@ -10,86 +10,86 @@ import "react-responsive-modal/styles.css";
 import ProfileModal from "../ProfileModal/ProfileModal";
 
 const NavBar = () => {
-  const [Mobile, setMobile] = useState(false);
-  const [notificationModal, setNotificationModal] = useState(false);
-  const [profile, setProfile] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+	const [Mobile, setMobile] = useState(false);
+	const [notificationModal, setNotificationModal] = useState(false);
+	const [profile, setProfile] = useState(false);
+	const [showModal, setShowModal] = useState(false);
 
-  const onOpenModal = () => {
-    setNotificationModal(true);
-  };
+	const onOpenModal = () => {
+		setNotificationModal(true);
+	};
 
-  const onCloseModal = () => setNotificationModal(false);
+	const onCloseModal = () => setNotificationModal(false);
 
-  // const toggleModal = () => {
-  // 	setNotificationModal(!notificationModal);
-  // };
-  const togglePopup = () => {
-    setShowModal(!showModal);
-  };
-  const logout = () => {
-    localStorage.clear();
-  };
-  const getSignature = localStorage.getItem("signature");
+	// const toggleModal = () => {
+	// 	setNotificationModal(!notificationModal);
+	// };
+	const togglePopup = () => {
+		setShowModal(!showModal);
+	};
+	const logout = () => {
+		localStorage.clear();
+	};
+	const getSignature = localStorage.getItem("signature");
 
-  return (
-    <nav className="navbar">
-      <div className="logotext">
-        <img src="src/assets/images/fulllogo.svg" />
-        <h3>iLearn</h3>
-      </div>
+	return (
+		<nav className="navbar">
+			<div className="logotext">
+				<img src="src/assets/images/fulllogo.svg" />
+				<h3>iLearn</h3>
+			</div>
 
-      <ul
-        className={Mobile ? "nav-links-mobile" : "navlinks"}
-        onClick={() => setMobile(false)}
-      >
-        {getSignature === null ? (
-          <>
-            <Link to={"/tutors"} className="nav-link">
-              <li> Tutors</li>
-            </Link>
+			<ul
+				className={Mobile ? "nav-links-mobile" : "navlinks"}
+				onClick={() => setMobile(false)}
+			>
+				{getSignature === null ? (
+					<>
+						<Link to={"/tutors"} className="nav-link">
+							<li> Tutors</li>
+						</Link>
 
-            <Link to={"/about"} className="nav-link">
-              <li> About Us</li>
-            </Link>
+						<Link to={"/about"} className="nav-link">
+							<li> About Us</li>
+						</Link>
 
-            <Link to={"/login"} className="nav-link">
-              <li> Login</li>
-            </Link>
+						<Link to={"/login"} className="nav-link">
+							<li> Login</li>
+						</Link>
 
-            <Link to={"/getstarted"} className="nav-link">
-              <li> Get Started</li>
-            </Link>
-          </>
-        ) : (
-          <>
-            <Link to={"/dashboard"} className="nav-link">
-              <li> Dashboard</li>
-            </Link>
+						<Link to={"/getstarted"} className="nav-link">
+							<li> Get Started</li>
+						</Link>
+					</>
+				) : (
+					<>
+						<Link to={"/dashboard"} className="nav-link">
+							<li> Dashboard</li>
+						</Link>
 
-            <Link to={"/reminder"} className="nav-link">
-              <li> Reminder</li>
-            </Link>
-            <li>
-              <button onClick={onOpenModal}>
-                {notificationModal && <Notification />}Notification
-              </button>
-              <Modal
-                open={notificationModal}
-                onClose={onCloseModal}
-                showCloseIcon={false}
-                styles={{
-                  overlay: { display: "none" },
-                  closeButton: { display: "none" },
-                }}
-              >
-                <Notification />
-              </Modal>
-            </li>
-          </>
-        )}
+						<Link to={"/reminder"} className="nav-link">
+							<li> Reminder</li>
+						</Link>
+						<li>
+							<button onClick={onOpenModal}>
+								{notificationModal && <Notification />}Notification
+							</button>
+							<Modal
+								open={notificationModal}
+								onClose={onCloseModal}
+								showCloseIcon={false}
+								styles={{
+									overlay: { display: "none" },
+									closeButton: { display: "none" },
+								}}
+							>
+								<Notification />
+							</Modal>
+						</li>
+					</>
+				)}
 
-        {/* <li>
+				{/* <li>
 					<button type="submit" onClick={onOpenProfile}>
 						<img
 							src="src/assets/images/profilepic.svg"
@@ -100,24 +100,24 @@ const NavBar = () => {
 						<Profile />
 					</Modal>
 				</li> */}
-        <li>
-          <button onClick={togglePopup}>
-            {showModal && (
-              <ProfileModal userName={""} userEmail={""} userPicture={""} />
-            )}
-            <img
-              src="src/assets/images/profilepic.svg"
-              className="profilepic"
-            />
-          </button>
-        </li>
-      </ul>
+				<li>
+					<button onClick={togglePopup}>
+						{showModal && (
+							<ProfileModal userName={""} userEmail={""} userPicture={""} />
+						)}
+						<img
+							src="src/assets/images/profilepic.svg"
+							className="profilepic"
+						/>
+					</button>
+				</li>
+			</ul>
 
-      <button className="mobile-menu-icon" onClick={() => setMobile(!Mobile)}>
-        {Mobile ? <ImCross /> : <FaBars />}
-      </button>
-    </nav>
-  );
+			<button className="mobile-menu-icon" onClick={() => setMobile(!Mobile)}>
+				{Mobile ? <ImCross /> : <FaBars />}
+			</button>
+		</nav>
+	);
 };
 
 export default NavBar;

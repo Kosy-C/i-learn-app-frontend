@@ -10,6 +10,7 @@ import NavBar from "./components/navBar/navBar";
 import Contact from "./pages/Contact/Contact";
 import ResetPassword from "./pages/ResetPassword/resetPassword";
 import SetNewPassword from "./pages/ResetPassword/setNewPassword";
+import AllTutor from "./components/AllTutorComponent/AllTutor";
 import Profile from "./components/profileDetails/profile";
 import AllCoursesPage from "./pages/AllCourses/AllCourses";
 import VerifyPage from "./pages/VerifyPage/Verify";
@@ -35,6 +36,7 @@ function App() {
 					<Route path="/tutor-profile" element={<Profile />} />
 					<Route path="/dashboard" element={<Dashboard />} />
 					<Route path="/history-page" element={<StudentHistoryPage />} />
+					<Route path="/all-tutors" element={<AllTutor />} />
 					<Route path="/all-courses" element={<AllCoursesPage />} />
 					<Route path="/verify" element={<VerifyPage />} />
 					<Route path="/reminder" element={<Reminder />} />

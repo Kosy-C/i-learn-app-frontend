@@ -8,7 +8,6 @@ import { Modal } from "react-responsive-modal";
 const FeaturedTutors = () => {
 	const [tutors, setTutors] = useState([]);
 	const [profile, setProfile] = useState(false);
-	
 
 	const onOpenProfile = () => setProfile(true);
 	const onCloseProfile = () => setProfile(false);
