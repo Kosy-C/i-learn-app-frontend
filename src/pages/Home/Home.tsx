@@ -1,7 +1,7 @@
 import StudentHistoryPage from "../../components/studentHistoryPage/studentHistoryPage";
 
-import ResetPassword from "../../pages/ResetPassword/resetPassword";
-import SetNewPassword from "../../pages/ResetPassword/setNewPassword";
+import ResetPassword from "../ResetPassword/resetPassword";
+import SetNewPassword from "../ResetPassword/setNewPassword";
 
 const Home = () => {
 	return (

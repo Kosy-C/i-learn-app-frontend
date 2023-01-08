@@ -4,12 +4,17 @@ import star from "../../assets/star.png";
 import axios from "axios";
 import coloredStar from "../../assets/colored-star.png";
 import "./AllTutor.css";
+import Modal from "../TutorAllCourses/tutorAllCoursesModal";
+import { title } from "process";
 
 const jsonUrl = "http://localhost:7100/tutors";
 const AllTutor = () => {
+  const [readMore, setReadMore] = useState(6);
+  const [openModal, setOpenModal] = useState(false);
   const [show, setShow] = useState(false);
   const [tutors, setTutor] = useState([]);
-  const getTutor = async () => {
+  const [oneTutor, setOneTutor] = useState({});
+  const getAllTutor = async () => {
     try {
       const response = await axios.get(jsonUrl);
       console.log(response.data);
@@ -18,13 +23,60 @@ const AllTutor = () => {
       console.log(error);
     }
   };
+  const getTutor = async (id: number) => {
+    try {
+      const response = await axios.get(jsonUrl);
+      console.log(response.data);
+      setOneTutor({
+        avatar:
+          "https://media.istockphoto.com/id/517322295/photo/businessman-icon-on-white-background.jpg?s=612x612&w=0&k=20&c=nblmvXxR-4huR6u9psWI8JGDQKw6ezlXX-p3wWtouSE=",
+        name: "blessing",
+        id: 1,
+        courses: [
+          {
+            course_id: 109,
+            title: "English for Beginners",
+            cover_image: "",
+            rating: 3.0,
+          },
+          {
+            course_id: 132,
+            title: "Intermediate Arabic",
+            cover_image: "",
+            rating: 4.0,
+          },
+          {
+            course_id: 189,
+            title: "Wood work for Junior Secondary School",
+            cover_image: "",
+            rating: 4.6,
+          },
+          {
+            course_id: 409,
+            title: "Carpentry for Senior Secondary School",
+            cover_image: "",
+            rating: 4.6,
+          },
+        ],
+        rating: 3.0,
+      });
+      setOpenModal(true);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
-    getTutor();
+    getAllTutor();
   }, []);
   const showMore = () => {
     setShow((previousState) => !previousState);
     // setText((initial)=>initial="See less")
-};
+  };
+
+  const showMoreBtn = () => {
+    setReadMore(readMore + 3);
+  };
+
   return (
     <>
       <NavBar />
@@ -37,20 +89,34 @@ const AllTutor = () => {
             placeholder="Search"
           />
         </div>
+      </div>
+
+      <div className="kings">
         <div className="unique_our_tutors_and_all_tutor_card_container">
           <div className="unique_our_tutors">Our Tutors</div>
           <div className="unique_all_tutor_card_container">
-            {tutors.map((tutor: any, index: number) => {
+            {tutors.slice(0, readMore).map((tutor: any, index: number) => {
               return (
                 <div key={index} className="unique_tutor_card">
                   <div className="unique_tutor_avatar_container">
-                    <img className="unique_tutor_avatar" src={tutor.avatar} alt="" />
+                    <img
+                      className="unique_tutor_avatar"
+                      src={tutor.avatar}
+                      alt=""
+                    />
                   </div>
                   <div className="unique_tutor_details">
                     <p className="unique_tutor_name">{tutor.name}</p>
-                    <button className="unique_see_tutor_courses_button">
+                    {/* <p className="unique_tutor_name">{tutor.courses.title}</p> */}
+                    <button
+                      className="unique_see_tutor_courses_button"
+                      onClick={() => {
+                        getTutor(tutor.id);
+                      }}
+                    >
                       See courses
                     </button>
+
                     <div className="unique_tutor_rating_container">
                       <div className="unique_rating_text_container">
                         <span>{tutor.rating}</span>
@@ -58,18 +124,21 @@ const AllTutor = () => {
 
                       <div className="unique_tutor_rating_stars_container">
                         <div className="unique_tutor_rating_star1">
-                        <img src={coloredStar} alt="" />
-                            <img src={star} alt="" />
+                          <img src={coloredStar} alt="" />
+                          <img src={star} alt="" />
                         </div>
-                        
                       </div>
                     </div>
                   </div>
+                  {/* </div> */}
 
                   {show &&
                     tutor.courses.map((c: any, index: number) => (
                       <div className="unique_all_courses_details">
-                        <div key={c.course_id} className="unique_all_courses_img">
+                        <div
+                          key={c.course_id}
+                          className="unique_all_courses_img"
+                        >
                           <img src={c.cover_image} alt="unique_course_logo" />
                         </div>
                         <h3>{c.title}</h3>
@@ -86,25 +155,14 @@ const AllTutor = () => {
               );
             })}
           </div>
+
+          {openModal && <Modal oneTutor={oneTutor} closeModal={setOpenModal} />}
+
           <div className="unique_see_more">
-            <button className="unique_button_seee_more">
-            See more &#8964;
+            <button className="unique_button_seee_more" onClick={showMoreBtn}>
+              See more &#8964;
             </button>
-            </div>
-            {/* {!show && (
-                    <div className="unique_see_more">
-                        <a href="#" onClick={showMore}>
-                            See more
-                        </a>
-                    </div>
-                )}
-                {show && (
-                    <div className="unique_see_more">
-                        <a href="#" onClick={showMore}>
-                            See less
-                        </a>
-                    </div>
-                )} */}
+          </div>
         </div>
       </div>
     </>

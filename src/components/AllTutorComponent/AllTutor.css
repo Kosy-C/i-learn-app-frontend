@@ -1,9 +1,9 @@
-.unique_all_tutors_container {
-    position: relative;
 
+.unique_all_tutors_container {
+    position: absolute;
     border-radius: 0px;
-  
     background: #ffffff;
+    margin: auto;
   }
   
   .unique_all_tutors_text_and_search_container {
@@ -57,16 +57,13 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: 0px;
+    padding-left: 120px;
     gap: 32px;
-    position: absolute;
-    width: 1189px;
-    height: 820px;
-    /* height: auto; */
-    left: 124px;
+    position: relative;
     top: 183px;
+    overflow:scroll;
   
-    border: #fd2959 solid 1px;
+    /* border: #fd2959 solid 1px; */
   }
   .unique_our_tutors {
     width: 142px;
@@ -78,22 +75,22 @@
     text-align: left;
     line-height: 22px; /* identical to box height */
     color: #21334f;
-    border: 1px orange solid;
+    /* border: 1px orange solid; */
   }
   .unique_all_tutor_card_container {
     /* auto layout */
     display: flex;
     flex-wrap: wrap;
-    
     padding: 0px;
     gap: 24px;
     /* width: 1189px; */
-    height: 766px;
+    height: 100vh;
+    overflow: auto;
     /*inside auto layout*/
     /* flex: none; */
     order: 1;
     flex-grow: 0;
-    border: blue solid 1px;
+    /* border: blue solid 1px; */
   }
   .unique_tutor_card {
     /* auto layout */
@@ -103,7 +100,7 @@
     padding: 0px;
     width: 375px;
     height: 334px;
-    border: 1px dashed green;
+    /* border: 1px dashed green; */
   }
   .unique_tutor_avatar_container {
     width: 375px;
@@ -149,7 +146,7 @@
     text-align: left;
     line-height: 29px;
     color: #21334f;
-    border: 1px black dashed;
+    /* border: 1px black dashed; */
     /*inside flex container*/
     flex: none;
     order: 0;
@@ -164,7 +161,7 @@
     /* background: rgba(253, 41, 89, 0.1); */
     border-radius: 4px;
     padding: 8px, 16px;
-    border: 1px black dashed;
+    /* border: 1px black dashed; */
     cursor: pointer;
   }
   
@@ -245,5 +242,7 @@
       color: #FD2959;
       font-size: 18px;
       order: 4;
+      margin-bottom: 50px;
+      /* position: ; */
   }
   
