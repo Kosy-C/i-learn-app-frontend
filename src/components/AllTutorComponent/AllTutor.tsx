@@ -6,8 +6,8 @@ import coloredStar from "../../assets/colored-star.png";
 import "./AllTutor.css";
 import Modal from "../TutorAllCourses/tutorAllCoursesModal";
 import { title } from "process";
+import { apiGet } from "../../utils/api/axios";
 
-const jsonUrl = "http://localhost:7100/tutors";
 const AllTutor = () => {
   const [readMore, setReadMore] = useState(6);
   const [openModal, setOpenModal] = useState(false);
@@ -16,16 +16,17 @@ const AllTutor = () => {
   const [oneTutor, setOneTutor] = useState({});
   const getAllTutor = async () => {
     try {
-      const response = await axios.get(jsonUrl);
-      console.log(response.data);
-      setTutor(response.data);
+    const response =  await apiGet('/users/all-tutors')
+      console.log(response.data.findTutor);
+      setTutor(response.data.findTutor);
     } catch (error) {
       console.log(error);
     }
   };
   const getTutor = async (id: number) => {
     try {
-      const response = await axios.get(jsonUrl);
+      //const response = await axios.get('');
+     const response = await apiGet(`/users/atutordetail/${id}`)
       console.log(response.data);
       setOneTutor({
         avatar:
@@ -70,7 +71,6 @@ const AllTutor = () => {
   }, []);
   const showMore = () => {
     setShow((previousState) => !previousState);
-    // setText((initial)=>initial="See less")
   };
 
   const showMoreBtn = () => {
@@ -101,13 +101,12 @@ const AllTutor = () => {
                   <div className="unique_tutor_avatar_container">
                     <img
                       className="unique_tutor_avatar"
-                      src={tutor.avatar}
+                      src={tutor.image != "" ? tutor.image:  "https://media.istockphoto.com/id/517322295/photo/businessman-icon-on-white-background.jpg?s=612x612&w=0&k=20&c=nblmvXxR-4huR6u9psWI8JGDQKw6ezlXX-p3wWtouSE="}
                       alt=""
                     />
                   </div>
                   <div className="unique_tutor_details">
                     <p className="unique_tutor_name">{tutor.name}</p>
-                    {/* <p className="unique_tutor_name">{tutor.courses.title}</p> */}
                     <button
                       className="unique_see_tutor_courses_button"
                       onClick={() => {
@@ -130,8 +129,6 @@ const AllTutor = () => {
                       </div>
                     </div>
                   </div>
-                  {/* </div> */}
-
                   {show &&
                     tutor.courses.map((c: any, index: number) => (
                       <div className="unique_all_courses_details">
@@ -145,8 +142,6 @@ const AllTutor = () => {
 
                         <h3>
                           {c.rating}
-                          {/* <span><img src={coloredStar}/></span> */}
-                          {/* <span><img src={star}/></span> */}
                           <span>({index})</span>
                         </h3>
                       </div>

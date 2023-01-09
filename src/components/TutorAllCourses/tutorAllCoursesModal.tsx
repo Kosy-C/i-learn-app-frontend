@@ -1,64 +1,16 @@
  import React, { useEffect, useState } from "react";
  import './tutorAllCoursesModal.css'
-// // import NavBar from '../../components/navBar/navBar';
-
 import axios from "axios";
-// import coloredStar from "../../assets/colored-star.png";
 
 
-// // import NavBar from './navBar/navBar';
-// import database from "../../db/database.json";
+
+
 const jsonUrl = "http://localhost:7100/tutors";
-// const TutorAllCoursesModal = (tutors: any) => {
-	// const [showTutorCourse, setShowTutorCourse] = useState(false);
-	// const [tutor, setTutor] = useState([]);
-	// const getTutor = async () => {
-	// 	try {
-	// 		const response = await axios.get(jsonUrl);
-	// 		console.log(response.data);
-	// 		setTutor(response.data);
-	// 	} catch (error) {
-	// 		console.log(error);
-	// 	}
-	// };
-	// useEffect(() => {
-	// 	getTutor();
-	// }, []);
-
-// 	return (
-// 		<div className="tutor_all_courses_container">
-// 			<div className="tutor_all_courses_background_div"></div>
-// 			{tutor.courses.map()}
-// 		</div>
-// 	);
-// };
-// export default TutorAllCoursesModal;
-
 
 const Modal = ({closeModal, oneTutor}:{closeModal:any, oneTutor:any})=>{
-//     const [openModal, setOpenModal] = useState(false)
-//     const [show, setShow] = useState(false);
-//     const [tutors, setTutor] = useState([]);
-//     const getTutor = async () => {
-//       try {
-//         const response = await axios.get(jsonUrl);
-//         console.log(response.data);
-//         setTutor(response.data);
-//       } catch (error) {
-//         console.log(error);
-//       }
-//     };
-//     useEffect(() => {
-//       getTutor();
-//     }, []);
-//     const showMore = () => {
-//       setShow((previousState) => !previousState);
-//       // setText((initial)=>initial="See less")
-//   };
-    
-            // {tutors.map((tutor: any, index: number) => {
+
         return(
-            // <div key={index} className="unique_tutor_card">
+            
         <div className="tutor-allcourses-modal-background">
             <div className="tutor-allcourses-modal-container">
                 
@@ -78,11 +30,10 @@ const Modal = ({closeModal, oneTutor}:{closeModal:any, oneTutor:any})=>{
       
             </div>
               
-            // </div>
+         
     )
     
-// })
-// }
+
 }
 
 export default Modal

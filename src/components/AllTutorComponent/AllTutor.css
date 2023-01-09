@@ -62,8 +62,6 @@
     position: relative;
     top: 183px;
     overflow:scroll;
-  
-    /* border: #fd2959 solid 1px; */
   }
   .unique_our_tutors {
     width: 142px;
@@ -75,7 +73,6 @@
     text-align: left;
     line-height: 22px; /* identical to box height */
     color: #21334f;
-    /* border: 1px orange solid; */
   }
   .unique_all_tutor_card_container {
     /* auto layout */
@@ -83,14 +80,11 @@
     flex-wrap: wrap;
     padding: 0px;
     gap: 24px;
-    /* width: 1189px; */
     height: 100vh;
     overflow: auto;
     /*inside auto layout*/
-    /* flex: none; */
     order: 1;
     flex-grow: 0;
-    /* border: blue solid 1px; */
   }
   .unique_tutor_card {
     /* auto layout */
@@ -100,12 +94,10 @@
     padding: 0px;
     width: 375px;
     height: 334px;
-    /* border: 1px dashed green; */
   }
   .unique_tutor_avatar_container {
     width: 375px;
     height: 160px;
-    /* background: url(image.png); */
     background: rgba(253, 41, 89, 0.1);
     background: #21334F;
     overflow-y: hidden;
@@ -146,22 +138,18 @@
     text-align: left;
     line-height: 29px;
     color: #21334f;
-    /* border: 1px black dashed; */
     /*inside flex container*/
     flex: none;
     order: 0;
     flex-grow: 0;
   }
   .unique_see_tutor_courses_button {
-    /* background: #FD2959; */
     width: 200px;
     height: 45px;
     background: rgba(253, 41, 89, 0.3);
     z-index: 10;
-    /* background: rgba(253, 41, 89, 0.1); */
     border-radius: 4px;
     padding: 8px, 16px;
-    /* border: 1px black dashed; */
     cursor: pointer;
   }
   
@@ -243,6 +231,5 @@
       font-size: 18px;
       order: 4;
       margin-bottom: 50px;
-      /* position: ; */
   }
   

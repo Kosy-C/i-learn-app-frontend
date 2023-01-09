@@ -1,6 +1,5 @@
 .tutor-allcourses-modal-background {
     position: absolute;
-    /* top: 0px; */
     padding-left: 30vh;
     padding-top: 54px;
     width: 1189px;
@@ -19,7 +18,7 @@
 }
 
 .tutor-allcourses-modal-container{
-/* height: 788px; */
+
 width: 694px;
 padding: 36px 40px;
 background: white;
