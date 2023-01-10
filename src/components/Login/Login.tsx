@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
-/* eslint-disable @typescript-eslint/no-misused-promises */
+
 import React, { Fragment, ChangeEvent, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import "../signUp/signUp.css";
