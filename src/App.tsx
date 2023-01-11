@@ -17,7 +17,7 @@ import VerifyPage from "./pages/VerifyPage/Verify";
 import Reminder from "./components/reminder/reminder";
 import Calender from "./components/calender/calender";
 import SavedReminder from "./components/savedReminder/savedReminder";
-
+import CourseDetail from "./pages/courseDetails/courseDetail";
 import Dashboard from "./components/Dashboard/Dashboard";
 
 function App() {
@@ -25,9 +25,11 @@ function App() {
 		<React.Fragment>
 			<ToastContainer />
 			<Router>
+			{/* <NavBar/> */}
 				<Routes>
 					<Route path="/" element={<LandingPage />} />
-					<Route path="/navbar" element={<NavBar />} />
+					<Route path="/coursedetail" element={<CourseDetail/>} />
+					{/* <Route path="/navbar" element={<NavBar />} /> */}
 					<Route path="/contact_us" element={<Contact />} />
 					<Route path="/sign-up" element={<SignUpForm />} />
 					<Route path="/login" element={<LoginForm />} />

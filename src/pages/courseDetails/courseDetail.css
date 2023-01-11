@@ -1,0 +1,229 @@
+
+.cd-container{
+    position: absolute;
+    height: 788px;
+    left: 0px;
+    top: 0px;
+    background: #ffffff;
+}
+
+.cd-heading{
+    position: absolute;
+    width: 170px;
+    height: 20px;
+    left: 40px;
+    top: 27px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    margin-left: 238px;
+    /* line-height: 20px; */
+    /* identical to box height, or 125% */
+    color: #21334F;
+}
+
+.cd-course-container{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 70px;
+    margin-left: 280px;
+    padding: 25px 40px;
+    text-align: left;
+    gap: 8px;
+    position: absolute;
+    width: 900px;
+    height: 300px;
+    left: 0px;
+    top: 1px;
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.6);
+    background-image: url('/Users/decagon/Documents/ilearnfrontend/node-live-project-frontend-sq012-i-learn/src/assets/backgroungimage.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: blur(px);
+}
+
+.cd-p{
+    padding-left: 0px;
+}
+
+.cd-tutor-title{
+    width: 108px;
+    height: 17px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+.cd-tutor-container{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 390px;
+    margin-left: 280px;
+    padding: 15px 32px;
+    gap: 8px;
+    position: absolute;
+    width: 900px;
+    height: 300px;
+    left: 0px;
+    top: 1px;
+    padding-left: 0;
+
+}
+
+.cd-tutor-name{
+    padding-left: 10px;
+    width: 132px;
+    height: 17px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+/* identical to box height */
+
+
+color: #21334F;
+    
+}
+
+.cd-tutor-profile{
+    padding-top: 17px;
+    display: flex;
+}
+
+.cd-name-courses{
+    display: flex;
+    flex-direction: column;
+}
+
+.course-no{
+    padding-left: 0px;
+    padding-right: 29px;
+    height: 17px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+/* identical to box height */
+
+
+    color: #21334F;
+}
+
+.cd-about-tutor{
+    padding-top: 10px;
+}
+
+.cd-schedule-time{
+    display: flex;
+    padding-top: 10px;
+}
+
+.carlendar-icon{
+    padding-left: 10px;
+    padding-top: 5px;
+    color: #FD2959;
+    
+}
+
+.cd-icon{
+    padding-top: 3px;
+    font-size: 30px;
+    color: #FD2959;
+}
+
+.cd-time-container{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 610px;
+    margin-left: 280px;
+    padding: 15px 32px;
+    gap: 8px;
+    position: absolute;
+    width: 900px;
+    height: 300px;
+    left: 0px;
+    top: 1px;
+    padding-left: 0;
+}
+
+.cd-rating{
+    width: 76px;
+    height: 17px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 17px;
+}
+
+.rating-heading{
+    /* width: 88px; */
+    height: 15px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 15px;
+    padding-top: 10px;
+}
+
+.rating-heading2{
+    /* width: 88px; */
+    height: 15px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 15px;
+    padding-top: 45px;
+}
+
+.rating-body{
+    height: 20px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    padding-top: 10px;
+}
+
+.cal-button{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    /* align-items: center; */
+    padding-top: 4px;
+    /* gap: 10px; */
+
+    /* position: relative; */
+    width: 614px;
+    height: 52px;
+    left: 40px;
+    /* top: 700px; */
+
+    background: #FD2959;
+    border-radius: 4px;
+    margin-top: 60px;
+    display: block
+}
+
+
+
+
+/* .cd-rating{
+    width: 
+} */
