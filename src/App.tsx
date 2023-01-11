@@ -19,33 +19,35 @@ import Calender from "./components/calender/calender";
 import SavedReminder from "./components/savedReminder/savedReminder";
 
 import Dashboard from "./components/Dashboard/Dashboard";
+import PaymentSummaryPage from "./pages/paymentSummary/paymentSummary";
 
 function App() {
-	return (
-		<React.Fragment>
-			<ToastContainer />
-			<Router>
-				<Routes>
-					<Route path="/" element={<LandingPage />} />
-					<Route path="/navbar" element={<NavBar />} />
-					<Route path="/contact_us" element={<Contact />} />
-					<Route path="/sign-up" element={<SignUpForm />} />
-					<Route path="/login" element={<LoginForm />} />
-					<Route path="/reset-password" element={<ResetPassword />} />
-					<Route path="/users/resetpassword" element={<SetNewPassword />} />
-					<Route path="/tutor-profile" element={<Profile />} />
-					<Route path="/dashboard" element={<Dashboard />} />
-					<Route path="/history-page" element={<StudentHistoryPage />} />
-					<Route path="/all-tutors" element={<AllTutor />} />
-					<Route path="/all-courses" element={<AllCoursesPage />} />
-					<Route path="/verify" element={<VerifyPage />} />
-					<Route path="/reminder" element={<Reminder />} />
-					<Route path="/calender" element={<Calender />} />
-					<Route path="/savedReminder" element={<SavedReminder />} />
-				</Routes>
-			</Router>
-		</React.Fragment>
-	);
+  return (
+    <React.Fragment>
+      <ToastContainer />
+      <Router>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/navbar" element={<NavBar />} />
+          <Route path="/contact_us" element={<Contact />} />
+          <Route path="/sign-up" element={<SignUpForm />} />
+          <Route path="/login" element={<LoginForm />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/users/resetpassword" element={<SetNewPassword />} />
+          <Route path="/tutor-profile" element={<Profile />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/history-page" element={<StudentHistoryPage />} />
+          <Route path="/all-tutors" element={<AllTutor />} />
+          <Route path="/all-courses" element={<AllCoursesPage />} />
+          <Route path="/verify" element={<VerifyPage />} />
+          <Route path="/reminder" element={<Reminder />} />
+          <Route path="/calender" element={<Calender />} />
+          <Route path="/savedReminder" element={<SavedReminder />} />
+          <Route path="/Payment-Summary" element={<PaymentSummaryPage />} />
+        </Routes>
+      </Router>
+    </React.Fragment>
+  );
 }
 
 export default App;
