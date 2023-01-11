@@ -19,6 +19,7 @@ import Calender from "./components/calender/calender";
 import SavedReminder from "./components/savedReminder/savedReminder";
 
 import Dashboard from "./components/Dashboard/Dashboard";
+import TutorCourseOperations from "./pages/TutorCourseOperations/TutorCourseOperations";
 function App() {
 	return (
 		<React.Fragment>
@@ -42,10 +43,11 @@ function App() {
 					<Route path="/calender" element={<Calender />} />
 					<Route path="/savedReminder" element={<SavedReminder />} />
 					<Route path="/" element={<SavedReminder />} />
+					<Route path="*" element={<h1>404 Not Found</h1>} />
+					<Route path="/tutor-course-operations" element={<TutorCourseOperations/>} />
 					</Routes>
 			</Router>
 		</React.Fragment>
 	);
 }
-
 export default App;

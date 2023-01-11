@@ -15,6 +15,7 @@
     "@reduxjs/toolkit": "^1.9.1",
     "@types/firebase": "^3.2.1",
     "@types/react-calendar": "^3.9.0",
+    "antd": "^5.1.4",
     "axios": "^1.2.1",
     "dotenv": "^16.0.3",
     "eslint-plugin-react-hooks": "^4.6.0",
