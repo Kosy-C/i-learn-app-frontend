@@ -1,6 +1,9 @@
 import React, { createContext } from "react";
 
-const dataContext = createContext();
+const dataContext = createContext( {
+	// data: any;
+	// setData: (data: any) => void;
+});
 
 const DataProvider = () => {
 	return <dataContext.Provider value={{}}></dataContext.Provider>;

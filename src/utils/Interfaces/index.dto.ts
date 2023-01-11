@@ -19,3 +19,20 @@ export interface Courses {
 		}
 	];
 }
+
+// create interface for tutor to create, update and delete courses
+
+export interface Course {
+	id: string;
+	name: string;
+	email: string;
+	areaOfInterest: string;
+
+	courses: [
+		{
+			"course_image":"string",
+			"course_name":"string",
+			"tutor_name": "string",
+			"course_price": "string"
+}]
+}
