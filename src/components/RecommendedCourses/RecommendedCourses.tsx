@@ -27,7 +27,7 @@ const RecommendedCourses = () => {
 		<>
 			<div className="recommended-section">
 				<div className="recommended-courses-bar">
-					<h4>Recommended Courses</h4>
+					<h4 id="head_rec">Recommended Courses</h4>
 					<p>
 						<Link to="/all-courses" className="see-all-courses">
 							See all
@@ -53,7 +53,7 @@ const RecommendedCourses = () => {
 									<div className="course-details">
 										<h3 className="course-title">{el.title}</h3>
 										<p className="course-name">
-											{el?.name !== undefined ? el.name : ""}
+											{el.tutor.name !== undefined ? el.tutor.name : ""}
 										</p>
 										<div className="course-ratings">
 											<div>{el.rating}</div>

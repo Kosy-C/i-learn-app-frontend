@@ -27,7 +27,7 @@ const FeaturedTutors = () => {
 		<>
 			<div className="all_container">
 				<div className="tutors-bar">
-					<h4>Featured Tutors</h4>
+					<h4 id="head">Featured Tutors</h4>
 					<p>
 						<Link to="/all-tutors" className="see-all-tutors">
 							See all
