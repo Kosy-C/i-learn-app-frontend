@@ -1,96 +1,88 @@
 
 .cd-container{
-    position: absolute;
-    height: 788px;
     left: 0px;
     top: 0px;
     background: #ffffff;
+    width: 60%;
+    margin: 0px auto;
 }
 
 .cd-heading{
-    position: absolute;
-    width: 170px;
-    height: 20px;
-    left: 40px;
-    top: 27px;
+    padding-bottom: 5px;
+    position: relative;
+    text-align: left;
+    padding-top: 30px;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 600;
     font-size: 20px;
-    margin-left: 238px;
-    /* line-height: 20px; */
-    /* identical to box height, or 125% */
     color: #21334F;
+    width: 60%;
+    margin: 0px auto;
+}
+
+.heading-border{
+    border-bottom: 2px solid rgba(0, 0, 0, 0.16);
+    width: 100vw;
 }
 
 .cd-course-container{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin-top: 70px;
-    margin-left: 280px;
-    padding: 25px 40px;
+    margin-top: 30px;
+    padding: 10px 40px;
     text-align: left;
     gap: 8px;
-    position: absolute;
     width: 900px;
-    height: 300px;
-    left: 0px;
-    top: 1px;
+    height: 250px;
     color: #ffffff;
     background: rgba(0, 0, 0, 0.6);
-    background-image: url('/Users/decagon/Documents/ilearnfrontend/node-live-project-frontend-sq012-i-learn/src/assets/backgroungimage.svg');
     background-repeat: no-repeat;
     background-size: cover;
     filter: blur(px);
 }
 
-.cd-p{
-    padding-left: 0px;
-}
-
 .cd-tutor-title{
-    width: 108px;
-    height: 17px;
-
+    width: 500px;
+    text-align: left;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 700;
     font-size: 14px;
-    line-height: 17px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.16);
+    padding-bottom: 10px;
 }
 
 .cd-tutor-container{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin-top: 390px;
-    margin-left: 280px;
+    margin-top: 30px;
     padding: 15px 32px;
     gap: 8px;
-    position: absolute;
     width: 900px;
-    height: 300px;
     left: 0px;
     top: 1px;
     padding-left: 0;
+}
 
+.ratings-container{
+    border: 1px solid rgba(0, 0, 0, 0.16);
+    padding:10px 0px 30px 10px;
+    margin-top: 5px;
 }
 
 .cd-tutor-name{
-    padding-left: 10px;
+    padding-bottom: 23px;
     width: 132px;
     height: 17px;
-
     font-family: 'Inter';
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
     line-height: 17px;
-/* identical to box height */
-
-
-color: #21334F;
+    color: #21334F;
     
 }
 
@@ -102,21 +94,21 @@ color: #21334F;
 .cd-name-courses{
     display: flex;
     flex-direction: column;
+    text-align: left;
+    position: relative;
+    left: 15px;
+    top:8px;
 }
 
 .course-no{
     padding-left: 0px;
     padding-right: 29px;
     height: 17px;
-
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
-/* identical to box height */
-
-
     color: #21334F;
 }
 
@@ -143,19 +135,14 @@ color: #21334F;
 }
 
 .cd-time-container{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-top: 610px;
-    margin-left: 280px;
-    padding: 15px 32px;
-    gap: 8px;
-    position: absolute;
+    text-align: left;
     width: 900px;
-    height: 300px;
-    left: 0px;
-    top: 1px;
-    padding-left: 0;
+}
+
+
+.cd-ratings {
+    font-weight: 600;
+    padding-bottom: 10px;
 }
 
 .cd-rating{
@@ -169,61 +156,30 @@ color: #21334F;
 }
 
 .rating-heading{
-    /* width: 88px; */
     height: 15px;
-
     font-family: 'Inter';
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
     line-height: 15px;
-    padding-top: 10px;
-}
-
-.rating-heading2{
-    /* width: 88px; */
-    height: 15px;
-
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 15px;
-    padding-top: 45px;
 }
 
 .rating-body{
-    height: 20px;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    line-height: 20px;
-    padding-top: 10px;
+    padding: 12px 0px;
 }
 
 .cal-button{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    /* align-items: center; */
     padding-top: 4px;
-    /* gap: 10px; */
-
-    /* position: relative; */
-    width: 614px;
+    width: 900px;
     height: 52px;
-    left: 40px;
-    /* top: 700px; */
-
+    color: #fff;
     background: #FD2959;
     border-radius: 4px;
-    margin-top: 60px;
-    display: block
+    margin-bottom: 10px;
 }
-
-
-
-
-/* .cd-rating{
-    width: 
-} */
+.cd-buttons{
+    margin: 30px 0px;
+}
+.cd-title{
+    padding-top: 30px
+}

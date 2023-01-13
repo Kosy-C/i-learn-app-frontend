@@ -28,7 +28,7 @@ function App() {
 			{/* <NavBar/> */}
 				<Routes>
 					<Route path="/" element={<LandingPage />} />
-					<Route path="/coursedetail" element={<CourseDetail/>} />
+					<Route path="/coursedetail/:id/:tutorid" element={<CourseDetail/>} />
 					{/* <Route path="/navbar" element={<NavBar />} /> */}
 					<Route path="/contact_us" element={<Contact />} />
 					<Route path="/sign-up" element={<SignUpForm />} />
