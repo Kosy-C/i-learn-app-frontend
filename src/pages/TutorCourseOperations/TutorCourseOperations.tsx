@@ -1,13 +1,31 @@
 import React, { useState } from 'react';
 import { Form, Input, Upload, Button, Table } from 'antd';
-//import { Form, Input, Upload, Button, Table } from 'antd';
 //import { PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import { PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import { UploadOutlined } from '@ant-design/icons';
 import { UploadChangeParam } from 'antd/lib/upload';
 import { UploadFile } from 'antd/lib/upload/interface';
+import { UploadListType } from 'antd/lib/upload/interface';
+import { UploadProps } from 'antd/lib/upload/interface';
+import { UploadRequestOption as RcCustomRequestOptions } from 'rc-upload/lib/interface';
+import { UploadFileStatus } from 'antd/lib/upload/interface';
+import { UploadListProps } from 'antd/lib/upload/interface';
+import { UploadLocale } from 'antd/lib/upload/interface';
+import NavBar from '../../components/navBar/navBar';
+import Footer from '../../components/Footer/Footer';
+import { Link } from "react-router-dom";
+import footerLogo from "../../assets/footerImage.png";
+import SocialMedia from '../../components/SocialMedia/SocialMedia';
+import tutorLogo from "../../assets/logo.png";
+import { toast } from "react-toastify";
+import { ToastContainer, } from "react-toastify";
 
 
+
+
+
+
+const baseUrl: string = import.meta.env.VITE_SERVER_URL;
 interface Course {
   id: number;
   image: string;
@@ -19,30 +37,116 @@ interface Course {
 interface Props {}
 
 const CourseManagement: React.FC<Props> = () => {
+
+
+  const [form] = Form.useForm();
+  const [image, setImage] = useState<string>("");
+  const [imageList, setImageList] = useState<UploadFile[]>([]);
+  const [uploading, setUploading] = useState<boolean>(false);
+  const [uploadButton, setUploadButton] = useState<boolean>(true);
+  
   const [courses, setCourses] = useState<Course[]>([]);
    const [courseToEdit, setCourseToEdit] = useState<Course | null>(null);
+   const toastId = React.useRef(null);
+   const toast = React.useRef(null);
+   const [isEdit, setIsEdit] = useState<boolean>(false);
+    const [editCourse, setEditCourse] = useState<Course | null>(null);
+    const [editImage, setEditImage] = useState<string>("");
+    const [editImageList, setEditImageList] = useState<UploadFile[]>([]);
+    const [editUploading, setEditUploading] = useState<boolean>(false);
+    const [editUploadButton, setEditUploadButton] = useState<boolean>(true);
+    const [editForm] = Form.useForm();
+    const [editCourseId, setEditCourseId] = useState<number>(0);
+    const [editCourseName, setEditCourseName] = useState<string>("");
+    const [editCourseTutor, setEditCourseTutor] = useState<string>("");
+    const [editCoursePrice, setEditCoursePrice] = useState<number>(0);
+    const [editCourseImage, setEditCourseImage] = useState<string>("");
+    const [editCourseImageList, setEditCourseImageList] = useState<UploadFile[]>([]);
+    const [editCourseUploading, setEditCourseUploading] = useState<boolean>(false);
+    const [editCourseUploadButton, setEditCourseUploadButton] = useState<boolean>(true);
+    const [editCourseForm] = Form.useForm();
+    const Footer = () => {
+      return (
+        <div className="footer">
+          <div className="divider"></div>
+          <div id="footerGroup">
+            <h4>
+              <span>
+                </span>
+              <img src={footerLogo}
+                alt="logo"
+                style={{
+                  width: "50px",
+                  height: "50px",
+                  borderRadius: "50%",
+                  marginRight: "10px",
+                  position: "relative",
+                  marginTop: "580px",
+                  marginLeft: "-900px",
+                }}
+              />
+              <span id="footerText" style={{
+                
+                visibility: "visible",
+              }}>iLearn </span>
+            </h4>
+            
+
+            <div className= "socialMedia"
+            style={{
+              display: "flex",
+              position: "relative",
+              visibility: "visible",
+              marginRight: "-290px",
+            }}>
+              <SocialMedia/>
+              
+          </div>
+          </div>
+    
+          <div style={{
+            display: "flex",
+            position: "relative",
+            visibility: "visible",
+            marginLeft: "400px",
+            paddingTop: "130px",
+
+          }}>
+            <h4  style={{
+              position: "relative",
+            }}id="reserved">© 2022 iLearn. All rights reserved</h4>
+          </div>
+        </div>
+      );
+    };
+    
+    // write a ccode for diplaying toast success on file upload success and error on file upload error
+    
 
   const columns = [
     {
       title: 'Image',
       dataIndex: 'image',
       key: 'image',
-      render: (image: string) => <img src={image} alt="Course" width={100} />,
+      render: (image: string) => <img src={image} alt="Course" width={50} />,
     },
     {
       title: 'Name',
       dataIndex: 'name',
       key: 'name',
+      render: (name: string) => <Link to="/tutorCourseDetails">{name}</Link>,
     },
     {
       title: 'Tutor',
       dataIndex: 'tutor',
       key: 'tutor',
+      render: (tutor: string) => <Link to="/tutorProfile">{tutor}</Link>,
     },
     {
       title: 'Price',
       dataIndex: 'price',
       key: 'price',
+      render : (price: number) => <Link to="/tutorCourseDetails">{price}</Link>,
     },
     {
       title: 'Actions',
@@ -55,6 +159,7 @@ const CourseManagement: React.FC<Props> = () => {
       ),
     },
   ];
+  
 
   const handleEditClick = (course: Course) => {
     setCourseToEdit(course);
@@ -83,80 +188,135 @@ const CourseManagement: React.FC<Props> = () => {
     }
   };
 
+
   return (
-    <div>
-      <Form
-        layout="vertical"
-         InitialValues={courseToEdit &&
+    <><div>
+
+      <div style={{
+        paddingTop: "20px",
+      }}
+      ><NavBar
+       /*make the navbar sticky on scroll */
+      
+      {...NavBar} />
+        <div className="tutorLogo">
+
+        </div>
+
+        <Form style={{
+          paddingTop: "250px",
+          backgroundColor: "white",
+          
+        }}
+          layout="vertical"
+          initialValues={courseToEdit &&
             ({
-            image: courseToEdit?.image,
-            name: courseToEdit?.name,
-            tutor: courseToEdit?.tutor,
-            price: courseToEdit?.price,
-         } as any)
-        }
+              image: courseToEdit?.image,
+              name: courseToEdit?.name,
+              tutor: courseToEdit?.tutor,
+              price: courseToEdit?.price,
+            } as any)}
 
-        onFinish={handleFormFinish}
-      >
-        <Form.Item
-          label="Image"
-          name="image"
-          valuePropName="fileList"
-          getValueFromEvent={(e: any) => e.fileList}
-          rules={[{ required: true, message: 'Please upload an image for the course' }]}
+          onFinish={handleFormFinish}
         >
-          <Upload>
-            <Button> <PlusOutlined /> Upload</Button>
+          <Form.Item style={{
+            alignContent: "center",
+          }}
+            label="Image"
+            name="image"
+            valuePropName="fileList"
+            getValueFromEvent={(e: any) => e.fileList}
+            rules={[{ required: true, message: 'Please upload an image for the course' }]}
+          >
+            <Upload>
+              <Button style={{
+                backgroundColor: "rgb(239,104,48)",
+                color: "white",
+              }}> <PlusOutlined /> Upload</Button>
             </Upload>
-        </Form.Item>
+          </Form.Item>
 
-        <Form.Item
-            label="Name" 
+          <Form.Item
+            label="Name"
             name="name"
             rules={[{ required: true, message: 'Please enter the name of the course' }]}
-        >
+          >
             <Input />
-        </Form.Item>
+          </Form.Item>
 
 
-        <Form.Item
+          <Form.Item
             label="Tutor"
             name="tutor"
             rules={[{ required: true, message: 'Please enter the name of the tutor' }]}
 
-        >
+          >
             <Input />
-        </Form.Item>
+          </Form.Item>
 
-        <Form.Item
+          <Form.Item
 
             label="Price"
             name="price"
             rules={[{ required: true, message: 'Please enter the price of the course' }]}
-        >
+          >
 
             <Input />
-        </Form.Item>
+          </Form.Item>
 
-        <Form.Item>
+          <Form.Item>
+            <Button /*fix add button not functioning*/
+              style={{
+                backgroundColor: "rgb(239,104,48)",
+                color: "white",
+              }}
 
-            <Button type="primary" htmlType="submit">
-                {courseToEdit ? 'Update' : 'Add'}
+              
+              type="primary" htmlType="submit">
+              {courseToEdit ? 'Update' : 'Add'}
             </Button>
-        </Form.Item>
-
-
-
+          </Form.Item>
         </Form>
+        
+            
+            
+       
+
+
+
+
+
+
+
+            
+      </div>
+      <div style={{ 
+        paddingTop: "50px",
+      }}>
+
+
 
         <Table columns={columns} dataSource={courses} />
+      </div>
+      <></>
+      <div style={{
+        paddingTop: "50px",
+      }}>
 
 
-
+      </div>
     </div>
-    );
-};
+    <div style={{
+      paddingTop: "20px",
+    }}>
 
+       <Footer {...Footer} />
+    </div>
+    </> 
+       
+          
+  );     
+};
 export default CourseManagement;
 
 
@@ -169,137 +329,3 @@ export default CourseManagement;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*import { connect } from 'react-redux';
-import { bindActionCreators, Dispatch } from 'redux';
-import {addCourse, deleteTutorCourse, updateTutorCourse} from '../../components/tutorCoursesStore/tutorCoursesStore';
-import tutorCoursesStore from '../../components/tutorCoursesStore/tutorCoursesStore';
-import TutorCourseForm from '../../components/tutorCourseForm/tutorCourseForm';
-import TutorCourseTable from '../../components/tutorCourseTable/tutorCourseTable';
-import api from '../../components/tutorCourseTable/tutorCourseTable';
-import { SetStateAction, useEffect, useState } from 'react';
-import {useLocation } from 'react-router-dom';
-const TutorCourseOperations = () => {
-    const history = new History();
-    const { state } = useLocation();
-    const { data, setData } = useAuth();
-    const [tutorCourses, setTutorCourses] = useState([]);
-    const [tutorCourse, setTutorCourse] = useState({
-        id: 0,
-        tutorId: 0,
-        courseId: 0,
-        courseName: '',
-        courseDescription: '',
-        coursePrice: 0,
-        courseImage: '',
-        courseCategory: '',
-        courseSubCategory: '',
-        courseLevel: '',
-        courseDuration: 0,
-        courseDurationType: '',
-        courseLanguage: '',
-        courseRating: 0,
-        courseRatingCount: 0,
-        courseStudentCount: 0,
-        courseVideoCount: 0,
-        courseVideoDuration: 0,
-        courseVideoDurationType: '',
-        courseVideoSize: 0,
-        courseVideoSizeType: '',
-        courseVideoQuality: '',
-        courseVideoResolution: '',
-        courseVideoFormat: '',
-        courseVideoType: '',
-        courseVideoUrl: '',
-        courseVideoThumbnail: '',
-        courseVideoDescription: '',
-        courseVideoPreview: '',
-        courseVideoPreviewType: '',
-        courseVideoPreviewUrl: '',
-        courseVideoPreviewThumbnail: '',
-        courseVideoPreviewDescription: '',
-        courseVideoPreviewDuration: 0,
-        courseVideoPreviewDurationType: '',
-        courseVideoPreviewSize: 0,
-        courseVideoPreviewSizeType: '',
-        courseVideoPreviewQuality: '',
-        courseVideoPreviewResolution: '',
-        courseVideoPreviewFormat: '',
-        courseVideoPreviewRating: 0,
-        courseVideoPreviewRatingCount: 0,
-        courseVideoPreviewStudentCount: 0,
-        courseVideoPreviewViewCount: 0,
-        courseVideoPreviewLikeCount: 0,
-        courseVideoPreviewDislikeCount: 0,
-        courseVideoPreviewCommentCount: 0,
-        courseVideoPreviewShareCount: 0,
-        courseVideoPreviewDownloadCount: 0,
-        courseVideoPreviewFavouriteCount: 0
-    }); 
-
-    useEffect(() => {
-        if (data) {
-            setTutorCourse(data);
-        }
-    }
-    , [data]);
-
-    useEffect(() => {
-
-        api.getTutorCourses().then((res: { data: SetStateAction<never[]>; }) => {
-            setTutorCourses(res.data);
-        })
-    } , []);
-
-    const addTutorCourse = (tutorCourse: any) => {
-        tutorCoursesStore.dispatch(addCourse(tutorCourse));
-    }
-
-    const updateTutorCourse = (tutorCourse: any) => {
-        tutorCoursesStore.dispatch(updateTutorCourse(tutorCourse));
-    }  
-
-    const deleteTutorCourse = (id: any) => {
-
-        tutorCoursesStore.dispatch(deleteTutorCourse(id));
-    }
-
-    const editTutorCourse = (id: any) => {
-        history.push('/tutorCourseForm', { id: id });
-    }
-
-    return (
-        <div>
-
-            <TutorCourseForm addTutorCourse={addTutorCourse} updateTutorCourse={updateTutorCourse} tutorCourse={tutorCourse} />
-            <TutorCourseTable tutorCourses={tutorCourses} editTutorCourse={editTutorCourse} deleteTutorCourse={deleteTutorCourse} />
-        </div>
-    )
-}
-
-export default TutorCourseOperations;
-
-
-function useAuth(): { data: any; setData: any; } {
-    throw new Error('Function not implemented.');
-}
-
-*/

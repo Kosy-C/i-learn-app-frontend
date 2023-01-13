@@ -1,11 +1,25 @@
+import { floatButtonPrefixCls } from 'antd/es/float-button/FloatButton';
 import { stringify } from 'querystring';
 import React, { useState } from 'react';
 import { json } from 'stream/consumers';
+import { Style } from 'util';
 
 interface FormProps {
     onSubmit: (course: {image: string, name: string, tutor: string, price: number}) => void
 }
-
+const Style = {
+    form: {
+        display: 'flex',
+        flexDirection: 'column',
+        width: '50%',
+        maxWidth: '500px',
+        margin: '0 auto',
+        padding: '20px',
+        border: '1px solid #ccc',
+        borderRadius: '5px',
+    backgroundColor: 'green',
+    },
+}
 const Form: React.FC<FormProps> = ({ onSubmit }) => {
     const [image, setImage] = useState('');
     const [name, setName] = useState('');
@@ -35,10 +49,11 @@ const Form: React.FC<FormProps> = ({ onSubmit }) => {
     return (
         <form onSubmit={handleSubmit}>
             <div>
+                
                 <label>Image:</label>
                 <input type="text" value={image} onChange={e => setImage(e.target.value)} />
             </div>
-            <div>
+            <div style={{}}>
                 <label>Name:</label>
                 <input type="text" value={name} onChange={e => setName(e.target.value)} />
             </div>

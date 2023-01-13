@@ -2,7 +2,8 @@ import axios from 'axios';
 import { addCourse, updateTutorCourse, deleteTutorCourse } from '../tutorCoursesStore/tutorCoursesStore';
 import { useDispatch } from 'react-redux';
 
-const baseURL = "http://localhost:3000"
+const baseURL = "http://localhost:4000"
+const baseUrl: string = import.meta.env.VITE_SERVER_URL;
 
 const api = axios.create({
     baseURL,

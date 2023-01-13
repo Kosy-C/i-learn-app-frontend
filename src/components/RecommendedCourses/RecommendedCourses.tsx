@@ -3,6 +3,7 @@ import "./RecommendedCourses.css";
 import { Link } from "react-router-dom";
 import { apiGet } from "../../utils/api/axios";
 import { whiteStar } from "../../assets/index";
+import { Button } from "antd";
 
 const RecommendedCourses = () => {
 	const category: string | null = localStorage.getItem("user");
@@ -66,6 +67,12 @@ const RecommendedCourses = () => {
 												/>
 											</div>
 											<div>{el.rating}</div>
+											<Button style={{
+												backgroundColor: "rgb(237,75,95)",
+											}}
+											className="addCourseButton" href="/tutor-course-operations">
+												Add Course
+											</Button>
 										</div>
 									</div>
 								</div>
