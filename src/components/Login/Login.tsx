@@ -1,23 +1,24 @@
-/* eslint-disable @typescript-eslint/no-unused-expressions */
-/* eslint-disable @typescript-eslint/no-misused-promises */
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import React, { Fragment, ChangeEvent, useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../signUp/signUp.css";
 import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import logo from "../../assets/logo.png";
 import { signInWithGooglePopup } from "../../utils/firebaseAuth/firebase";
 import axios from "axios";
-
+import { toast } from "react-toastify";
+// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 import.meta.env;
 
-const baseUrl = import.meta.env.SERVER_URL;
+const baseUrl: string = import.meta.env.VITE_SERVER_URL;
 
 function LoginForm() {
 	const googleSignIn = async () => {
 		await signInWithGooglePopup();
 	};
+
+	const navigate = useNavigate();
 
 	const emailRef = useRef<HTMLInputElement>(null);
 	const passwordRef = useRef<HTMLInputElement>(null);
@@ -43,15 +44,14 @@ function LoginForm() {
 
 		try {
 			const response = await axios.post(`${baseUrl}/users/login`, data);
-			console.log(response);
 			const signature = response.data.signature;
+			console.log(response.data, "response is");
 			localStorage.setItem("signature", signature);
-			setTimeout(() => {
-				window.location.href = "/navbar";
-			}, 1000);
+			localStorage.setItem("user", response.data.areaOfInterest || "backend");
+			navigate("/dashboard");
 		} catch (err: any) {
-			console.log(err.response.data);
-			window.alert(err.response.data);
+			console.log(err.response.data, "error message");
+			toast.error(err.response?.data?.Error || "Something went wrong");
 		}
 	};
 
@@ -72,6 +72,7 @@ function LoginForm() {
 							<h3>Login </h3>
 						</div>
 
+						{/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
 						<form onSubmit={handleSubmit} className="formInputs">
 							{error.length > 0 && error.includes("user") && (
 								<div className="errorMsg">{error}</div>
@@ -122,6 +123,7 @@ function LoginForm() {
 								</Link>
 							</div>
 							<div className="socialIcons">
+								{/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
 								<button type="submit" onClick={googleSignIn}>
 									<FcGoogle />
 								</button>

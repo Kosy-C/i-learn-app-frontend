@@ -60,14 +60,17 @@ const About = ({ mystyle }: any) => {
 					</p>
 					<p id="us">
 						Samuel Adigun, <span id="naming">Ifiok Inyang, </span> Charles
-						Chijuka, <br/> Chiemeka Elumeziem,
-						<span id="naming">Kosisochukwu Chinweuba, <br/></span> Zinat Sanni,
-						Olaitan Olanrewaju, <span id="naming">Victor Olufade</span>
+						Chijuka, <br /> Chiemeka Elumeziem,
+						<span id="naming">
+							Kosisochukwu Chinweuba, <br />
+						</span>{" "}
+						Zinat Sanni, Olaitan Olanrewaju,{" "}
+						<span id="naming">Victor Olufade</span>
 						<br />
-						Oluwatobiloba Akinrimisi, Mercy Ogbenjuwa, Theresa Oyim,<br />{" "}
-						<span id="naming">Oluwaseyi Makinde</span>,
-					
-						Samuel Ajalode, Kingsley Ogbonnaya, <br />Mustapha Muhammed,
+						Oluwatobiloba Akinrimisi, Mercy Ogbenjuwa, Theresa Oyim,
+						<br /> <span id="naming">Oluwaseyi Makinde</span>, Samuel Ajalode,
+						Kingsley Ogbonnaya, <br />
+						Mustapha Muhammed,
 						<span id="naming">Daniel Iwegbue</span> Abdullahi Aliyu
 					</p>
 				</div>

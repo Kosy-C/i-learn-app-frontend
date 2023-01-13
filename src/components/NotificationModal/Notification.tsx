@@ -12,56 +12,64 @@ import { posts } from "./dataPosts";
 // }
 
 const Notification: React.FC = () => {
-  // const [notifications, setNotifications] = useState<Notification[]>([]);
-  // const [loading, setLoading] = useState(false);
-  // const [error, setError] = useState("");
+	// const [notifications, setNotifications] = useState<Notification[]>([]);
+	// const [loading, setLoading] = useState(false);
+	// const [error, setError] = useState("");
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     setLoading(true);
-  //     try {
-  //       const response = await fetch("/api/notifications");
-  //       const data = await response.json();
-  //       setNotifications(data);
-  //     } catch (err) {
-  //       setError(err.message);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
+	// useEffect(() => {
+	//   const fetchData = async () => {
+	//     setLoading(true);
+	//     try {
+	//       const response = await fetch("/api/notifications");
+	//       const data = await response.json();
+	//       setNotifications(data);
+	//     } catch (err) {
+	//       setError(err.message);
+	//     } finally {
+	//       setLoading(false);
+	//     }
+	//   };
 
-  //   fetchData();
-  // }, []);
+	//   fetchData();
+	// }, []);
 
-  // if (loading) {
-  //   return <p>Loading notifications...</p>;
-  // }
+	// if (loading) {
+	//   return <p>Loading notifications...</p>;
+	// }
 
-  // if (error) {
-  //   return <p>Error: {error}</p>;
-  // }
-  return (
-    <div>
-      <Card>
-        {posts.map((post: any, index) => {
-          return (
-            <>
-              <div key={index} className="notification-user">
-                <img src={post.image} alt="userImage" />
-                <div className="notification-profile">
-                  <h1>{post.name}</h1>
-                  <p>{post.time}</p>
-                  <div className="notification-message">
-                    <p>{post.message}</p>
-                  </div>
-                </div>
-              </div>
-              <hr className="notification-line" />
-            </>
-          );
-        })}
-      </Card>
-    </div>
-  );
+	// if (error) {
+	//   return <p>Error: {error}</p>;
+	// }
+	return (
+		<div>
+			<Card>
+				{posts.slice(0, 5).map((post: any, index) => {
+					return (
+						<>
+							<div
+								key={index}
+								className="notification-user"
+								style={
+									post.status === "unread"
+										? { backgroundColor: "rgba(20, 168, 0, 0.05)" }
+										: { backgroundColor: "#ffffff" }
+								}
+							>
+								<img src={post.image} alt="userImage" />
+								<div className="notification-profile">
+									<h1>{post.name}</h1>
+									<p>{post.time}</p>
+									<div className="notification-message">
+										<p>{post.message}</p>
+									</div>
+								</div>
+							</div>
+							<hr className="notification-line" />
+						</>
+					);
+				})}
+			</Card>
+		</div>
+	);
 };
 export default Notification;
