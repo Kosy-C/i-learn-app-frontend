@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Calendar } from 'react-calendar';
-import DatePicker from "react-datepicker"
 import 'react-datepicker/dist/react-datepicker.css'
 import './Carlender.css'
 
@@ -15,7 +14,7 @@ closeModal: ()=>void
 
 
 const Modal: React.FC<Props> = ({modal, closeModal}) =>{
-    const events = ['01-01-2023', '09-01-2023', ]
+    const events = ['01-01-2023', '09-01-2023' ]
     return(
         <>
           {modal && 

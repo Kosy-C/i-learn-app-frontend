@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import './courseDetail.css'
 import tutorpicture from '../../assets/tutorpicture.svg'
 import ratingstar from '../../assets/ratingstar.svg'
