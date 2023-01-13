@@ -16,6 +16,7 @@ import VerifyPage from "./pages/VerifyPage/Verify";
 import Reminder from "./components/reminder/reminder";
 import Calender from "./components/calender/calender";
 import SavedReminder from "./components/savedReminder/savedReminder";
+import TutorRating from "./components/TutorRating/tutorRating";
 
 function App() {
 	return (
@@ -38,6 +39,7 @@ function App() {
 					<Route path="/reminder" element={<Reminder />} />
 					<Route path="/calender" element={<Calender />} />
 					<Route path="/savedReminder" element={<SavedReminder />} />
+					<Route path="/tutorRating" element={<TutorRating />} />
 				</Routes>
 			</Router>
 		</React.Fragment>

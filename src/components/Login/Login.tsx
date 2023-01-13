@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
-
+/* eslint-disable @typescript-eslint/no-misused-promises */
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 import React, { Fragment, ChangeEvent, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import "../signUp/signUp.css";
@@ -8,9 +9,10 @@ import { FcGoogle } from "react-icons/fc";
 import logo from "../../assets/logo.png";
 import { signInWithGooglePopup } from "../../utils/firebaseAuth/firebase";
 import axios from "axios";
+
 import.meta.env;
 
-const baseUrl = import.meta.env.VITE_SERVER_URL;
+const baseUrl = import.meta.env.SERVER_URL;
 
 function LoginForm() {
 	const googleSignIn = async () => {
