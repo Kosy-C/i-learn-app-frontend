@@ -13,7 +13,6 @@ const TutorHeader = () => {
   const getUser = async () => {
     const response = await axios.get('https://randomuser.me/api')
     setTutor(response.data.results)
-    console.log(response.data.results)
   }
   useEffect(() => {
     getUser()

@@ -4,7 +4,7 @@ import RecommendedCourses from '../RecommendedCourses/RecommendedCourses'
 import SubNavbar from '../SubNavbar/SubNavbar'
 import NavBar from '../navBar/navBar'
 import './Dashboard.css'
-import TutorHeader from '../TutorHeader/TutorHeader'
+import TutorHome from '../TutorHome/TutorHome'
 
 import { apiGet } from '../../utils/api/axios'
 import { User } from '../../utils/Interfaces/index.dto'
@@ -50,7 +50,7 @@ const Dashboard = () => {
         <>
           {user?.userType === 'Tutor' ? (
             <>
-              <TutorHeader></TutorHeader>
+              <TutorHome></TutorHome>
             </>
           ) : (
             <div className='container'>
