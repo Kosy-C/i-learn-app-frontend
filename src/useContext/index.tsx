@@ -3,7 +3,10 @@ import React, { createContext } from "react";
 const dataContext = createContext();
 
 const DataProvider = () => {
-	return <dataContext.Provider value={{}}></dataContext.Provider>;
+	return (<dataContext.Provider 
+		value={{}}>
+	</dataContext.Provider>
+	);
 };
 
 export const useAuth = () => {
