@@ -1,21 +1,67 @@
-import React from "react";
-import FeaturedTutors from "../FeaturedTutors/FeaturedTutors";
-import RecommendedCourses from "../RecommendedCourses/RecommendedCourses";
-import SubNavbar from "../SubNavbar/SubNavbar";
-import NavBar from "../navBar/navBar";
-import "./Dashboard.css";
+import React, { useState, useEffect } from 'react'
+import FeaturedTutors from '../FeaturedTutors/FeaturedTutors'
+import RecommendedCourses from '../RecommendedCourses/RecommendedCourses'
+import SubNavbar from '../SubNavbar/SubNavbar'
+import NavBar from '../navBar/navBar'
+import './Dashboard.css'
+import TutorHeader from '../TutorHeader/TutorHeader'
+
+import { apiGet } from '../../utils/api/axios'
+import { User } from '../../utils/Interfaces/index.dto'
 
 const Dashboard = () => {
-	return (
-		<div>
-			<NavBar />
-			<SubNavbar />
-			<div className="container">
-				<FeaturedTutors />
-				<RecommendedCourses />
-			</div>
-		</div>
-	);
-};
+  const [user, setUser] = useState<User>()
+  const [loading, setLoading] = useState<Boolean>(true)
+  const loggedInUser = async () => {
+    const { data } = await apiGet('/users/profile')
+    console.log(data.userDetails)
+    setUser(data.userDetails)
+    setLoading(false)
+  }
+  const setNavbarText = () => {
+    if (user?.userType === 'Student') {
+      return {
+        username: user?.name || 'John Doe',
+        welcomeText: 'welcome',
+      }
+    } else {
+      return {
+        username: undefined,
+        welcomeText: undefined,
+      }
+    }
+  }
 
-export default Dashboard;
+  useEffect(() => {
+    return () => {
+      loggedInUser()
+    }
+  }, [])
+  return (
+    <div>
+      <NavBar />
+      <SubNavbar
+        name={setNavbarText().username}
+        welcome={setNavbarText().welcomeText}
+      />
+      {loading ? (
+        <h3>loading...</h3>
+      ) : (
+        <>
+          {user?.userType === 'Tutor' ? (
+            <>
+              <TutorHeader></TutorHeader>
+            </>
+          ) : (
+            <div className='container'>
+              <FeaturedTutors />
+              <RecommendedCourses />
+            </div>
+          )}
+        </>
+      )}
+    </div>
+  )
+}
+
+export default Dashboard
