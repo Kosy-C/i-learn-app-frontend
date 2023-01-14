@@ -14,7 +14,6 @@ const Dashboard = () => {
   const [loading, setLoading] = useState<Boolean>(true)
   const loggedInUser = async () => {
     const { data } = await apiGet('/users/profile')
-
     setUser(data.userDetails)
     setLoading(false)
   }
@@ -50,7 +49,7 @@ const Dashboard = () => {
         <>
           {user?.userType === 'Tutor' ? (
             <>
-              <TutorHome></TutorHome>
+              <TutorHome tutor={user} />
             </>
           ) : (
             <div className='container'>

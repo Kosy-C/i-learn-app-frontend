@@ -6,31 +6,26 @@ import 'react-tabs/style/react-tabs.css'
 
 import axios from 'axios'
 import './TutorHome.css'
+import { User } from '../../utils/Interfaces/index.dto'
 
-const TutorHeader = () => {
-  const [tutor, setTutor] = useState<any>([])
-
-  const getUser = async () => {
-    const response = await axios.get('https://randomuser.me/api')
-    setTutor(response.data.results)
-  }
-  useEffect(() => {
-    getUser()
-  }, [])
+const TutorHeader = ({ tutor }: { tutor: User }) => {
+  // const getUser = async () => {
+  //   const response = await axios.get('https://randomuser.me/api')
+  //   setTutor(response.data.results)
+  // }
+  // useEffect(() => {
+  //   getUser()
+  // }, [])
   return (
     <div className='tutorMainContainer'>
       <div className='tutorHeader'>
         <div className='tutorHeader-img'>
-          <img
-            className='tutor-Img'
-            src={tutor[0]?.picture.large}
-            alt={tutor[0]?.picture.large}
-          />
+          <img className='tutor-Img' src={tutor.image} alt={tutor.image} />
         </div>
 
         <div className='tutorHeader-title'>
-          <h2>Amy Adams</h2>
-          <p>{tutor[0]?.email}</p>
+          <h2>{tutor.name}</h2>
+          <p>{tutor.email}</p>
         </div>
       </div>
 
