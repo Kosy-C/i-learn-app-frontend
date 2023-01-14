@@ -40,6 +40,7 @@ const TutorHeader = () => {
             <Tab className={'react-tabs__tab'}>Overview</Tab>
             <Tab className={'react-tabs__tab'}>My courses</Tab>
             <Tab className={'react-tabs__tab'}>Reviews</Tab>
+            <Tab className={'react-tabs__tab'}>Bookings</Tab>
           </TabList>
           <div>
             <TabPanel>
@@ -65,6 +66,9 @@ const TutorHeader = () => {
             </TabPanel>
             <TabPanel>
               <p>You have no reviews yet</p>
+            </TabPanel>
+            <TabPanel>
+              <p>You have no Bookings yet</p>
             </TabPanel>
           </div>
         </Tabs>

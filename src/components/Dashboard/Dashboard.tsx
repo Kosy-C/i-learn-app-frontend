@@ -14,7 +14,7 @@ const Dashboard = () => {
   const [loading, setLoading] = useState<Boolean>(true)
   const loggedInUser = async () => {
     const { data } = await apiGet('/users/profile')
-    console.log(data.userDetails)
+
     setUser(data.userDetails)
     setLoading(false)
   }
