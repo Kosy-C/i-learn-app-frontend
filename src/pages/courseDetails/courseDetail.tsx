@@ -46,7 +46,7 @@ const CourseDetail = () => {
     setModal(false)
   }
   const params = useParams()
-  // /users/atutordetail/
+  
   useEffect(() => {
     const getCourseDetail = async () => {
       const { data } = await apiGet(`/courses/requestCourse/${params.id}`)
@@ -82,7 +82,7 @@ const CourseDetail = () => {
         <h2 className='cd-title'>{course.title}</h2>
         <p className="cd-p">{course.description}</p>
         <div className="cd-rating">
-          <Rating rating={4} image={ratingstar} />
+          <Rating rating={4} image={ratingstar} color={''}/>
         </div>
         <p>Updated {new Date(course.createdAt).toLocaleString('en-NG')}</p>
 
