@@ -19,10 +19,7 @@ import SocialMedia from '../../components/SocialMedia/SocialMedia';
 import tutorLogo from "../../assets/logo.png";
 import { toast } from "react-toastify";
 import { ToastContainer, } from "react-toastify";
-
-
-
-
+import "react-toastify/dist/ReactToastify.css";
 
 
 const baseUrl: string = import.meta.env.VITE_SERVER_URL;
@@ -65,6 +62,9 @@ const CourseManagement: React.FC<Props> = () => {
     const [editCourseUploading, setEditCourseUploading] = useState<boolean>(false);
     const [editCourseUploadButton, setEditCourseUploadButton] = useState<boolean>(true);
     const [editCourseForm] = Form.useForm();
+    // add the code for displaying toast success on file upload success and error on file upload error
+    const handleUpload = (options: RcCustomRequestOptions) => {};
+    
     const Footer = () => {
       return (
         <div className="footer">
@@ -190,11 +190,10 @@ const CourseManagement: React.FC<Props> = () => {
 
 
   return (
-    <><div>
+    <>
+    <div>
 
-      <div style={{
-        paddingTop: "20px",
-      }}
+      <div 
       ><NavBar
        /*make the navbar sticky on scroll */
       
@@ -219,9 +218,16 @@ const CourseManagement: React.FC<Props> = () => {
 
           onFinish={handleFormFinish}
         >
-          <Form.Item style={{
-            alignContent: "center",
-          }}
+
+         <div style={{
+          display: "flex",
+          justifyContent: "center",
+         }}> 
+          <Form.Item 
+          /*make the image vissible*/
+          
+          
+
             label="Image"
             name="image"
             valuePropName="fileList"
@@ -235,16 +241,25 @@ const CourseManagement: React.FC<Props> = () => {
               }}> <PlusOutlined /> Upload</Button>
             </Upload>
           </Form.Item>
-
+          </div>
+            <div style={{
+              display: "flex",
+              justifyContent: "center",
+            }}>
           <Form.Item
-            label="Name"
+            label="Name" style={{
+            }}
             name="name"
             rules={[{ required: true, message: 'Please enter the name of the course' }]}
           >
             <Input />
           </Form.Item>
+          </div>
 
-
+<div style={{
+              display: "flex",
+              justifyContent: "center",
+            }}>
           <Form.Item
             label="Tutor"
             name="tutor"
@@ -253,8 +268,15 @@ const CourseManagement: React.FC<Props> = () => {
           >
             <Input />
           </Form.Item>
+          </div>
 
-          <Form.Item
+            <div style={{
+              display: "flex",
+              justifyContent: "center",
+            }} >
+          <Form.Item style={{
+            justifyContent: "center",
+          }}
 
             label="Price"
             name="price"
@@ -263,19 +285,20 @@ const CourseManagement: React.FC<Props> = () => {
 
             <Input />
           </Form.Item>
+          </div>
 
           <Form.Item>
-            <Button /*fix add button not functioning*/
-              style={{
-                backgroundColor: "rgb(239,104,48)",
-                color: "white",
-              }}
-
-              
-              type="primary" htmlType="submit">
+            <Button style={{
+              backgroundColor: "rgb(239,104,48)",
+              color: "white",
+              position: "sticky",
+              display: "flex",
+              marginLeft: "500px",
+            }} type="primary" htmlType="submit">
               {courseToEdit ? 'Update' : 'Add'}
             </Button>
-          </Form.Item>
+
+            </Form.Item>
         </Form>
         
             
@@ -312,10 +335,11 @@ const CourseManagement: React.FC<Props> = () => {
 
        <Footer {...Footer} />
     </div>
+  
     </> 
-       
-          
-  );     
+    
+  );  
+  
 };
 export default CourseManagement;
 
