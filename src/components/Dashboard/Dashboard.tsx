@@ -4,6 +4,7 @@ import RecommendedCourses from "../RecommendedCourses/RecommendedCourses";
 import SubNavbar from "../SubNavbar/SubNavbar";
 import NavBar from "../navBar/navBar";
 import "./Dashboard.css";
+import CreateAvailability from "../Availability/CreateAvailability";
 
 const Dashboard = () => {
 	return (
@@ -13,6 +14,7 @@ const Dashboard = () => {
 			<div className="container">
 				<FeaturedTutors />
 				<RecommendedCourses />
+				<CreateAvailability />
 			</div>
 		</div>
 	);
