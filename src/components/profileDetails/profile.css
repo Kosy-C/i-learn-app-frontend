@@ -52,3 +52,24 @@ hr{
     background-color: rgb(234, 230, 230);
     border-radius: 20px;
 }
+.availabilityButton{
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+    width: 50%;
+    margin-top: 10px;
+    background-color: rgb(223, 99, 32);
+    /* border: #14A800 1px solid; */
+    border-radius: 5px;
+    padding: 10px;
+}
+.availabilityButton button{
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out
+}
+.availabilityButton button:hover{
+    background-color: rgb(223, 99, 32);
+    color: rgb(201, 172, 157);
+}
