@@ -35,8 +35,7 @@ function App() {
 					<Route path="/login" element={<LoginForm />} />
 					<Route path="/reset-password" element={<ResetPassword />} />
 					<Route path="/users/resetpassword" element={<SetNewPassword />} />
-					<Route path="/tutor-profile" element={<Profile />} />
-					<Route path="/dashboard" element={<Dashboard />} />
+					<Route path="/dashboard/:id?" element={<Dashboard />} />
 					<Route path="/history-page" element={<StudentHistoryPage />} />
 					<Route path="/all-tutors" element={<AllTutor />} />
 					<Route path="/all-courses" element={<AllCoursesPage />} />
