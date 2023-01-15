@@ -15,28 +15,9 @@ interface NotificationM {
 
 const Notification: React.FC = () => {
   const [notifications, setNotifications] = useState<NotificationM[]>([]);
-  const [pay, setPay] = useState("pay");
-  const [payment, setPayment] = useState(true);
-  const [notifs, setNotifs] = useState(posts);
+
   const params = useParams();
 
-  const handleClick = (index: number, post: any) => {
-    // setPay((index) => {
-    //   if (index) {
-    //     return "confirmed";
-    //   }
-    // });
-    post.payment = "confirm";
-    const newNotif = notifs;
-    //console.log(notifs[index]);
-    // const allPost = [...notifs.filter((notif, ind) => ind !== index), post];
-    // console.log(post);
-    setNotifs(newNotif);
-    console.log(notifs);
-    // if (index) {
-    // 	setPayment(!payment);
-    // }
-  };
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -55,32 +36,26 @@ const Notification: React.FC = () => {
   return (
     <div>
       <Card>
-        {notifs.slice(0, 5).map((post: any, index) => {
+        {notifications.slice(0, 5).map((notification: NotificationM, index) => {
           return (
             <>
               <div
                 key={index}
                 className="notification-user"
                 style={
-                  post.status === "unread"
+                  notification.status === "unread"
                     ? { backgroundColor: "rgba(20, 168, 0, 0.05)" }
                     : { backgroundColor: "#ffffff" }
                 }
               >
-                <img src={post.image} alt="userImage" />
+                <img src={notification.image} alt="userImage" />
                 <div className="notification-profile">
-                  <h1>{post.name}</h1>
-                  <p>{post.time}</p>
+                  <h1>{notification.name}</h1>
+                  <p>{notification.time}</p>
                   <div className="notification-message">
-                    <p>{post.message}</p>
+                    <p>{notification.description}</p>
                   </div>
                 </div>
-                <button
-                  className="notification-button"
-                  onClick={() => handleClick(index, post)}
-                >
-                  {post.payment === "pending" ? "pay" : "confirm"}
-                </button>
               </div>
               <hr className="notification-line" />
             </>
