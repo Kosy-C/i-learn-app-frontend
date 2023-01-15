@@ -19,14 +19,13 @@ export const apiGet = async (path: string) => {
 //     };
 //     return axios.get(`${baseUrl}${path}`, config);
 // };
-export const apiPost = async (path: string, conf = {}) => {
+export const apiPost = async (path: string, conf: any) => {
 	const config = {
-		...conf,
 		headers: {
 			Authorization: `Bearer ${localStorage.getItem("signature") as string}`,
 		},
 	};
-	return await axios.post(`${baseUrl}${path}`, conf);
+	return await axios.post(`${baseUrl}${path}`, conf, config);
 };
 export const apiUpdate = async (path: string, conf = {}, auth = true) => {
 	const config = {

@@ -19,6 +19,8 @@ import Calender from "./components/calender/calender";
 import SavedReminder from "./components/savedReminder/savedReminder";
 
 import Dashboard from "./components/Dashboard/Dashboard";
+// import TutorRating from "./components/TutorRating/tutorRating";
+import TutorRating from "./pages/RateTutor/RatingTutor";
 
 function App() {
 	return (
@@ -42,6 +44,7 @@ function App() {
 					<Route path="/reminder" element={<Reminder />} />
 					<Route path="/calender" element={<Calender />} />
 					<Route path="/savedReminder" element={<SavedReminder />} />
+					<Route path="/tutorRating/:id" element={<TutorRating />} />
 				</Routes>
 			</Router>
 		</React.Fragment>
