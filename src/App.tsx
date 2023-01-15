@@ -10,17 +10,12 @@ import NavBar from "./components/navBar/navBar";
 import Contact from "./pages/Contact/Contact";
 import ResetPassword from "./pages/ResetPassword/resetPassword";
 import SetNewPassword from "./pages/ResetPassword/setNewPassword";
-import AllTutor from "./components/AllTutorComponent/AllTutor";
 import Profile from "./components/profileDetails/profile";
 import AllCoursesPage from "./pages/AllCourses/AllCourses";
 import VerifyPage from "./pages/VerifyPage/Verify";
 import Reminder from "./components/reminder/reminder";
 import Calender from "./components/calender/calender";
 import SavedReminder from "./components/savedReminder/savedReminder";
-
-import Dashboard from "./components/Dashboard/Dashboard";
-// import TutorRating from "./components/TutorRating/tutorRating";
-import TutorRating from "./pages/RateTutor/RatingTutor";
 
 function App() {
 	return (
@@ -36,15 +31,13 @@ function App() {
 					<Route path="/reset-password" element={<ResetPassword />} />
 					<Route path="/users/resetpassword" element={<SetNewPassword />} />
 					<Route path="/tutor-profile" element={<Profile />} />
-					<Route path="/dashboard" element={<Dashboard />} />
+
 					<Route path="/history-page" element={<StudentHistoryPage />} />
-					<Route path="/all-tutors" element={<AllTutor />} />
 					<Route path="/all-courses" element={<AllCoursesPage />} />
 					<Route path="/verify" element={<VerifyPage />} />
 					<Route path="/reminder" element={<Reminder />} />
 					<Route path="/calender" element={<Calender />} />
 					<Route path="/savedReminder" element={<SavedReminder />} />
-					<Route path="/tutorRating/:id" element={<TutorRating />} />
 				</Routes>
 			</Router>
 		</React.Fragment>
