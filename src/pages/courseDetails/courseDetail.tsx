@@ -49,9 +49,9 @@ const CourseDetail = () => {
   
   useEffect(() => {
     const getCourseDetail = async () => {
-      const { data } = await apiGet(`/courses/requestCourse/${params.id}`)
-      setCourse(data)
-      console.log(course.course_image)
+      const { data } = await apiGet(`/courses/get-course/${params.id}`)
+      setCourse(data.course)
+      console.log(course.rating)
     }
     getCourseDetail()
   }, [])
@@ -82,7 +82,7 @@ const CourseDetail = () => {
         <h2 className='cd-title'>{course.title}</h2>
         <p className="cd-p">{course.description}</p>
         <div className="cd-rating">
-          <Rating rating={4} image={ratingstar} color={''}/>
+          <Rating rating={Number(course.rating)} image={ratingstar} color={''}/>
         </div>
         <p>Updated {new Date(course.createdAt).toLocaleString('en-NG')}</p>
 
@@ -102,15 +102,15 @@ const CourseDetail = () => {
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. At nibh quam
           odio sit vestibulum sagittis urna.
         </p>
-        <div className="cd-schedule-time">
+        {/* <div className="cd-schedule-time">
           <BsFillCalendarDateFill className="cd-icon" />
           <p className="carlendar-icon">Schedule Time</p>
-        </div>
+        </div> */}
       </div>
 
       <div className="cd-time-container">
         <div className='ratings-container'>
-            <p className="cd-ratings">Ratings(6)</p>
+            <p className="cd-ratings">Ratings</p>
             <hr />
             <div className="rating-body">
                 <p className="rating-heading">Awesome Tutor</p>
@@ -124,10 +124,13 @@ const CourseDetail = () => {
         </div>
       </div>
         <div className="cd-buttons">
-          <button className="cal-button" onClick={openModal}>
+          {/* <button className="cal-button" onClick={openModal}>
             Engage Tutor
           </button>
-          <Modal modal={modal} closeModal={closeModal} />
+          <Modal modal={modal} closeModal={closeModal} /> */}
+          <button className="cal-button">
+            Pay Now
+          </button>
         </div>
     </div>
     

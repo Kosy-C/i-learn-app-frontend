@@ -15,7 +15,7 @@ const Rating : React.FC<Props> = ({ rating, image, color }) => {
     array.push('img' + i)
    }
   return (
-    <div>
+    <div className='cd-ratingcontainer'>
       <span className='cd-span-number'>
       {rating}  
       </span>
@@ -26,7 +26,8 @@ const Rating : React.FC<Props> = ({ rating, image, color }) => {
         // <img className='cd-img' src={image} key={each}/>
         ))}  
     </span> */}
-     <span className='cd-span'>
+    <div className='cd-ratingstars'>
+    <span className='cd-span'>
         <i style= {{color: color}}
         >
           {
@@ -91,6 +92,8 @@ const Rating : React.FC<Props> = ({ rating, image, color }) => {
           }
         </i>
       </span>
+    </div>
+    
 
     </div>
     
