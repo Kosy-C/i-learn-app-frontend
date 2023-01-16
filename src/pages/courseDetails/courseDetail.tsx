@@ -5,40 +5,15 @@ import ratingstar from '../../assets/ratingstar.svg'
 import { BsFillCalendarDateFill } from 'react-icons/bs'
 import Rating from '../../components/Rating/Rating'
 import Modal from '../../components/carlendarModal/CarlendarModal'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { apiGet } from '../../utils/api/axios'
 import { CourseModel, TutorModel } from './interface'
+import { initialTutorState, initialCourseState } from './interface'
 
 
 const CourseDetail = () => {
   const [modal, setModal] = useState(false)
-  const [course, setCourse] = useState<CourseModel>({
-    id: '',
-    title: '',
-    description: '',
-    course_image: '',
-    tutorId: '',
-    pricing: '',
-    category: '',
-    course_material: '',
-    rating: '',
-    createdAt: '',
-    updatedAt: '',
-  })
-  const [tutor, setTutor] = useState<TutorModel>({
-    id: '',
-    email: '',
-    password: '',
-    name: '',
-    verified: '',
-    salt: '',
-    areaOfInterest: '',
-    userType: '',
-    image: '',
-    rating: '',
-    createdAt: '',
-    updatedAt: '',
-  })
+  const [course, setCourse] = useState<CourseModel>(initialCourseState)
   const openModal = () => {
     setModal(true)
   }
@@ -56,17 +31,14 @@ const CourseDetail = () => {
     getCourseDetail()
   }, [])
 
-  useEffect(() => {
-    const getTutorDetail = async () => {
-      const { data } = await apiGet(`/users/atutordetail/${params.tutorid}`)
-      setTutor(data.message)
-      console.log(tutor)
-    }
-    getTutorDetail()
-  }, [])
+  
 
   return (
     <>
+    <Link to='/all-courses'>
+    <button className="cd-rate_course_arrowButton">&#8249; Go Back</button>
+    </Link>
+    
       <div className='heading-border'>
         <h1 className="cd-heading"> About the course</h1>
       </div>
@@ -86,15 +58,15 @@ const CourseDetail = () => {
         </div>
         <p>Updated {new Date(course.createdAt).toLocaleString('en-NG')}</p>
 
-        <p>{`N${course.pricing}/hour`}</p>
+        <p>{`N${course.pricing}`}</p>
       </div>
 
       <div className="cd-tutor-container">
         <p className="cd-tutor-title">About the Tutor</p>
         <div className="cd-tutor-profile">
-          <img src={tutor.image ? tutor.image : tutorpicture} alt="tutor" />
+          <img src={course.tutor.image ? course.tutor.image : tutorpicture} alt="tutor" />
           <div className="cd-name-courses">
-            <span className="cd-tutor-name">{tutor.name}</span>
+            <span className="cd-tutor-name">{course.tutor.name}</span>
             <span className="course-no">62 Courses</span>
           </div>
         </div>

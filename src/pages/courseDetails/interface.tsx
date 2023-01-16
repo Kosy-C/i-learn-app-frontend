@@ -10,6 +10,7 @@ export interface  CourseModel{
     rating: string,
     createdAt: string,
     updatedAt: string,
+    tutor: TutorModel
 }
 
 export interface TutorModel {
@@ -26,3 +27,33 @@ export interface TutorModel {
     createdAt: string,
     updatedAt: string,
 }
+
+export const initialTutorState = {
+    id: '',
+    email: '',
+    password: '',
+    name: '',
+    verified: '',
+    salt: '',
+    areaOfInterest: '',
+    userType: '',
+    image: '',
+    rating: '',
+    createdAt: '',
+    updatedAt: '',
+  }
+
+  export const initialCourseState = {
+    id: '',
+    title: '',
+    description: '',
+    course_image: '',
+    tutorId: '',
+    pricing: '',
+    category: '',
+    course_material: '',
+    rating: '',
+    createdAt: '',
+    updatedAt: '',
+    tutor: initialTutorState
+  }

@@ -59,7 +59,7 @@ const AllCourses = () => {
 									</div>
 									<div className="all_courses_card">
 										{/* {course.course.slice(0, 6).map((c: any, index: number) => ( */}
-										<Link to={`/coursedetail/${course.id}/${course.tutorId}`}>
+										<Link to={`/coursedetail/${course.id}`}>
 											<div className="all_courses_details">
 												<div key={course.id} className="all_courses_img">
 													

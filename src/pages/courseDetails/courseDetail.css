@@ -183,3 +183,19 @@
 .cd-title{
     padding-top: 30px
 }
+
+.cd-rate_course_arrowButton{
+
+    font-size: 20px;
+
+    /* /* margin-right: .4em; */
+    padding-top: 25px; 
+     margin-left: 60px; 
+    position: relative;
+    text-align: left;
+    cursor: pointer;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+
+}
