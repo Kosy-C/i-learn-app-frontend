@@ -20,6 +20,8 @@ import SavedReminder from "./components/savedReminder/savedReminder";
 import CourseDetail from "./pages/courseDetails/courseDetail";
 import Dashboard from "./components/Dashboard/Dashboard";
 import RateCourses from "./pages/RateCourses/RateCourses";
+import TutorRating from "./pages/RateTutor/RatingTutor";
+// import Dataprovider from "./useContext/index";
 
 function App() {
 	return (
@@ -45,6 +47,7 @@ function App() {
 					<Route path="/calender" element={<Calender />} />
 					<Route path="/savedReminder" element={<SavedReminder />} />
 					<Route path="/rate-course/:courseId" element={<RateCourses />} />
+					<Route path="/tutorRating/:tutorId" element={<TutorRating />} />
 				</Routes>
 			</Router>
 		</React.Fragment>
@@ -52,4 +55,5 @@ function App() {
 }
 
 export default App
+
 

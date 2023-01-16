@@ -1,63 +1,80 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import "./student.css";
 import maths from "../../assets/maths.jpg";
 import axios from "axios";
 import { apiGet } from "../../utils/api/axios";
-
-const studentHistoryPage = () => {
+import NavBar from "../navBar/navBar";
+const StudentHistoryPage = () => {
 	const [courses, setCourses] = useState<any>([]);
-	const getHistory = async () => {
-		try {
-			const id = localStorage.getItem("id");
-			const { data } = await apiGet(`/courses/getStudentHistory`);
-			setCourses(data.courses);
-		} catch (error) {
-			console.log(error);
-		}
-	};
 	useEffect(() => {
+		const getHistory = async () => {
+			try {
+				const { data } = await apiGet("/courses/getStudentHistory");
+				setCourses(data.courses);
+			} catch (error) {
+				console.log(error);
+			}
+		};
 		getHistory();
 	}, []);
+	const params = useParams()
+	const navigate = useNavigate()
+	// const rateTutor =()=>{
+	// 	navigate(``)
+	// }
 	return (
 		<>
-			{courses.map((course: any) => {
-				return (
-					<div className="container">
-						<div className="header">
-							<h2>My Courses</h2>
-						</div>
-						<div className="card-container">
-							<div className="card">
-								<img src={maths} alt="" className="img_container" />
-								<div className="card-details">
-									<div className="subj">
-										<h3>
-											{" "}
-											<b>
-												{course.title}
-												<br /> {course.subtitle}
-											</b>
-										</h3>
-										{/* <h3> <b>Chemistry for beginners:<br/>30 days perfection</b></h3> */}
-										<span>
-											{" "}
-											<button type="submit"> Rate Tutor</button>
-										</span>
-									</div>
-									<div className="student-details">
-										<p>{course.tutorName}</p>
-										{/* <p>Adekunle Ayo</p> */}
-										<p className="progressbar"></p>
-										<p>Your progress</p>
+			<div>
+				<NavBar />
+				<div className="header">
+					<h2>My Courses</h2>
+				</div>
+				{courses.map((course: any) => {
+					return (
+						<div className="container" key={course.id}>
+							<div className="card-container">
+								<div className="card">
+									<Link to={`/paid-courses/${course.id}`}>
+										<img
+											src={course.course_image}
+											alt=""
+											className="img_container"
+										/>
+									</Link>
+									<div className="card-details">
+										<div className="subj">
+											<Link to={`/paid-courses/${course.id}`}>
+												<h3>
+													{" "}
+													<b>
+														{course.title}
+														<br /> {course.description}
+													</b>
+												</h3>
+											</Link>
+											{/* <h3> <b>Chemistry for beginners:<br/>30 days perfection</b></h3> */}
+											<span>
+												{" "}
+												<Link to={`/tutorRating/${course.tutorId}`}>
+												<button type="submit"> Rate Tutor</button>
+												</Link>
+											</span>
+										</div>
+										<div className="student-details">
+											<p>{course.category}</p>
+											{/* <p>Adekunle Ayo</p> */}
+											<p className="progressbar"></p>
+											<p>Your progress</p>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-				);
-			})}
+					);
+				})}
+			</div>
 		</>
 	);
 };
-export default studentHistoryPage;
+export default StudentHistoryPage;
