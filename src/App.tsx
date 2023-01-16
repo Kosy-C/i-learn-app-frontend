@@ -19,6 +19,7 @@ import Calender from "./components/calender/calender";
 import SavedReminder from "./components/savedReminder/savedReminder";
 import CourseDetail from "./pages/courseDetails/courseDetail";
 import Dashboard from "./components/Dashboard/Dashboard";
+import PaymentSummaryPage from "./pages/paymentSummary/paymentSummary";
 import RateCourses from "./pages/RateCourses/RateCourses";
 import TutorRating from "./pages/RateTutor/RatingTutor";
 // import Dataprovider from "./useContext/index";
@@ -48,6 +49,7 @@ function App() {
 					<Route path="/savedReminder" element={<SavedReminder />} />
 					<Route path="/rate-course/:courseId" element={<RateCourses />} />
 					<Route path="/tutorRating/:tutorId" element={<TutorRating />} />
+          <Route path="/Payment-Summary" element={<PaymentSummaryPage title={''} price={''} imageUrl={''} />} />
 				</Routes>
 			</Router>
 		</React.Fragment>
