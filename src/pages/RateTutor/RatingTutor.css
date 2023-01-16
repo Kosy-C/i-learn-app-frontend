@@ -43,7 +43,7 @@
 .submit-button {
     color: white;
     background-color: red;
-    width: 28rem;
+    width: 29rem;
 }
 
 .comment-box {
@@ -102,4 +102,9 @@
     padding-left: 40px;
     text-align: right;
 
+}
+
+.ratingTextarea {
+    padding-left: 10px;
+    padding-top: 10px;
 }

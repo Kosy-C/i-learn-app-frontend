@@ -43,7 +43,7 @@ function App() {
 					<Route path="/reminder" element={<Reminder />} />
 					<Route path="/calender" element={<Calender />} />
 					<Route path="/savedReminder" element={<SavedReminder />} />
-					<Route path="/tutorRating/:id" element={<TutorRating />} />
+					<Route path="/tutorRating/:tutorId" element={<TutorRating />} />
 				</Routes>
 			</Router>
 		</React.Fragment>
