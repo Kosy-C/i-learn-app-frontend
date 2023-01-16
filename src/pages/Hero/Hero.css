@@ -1,193 +1,195 @@
 * {
-    box-sizing: border-box;
-    font-family: 'Inter', sans-serif;
-    font-style: normal;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    /* overflow: hidden; */
-    height: 100%;
+  margin: 0;
+  padding: 0;
+  /* overflow: hidden; */
+  height: 100%;
 }
 
 .brand-title {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 .brand-title span {
-    font-size: 40px;
-    font-weight: 800;
-    color: rgb(216, 213, 213);
-    padding: 7px;
+  font-size: 40px;
+  font-weight: 800;
+  color: rgb(216, 213, 213);
+  padding: 7px;
 }
 
 .navbar-links ul {
-    margin: 0;
-    padding: 0;
-    display: flex;
+  margin: 0;
+  padding: 0;
+  display: flex;
 }
 
 .navbar-links li {
-    list-style: none;
-    display: inline-block;
-    padding: 10px 10px;
+  list-style: none;
+  display: inline-block;
+  padding: 10px 10px;
 }
 
 .navbar-links li a {
-    text-decoration: none;
-    color: rgb(216, 213, 213);
-    padding: 1rem;
-    display: block;
-    font-weight: bold;
-    font-family: "Inter";
-    font-size: 16px;
-    line-height: 20px;
+  text-decoration: none;
+  color: rgb(216, 213, 213);
+  padding: 1rem;
+  display: block;
+  font-weight: bold;
+  font-family: 'Inter';
+  font-size: 16px;
+  line-height: 20px;
 }
 
 .navbar-links li a:hover {
-    color: orangered;
-    transition: .3s;
+  color: orangered;
+  transition: 0.3s;
 }
 
 .line {
-    border-left: 1px solid white;
-    top: 10px;
-    height: 40px;
-    margin-top: 15px;
+  border-left: 1px solid white;
+  top: 10px;
+  height: 40px;
+  margin-top: 15px;
 }
-.heroContent{
-    display: flex;
-    flex-direction: column;
-    margin-top: 10%;
-    color: white;
-    /* border: 2px solid brown; */
-    margin-left: 7em;
-    text-align: left;
+.heroContent {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10%;
+  color: white;
+  /* border: 2px solid brown; */
+  margin-left: 7em;
+  text-align: left;
 }
 .body-content {
-    display: flex;
-    flex-direction: column;
-    margin-top: 10%;
-    color: white;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10%;
+  color: white;
 }
 
-.card {
-    /* margin-top: 30px; */
-    padding: 10px;
-    justify-content: left;
+.card-hero {
+  /* margin-top: 30px; */
+  padding: 10px;
+  justify-content: left;
 }
-.heroSecondCard{
-    padding: 10px;
-    justify-content: left;
-    /* margin-left: 4em; */
+.heroSecondCard {
+  padding: 10px;
+  justify-content: left;
+  /* margin-left: 4em; */
 }
 .firstCard {
-    font-size: 30px;
-    /* margin-left: 2em; */
+  font-size: 30px;
+  /* margin-left: 2em; */
 }
 
 .buttonCard {
-    background-color: #fd2929d8;
-    padding: 10px;
-    width: 250px;
-    height: 3em;
-    text-align: center;
-    text-decoration: none;
-    color: white;
-    margin-left: 14em;
-    border-radius: 18px;
+  background-color: #fd2929d8;
+  padding: 10px;
+  width: 250px;
+  height: 3em;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+  margin-left: 14em;
+  border-radius: 18px;
 }
 
 .buttonCardOne {
-    background-color: #fd2929d8;
-    padding: 14px;
-    width: 250px;
-    height: 3em;
-    text-align: center;
-    text-decoration: none;
-    color: white;
-    margin: 10px 0px;
-    border-radius: 18px;
+  background-color: #fd2929d8;
+  padding: 14px;
+  width: 250px;
+  height: 3em;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+  margin: 10px 0px;
+  border-radius: 18px;
 }
 
 .buttonCard a {
-    text-decoration: none;
-    color: white;
-    font-weight: 700;
+  text-decoration: none;
+  color: white;
+  font-weight: 700;
 }
 
 .buttonCardOne a {
-    text-decoration: none;
-    color: white;
-    font-weight: 700;
-    margin-bottom: 3.4em;
+  text-decoration: none;
+  color: white;
+  font-weight: 700;
+  margin-bottom: 3.4em;
 }
 
 .hero {
-    /* height: 80vh; */
-    width: 100%;
-    background: center center fixed;
-    background-image: linear-gradient(rgb(0, 0, 0, 0.6), rgb(0, 0, 0, 0.6)), url('../../assets/cover-image.png');
-    background-repeat: no-repeat;
-    resize: both;
-    overflow: auto;
-    /* background-size: 125px 175px; */
-    background-size: 100% 100%;
+  /* height: 80vh; */
+  width: 100%;
+  background: center center fixed;
+  background-image: linear-gradient(rgb(0, 0, 0, 0.6), rgb(0, 0, 0, 0.6)),
+    url('../../assets/cover-image.png');
+  background-repeat: no-repeat;
+  resize: both;
+  overflow: auto;
+  /* background-size: 125px 175px; */
+  background-size: 100% 100%;
 }
 
-@media (max-width:700px) {
-    .toggle-button {
-        display: flex;
-    }
+@media (max-width: 700px) {
+  .toggle-button {
+    display: flex;
+  }
 
-    .navbar-links {
-        display: none;
-    }
+  .navbar-links {
+    display: none;
+  }
 
-    .navbar {
-        flex-direction: column;
-        align-items: flex-start;
-    }
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
-    .navbar-links ul {
-        width: 100%;
-        flex-direction: column;
-    }
+  .navbar-links ul {
+    width: 100%;
+    flex-direction: column;
+  }
 
-    .navbar-links li {
-        text-align: left;
-    }
+  .navbar-links li {
+    text-align: left;
+  }
 
-    .navbar-links li a {
-        padding: .5rem 1rem;
-    }
+  .navbar-links li a {
+    padding: 0.5rem 1rem;
+  }
 
-    .navbar-links.active {
-        display: flex;
-    }
+  .navbar-links.active {
+    display: flex;
+  }
 
-    .hamburger {
-        display: flex;
-    }
+  .hamburger {
+    display: flex;
+  }
 
-    .hero {
-        height: 400px;
-        /* max-height: fit-content; */
-        width: 100%;
-        max-width: 400px;
-        background-image: linear-gradient(rgb(0, 0, 0, 0.6), rgb(0, 0, 0, 0.6)), url('../../assets/background.svg');
-        background-repeat: no-repeat;
-        /* resize: both; */
-        /* overflow: auto; */
-    }
+  .hero {
+    height: 400px;
+    /* max-height: fit-content; */
+    width: 100%;
+    max-width: 400px;
+    background-image: linear-gradient(rgb(0, 0, 0, 0.6), rgb(0, 0, 0, 0.6)),
+      url('../../assets/background.svg');
+    background-repeat: no-repeat;
+    /* resize: both; */
+    /* overflow: auto; */
+  }
 
-    .m-text-heading {
-        font-size: 30px;
-    }
+  .m-text-heading {
+    font-size: 30px;
+  }
 
-    .description {
-        font-size: 30px;
-    }
+  .description {
+    font-size: 30px;
+  }
 }
