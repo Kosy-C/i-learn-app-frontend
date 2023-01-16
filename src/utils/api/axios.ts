@@ -11,30 +11,21 @@ export const apiGet = async (path: string) => {
 	return result;
 };
 
-// export const apiGet = (path: string, auth=true) => {
-//     const config = {
-//         headers: {
-//             Authorization: `Bearer ${localStorage.getItem("signature")}`,
-//         },
-//     };
-//     return axios.get(`${baseUrl}${path}`, config);
-// };
-export const apiPost = async (path: string, conf: {}) => {
+export const apiPost = async (path: string, body = {}) => {
 	const config = {
 		headers: {
 			Authorization: `Bearer ${localStorage.getItem("signature") as string}`,
 		},
 	};
-	return await axios.post(`${baseUrl}${path}`, conf, config);
+	return await axios.post(`${baseUrl}${path}`, body, config);
 };
-export const apiUpdate = async (path: string, conf = {}, auth = true) => {
+export const apiUpdate = async (path: string, body = {}, auth = true) => {
 	const config = {
-		...conf,
 		headers: {
 			Authorization: `Bearer ${localStorage.getItem("signature") as string}`,
 		},
 	};
-	return await axios.put(`${baseUrl}${path}`, config);
+	return await axios.put(`${baseUrl}${path}`, body, config);
 };
 export const apiDelete = async (path: string, auth = true) => {
 	const config = {

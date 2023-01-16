@@ -19,6 +19,7 @@ import Calender from "./components/calender/calender";
 import SavedReminder from "./components/savedReminder/savedReminder";
 import CourseDetail from "./pages/courseDetails/courseDetail";
 import Dashboard from "./components/Dashboard/Dashboard";
+import RateCourses from "./pages/RateCourses/RateCourses";
 
 function App() {
 	return (
@@ -29,12 +30,12 @@ function App() {
 				<Routes>
 					<Route path="/" element={<LandingPage />} />
 					<Route path="/coursedetail/:id" element={<CourseDetail/>} />
-					{/* <Route path="/navbar" element={<NavBar />} /> */}
 					<Route path="/contact_us" element={<Contact />} />
 					<Route path="/sign-up" element={<SignUpForm />} />
 					<Route path="/login" element={<LoginForm />} />
 					<Route path="/reset-password" element={<ResetPassword />} />
 					<Route path="/users/resetpassword" element={<SetNewPassword />} />
+					<Route path='/tutor-profile' element={<Profile />} />
 					<Route path="/dashboard/:id?" element={<Dashboard />} />
 					<Route path="/history-page" element={<StudentHistoryPage />} />
 					<Route path="/all-tutors" element={<AllTutor />} />
@@ -43,6 +44,7 @@ function App() {
 					<Route path="/reminder" element={<Reminder />} />
 					<Route path="/calender" element={<Calender />} />
 					<Route path="/savedReminder" element={<SavedReminder />} />
+					<Route path="/rate-course/:courseId" element={<RateCourses />} />
 				</Routes>
 			</Router>
 		</React.Fragment>
@@ -50,3 +52,4 @@ function App() {
 }
 
 export default App
+

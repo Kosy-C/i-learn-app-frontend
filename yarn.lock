@@ -977,6 +977,13 @@
   dependencies:
     react-icons "*"
 
+"@types/react-star-rating-component@^1.4.1":
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/@types/react-star-rating-component/-/react-star-rating-component-1.4.1.tgz#31cc3a12455bb4f8650e44dc4fa0222125ff6739"
+  integrity sha512-f4rKKGvS9//wr2mjsT2Ol3N7tgV3DPmu4RZRp2dabEvYukHDx5tIjXecnEZGxpdU6HszKkvbpcy4kPq5VrAqew==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-tabs@^5.0.5":
   version "5.0.5"
   resolved "https://registry.yarnpkg.com/@types/react-tabs/-/react-tabs-5.0.5.tgz#f50a9527adbaf8d146da7f787d1fbdfeff31dd56"
@@ -1362,7 +1369,11 @@ chalk@^4.0.0, chalk@^4.1.2:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
 
+<<<<<<< HEAD
 classnames@^2.2.6, classnames@^2.3.1:
+=======
+classnames@^2.2.5, classnames@^2.3.1:
+>>>>>>> staging
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.3.2.tgz#351d813bf0137fcc6a76a16b88208d2560a0d924"
   integrity sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==
@@ -3443,6 +3454,14 @@ react-router@6.5.0:
   integrity sha512-fqqUSU0NC0tSX0sZbyuxzuAzvGqbjiZItBQnyicWlOUmzhAU8YuLgRbaCL2hf3sJdtRy4LP/WBrWtARkMvdGPQ==
   dependencies:
     "@remix-run/router" "1.1.0"
+
+react-star-rating-component@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/react-star-rating-component/-/react-star-rating-component-1.4.1.tgz#74dc1c73493f088013331c234190b8cccad31f6b"
+  integrity sha512-i0YEvQzToS0s0GDkxn01Jy4EeLpVEyh023NXJTJ+/1+xkvhpACyD4d1YeBhYWZab53ppUnUxs5gmp75gJr3khA==
+  dependencies:
+    classnames "^2.2.5"
+    prop-types "^15.6.1"
 
 react-tabs@*, react-tabs@^6.0.0:
   version "6.0.0"
