@@ -21,7 +21,7 @@ const Notification: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await apiGet(`/users/notifications/${params.id}`);
+        const response = await apiGet(`/users/notifications`);
         const data = response.data;
         console.log(data);
         setNotifications(data);
