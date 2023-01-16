@@ -1,30 +1,30 @@
 import React, { useEffect, useState } from "react";
 import Card from "../CardModal/Card";
 import "./Notification.css";
-import { useParams } from "react-router-dom";
-import { posts } from "./dataPosts";
 import { apiGet } from "../../utils/api/axios";
+import moment from "moment";
+moment().format();
 
 interface NotificationM {
-  name: string;
   description: string;
-  time: string;
+  createdAt: string;
   status: string;
-  image: string;
+  theSender: {
+    image?: string;
+    name?: string;
+  };
 }
 
 const Notification: React.FC = () => {
   const [notifications, setNotifications] = useState<NotificationM[]>([]);
-
-  const params = useParams();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await apiGet(`/users/notifications`);
         const data = response.data;
-        console.log(data);
-        setNotifications(data);
+        console.log(data.notifications);
+        setNotifications(data.notifications);
       } catch (error) {
         console.log(error);
       }
@@ -48,10 +48,10 @@ const Notification: React.FC = () => {
                     : { backgroundColor: "#ffffff" }
                 }
               >
-                <img src={notification.image} alt="userImage" />
+                <img src={notification.theSender.image} alt="userImage" />
                 <div className="notification-profile">
-                  <h1>{notification.name}</h1>
-                  <p>{notification.time}</p>
+                  <h1>{notification.theSender.name}</h1>
+                  <p>{moment().startOf("date").fromNow()}</p>
                   <div className="notification-message">
                     <p>{notification.description}</p>
                   </div>
