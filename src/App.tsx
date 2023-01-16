@@ -33,7 +33,7 @@ function App() {
 				<Routes>
 					<Route path="/" element={<LandingPage />} />
 					<Route path="/navbar" element={<NavBar />} />
-					<Route path="/coursedetail/:id" element={<CourseDetail />} />
+					<Route path="/coursedetail/:id" element={<CourseDetail/>} />
 					<Route path="/contact_us" element={<Contact />} />
 					<Route path="/sign-up" element={<SignUpForm />} />
 					<Route path="/login" element={<LoginForm />} />
