@@ -1,14 +1,10 @@
 import { useState, useEffect } from 'react'
 import './courseDetail.css'
-import tutorpicture from '../../assets/tutorpicture.svg'
-import ratingstar from '../../assets/ratingstar.svg'
-import { BsFillCalendarDateFill } from 'react-icons/bs'
 import Rating from '../../components/Rating/Rating'
-import Modal from '../../components/carlendarModal/CarlendarModal'
 import { Link, useParams } from 'react-router-dom'
 import { apiGet } from '../../utils/api/axios'
-import { CourseModel, TutorModel } from './interface'
-import { initialTutorState, initialCourseState } from './interface'
+import { CourseModel } from './interface'
+import { initialCourseState } from './interface'
 
 
 const CourseDetail = () => {
@@ -54,7 +50,7 @@ const CourseDetail = () => {
         <h2 className='cd-title'>{course.title}</h2>
         <p className="cd-p">{course.description}</p>
         <div className="cd-rating">
-          <Rating rating={Number(course.rating)} image={ratingstar} color={''}/>
+          <Rating rating={Number(course.rating)} image={''} color={''}/>
         </div>
         <p>Updated {new Date(course.createdAt).toLocaleString('en-NG')}</p>
 
@@ -64,7 +60,7 @@ const CourseDetail = () => {
       <div className="cd-tutor-container">
         <p className="cd-tutor-title">About the Tutor</p>
         <div className="cd-tutor-profile">
-          <img src={course.tutor.image ? course.tutor.image : tutorpicture} alt="tutor" />
+          <img src={course.tutor.image && course.tutor.image} alt="tutor" />
           <div className="cd-name-courses">
             <span className="cd-tutor-name">{course.tutor.name}</span>
             <span className="course-no">62 Courses</span>
@@ -74,10 +70,6 @@ const CourseDetail = () => {
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. At nibh quam
           odio sit vestibulum sagittis urna.
         </p>
-        {/* <div className="cd-schedule-time">
-          <BsFillCalendarDateFill className="cd-icon" />
-          <p className="carlendar-icon">Schedule Time</p>
-        </div> */}
       </div>
 
       <div className="cd-time-container">
@@ -96,10 +88,6 @@ const CourseDetail = () => {
         </div>
       </div>
         <div className="cd-buttons">
-          {/* <button className="cal-button" onClick={openModal}>
-            Engage Tutor
-          </button>
-          <Modal modal={modal} closeModal={closeModal} /> */}
           <button className="cal-button">
             Pay Now
           </button>
