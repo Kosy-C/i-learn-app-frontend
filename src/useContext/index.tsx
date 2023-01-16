@@ -1,10 +1,13 @@
-import React, { createContext } from "react";
+import React, { createContext, useState } from "react";
 
 const dataContext = createContext();
 
-const DataProvider = () => {
+const DataProvider = ({children}: any) => {
+	const [initialStar, setInitialStar] = useState(1);
+
 	return (<dataContext.Provider 
-		value={{}}>
+		value={{initialStar, setInitialStar}}>
+			{children}
 	</dataContext.Provider>
 	);
 };

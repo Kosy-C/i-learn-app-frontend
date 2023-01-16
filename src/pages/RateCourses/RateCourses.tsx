@@ -1,25 +1,30 @@
+// import React, { useState, BaseSyntheticEvent, useEffect } from "react";
+
 import { useState, BaseSyntheticEvent, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import NavBar from "../../components/navBar/navBar";
 import StarRatingComponent from "react-star-rating-component";
 import "./RateCourses.css";
 import { apiGet, apiPost } from "../../utils/api/axios";
 import { toast } from "react-toastify";
-import { Courses } from "../../utils/Interfaces/index.dto";
+import { courseDetails, Courses } from "../../utils/Interfaces/index.dto";
+// import { useGlobalState, GlobalStateInterface } from "../../useContext/context"
+
 
 const RateCourses = () => {
-	const [initialStar, setInitialStar] = useState(1);
-	const [initialComment, setInitialComment] = useState({ comment: "" });
-	const [courses, setCourse] = useState([]);
+	// const {initialStar, setInitialStar} = useGlobalState()
 
-	const queryParams = new URLSearchParams(window.location.search);
-	const newcourseId = queryParams.get("id") as string;
-	const courseId = "4f21fae9-af74-45c6-9c8a-f1f206175df5";
+	const [initialStar, setInitialStar] = useState(1);
+	const [halfStar, setHalfStar] = useState(0)
+	const [initialComment, setInitialComment] = useState({ comment: "" });
+	const [courses, setCourse] = useState(courseDetails);
+
+	const { courseId } = useParams();
 
 	const fetchCourseDetails = async () => {
 		try {
 			const response = await apiGet(`/courses/get-course/${courseId}`);
 			setCourse(response.data.course);
-			console.log("response is ", response.data.course);
 		} catch (error: any) {
 			toast.error(error);
 		}
@@ -29,6 +34,12 @@ const RateCourses = () => {
 			return next;
 		});
 	};
+	const selectHalfIcon = (next: number, prev: number, name: string) => {
+		setHalfStar((previous) => {
+			return prev+(0.5)
+		})
+	};
+
 	const getInputValues = (event: BaseSyntheticEvent) => {
 		event.preventDefault();
 		const { name, value } = event.target;
@@ -37,16 +48,15 @@ const RateCourses = () => {
 	const submitDetails = async () => {
 		try {
 			const data = {
-				courseId,
 				ratingValue: initialStar,
 				description: initialComment.comment,
 			};
-			console.log(data);
 			setInitialComment({ comment: "" });
-			const res = await apiPost(`/courses/rateCourses/`, data);
+			setInitialStar((prev)=>prev=1)
+			const res = await apiPost(`/courses/rate-courses/${courseId}`, data);
 			toast.success(res.data.message);
 		} catch (error: any) {
-			toast.error("Something went wrong");
+			toast.error(error.response.data.message);
 		}
 	};
 	useEffect(() => {
@@ -71,30 +81,29 @@ const RateCourses = () => {
 						{/* <div className="rate_course_logo">
 							<img src="" alt="course_logo" />
 						</div> */}
-						{courses.length > 0 ? (
-							courses.map((course: Courses, index: number) => (
-								<div className="rate_course_titleDesc" key={course.id}>
-									<div className="rate_course_logo">
-										<img
-											className="rate_course_image"
-											src={course.course_image}
-										/>
-									</div>
-									<div className="rate_course-subheading">
-										<h4>
-											{course.title} by {course.tutor?.name}
-										</h4>
-										<span>{course.description}</span>
-									</div>
+						{
+							<div className="rate_course_titleDesc">
+								<div className="rate_course_logo">
+									<img
+										className="rate_course_image"
+										src={courses.course_image}
+									/>
 								</div>
-							))
-						) : (
-							<div className="rate_course_titleDesc">No courses</div>
-						)}
+								<div className="rate_course-subheading">
+									<h6 className="rate_course_titleAndName">
+										{courses.title} by {courses.tutor?.name}
+									</h6>
+									<span>{courses.description}</span>
+								</div>
+							</div>
+
+							// <div className="rate_course_titleDesc">No courses</div>
+						}
 					</div>
 					<div className="rate_course_starContainer">
 						<h3>Rate Course</h3>
 						<StarRatingComponent
+						renderStarIcon={() => <span className="rate_course_starComponent">★</span>}
 							name="star"
 							value={initialStar}
 							onStarClick={clickedStar}

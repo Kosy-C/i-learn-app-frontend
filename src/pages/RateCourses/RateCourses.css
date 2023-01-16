@@ -34,16 +34,26 @@
 .rate_course_logo{
     /* flex: 2; */
     /* background-color: aquamarine; */
+    flex: 1;
+    /* margin: 3px; */
+    height: 10vh;
+    /* position: relative */
+
 }
 .rate_course_image{
-    border-radius: 20%;
+    /* border-radius: 50%; */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 .rate_course_titleDesc{
     display: flex;
     /* flex: 4; */
     margin-top: 2em;
+    /* padding-top: 2em; */
     /* background-color: #FA2; */
     height: 6em;
+    /* width: 12em */
 }
 .rate_course_body{
     border: 1px solid rgba(0, 0, 0, 0.16);
@@ -89,8 +99,15 @@
 }
 .rate_course-subheading{
     /* background-color: #FD2959; */
-    width: 14em;
-    margin-left: 2em;
-    letter-spacing: .1em;
+    width: 12em;
+    /* height: 5em; */
+    margin-left: .1em;
+    /* letter-spacing: .1em; */
     font-size: 1.4em;
+}
+.rate_course_titleAndName{
+    /* height: 1em; */
+}
+.rate_course_starComponent{
+    font-size: 2rem;
 }
