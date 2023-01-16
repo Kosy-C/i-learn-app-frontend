@@ -20,22 +20,35 @@ export interface Courses {
   ]
 }
 
-export interface User {
-  id: string
-  email: string
-  name: string
-  verified: boolean
-  areaOfInterest: string
-  userType: string
-  image: string
-  rating: number
-  createdAt: Date
-  updatedAt: Date
+export interface Course {
+  id: string;
+  courseId: string;
+  title: string;
+  description: string;
+  rating: number;
+  tutorId: string;
+  pricing: string;
+  category: string;
+  course_image: string;
+  course_material: string;
 }
+export interface User {
+  id: string;
+  email: string;
+  name: string;
+  verified: boolean;
+  areaOfInterest: string;
+  userType: string;
+  image: string;
+  rating: number;
+  createdAt: Date;
+  updatedAt: Date;
+  courses: Course[] ;
+};
 
 // create interface for tutor to create, update and delete courses
 
-export interface Course {
+export interface UserCourse {
 	id: string;
 	name: string;
 	email: string;

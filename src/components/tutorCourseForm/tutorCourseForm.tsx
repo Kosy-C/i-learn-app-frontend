@@ -14,7 +14,7 @@ const Style = {
         width: '50%',
         maxWidth: '500px',
         margin: '0 auto',
-        padding: '20px',
+        padding: '0px',
         border: '1px solid #ccc',
         borderRadius: '5px',
     backgroundColor: 'green',

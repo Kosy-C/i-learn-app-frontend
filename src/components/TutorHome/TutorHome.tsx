@@ -7,15 +7,11 @@ import 'react-tabs/style/react-tabs.css'
 import axios from 'axios'
 import './TutorHome.css'
 import { User } from '../../utils/Interfaces/index.dto'
+import { Link } from 'react-router-dom'
+import Card from '../Cards/course'
 
 const TutorHeader = ({ tutor }: { tutor: User }) => {
-  // const getUser = async () => {
-  //   const response = await axios.get('https://randomuser.me/api')
-  //   setTutor(response.data.results)
-  // }
-  // useEffect(() => {
-  //   getUser()
-  // }, [])
+
   return (
     <div className='tutorMainContainer'>
       <div className='tutorHeader'>
@@ -33,7 +29,10 @@ const TutorHeader = ({ tutor }: { tutor: User }) => {
         <Tabs>
           <TabList>
             <Tab className={'react-tabs__tab'}>Overview</Tab>
-            <Tab className={'react-tabs__tab'}>My courses</Tab>
+           {/* <Link to= '../tutor-course-operations'> <Tab  className={'react-tabs__tab'}>Courses</Tab></Link> */}
+            <Tab className={'react-tabs__tab'}>Courses</Tab>
+           
+
             <Tab className={'react-tabs__tab'}>Reviews</Tab>
             <Tab className={'react-tabs__tab'}>Bookings</Tab>
           </TabList>
@@ -57,7 +56,31 @@ const TutorHeader = ({ tutor }: { tutor: User }) => {
               </div>
             </TabPanel>
             <TabPanel>
-              <p>You have no courses yet</p>
+            {/* Link to TutorCourseOperations page */}
+              <Link to= '../tutor-course-operations'> <p className='add-course-btn' style={{
+                color: 'black',
+                backgroundColor: 'rgb(251,231,237)',
+                padding: '5px',
+                borderRadius: '5px',
+                cursor: 'pointer',
+                width: '15%',
+                textAlign: 'center',
+                margin: 'auto',
+                textUnderlineOffset: 'none',
+              }}>
+              Add Course</p>
+              
+            </Link>
+            <div>
+              {tutor?.courses && tutor?.courses.map((course) => {
+                return (
+                  <div key={course.id}>
+                  <Card course={course}/>
+                  </div>
+                )
+              }
+              )}
+            </div>
             </TabPanel>
             <TabPanel>
               <p>You have no reviews yet</p>

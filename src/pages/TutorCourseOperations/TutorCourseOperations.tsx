@@ -64,7 +64,23 @@ const CourseManagement: React.FC<Props> = () => {
     const [editCourseForm] = Form.useForm();
     // add the code for displaying toast success on file upload success and error on file upload error
     const handleUpload = (options: RcCustomRequestOptions) => {};
+    const [showModal, setShowModal] = useState(false);
+    <button onClick={() => setShowModal(true)}>Open Modal</button>
+
     
+    {showModal && 
+      <div className="modal">
+        <div className="modal-content">
+          {/* Add the rest of the page content here */}
+        </div>
+      </div>
+    }
+    
+
+
+
+
+
     const Footer = () => {
       return (
         <div className="footer">
@@ -76,13 +92,14 @@ const CourseManagement: React.FC<Props> = () => {
               <img src={footerLogo}
                 alt="logo"
                 style={{
-                  width: "50px",
+                  width: "75px",
                   height: "50px",
                   borderRadius: "50%",
                   marginRight: "10px",
                   position: "relative",
-                  marginTop: "580px",
+                  marginTop: "auto",
                   marginLeft: "-900px",
+
                 }}
               />
               <span id="footerText" style={{
@@ -203,8 +220,8 @@ const CourseManagement: React.FC<Props> = () => {
         </div>
 
         <Form style={{
-          paddingTop: "250px",
-          backgroundColor: "white",
+          paddingTop: "0px",
+          backgroundColor: "rgb(250,250,250)",
           
         }}
           layout="vertical"
@@ -245,6 +262,8 @@ const CourseManagement: React.FC<Props> = () => {
             <div style={{
               display: "flex",
               justifyContent: "center",
+              position: "relative",
+              visibility: "visible"
             }}>
           <Form.Item
             label="Name" style={{
@@ -291,9 +310,10 @@ const CourseManagement: React.FC<Props> = () => {
             <Button style={{
               backgroundColor: "rgb(239,104,48)",
               color: "white",
-              position: "sticky",
+              width: "110px",
               display: "flex",
-              marginLeft: "500px",
+              justifyContent: "center",
+              marginLeft: "580px",
             }} type="primary" htmlType="submit">
               {courseToEdit ? 'Update' : 'Add'}
             </Button>
@@ -302,17 +322,7 @@ const CourseManagement: React.FC<Props> = () => {
         </Form>
         
             
-            
-       
-
-
-
-
-
-
-
-            
-      </div>
+          </div>
       <div style={{ 
         paddingTop: "50px",
       }}>
@@ -342,14 +352,3 @@ const CourseManagement: React.FC<Props> = () => {
   
 };
 export default CourseManagement;
-
-
-
-
-
-
-
-
-
-
-
