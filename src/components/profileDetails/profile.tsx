@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import { apiGet } from "../../utils/api/axios";
 import TutorAvailability from "../Availability/ShowAvailabilty";
 import { Modal } from "react-responsive-modal";
+
 const Profile = () => {
 	const [tutor, setTutor] = useState<any>({});
 	const [modalIsOpen, setIsOpen] = useState(false);

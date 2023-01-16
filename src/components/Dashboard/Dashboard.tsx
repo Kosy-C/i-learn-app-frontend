@@ -1,19 +1,65 @@
-import React from "react";
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
+import React, { useState, useEffect } from "react";
 import FeaturedTutors from "../FeaturedTutors/FeaturedTutors";
 import RecommendedCourses from "../RecommendedCourses/RecommendedCourses";
 import SubNavbar from "../SubNavbar/SubNavbar";
 import NavBar from "../navBar/navBar";
 import "./Dashboard.css";
+import TutorHome from "../TutorHome/TutorHome";
+
+import { apiGet } from "../../utils/api/axios";
+import { User } from "../../utils/Interfaces/index.dto";
 
 const Dashboard = () => {
+	const [user, setUser] = useState<User>();
+	const [loading, setLoading] = useState<Boolean>(true);
+	const loggedInUser = async () => {
+		const { data } = await apiGet("/users/profile");
+		setUser(data.userDetails);
+		setLoading(false);
+	};
+	const setNavbarText = () => {
+		if (user?.userType === "Student") {
+			return {
+				username: user?.name || "John Doe",
+				welcomeText: "welcome",
+			};
+		} else {
+			return {
+				username: undefined,
+				welcomeText: undefined,
+			};
+		}
+	};
+
+	useEffect(() => {
+		return () => {
+			void loggedInUser();
+		};
+	}, []);
 	return (
 		<div>
 			<NavBar />
-			<SubNavbar />
-			<div className="container">
-				<FeaturedTutors />
-				<RecommendedCourses />
-			</div>
+			<SubNavbar
+				name={setNavbarText().username}
+				welcome={setNavbarText().welcomeText}
+			/>
+			{loading ? (
+				<h3>loading...</h3>
+			) : (
+				<>
+					{user?.userType === "Tutor" ? (
+						<>
+							<TutorHome tutor={user} />
+						</>
+					) : (
+						<div className="container">
+							<FeaturedTutors />
+							<RecommendedCourses />
+						</div>
+					)}
+				</>
+			)}
 		</div>
 	);
 };

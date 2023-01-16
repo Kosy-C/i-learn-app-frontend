@@ -5,6 +5,7 @@ import Group from "../../assets/Group.svg";
 import { Link, useSearchParams } from "react-router-dom";
 import React, { useState } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
 // import dotenv from "dotenv";
 // dotenv.config();
 
@@ -14,8 +15,8 @@ const SetNewPassword = () => {
 	const [createForm, setCreateForm] = useState({});
 
 	const queryParams = new URLSearchParams(window.location.search);
-	const userId = queryParams.get("userId");
-	const token = queryParams.get("token");
+	const userId = queryParams.get("userId") as string;
+	const token = queryParams.get("token") as string;
 	// console.log(token, userId);
 
 	const submitDetails = (e: any) => {
@@ -34,17 +35,14 @@ const SetNewPassword = () => {
 	const fetchLink = async (e: any) => {
 		try {
 			e.preventDefault();
-			console.log("async function");
 			const response = await axios.post(
 				`http://localhost:4000/users/resetpassword/${userId}/${token}`,
 				createForm
 			);
-			console.log("response is ", response.data);
-			window.alert(response.data.message);
-			console.log(createForm);
-		} catch (error) {
+			toast.success(response.data.message);
+		} catch (error: any) {
 			console.log(error);
-			window.alert(error);
+			toast.error(error);
 		}
 	};
 	return (

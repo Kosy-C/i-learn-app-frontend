@@ -19,6 +19,8 @@ import Calender from "./components/calender/calender";
 import SavedReminder from "./components/savedReminder/savedReminder";
 
 import Dashboard from "./components/Dashboard/Dashboard";
+import RateCourses from "./pages/RateCourses/RateCourses";
+// import Dataprovider from "./useContext/index";
 
 function App() {
 	return (
