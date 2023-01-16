@@ -1,8 +1,7 @@
-import React from 'react'
-import { useEffect, useState } from 'react'
-import { apiGet } from '../../utils/api/axios'
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
-import 'react-tabs/style/react-tabs.css'
+import React, { useEffect, useState } from "react";
+import { apiGet } from "../../utils/api/axios";
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import "react-tabs/style/react-tabs.css";
 
 import axios from 'axios'
 import './TutorHome.css'
@@ -19,11 +18,11 @@ const TutorHeader = ({ tutor }: { tutor: User }) => {
           <img className='tutor-Img' src={tutor.image} alt={tutor.image} />
         </div>
 
-        <div className='tutorHeader-title'>
-          <h2>{tutor.name}</h2>
-          <p>{tutor.email}</p>
-        </div>
-      </div>
+				<div className="tutorHeader-title">
+					<h2>{tutor.name}</h2>
+					<p>{tutor.email}</p>
+				</div>
+			</div>
 
       <div className='tab-Container'>
         <Tabs>
@@ -95,4 +94,4 @@ const TutorHeader = ({ tutor }: { tutor: User }) => {
   )
 }
 
-export default TutorHeader
+export default TutorHeader;
