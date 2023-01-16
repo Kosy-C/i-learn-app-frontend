@@ -4,6 +4,7 @@ import Group from "../../assets/Group.svg";
 // import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
 const baseUrl = import.meta.env.SERVER_URL;
 
 const ResetPassword = () => {
@@ -11,7 +12,6 @@ const ResetPassword = () => {
 	const submitDetails = (e: any) => {
 		e.preventDefault();
 		const { name, value } = e.target;
-		console.log({ name, value });
 		setCreateForm({
 			...createForm,
 			[name]: value,
@@ -20,19 +20,15 @@ const ResetPassword = () => {
 
 	const fetchLink = async () => {
 		try {
-			console.log("async function");
 			const response = await axios.post(
 				`http://localhost:4000/users/forgot-password`,
 				createForm
 			);
-			console.log(baseUrl);
-			window.alert(response.data.message);
+			toast.success(response.data.message);
 			// http://localhost:4000/users/forgot-password
-
-			console.log("response is ", response.data);
-		} catch (error) {
+		} catch (error: any) {
 			console.log(error);
-			window.alert(error);
+			toast.error(error);
 		}
 	};
 
