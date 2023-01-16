@@ -8,13 +8,7 @@ import "./TutorHome.css";
 import { User } from "../../utils/Interfaces/index.dto";
 
 const TutorHeader = ({ tutor }: { tutor: User }) => {
-	// const getUser = async () => {
-	//   const response = await axios.get('https://randomuser.me/api')
-	//   setTutor(response.data.results)
-	// }
-	// useEffect(() => {
-	//   getUser()
-	// }, [])
+	
 	return (
 		<div className="tutorMainContainer">
 			<div className="tutorHeader">
