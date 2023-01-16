@@ -7,7 +7,8 @@ import { Modal } from "react-responsive-modal";
 const FeaturedTutors = () => {
 	const [tutors, setTutors] = useState([]);
 	const [profile, setProfile] = useState(false);
-	const [profileProps, setProfileProps] = useState("");
+	const [profileProps, setProfileProps] = useState('')
+
 	const onOpenProfile = () => setProfile(true);
 	const onCloseProfile = () => setProfile(false);
 	useEffect(() => {
@@ -47,7 +48,10 @@ const FeaturedTutors = () => {
 				<div className="tutor-details">
 					{tutors.map((el: any) => {
 						return (
+							
+							
 							<div key={el.id} className="img-name">
+<<<<<<< HEAD
 								<Link to={`/dashboard/${el.id}`}>
 									<button type="submit" onClick={onOpenProfile}>
 										<div className="images">
@@ -57,13 +61,29 @@ const FeaturedTutors = () => {
 										<p className="ratings">⭐ {el.rating}</p>
 									</button>
 								</Link>
+=======
+								
+							<Link to={`/dashboard/${el.id}`}>
+							<button type="submit" onClick={onOpenProfile}>
+									<div className="images">
+										<img src={el.image} alt="" width="68px" height="68px" />
+									</div>
+									<p className="names">{el.name}</p>
+									<p className="ratings">⭐ {el.rating}</p>
+									
+								</button>
+							</Link>
+>>>>>>> f7db5ffc742e541768ba0e05c3d47c07817d732d
 							</div>
+							
 						);
 					})}
 				</div>
+				
 				<Modal open={profile} onClose={onCloseProfile}>
-					<Profile />
+							<Profile/>
 				</Modal>
+				
 			</div>
 		</>
 	);
