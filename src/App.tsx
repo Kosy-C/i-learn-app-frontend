@@ -18,7 +18,10 @@ import Reminder from './components/reminder/reminder'
 import Calender from './components/calender/calender'
 import SavedReminder from './components/savedReminder/savedReminder'
 
-import Dashboard from './components/Dashboard/Dashboard'
+import Dashboard from "./components/Dashboard/Dashboard";
+import RateCourses from "./pages/RateCourses/RateCourses";
+// import Dataprovider from "./useContext/index";
+
 
 function App() {
   return (
@@ -42,6 +45,7 @@ function App() {
           <Route path='/reminder' element={<Reminder />} />
           <Route path='/calender' element={<Calender />} />
           <Route path='/savedReminder' element={<SavedReminder />} />
+		  <Route path="/rate-course/:courseId" element={<RateCourses />} />
         </Routes>
       </Router>
     </React.Fragment>
