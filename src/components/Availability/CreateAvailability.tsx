@@ -1,14 +1,12 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { apiPost } from "../../utils/api/axios";
 import moment from "moment";
+import "./avail.css";
 
-interface Props {
-	onSubmit: (data: { availableDate: string; availableTime: string[] }) => void;
-}
-
-const CreateAvailability: React.FC<Props> = ({ onSubmit }) => {
+const CreateAvailability = () => {
 	const [availableDate, setAvailableDate] = useState<string>("");
 	const [availableTime, setAvailableTime] = useState<string[]>([]);
 
@@ -20,12 +18,12 @@ const CreateAvailability: React.FC<Props> = ({ onSubmit }) => {
 			if (date.isValid()) {
 				data.availableDate = date.toISOString();
 				const response = await apiPost("/users/tutors/availablity", data);
-				onSubmit(data);
+
 				toast.success(response.data.message);
 			} else {
 				toast.error("Invalid date format, please use format YYYY-MM-DD");
 			}
-		} catch (err) {
+		} catch (err: any) {
 			toast.error(err.response.data.message);
 		}
 	};
@@ -68,7 +66,9 @@ const CreateAvailability: React.FC<Props> = ({ onSubmit }) => {
 				</select>
 			</label>
 			<br />
-			<button type="submit">Create Availability</button>
+			<button className="avail-btn" type="submit">
+				Create Availability
+			</button>
 		</form>
 	);
 };

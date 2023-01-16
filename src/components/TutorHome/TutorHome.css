@@ -1,0 +1,75 @@
+.tutorMainContainer {
+  margin-left: 100px;
+  margin-top: -70px;
+  margin-right: 100px;
+}
+.tutorHeader {
+  display: flex;
+  align-items: center;
+}
+
+.tutorHeader-img {
+  margin-right: 50px;
+  border-radius: 400px;
+  height: 200px;
+  width: 200px;
+  border: 4px;
+  border-color: white;
+  border-style: solid;
+}
+.tutor-Img {
+  height: 100%;
+  border-radius: 50%;
+}
+
+/* tabs */
+.tab-Container {
+  margin-top: 30px;
+}
+.tab-list {
+  border: none;
+}
+.react-tabs__tab {
+  border: none;
+  width: 150px;
+}
+.react-tabs__tab--selected {
+  border: 0;
+  border-bottom: 5px;
+  border-style: solid;
+  border-color: black;
+  background: none;
+}
+.react-tabs__tab--selected::after {
+  border: 0;
+  border-bottom: 5px;
+  border-style: solid;
+  border-color: black;
+}
+
+/* overview tab section */
+.create-avail{
+  /* margin-top: 40px; */
+  margin: 0 auto;
+  width:40%;
+  
+}
+
+.tutor-overview__container {
+  display: flex;
+}
+.tutor-overview-details {
+  width: 50%;
+}
+
+@media screen and (max-width: 600px) {
+  .tutorMainContainer {
+    margin-left: 100px;
+    margin-top: 0px;
+  }
+  .tutorHeader {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}

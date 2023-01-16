@@ -19,3 +19,16 @@ export interface Courses {
 		}
 	];
 }
+
+export interface User {
+	id: string;
+	email: string;
+	name: string;
+	verified: boolean;
+	areaOfInterest: string;
+	userType: string;
+	image: string;
+	rating: number;
+	createdAt: Date;
+	updatedAt: Date;
+}
