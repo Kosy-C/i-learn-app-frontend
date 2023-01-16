@@ -5,7 +5,7 @@ import Navbar from "../../components/navBar/navBar";
 import "./paymentSummary.css";
 interface Props {
   title: string;
-  price: number;
+  price: string;
   imageUrl: string;
 }
 
@@ -14,7 +14,7 @@ const PaymentSummaryPage: React.FC<Props> = ({ title, price, imageUrl }) => {
     <>
       <div className="payment_summary_page">
         <Navbar />
-        <SubNavbar />
+        <SubNavbar name={undefined} welcome={undefined} />
         <div className="payment_summary_general">
           <div className="payment_summary_header">
             <h1 className="payment_summary_header_text">Payment Summary</h1>
@@ -33,9 +33,6 @@ const PaymentSummaryPage: React.FC<Props> = ({ title, price, imageUrl }) => {
           </div>
           <div className="payment_summary_price">
             <h3 className="payment_summary_price_text">Price: {price}</h3>
-          </div>
-          <div className="payment_summary_total">
-            <h3 className="payment_summary_total_text">Total:</h3>
           </div>
           <div className="payment_summary_btn">
             <button className="payment_summary_button">Pay</button>
