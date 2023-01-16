@@ -1,21 +1,15 @@
-import React from "react";
-// import { apiGet } from "../../utils/api/axios";
+import React, { useEffect, useState } from "react";
+import { apiGet } from "../../utils/api/axios";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import CreateAvailability from "../../components/Availability/CreateAvailability";
 
-// import axios from "axios";
+import axios from "axios";
 import "./TutorHome.css";
 import { User } from "../../utils/Interfaces/index.dto";
 
 const TutorHeader = ({ tutor }: { tutor: User }) => {
-	// const getUser = async () => {
-	//   const response = await axios.get('https://randomuser.me/api')
-	//   setTutor(response.data.results)
-	// }
-	// useEffect(() => {
-	//   getUser()
-	// }, [])
+	
 	return (
 		<div className="tutorMainContainer">
 			<div className="tutorHeader">

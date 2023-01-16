@@ -1,0 +1,16 @@
+.progress-bar-inner{
+  
+    border-radius: 20px;
+    background-color: green;
+    border: 1px gold solid;
+    transform: scale(0.4);
+    }
+
+
+    .progress-bar{
+        margin-right: 15rem;
+        margin-top: -2rem;
+        border-radius: 20px;
+       
+    
+    }
