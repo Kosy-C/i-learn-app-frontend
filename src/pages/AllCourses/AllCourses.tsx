@@ -27,7 +27,7 @@ const AllCourses = () => {
 	};
 
 	useEffect(() => {
-		getCourses();
+		void getCourses();
 	}, []);
 
 	const showMore = () => {
