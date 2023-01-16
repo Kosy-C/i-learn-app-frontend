@@ -4,19 +4,16 @@ body {
 	font-family: Inter, sans-serif;
     box-sizing: border-box;
     background-color: white;
-	/* min-height: 100vh; */
 	margin: 0;
 }
 hr{
     width: 100%;
     margin-left: 0px;
-    /* margin-top: 30px; */
+
 }
 
 .profile-container {
 	padding-top: 10px;
-	/* position: relative; */
-    /* width: 100%; */
 	max-width: 100%;
 	text-align: left;
     margin-left: 30px;
@@ -59,7 +56,6 @@ hr{
     width: 50%;
     margin-top: 10px;
     background-color: rgb(223, 99, 32);
-    /* border: #14A800 1px solid; */
     border-radius: 5px;
     padding: 10px;
 }
