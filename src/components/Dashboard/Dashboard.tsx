@@ -8,12 +8,14 @@ import TutorHome from '../TutorHome/TutorHome'
 
 import { apiGet } from '../../utils/api/axios'
 import { User } from '../../utils/Interfaces/index.dto'
+import Profile from '../profileDetails/profile'
 
 const Dashboard = () => {
   const [user, setUser] = useState<User>()
   const [loading, setLoading] = useState<Boolean>(true)
   const loggedInUser = async () => {
-    const { data } = await apiGet('/users/profile')
+    // const { data } = await apiGet('/users/profile')
+    const { data } = await apiGet('/users/all-tutors')
     setUser(data.userDetails)
     setLoading(false)
   }
@@ -30,6 +32,8 @@ const Dashboard = () => {
       }
     }
   }
+
+  // <Profile id= {}/>
 
   useEffect(() => {
     return () => {
