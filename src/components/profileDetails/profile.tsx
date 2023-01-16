@@ -3,11 +3,12 @@ import "../profileDetails/profile.css";
 import Ellipse4 from "../../assets/images/Ellipse 4.svg";
 import { AiOutlineSafetyCertificate } from "react-icons/ai";
 import { CiLocationOn } from "react-icons/ci";
-import axios from "axios";
 import { useParams } from "react-router-dom";
 import { apiGet } from "../../utils/api/axios";
 
-function Profile() {
+
+
+const Profile =() => {
 	const [tutor, setTutor] = useState<any>({});
 
 	const params = useParams();

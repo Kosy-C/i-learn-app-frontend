@@ -5,10 +5,10 @@ import star from "../../assets/star.png";
 import axios from "axios";
 import coloredStar from "../../assets/colored-star.png";
 import "../AllCourses/AllCourses.css";
-import dotenv from "dotenv";
+import { Link } from "react-router-dom";
 // dotenv.config();
 
-const jsonUrl = "http://localhost:8000/courses";
+const jsonUrl = "http://localhost:4000/courses";
 // process.env.JSON_URL as string;
 // const style = {
 //     text: "See more"
@@ -19,15 +19,15 @@ const AllCourses = () => {
 	const getCourses = async () => {
 		try {
 			const response = await axios.get(jsonUrl);
-			console.log("response data is ", response.data);
-			setCourses(response.data);
+			console.log("response data is ", response.data.course.rows);
+			setCourses(response.data.course.rows);
 		} catch (error) {
 			console.log(error);
 		}
 	};
 
 	useEffect(() => {
-		getCourses();
+		void getCourses();
 	}, []);
 
 	const showMore = () => {
@@ -52,21 +52,25 @@ const AllCourses = () => {
 					{courses.length > 0 ? (
 						courses.map((course: any, index: number) => {
 							return (
+								
 								<div key={index}>
 									<div id="all_courses_cat">
 										<h2>{course.category} courses</h2>
 									</div>
 									<div className="all_courses_card">
-										{course.course.slice(0, 6).map((c: any, index: number) => (
+										{/* {course.course.slice(0, 6).map((c: any, index: number) => ( */}
+										<Link to={`/coursedetail/${course.id}`}>
 											<div className="all_courses_details">
-												<div key={c.courseId} className="all_courses_img">
-													<img src={c.image} alt="course_logo" />
+												<div key={course.id} className="all_courses_img">
+													
+													<img src={course.course_image} alt="course_logo" />
+													
 												</div>
 												<div className="all_courses_features">
-													<h2>{c.title}</h2>
-													<p>{c.name}</p>
+													<h2>{course.title}</h2>
+													<p>{course.description}</p>
 													<p>
-														{c.rating}
+														{course.rating}
 														<span>
 															<img src={coloredStar} />
 														</span>
@@ -77,18 +81,19 @@ const AllCourses = () => {
 													</p>
 												</div>
 											</div>
-										))}
+											</Link>
+										
 										{show &&
-											course.course.slice(6).map((c: any, index: number) => (
+											// course.course.slice(6).map((c: any, index: number) => (
 												<div className="all_courses_details">
-													<div key={c.courseId} className="all_courses_img">
-														<img src={c.image} alt="course_logo" />
+													<div key={course.id} className="all_courses_img">
+														<img src={course.course_image} alt="course_logo" />
 													</div>
 													<div className="all_courses_features">
-														<h2>{c.title}</h2>
-														<p>{c.name}</p>
+														<h2>{course.title}</h2>
+														<p>{course.description}</p>
 														<p>
-															{c.rating}
+															{course.rating}
 															<span>
 																<img src={coloredStar} />
 															</span>
@@ -99,7 +104,7 @@ const AllCourses = () => {
 														</p>
 													</div>
 												</div>
-											))}
+											}
 									</div>
 									{!show && (
 										<div className="all_courses_seeMore">
@@ -116,6 +121,7 @@ const AllCourses = () => {
 										</div>
 									)}
 								</div>
+								
 							);
 						})
 					) : (
