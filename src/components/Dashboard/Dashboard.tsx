@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react'
-import FeaturedTutors from '../FeaturedTutors/FeaturedTutors'
-import RecommendedCourses from '../RecommendedCourses/RecommendedCourses'
-import SubNavbar from '../SubNavbar/SubNavbar'
-import NavBar from '../navBar/navBar'
-import './Dashboard.css'
-import TutorHome from '../TutorHome/TutorHome'
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
+import React, { useState, useEffect } from "react";
+import FeaturedTutors from "../FeaturedTutors/FeaturedTutors";
+import RecommendedCourses from "../RecommendedCourses/RecommendedCourses";
+import SubNavbar from "../SubNavbar/SubNavbar";
+import NavBar from "../navBar/navBar";
+import "./Dashboard.css";
+import TutorHome from "../TutorHome/TutorHome";
 
 import { apiGet } from '../../utils/api/axios'
 import { User } from '../../utils/Interfaces/index.dto'
@@ -67,4 +68,4 @@ const Dashboard = () => {
   )
 }
 
-export default Dashboard
+export default Dashboard;

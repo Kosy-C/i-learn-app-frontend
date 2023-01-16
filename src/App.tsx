@@ -32,6 +32,7 @@ function App() {
 			{/* <NavBar/> */}
 				<Routes>
 					<Route path="/" element={<LandingPage />} />
+					<Route path="/navbar" element={<NavBar />} />
 					<Route path="/coursedetail/:id" element={<CourseDetail/>} />
 					<Route path="/contact_us" element={<Contact />} />
 					<Route path="/sign-up" element={<SignUpForm />} />
@@ -56,6 +57,6 @@ function App() {
 	);
 }
 
-export default App
+export default App;
 
 
