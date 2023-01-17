@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import "./RecommendedCourses.css";
 import { Link } from "react-router-dom";
 import { apiGet } from "../../utils/api/axios";
-import Rating from "../Rating/Rating";
+import { whiteStar } from "../../assets/index";
+import { Button } from "antd";
+import Course from "../Cards/course";
 
 const RecommendedCourses = () => {
 	const category: string | null = localStorage.getItem("user");
@@ -27,7 +29,7 @@ const RecommendedCourses = () => {
 		<>
 			<div className="recommended-section">
 				<div className="recommended-courses-bar">
-					<h4 id="head_rec">Recommended Courses</h4>
+					<h4>Recommended Courses</h4>
 					<p>
 						<Link to="/all-courses" className="see-all-courses">
 							See all
@@ -39,37 +41,11 @@ const RecommendedCourses = () => {
 					{courses.length === 0 ? (
 						<p>No Courses found</p>
 					) : (
-						courses.map((el: any) => {
+						courses.map((item: any) => {
 							return (
-								<>
-									<div key={el.id} className="course-container">
-										<div className="course-img">
-											<img
-												src={el.course_image}
-												alt=""
-												style={{ width: "350px" }}
-											/>
-										</div>
-
-										<div className="course-details">
-											<h3 className="course-title">{el.title}</h3>
-											<p className="course-name">
-												{el.tutor.name !== undefined ? el.tutor.name : ""}
-											</p>
-											<div className="course-ratings">
-												<div style={{ margin: "0 8px 0 8px" }}>
-													<div className="cd-rating">
-														<Rating
-															rating={Number(el.rating)}
-															image={""}
-															color={""}
-														/>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</>
+								<div key={item.id}>
+									<Course course={item}/>
+								</div>
 							);
 						})
 					)}
