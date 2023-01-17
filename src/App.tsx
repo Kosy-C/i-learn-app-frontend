@@ -22,6 +22,7 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import PaymentSummaryPage from "./pages/paymentSummary/paymentSummary";
 import RateCourses from "./pages/RateCourses/RateCourses";
 import TutorRating from "./pages/RateTutor/RatingTutor";
+import TutorNotification from "./pages/TutorPage/TutorPage";
 // import Dataprovider from "./useContext/index";
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
 			<Router>
 			{/* <NavBar/> */}
 				<Routes>
+					<Route path="/tutor/bookings" element={<TutorNotification/>}/>
 					<Route path="/" element={<LandingPage />} />
 					<Route path="/navbar" element={<NavBar />} />
 					<Route path="/coursedetail/:id" element={<CourseDetail/>} />

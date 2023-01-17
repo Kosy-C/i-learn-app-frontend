@@ -1,0 +1,176 @@
+/* .tutor_container {
+  margin: 0 4rem;
+  width: 100vw;
+  height: 80vh;
+  overflow-y:scroll;
+} */
+
+/* Name of student who sent request */
+/* .tutor_title h2 {
+  margin: 0;
+  font-size: 0.9em;
+} */
+
+/* Date and time of request */
+/* 
+.tutor_notifications {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  margin-top: 50px;
+}
+
+.tutor_notification {
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px #ccc;
+  padding: 20px;
+  margin: 10px;
+  width: 30%;
+  max-width: 300px;
+} */
+
+/* Title for individual notification */
+/* .tutor_title {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  align-items: flex-start;
+}
+
+.tutor_title p {
+  margin: 0;
+  font-size: 12px;
+  color: #555;
+} */
+
+
+.tutor_container {
+  margin: 0 4rem;
+  width: 100vw;
+  height: 80vh;
+  overflow-y:scroll;
+}
+
+/* Name of student who sent request */
+.tutor_title h2 {
+  margin: 0;
+  font-size: 0.9em;
+  color: #0000ff; /* Blue text color */
+
+  /* color: lightgreen; */
+  /* background-color: white; */
+  padding: 5px;
+  border-radius: 5px;
+  color: #555;
+  margin-bottom: 5px;
+  /* background-color: rgb(245, 227, 194); */
+  background-color: rgb(240, 160, 12);
+color:white;
+}
+
+/* Date and time of request */
+
+.tutor_notifications {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  margin-top: 50px;
+}
+
+.tutor_notification {
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px #ccc;
+  padding: 20px;
+  margin: 10px;
+  width: 30%;
+  max-width: 300px;
+}
+
+/* Title for individual notification */
+.tutor_title {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  align-items: flex-start;
+}
+
+.tutor_title p {
+  /* margin: 0; */
+  font-size: 12px;
+  /* color: #555; */
+}
+
+.tutor_title p.message {
+  color: rgb(110, 180, 238); /* Red text color for message */
+
+  /* color: lightgreen; */
+  background-color: white;
+  padding: 5px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  color: #555;
+  color: rgb(54, 6, 6);
+  /* background-color: rgb(191, 232, 129); */
+  /* background-color: wheat; */
+
+
+
+}
+
+/* .tutor_title p.date-time {
+  color: #00ff00; 
+} */
+
+.date-text {
+  color: #006699;
+}
+
+
+.tutor_start_date {
+  color: lightgreen;
+  background-color: white;
+  padding: 5px;
+  border-radius: 5px;
+
+  margin-bottom: 5px;
+  color: rgb(183, 6, 6);
+  /* border: 1px solid green; */
+}
+
+.tutor_end_date {
+  color: pink;
+  background-color: white;
+  padding: 5px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  color:red;
+  /* border: 1px solid black; */
+}
+
+
+.tutor_area_interest{
+  color: pink;
+  background-color: white;
+  padding: 5px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  color: #555;
+  color: rgb(54, 6, 6);
+
+  
+}
+
+.date-time{
+  /* color: pink; */
+  background-color: white;
+  padding: 5px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+
+  color: rgb(54, 6, 6);
+
+}
