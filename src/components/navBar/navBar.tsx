@@ -48,7 +48,7 @@ const NavBar = () => {
 
   return (
     <nav className="navbar">
-      <div ref={myRef}></div>
+      {/* <div ref={myRef}></div> */}
       <div className="logotext">
         <img src="/src/assets/images/fulllogo.svg" />
         <h3>iLearn</h3>
