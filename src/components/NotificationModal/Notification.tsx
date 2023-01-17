@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Card from "../CardModal/Card";
 import "./Notification.css";
 import { apiGet } from "../../utils/api/axios";
+import avatar from "../../assets/";
 import moment from "moment";
 moment().format();
 
@@ -10,7 +11,7 @@ interface NotificationM {
   createdAt: string;
   status: string;
   theSender: {
-    image?: string;
+    image: string;
     name?: string;
   };
 }
@@ -48,7 +49,14 @@ const Notification: React.FC = () => {
                     : { backgroundColor: "#ffffff" }
                 }
               >
-                <img src={notification.theSender.image} alt="userImage" />
+                <img
+                  src={
+                    notification.theSender.image === undefined
+                      ? notification.theSender.image
+                      : avatar
+                  }
+                  alt="userImage"
+                />
                 <div className="notification-profile">
                   <h1>{notification.theSender.name}</h1>
                   <p>{moment().startOf("date").fromNow()}</p>

@@ -1,10 +1,12 @@
 .recommended-section{
     margin-top: 15px;
     width: 80vw;
-   
+    /* margin-bottom: 5px; */
+    /* justify-content: space-between; */
 }
 
 .recommended-courses-bar {
+    /* border: 2px solid aquamarine ; */
     display: flex;
     justify-content: space-between;
     margin-bottom: 15px;
@@ -16,22 +18,35 @@
     text-decoration: none;
 }
 
+/* .parent-course-container {
+    border: 2px solid darkgreen;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: 22px;
+    margin-top: 40px;
+    margin-right: 200px;
+    width: 70vw;
+    height: 7px;
+
+} */
 .parent-course-container{
-  
+    /* border: 2px solid green; */
     margin-top: 30px;
     display: grid;
     grid-template-columns: auto auto auto;
     grid-gap: 22px;
-    margin-left: 5rem;
 }
 
 
 .course-container {
     height: 350px;
+    background: #FFFFFF;
     box-shadow: 5px 5px  rgba(0, 0, 0, 0.16);
+    /* border:5px solid gray; */
     width: 350px;
     height: 300px;
-    background-color: #E5E5E5;
+
+
 }
 
 .course-details {
@@ -43,16 +58,16 @@
 .course-name {
     margin-top: 10px;
     padding-left: 11px;
+    /* padding-right: 50px; */
 }
 
 .course-title {
     font-weight: 700;
+    /* font-size: 4px; */
     line-height: 29px;
     color: #21334F;
 }
-#head_rec{
-    margin-left: 5rem;
-}
+
 .course-ratings {
    display: flex;
    flex-direction: row;
