@@ -25,7 +25,7 @@ export const apiUpdate = async (path: string, body = {}, auth = true) => {
 			Authorization: `Bearer ${localStorage.getItem("signature") as string}`,
 		},
 	};
-	return await axios.put(`${baseUrl}${path}`, body, config);
+	return await axios.patch(`${baseUrl}${path}`, body, config);
 };
 export const apiDelete = async (path: string, auth = true) => {
 	const config = {
