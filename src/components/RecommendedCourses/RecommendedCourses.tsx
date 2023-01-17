@@ -8,6 +8,7 @@ import Course from "../Cards/course";
 
 const RecommendedCourses = () => {
 	const category: string | null = localStorage.getItem("user");
+	
 	const [courses, setCourses] = useState([]);
 
 	useEffect(() => {
@@ -43,9 +44,11 @@ const RecommendedCourses = () => {
 					) : (
 						courses.map((item: any) => {
 							return (
-								<div key={item.id}>
+								<Link to={`/coursedetail/${item.id}`} key={item.id}>
+									<div>
 									<Course course={item}/>
 								</div>
+								</Link>
 							);
 						})
 					)}
@@ -56,3 +59,5 @@ const RecommendedCourses = () => {
 };
 
 export default RecommendedCourses;
+
+// "/coursedetail/:id"
