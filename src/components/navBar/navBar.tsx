@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import { useRef, useState } from "react";
-=======
 import { useEffect, useRef, useState } from "react";
->>>>>>> staging
 import { Link } from "react-router-dom";
 import "./navBar.css";
 import { FaBars } from "react-icons/fa";
