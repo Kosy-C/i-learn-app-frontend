@@ -51,7 +51,6 @@ const FeaturedTutors = () => {
 							
 							
 							<div key={el.id} className="img-name">
-<<<<<<< HEAD
 								<Link to={`/dashboard/${el.id}`}>
 									<button type="submit" onClick={onOpenProfile}>
 										<div className="images">
@@ -61,19 +60,6 @@ const FeaturedTutors = () => {
 										<p className="ratings">⭐ {el.rating}</p>
 									</button>
 								</Link>
-=======
-								
-							<Link to={`/dashboard/${el.id}`}>
-							<button type="submit" onClick={onOpenProfile}>
-									<div className="images">
-										<img src={el.image} alt="" width="68px" height="68px" />
-									</div>
-									<p className="names">{el.name}</p>
-									<p className="ratings">⭐ {el.rating}</p>
-									
-								</button>
-							</Link>
->>>>>>> f7db5ffc742e541768ba0e05c3d47c07817d732d
 							</div>
 							
 						);

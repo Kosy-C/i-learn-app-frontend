@@ -12,28 +12,34 @@
   margin-top: 10px;
 }
 
-.tutorAvailability-buttonContainer {
-  border: 1px solid black;
+.tutorAvailability-buttonContainer{
+  border: 1px solid rgb(196, 193, 193);
+  border-radius: 5px;
+  display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 20px;
+  margin: 20px;
 }
 .tutorAvailability-buttonContainer2 {
   display: flex;
   justify-content: space-between;
   padding: 30px;
+  margin: 10px;
 }
 .tutorAvailability-buttonContainer button {
   border: 1px solid rgb(196, 193, 193);
   padding: 20px;
   border-radius: 5px;
   cursor: pointer;
+  margin: 10px;
 }
 .tutorAvailability-buttonContainer2 button {
   border: 1px solid rgb(196, 193, 193);
   padding: 2px 30px;
   border-radius: 5px;
   cursor: pointer;
+  margin: 10px;
 }
 .tutorAvailability-buttonContainer button:active {
   background-color: red;
@@ -52,4 +58,17 @@
 .tutorAvailability-submitButton > button {
   color: white;
   font-size: 18px;
+  cursor: pointer;
+}
+.next-arrow{
+    font-size: 20px;
+    cursor: pointer;
+    font-style: italic;
+    
+}
+.previous-arrow{
+    font-size: 20px;
+    cursor: pointer;
+    font-style: italic;
+    
 }
