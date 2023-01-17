@@ -2,13 +2,11 @@ import React, { useEffect, useState } from "react";
 import "./RecommendedCourses.css";
 import { Link } from "react-router-dom";
 import { apiGet } from "../../utils/api/axios";
-import Rating from "../dashBoardRating/dashboardRating";
-import Course from "../Cards/course";
+import Rating from "../Rating/Rating";
 
 const RecommendedCourses = () => {
 	const category: string | null = localStorage.getItem("user");
 	const [courses, setCourses] = useState([]);
-	const [rating, setRating] = useState(0);
 
 	useEffect(() => {
 		const fetchCourses = async () => {
@@ -43,32 +41,35 @@ const RecommendedCourses = () => {
 					) : (
 						courses.map((el: any) => {
 							return (
-								<><div key={el.id} className="course-container">
-									<div className="course-img">
-										<img
-											src={el.course_image}
-											alt=""
-											style={{ width: "350px" }} />
-									</div>
+								<>
+									<div key={el.id} className="course-container">
+										<div className="course-img">
+											<img
+												src={el.course_image}
+												alt=""
+												style={{ width: "350px" }}
+											/>
+										</div>
 
-									<div className="course-details">
-										<h3 className="course-title">{el.title}</h3>
-										<p className="course-name">
-											{el.tutor.name !== undefined ? el.tutor.name : ""}
-										</p>
-										<div className="course-ratings">
-											<div>{el.rating}</div>
-											<div style={{ margin: "0 8px 0 8px" }}>
-												<Rating
-													rating={rating}
-													onRating={(rate: React.SetStateAction<number>) => setRating(rate)} />
+										<div className="course-details">
+											<h3 className="course-title">{el.title}</h3>
+											<p className="course-name">
+												{el.tutor.name !== undefined ? el.tutor.name : ""}
+											</p>
+											<div className="course-ratings">
+												<div style={{ margin: "0 8px 0 8px" }}>
+													<div className="cd-rating">
+														<Rating
+															rating={Number(el.rating)}
+															image={""}
+															color={""}
+														/>
+													</div>
+												</div>
 											</div>
-											<div>{el.rating}</div>
 										</div>
 									</div>
-								</div><div key={el.id}>
-										<Course course={el} />
-									</div></>
+								</>
 							);
 						})
 					)}

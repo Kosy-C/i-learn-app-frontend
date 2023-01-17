@@ -28,7 +28,6 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "firebase": "^9.15.0",
     "json-server": "^0.17.1",
-    "material-ui-rating": "^4.0.0-beta.2",
     "prop-types": "^15.8.1",
     "query-string": "^8.0.3",
     "react": "^18.2.0",
