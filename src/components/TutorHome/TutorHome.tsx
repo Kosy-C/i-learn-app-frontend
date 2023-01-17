@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 // import { apiGet } from "../../utils/api/axios";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import CreateAvailability from "../../components/Availability/CreateAvailability";
+import TutorAvailability from "../../components/Availability/ShowAvailabilty";
+import { Modal } from "react-responsive-modal";
 
 // import axios from "axios";
 import "./TutorHome.css";
 import { User } from "../../utils/Interfaces/index.dto";
 
 const TutorHeader = ({ tutor }: { tutor: User }) => {
+	const [available, setAvailability] = useState(false);
+	const onOpenAvailability = () => setAvailability(true);
+	const onCloseAvailability = () => setAvailability(false);
 	return (
 		<div className="tutorMainContainer">
 			<div className="tutorHeader">
@@ -46,7 +51,7 @@ const TutorHeader = ({ tutor }: { tutor: User }) => {
 								</div>
 								<div className="tutor-overview-schedule"></div>
 								<div className="create-avail">
-									<CreateAvailability />
+									<TutorAvailability />
 								</div>
 							</div>
 						</TabPanel>
@@ -62,8 +67,76 @@ const TutorHeader = ({ tutor }: { tutor: User }) => {
 					</div>
 				</Tabs>
 			</div>
+			<button type="submit" onClick={onOpenAvailability}>
+				Set Availability
+			</button>
+			<div>
+				<Modal open={available} onClose={onCloseAvailability}>
+					<CreateAvailability />
+				</Modal>
+			</div>
 		</div>
 	);
 };
 
 export default TutorHeader;
+
+// import React, { useState } from 'react';
+// import { DatePicker, TimeSlot } from 'react-timeslots';
+// import axios from 'axios';
+
+// interface AvailableSlot {
+//   date: string;
+//   times: string[];
+// }
+
+// const AvailableTeachingTime: React.FC = () => {
+//   const [availableDate, setAvailableDate] = useState<string>('');
+//   const [availableTime, setAvailableTime] = useState<string[]>([]);
+
+//   const handleDateChange = (date: Date | null) => {
+//     if (date) {
+//       setAvailableDate(date.toISOString().slice(0, 10));
+//     }
+//   };
+
+//   const handleTimeChange = (times: string[]) => {
+//     setAvailableTime(times);
+//   };
+
+//   const handleSubmit = async (event: React.FormEvent) => {
+//     event.preventDefault();
+//     const availableSlot: AvailableSlot = {
+//       date: availableDate,
+//       times: availableTime
+//     }
+//     try {
+//       await axios.post('/api/available-slots', availableSlot);
+//       alert('Your available teaching times have been sent to the backend!');
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   };
+
+//   return (
+//     <form onSubmit={handleSubmit}>
+//       <label>
+//         Available Date:
+//         <DatePicker
+//           value={availableDate}
+//           onChange={handleDateChange}
+//           dateFormat="yyyy-MM-dd"
+//         />
+//       </label>
+//       <br />
+//       <label>
+//         Available Times:
+//         <TimeSlot onChange={handleTimeChange} />
+//       </label>
+//       <br />
+//       <button type="submit">Submit</button>
+//     </form>
+//   );
+// };
+
+// export default AvailableTeachingTime;

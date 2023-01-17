@@ -5,6 +5,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { apiPost } from "../../utils/api/axios";
 import moment from "moment";
 import "./avail.css";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const CreateAvailability = () => {
 	const [availableDate, setAvailableDate] = useState<string>("");
@@ -29,47 +31,59 @@ const CreateAvailability = () => {
 	};
 
 	return (
-		<form onSubmit={handleSubmit}>
-			<label>
-				Available Dates:
-				<input
+		<>
+			<div className="availa_container">
+				<form onSubmit={handleSubmit}>
+					Available Dates:
+					{/* <input
 					placeholder="YYYY-MM-DD"
 					type="text"
 					value={availableDate}
 					onChange={(event) => setAvailableDate(event.target.value)}
-				/>
-			</label>
-			<br />
-			<label>
-				Available Times:
-				<br />
-				<select
-					multiple
-					value={availableTime}
-					onChange={(event) =>
-						setAvailableTime(
-							Array.from(
-								event.target.selectedOptions,
-								(item: any) => item.value
-							)
-						)
-					}
-				>
-					<option value="9:00 AM - 10:00 AM">9:00 AM - 10:00 AM</option>
-					<option value="10:00 AM - 11:00 AM">10:00 AM - 11:00 AM</option>
-					<option value="11:00 AM - 12:00 PM">11:00 AM - 12:00 PM</option>
-					<option value="12:00 PM - 1:00 PM">12:00 PM - 1:00 PM</option>
-					<option value="1:00 PM - 2:00 PM">1:00 PM - 2:00 PM</option>
-					<option value="2:00 PM - 3:00 PM">2:00 PM - 3:00 PM</option>
-					<option value="3:00 PM - 4:00 PM">3:00 PM - 4:00 PM</option>
-					<option value="4:00 PM - 5:00 PM">4:00 PM - 5:00 PM</option>
-				</select>
-			</label>
-			<br />
-			<button className="avail-btn" type="submit">
-				Create Availability
-			</button>
-		</form>
+				/> */}
+					<DatePicker
+						value={availableDate}
+						onChange={(date: Date | null) => {
+							if (date != null) {
+								const dateString = date.toISOString().slice(0, 10);
+								setAvailableDate(dateString);
+							}
+						}}
+						dateFormat="dd/MM/yyyy"
+					/>
+					<br />
+					<label>
+						Available Times:
+						<br />
+						<select
+							multiple
+							value={availableTime}
+							onChange={(event) =>
+								setAvailableTime(
+									Array.from(
+										event.target.selectedOptions,
+										(item: any) => item.value
+									)
+								)
+							}
+						>
+							<option value="9:00 AM - 10:00 AM">9:00 AM - 10:00 AM</option>
+							<option value="10:00 AM - 11:00 AM">10:00 AM - 11:00 AM</option>
+							<option value="11:00 AM - 12:00 PM">11:00 AM - 12:00 PM</option>
+							<option value="12:00 PM - 1:00 PM">12:00 PM - 1:00 PM</option>
+							<option value="1:00 PM - 2:00 PM">1:00 PM - 2:00 PM</option>
+							<option value="2:00 PM - 3:00 PM">2:00 PM - 3:00 PM</option>
+							<option value="3:00 PM - 4:00 PM">3:00 PM - 4:00 PM</option>
+							<option value="4:00 PM - 5:00 PM">4:00 PM - 5:00 PM</option>
+						</select>
+					</label>
+					<br />
+					<button className="avail-btn" type="submit">
+						Create Availability
+					</button>
+				</form>
+			</div>
+		</>
 	);
 };
 
