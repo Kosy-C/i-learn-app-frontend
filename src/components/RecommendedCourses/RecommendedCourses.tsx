@@ -5,6 +5,7 @@ import { apiGet } from "../../utils/api/axios";
 import { whiteStar } from "../../assets/index";
 import { Button } from "antd";
 import Course from "../Cards/course";
+import Rating from "../Rating/Rating";
 
 const RecommendedCourses = () => {
 	const category: string | null = localStorage.getItem("user");
@@ -30,7 +31,7 @@ const RecommendedCourses = () => {
 		<>
 			<div className="recommended-section">
 				<div className="recommended-courses-bar">
-					<h4>Recommended Courses</h4>
+					<h4 id="head_rec">Recommended Courses</h4>
 					<p>
 						<Link to="/all-courses" className="see-all-courses">
 							See all
