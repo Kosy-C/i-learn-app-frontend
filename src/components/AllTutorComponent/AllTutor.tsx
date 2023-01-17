@@ -26,8 +26,8 @@ const AllTutor = () => {
   const getTutor = async (id: number) => {
     try {
       //const response = await axios.get('');
-     const response = await apiGet(`/users/atutordetail/${id}`)
-      console.log(response.data);
+     const response = await apiGet(`/users/tutors/${id}/course`)
+      console.log("response data is ", response.data);
       setOneTutor({
         avatar:
           "https://media.istockphoto.com/id/517322295/photo/businessman-icon-on-white-background.jpg?s=612x612&w=0&k=20&c=nblmvXxR-4huR6u9psWI8JGDQKw6ezlXX-p3wWtouSE=",

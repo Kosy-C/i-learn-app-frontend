@@ -7,9 +7,10 @@ import { useParams } from "react-router-dom";
 import { apiGet } from "../../utils/api/axios";
 import TutorAvailability from "../Availability/ShowAvailabilty";
 import { Modal } from "react-responsive-modal";
+import { Tutor } from "../../utils/Interfaces/index.dto";
 
 const Profile = () => {
-  const [tutor, setTutor] = useState<any>({});
+  const [tutor, setTutor] = useState<Tutor>();
   const [modalIsOpen, setIsOpen] = useState(false);
 
   function openModal() {
@@ -39,9 +40,9 @@ const Profile = () => {
           </div>
           <hr />
           <div className="profile-tutor">
-            <img src={tutor.image} alt="avatar" />
+            <img src={tutor?.image} alt="avatar" />
             <div className="profile-tutor-details">
-              <h2>{tutor.name}</h2>
+              <h2>{tutor?.name}</h2>
               <p>
                 {" "}
                 <AiOutlineSafetyCertificate className="certify-icon" />{" "}
@@ -49,7 +50,7 @@ const Profile = () => {
               </p>
               <p>
                 {" "}
-                <CiLocationOn /> {tutor.email}
+                <CiLocationOn /> {tutor?.email}
               </p>
             </div>
           </div>
@@ -66,7 +67,7 @@ const Profile = () => {
             <h3>Expertise</h3>
             <div>
               <ul className="profile-expertise-list">
-                <li>{tutor.areaOfInterest}</li>
+                <li>{tutor?.areaOfInterest}</li>
               </ul>
             </div>
           </div>
