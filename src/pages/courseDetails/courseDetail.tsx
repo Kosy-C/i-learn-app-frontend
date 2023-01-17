@@ -6,7 +6,6 @@ import { apiGet } from '../../utils/api/axios'
 import { CourseModel } from './interface'
 import { initialCourseState } from './interface'
 
-
 const CourseDetail = () => {
   const [modal, setModal] = useState(false)
   const [course, setCourse] = useState<CourseModel>(initialCourseState)
