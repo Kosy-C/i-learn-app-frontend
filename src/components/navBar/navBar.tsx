@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import "./navBar.css";
 import { FaBars } from "react-icons/fa";
@@ -14,7 +14,6 @@ const NavBar = () => {
   const [notificationModal, setNotificationModal] = useState(false);
   const [profile, setProfile] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const myRef = useRef(null);
 
   const onOpenModal = () => {
     setNotificationModal(true);
@@ -22,9 +21,23 @@ const NavBar = () => {
 
   const onCloseModal = () => setNotificationModal(false);
 
-  // const toggleModal = () => {
-  // 	setNotificationModal(!notificationModal);
-  // };
+  const toggleModal = () => {
+    setNotificationModal(!notificationModal);
+  };
+  // const ref = useRef<HTMLDivElement>(null);
+
+  // useEffect(() => {
+  //   const handleClick = (e: MouseEvent) => {
+  //     if (ref.current != null && !ref.current.contains(e.target as Node)) {
+  //       setNotificationModal(false);
+  //     }
+  //   };
+  //   document.addEventListener("click", handleClick);
+  //   return () => {
+  //     document.removeEventListener("click", handleClick);
+  //   };
+  // }, [ref]);
+
   const togglePopup = () => {
     setShowModal(!showModal);
   };
@@ -73,21 +86,17 @@ const NavBar = () => {
               <li> Reminder</li>
             </Link>
             <li>
-              <button onClick={onOpenModal}>
-                {notificationModal && <Notification />}Notification
-              </button>
+              <button onClick={toggleModal}>Notification</button>
               <Modal
                 open={notificationModal}
                 onClose={onCloseModal}
                 showCloseIcon={false}
-                classNames={{
-                  modal: "customModal",
-                }}
+                classNames={{ modal: "customModal" }}
                 styles={{
                   overlay: { display: "none" },
                   closeButton: { display: "none" },
+                  closeIcon: { display: "none" },
                 }}
-                container={myRef.current}
               >
                 <Notification />
               </Modal>
