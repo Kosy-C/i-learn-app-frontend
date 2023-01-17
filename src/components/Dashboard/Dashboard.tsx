@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
-import React, { useState, useEffect } from "react";
-import FeaturedTutors from "../FeaturedTutors/FeaturedTutors";
-import RecommendedCourses from "../RecommendedCourses/RecommendedCourses";
-import SubNavbar from "../SubNavbar/SubNavbar";
-import NavBar from "../navBar/navBar";
-import "./Dashboard.css";
-import TutorHome from "../TutorHome/TutorHome";
+import React, { useState, useEffect } from 'react'
+import FeaturedTutors from '../FeaturedTutors/FeaturedTutors'
+import RecommendedCourses from '../RecommendedCourses/RecommendedCourses'
+import SubNavbar from '../SubNavbar/SubNavbar'
+import NavBar from '../navBar/navBar'
+import './Dashboard.css'
+import TutorHome from '../TutorHome/TutorHome'
 
 import { apiGet } from '../../utils/api/axios'
 import { User } from '../../utils/Interfaces/index.dto'
@@ -15,8 +15,7 @@ const Dashboard = () => {
   const [user, setUser] = useState<User>()
   const [loading, setLoading] = useState<Boolean>(true)
   const loggedInUser = async () => {
-    // const { data } = await apiGet('/users/profile')
-    const { data } = await apiGet('/users/all-tutors')
+    const { data } = await apiGet('/users/profile')
     setUser(data.userDetails)
     setLoading(false)
   }
