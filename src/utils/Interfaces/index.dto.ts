@@ -20,6 +20,18 @@ export interface Courses {
 	];
 }
 
+export interface Course {
+	id: string;
+	courseId: string;
+	title: string;
+	description: string;
+	rating: number;
+	tutorId: string;
+	pricing: string;
+	category: string;
+	course_image: string;
+	course_material: string;
+}
 export interface User {
 	id: string;
 	email: string;
@@ -31,6 +43,25 @@ export interface User {
 	rating: number;
 	createdAt: Date;
 	updatedAt: Date;
+	courses: Course[];
+}
+
+// create interface for tutor to create, update and delete courses
+
+export interface UserCourse {
+	id: string;
+	name: string;
+	email: string;
+	areaOfInterest: string;
+
+	courses: [
+		{
+			course_image: "string";
+			course_name: "string";
+			tutor_name: "string";
+			course_price: "string";
+		}
+	];
 }
 export interface TutorCourses {
 	id?: string;
