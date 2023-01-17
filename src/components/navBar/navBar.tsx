@@ -24,19 +24,7 @@ const NavBar = () => {
   const toggleModal = () => {
     setNotificationModal(!notificationModal);
   };
-  // const ref = useRef<HTMLDivElement>(null);
-
-  // useEffect(() => {
-  //   const handleClick = (e: MouseEvent) => {
-  //     if (ref.current != null && !ref.current.contains(e.target as Node)) {
-  //       setNotificationModal(false);
-  //     }
-  //   };
-  //   document.addEventListener("click", handleClick);
-  //   return () => {
-  //     document.removeEventListener("click", handleClick);
-  //   };
-  // }, [ref]);
+  
 
   const togglePopup = () => {
     setShowModal(!showModal);
@@ -48,7 +36,7 @@ const NavBar = () => {
 
   return (
     <nav className="navbar">
-      {/* <div ref={myRef}></div> */}
+   
       <div className="logotext">
         <img src="/src/assets/images/fulllogo.svg" />
         <h3>iLearn</h3>
