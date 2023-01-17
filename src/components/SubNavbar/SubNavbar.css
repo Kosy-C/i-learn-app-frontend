@@ -12,18 +12,14 @@
 
 .welcome {
     margin-bottom: 0;
-    text-align: left;
 }
 
 .welcome-box {
-    margin-left: 8rem;
+    margin-left: 2rem;
 }
 
 .student-name {
     margin-top: 0;
-    text-align: left;
-    margin-left: 10px;
-
 }
 
 .search-icon {

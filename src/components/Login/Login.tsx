@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/promise-function-async */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
@@ -17,14 +16,11 @@ import.meta.env;
 const baseUrl: string = import.meta.env.VITE_SERVER_URL;
 
 function LoginForm() {
-	const navigate = useNavigate();
 	const googleSignIn = async () => {
 		await signInWithGooglePopup();
 	};
 
-	const facebookSignIn = async () => {
-		await axios.get("/auth/facebook");
-	};
+	const navigate = useNavigate();
 
 	const emailRef = useRef<HTMLInputElement>(null);
 	const passwordRef = useRef<HTMLInputElement>(null);
@@ -128,18 +124,16 @@ function LoginForm() {
 									Create
 								</Link>
 							</div>
-						</form>
-						<div className="socialIcons">
-							{/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
-							<button type="submit" onClick={googleSignIn}>
-								<FcGoogle />
-							</button>
-							<a href="#">
+							<div className="socialIcons">
+								{/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
+								<button type="submit" onClick={googleSignIn}>
+									<FcGoogle />
+								</button>
 								<button type="submit" className="fbBtn">
 									<FaFacebook />
 								</button>
-							</a>
-						</div>
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>
