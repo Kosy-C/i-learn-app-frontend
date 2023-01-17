@@ -49,7 +49,7 @@ const NavBar = () => {
   return (
     <nav className="navbar">
       <div className="logotext">
-        <img src="src/assets/images/fulllogo.svg" />
+        <img src="/src/assets/images/fulllogo.svg" />
         <h3>iLearn</h3>
       </div>
 
@@ -103,7 +103,7 @@ const NavBar = () => {
           </>
         )}
 
-        {/* <li>
+				{/* <li>
 					<button type="submit" onClick={onOpenProfile}>
 						<img
 							src="src/assets/images/profilepic.svg"
@@ -120,7 +120,7 @@ const NavBar = () => {
               <ProfileModal userName={""} userEmail={""} userPicture={""} />
             )}
             <img
-              src="src/assets/images/profilepic.svg"
+              src="/src/assets/images/profilepic.svg"
               className="profilepic"
             />
           </button>
