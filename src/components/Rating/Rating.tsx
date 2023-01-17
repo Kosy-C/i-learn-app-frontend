@@ -1,57 +1,109 @@
-/* eslint-disable @typescript-eslint/strict-boolean-expressions */
-import React, { useMemo, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import fontawesome from "@fortawesome/fontawesome";
-import { faStar } from "@fortawesome/fontawesome-free-solid";
+import React from 'react'
+import {AiFillStar} from 'react-icons/ai'
+import {BsStarHalf} from 'react-icons/bs'
+import {ImStarEmpty} from 'react-icons/im'
+import './Rating.css'
 
-interface RatingProps {
-	onRating: (rate: any) => void;
-	rating: number;
+interface Props {
+    rating: number,
+    image: string,
+    color: string
+}
+const Rating : React.FC<Props> = ({ rating, image, color }) => {
+    let array: any = []
+   for(let i : number = 0; i < rating ; i++){
+    array.push('img' + i)
+   }
+  return (
+    <div className='cd-ratingcontainer'>
+      <span className='cd-span-number'>
+      {rating}  
+      </span>
+    {/* <span className='cd-span'>
+      
+      {array.map((each: string)=>(
+        <AiFillStar key={each} className='cd-img'/>
+        // <img className='cd-img' src={image} key={each}/>
+        ))}  
+    </span> */}
+    <div className='cd-ratingstars'>
+    <span className='cd-span'>
+        <i style= {{color: color}}
+        >
+          {
+            rating >= 1
+            ? <AiFillStar/>
+            : rating >= 0.5
+            ? <BsStarHalf/>
+            : <ImStarEmpty/>
+            
+          }
+        </i>
+      </span>
+      <span className='cd-span'>
+        <i style= {{color: color}}
+        >
+          {
+            rating >= 2
+            ? <AiFillStar/>
+            : rating >= 1.5
+            ? <BsStarHalf/>
+            : <ImStarEmpty/>
+            
+          }
+        </i>
+      </span>
+      <span className='cd-span'>
+        <i style= {{color: color}}
+        >
+           {
+            rating >= 3
+            ? <AiFillStar/>
+            : rating >= 2.5
+            ? <BsStarHalf/>
+            : <ImStarEmpty/>
+            
+          }
+        </i>
+      </span>
+      <span className='cd-span'>
+        <i style= {{color: color}}
+        >
+          {
+            rating >= 4
+            ? <AiFillStar/>
+            : rating >= 3.5
+            ? <BsStarHalf/>
+            : <ImStarEmpty/>
+            
+          }
+        </i>
+      </span>
+      <span className='cd-span'>
+        <i style= {{color: color}}
+        >
+          {
+            rating >= 5
+            ? <AiFillStar/>
+            : rating >= 4.5
+            ? <BsStarHalf/>
+            : <ImStarEmpty/>
+            
+          }
+        </i>
+      </span>
+    </div>
+    
+
+    </div>
+    
+   
+    
+  )
 }
 
-fontawesome.library.add(faStar);
+Rating.defaultProps = {
+  color: '#f8e825'
+}
 
-const Rating = (props: RatingProps) => {
-	const { rating, onRating } = props;
-	const [hoverRating, setHoverRating] = useState(0);
-
-	const color = {
-		filled: "#f5eb3b",
-		unfilled: "#DCDCDC",
-	};
-
-	const count = 5;
-
-	const getColor = (index: number) => {
-		if (hoverRating >= index) {
-			return color.filled;
-		} else if (!hoverRating && rating >= index) {
-			return color.filled;
-		}
-
-		return color.unfilled;
-	};
-
-	const starRating = useMemo(() => {
-		return Array(count)
-			.fill(0)
-			.map((_, i) => i + 1)
-			.map((idx) => (
-				<FontAwesomeIcon
-					key={idx}
-					className="cursor-pointer"
-					icon="star"
-					onClick={() => onRating(idx)}
-					style={{ color: getColor(idx) }}
-					onMouseEnter={() => setHoverRating(idx)}
-					onMouseLeave={() => setHoverRating(0)}
-				/>
-			));
-	}, [count, rating, hoverRating]);
-
-	console.log(starRating);
-
-	return <div>{starRating}</div>;
-};
-
-export default Rating;
+export default Rating

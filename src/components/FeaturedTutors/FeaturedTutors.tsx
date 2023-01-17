@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { apiGet } from "../../utils/api/axios";
 import Profile from "../profileDetails/profile";
 import { Modal } from "react-responsive-modal";
-import Rating from "../Rating/Rating";
+import Rating from "../dashBoardRating/dashboardRating";
 
 const FeaturedTutors = () => {
 	const [tutors, setTutors] = useState([]);
@@ -62,4 +62,4 @@ const FeaturedTutors = () => {
 	);
 };
 
-export default FeaturedTutors;
+// export default FeaturedTutors;

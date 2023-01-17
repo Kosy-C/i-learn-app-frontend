@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./RecommendedCourses.css";
 import { Link } from "react-router-dom";
 import { apiGet } from "../../utils/api/axios";
-import Rating from "../Rating/Rating";
+import Rating from "../dashBoardRating/dashboardRating";
+import Course from "../Cards/course";
 
 const RecommendedCourses = () => {
 	const category: string | null = localStorage.getItem("user");
@@ -42,13 +43,12 @@ const RecommendedCourses = () => {
 					) : (
 						courses.map((el: any) => {
 							return (
-								<div key={el.id} className="course-container">
+								<><div key={el.id} className="course-container">
 									<div className="course-img">
 										<img
 											src={el.course_image}
 											alt=""
-											style={{ width: "350px" }}
-										/>
+											style={{ width: "350px" }} />
 									</div>
 
 									<div className="course-details">
@@ -61,15 +61,14 @@ const RecommendedCourses = () => {
 											<div style={{ margin: "0 8px 0 8px" }}>
 												<Rating
 													rating={rating}
-													onRating={(rate: React.SetStateAction<number>) =>
-														setRating(rate)
-													}
-												/>
+													onRating={(rate: React.SetStateAction<number>) => setRating(rate)} />
 											</div>
 											<div>{el.rating}</div>
 										</div>
 									</div>
-								</div>
+								</div><div key={el.id}>
+										<Course course={el} />
+									</div></>
 							);
 						})
 					)}
