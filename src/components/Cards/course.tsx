@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../RecommendedCourses/RecommendedCourses.css";
 import { Link } from "react-router-dom";
 import { apiGet } from "../../utils/api/axios";
-// import { whiteStar } from "../../assets/index";
+import whiteStar from "../../assets/white-star.svg";
 import { Button } from "antd";
 
 const course = ({ course }: any) => {
@@ -22,7 +22,7 @@ const course = ({ course }: any) => {
 						<div>{course.rating}</div>
 						<div style={{ margin: "0 8px 0 8px" }}>
 							⭐ ⭐ ⭐ ⭐{" "}
-							{/* <img style={{ marginTop: "0.1rem" }} src={whiteStar} alt="" /> */}
+							<img style={{ marginTop: "0.1rem" }} src={whiteStar} alt="" />
 						</div>
 						<div>{course.rating}</div>
 					</div>
