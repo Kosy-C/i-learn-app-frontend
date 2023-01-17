@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import "./RecommendedCourses.css";
 import { Link } from "react-router-dom";
 import { apiGet } from "../../utils/api/axios";
-import { whiteStar } from "../../assets/index";
+import Rating from "../Rating/Rating";
 
 const RecommendedCourses = () => {
 	const category: string | null = localStorage.getItem("user");
 	const [courses, setCourses] = useState([]);
+	const [rating, setRating] = useState(0);
 
 	useEffect(() => {
 		const fetchCourses = async () => {
@@ -58,11 +59,11 @@ const RecommendedCourses = () => {
 										<div className="course-ratings">
 											<div>{el.rating}</div>
 											<div style={{ margin: "0 8px 0 8px" }}>
-												⭐ ⭐ ⭐ ⭐{" "}
-												<img
-													style={{ marginTop: "0.1rem" }}
-													src={whiteStar}
-													alt=""
+												<Rating
+													rating={rating}
+													onRating={(rate: React.SetStateAction<number>) =>
+														setRating(rate)
+													}
 												/>
 											</div>
 											<div>{el.rating}</div>

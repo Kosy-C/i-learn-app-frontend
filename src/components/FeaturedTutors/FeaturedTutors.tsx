@@ -4,10 +4,12 @@ import { Link } from "react-router-dom";
 import { apiGet } from "../../utils/api/axios";
 import Profile from "../profileDetails/profile";
 import { Modal } from "react-responsive-modal";
+import Rating from "../Rating/Rating";
 
 const FeaturedTutors = () => {
 	const [tutors, setTutors] = useState([]);
 	const [profile, setProfile] = useState(false);
+	const [rating, setRating] = useState(0);
 
 	const onOpenProfile = () => setProfile(true);
 	const onCloseProfile = () => setProfile(false);
@@ -34,18 +36,6 @@ const FeaturedTutors = () => {
 						</Link>
 					</p>
 				</div>
-				{/* <li>
-					<button type="submit" onClick={onOpenProfile}>
-						<img
-							src="src/assets/images/profilepic.svg"
-							className="profilepic"
-						/>
-					</button>
-					<Modal open={profile} onClose={onCloseProfile}>
-						<Profile />
-					</Modal>
-				</li> */}
-
 				<div className="tutor-details">
 					{tutors.map((el: any) => {
 						return (
@@ -55,7 +45,10 @@ const FeaturedTutors = () => {
 										<img src={el.image} alt="" width="68px" height="68px" />
 									</div>
 									<p className="names">{el.name}</p>
-									<p className="ratings">⭐ {el.rating}</p>
+									<Rating
+										rating={rating}
+										onRating={(rate) => setRating(rate)}
+									/>
 								</button>
 							</div>
 						);

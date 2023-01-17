@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/promise-function-async */
 import React, { Fragment, ChangeEvent, useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../signUp/signUp.css";
@@ -13,11 +14,14 @@ import.meta.env;
 const baseUrl: string = import.meta.env.VITE_SERVER_URL;
 
 function LoginForm() {
+	const navigate = useNavigate();
 	const googleSignIn = async () => {
 		await signInWithGooglePopup();
 	};
 
-	const navigate = useNavigate();
+	const facebookSignIn = async () => {
+		await axios.get("/auth/facebook");
+	};
 
 	const emailRef = useRef<HTMLInputElement>(null);
 	const passwordRef = useRef<HTMLInputElement>(null);
@@ -121,16 +125,18 @@ function LoginForm() {
 									Create
 								</Link>
 							</div>
-							<div className="socialIcons">
-								{/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
-								<button type="submit" onClick={googleSignIn}>
-									<FcGoogle />
-								</button>
+						</form>
+						<div className="socialIcons">
+							{/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
+							<button type="submit" onClick={googleSignIn}>
+								<FcGoogle />
+							</button>
+							<a href="#">
 								<button type="submit" className="fbBtn">
 									<FaFacebook />
 								</button>
-							</div>
-						</form>
+							</a>
+						</div>
 					</div>
 				</div>
 			</div>

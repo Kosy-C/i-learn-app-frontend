@@ -11,6 +11,11 @@
     "indent": "eslint src/ --fix"
   },
   "dependencies": {
+    "@fortawesome/fontawesome": "^1.1.8",
+    "@fortawesome/fontawesome-free-solid": "^5.0.13",
+    "@fortawesome/fontawesome-svg-core": "^6.2.1",
+    "@fortawesome/free-solid-svg-icons": "^6.2.1",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "@hookform/resolvers": "^2.9.10",
     "@types/firebase": "^3.2.1",
     "@types/react-calendar": "^3.9.0",
@@ -19,6 +24,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "firebase": "^9.15.0",
     "json-server": "^0.17.1",
+    "material-ui-rating": "^4.0.0-beta.2",
     "query-string": "^8.0.3",
     "react": "^18.2.0",
     "react-calendar": "^4.0.0",
