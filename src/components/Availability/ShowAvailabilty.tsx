@@ -25,9 +25,6 @@ const TutorAvailability: React.FC<Props> = ({ tutor, title, onClick, id }) => {
 		availableTime: [],
 		availableDate: "",
 	});
-	const color = {
-		border: "none",
-	};
 	const [availabilities, setAvailabilities] = useState<any>([]);
 	const [availabletime, setAvailabletime] = useState([]);
 	const [activeSlotIndex, setActiveSlotIndex] = useState<number>(0);

@@ -5,7 +5,7 @@ import "../profileDetails/profile.css";
 import { AiOutlineSafetyCertificate } from "react-icons/ai";
 import { CiLocationOn } from "react-icons/ci";
 import { useParams } from "react-router-dom";
-import { apiGet } from "../../utils/api/axios";
+import { apiGet, apiPost } from "../../utils/api/axios";
 import TutorAvailability from "../Availability/ShowAvailabilty";
 import { Modal } from "react-responsive-modal";
 // import { Tutor } from "../../utils/Interfaces/index.dto";
@@ -16,7 +16,11 @@ const Profile = () => {
 	const [modalIsOpen, setIsOpen] = useState(false);
 	const params = useParams();
 
-	const handleBookSession = () => {
+	const handleBookSession = async () => {
+		// const { data } = await apiPost(
+		// 	`/users/scheduled-time/${tutorId}/:${studentId}'`
+		// );
+		// //
 		toast.success("Session booked successfully!");
 	};
 
