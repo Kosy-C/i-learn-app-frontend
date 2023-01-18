@@ -48,7 +48,6 @@ const StudentHistoryPage = () => {
                                             </b>
                                         </h3>
                                         </Link>
-                                        {/* <h3> <b>Chemistry for beginners:<br/>30 days perfection</b></h3> */}
                                         </div>
                                             <div>
                                             <button className="rate-btn-turo" type="submit"> Rate Tutor</button>
@@ -56,8 +55,6 @@ const StudentHistoryPage = () => {
                                             </div>
                                     </div>
                                     <div className="student-details">
-                                        {/* <p>{course.category}</p> */}
-                                        {/* <p>Adekunle Ayo</p> */}
                                         <ProgressBar currentPage={0} totalPages={0}/>
                                         <p className="progress-bar-name">Your progress</p>
                                     </div>
