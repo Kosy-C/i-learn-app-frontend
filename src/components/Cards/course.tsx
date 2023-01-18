@@ -74,13 +74,13 @@ const CourseCard = ({ course }: any) => {
 					<div className="tutorCourse_button">
 						<Button
 							type={"button"}
-							onClick={async () => await handleEditedClick(course.id)}
+							onClick={() => handleEditedClick(course.id)}
 							className={"tutorCourse_editButton"}
 							title={"Edit"}
 						/>
 						<Button
 							type={"button"}
-							onClick={async () => await handleDeletedClick(course.id)}
+							onClick={() => handleDeletedClick(course.id)}
 							className={"tutorCourse_deleteButton"}
 							title={"Delete"}
 						/>
