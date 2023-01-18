@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/prefer-optional-chain */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import React, { useState, useEffect } from "react";
-import { apiGet } from "../../utils/api/axios";
+import { apiGet, apiPost } from "../../utils/api/axios";
 import "./show.css";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -18,8 +18,14 @@ const TutorAvailability = () => {
 		availableTime: [],
 		availableDate: "",
 	});
+	const color = {
+		border: "none",
+	};
 	const [availabilities, setAvailabilities] = useState<any>([]);
 	const [availabletime, setAvailabletime] = useState([]);
+	const [activeSlotIndex, setActiveSlotIndex] = useState<number>(0);
+	const [activeButtonIndex, setActiveButtonIndex] = useState<number>(0);
+
 	const [num, setNum] = useState(3);
 
 	function getMonthName(monthNumber: any) {
@@ -28,8 +34,21 @@ const TutorAvailability = () => {
 
 		return date.toLocaleString("en-US", { month: "long" });
 	}
-	const params = useParams();
 
+	/// this change the selected date button state
+
+	const handleDateClick = (date: any, index: number) => {
+		setAvailabletime(date.availableTime);
+		setActiveButtonIndex(index);
+	};
+
+	// This change the selected time state
+	const handleTimeClick = (timeslot: any, index: number) => {
+		selectedTime.push(timeslot);
+		setActiveSlotIndex(index);
+	};
+
+	const params = useParams();
 	useEffect(() => {
 		const getAvailable = async () => {
 			if (params.id !== undefined) {
@@ -57,7 +76,25 @@ const TutorAvailability = () => {
 		void getAvailable();
 	}, [params.id]);
 
-	const handleBookSession = () => {
+	// function that set the time
+	const setTime = (date: any, index: number) => {
+		setAvailabletime(date.availableTime);
+		// setButtonActive(!buttonActive);
+		// if (index === buttonIndex) {
+		// }
+		console.log(`availButton${index}`);
+	};
+
+	const selectedTime: string[] = [];
+
+	const handleBookSession = async () => {
+		const { data } = await apiPost(
+			// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+			`/${selectedTime[0]}/${params.id}/${availabilities[0].userId}`
+		);
+
+		// router.post("/scheduled-time/:tutorId/:studentId")
+		// );
 		toast.success("Session booked successfully!");
 	};
 
@@ -72,11 +109,14 @@ const TutorAvailability = () => {
 					<hr />
 					{availabilities &&
 						availabilities.slice(0, num).map((date: any, index: number) => (
-							<button
-								key={index}
-								onClick={() => setAvailabletime(date.availableTime)}
-							>
-								<div key={index} className="tutorAvailability-buttonContainer">
+							<button key={index} onClick={() => handleDateClick(date, index)}>
+								<div
+									key={index}
+									className={
+										`tutorAvailability-buttonContainer ` +
+										(index === activeButtonIndex ? `button-active` : "")
+									}
+								>
 									<div>
 										{
 											new Date(date.availableDate)
@@ -117,7 +157,11 @@ const TutorAvailability = () => {
 					</div>
 					<div className="tutorAvailability-buttonContainer2">
 						{availabletime.map((timeslot: any, index: number) => (
-							<button type="submit" key={index}>
+							<button
+								key={index}
+								onClick={() => handleTimeClick(timeslot, index)}
+								className={index === activeSlotIndex ? ` button-active` : ""}
+							>
 								{timeslot}
 							</button>
 						))}

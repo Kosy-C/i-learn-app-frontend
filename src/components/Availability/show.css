@@ -8,11 +8,14 @@
   padding: 15px;
   border-radius: 2px;
 }
+.active {
+  border: 1px solid rgb(12, 12, 12);
+}
 .tutor-Availability-container hr {
   margin-top: 10px;
 }
 
-.tutorAvailability-buttonContainer{
+.tutorAvailability-buttonContainer {
   border: 1px solid rgb(196, 193, 193);
   border-radius: 5px;
   display: flex;
@@ -21,6 +24,10 @@
   padding: 20px;
   margin: 20px;
 }
+.button-active {
+  border: 1px solid brown !important;
+}
+
 .tutorAvailability-buttonContainer2 {
   display: flex;
   justify-content: space-between;
@@ -60,15 +67,13 @@
   font-size: 18px;
   cursor: pointer;
 }
-.next-arrow{
-    font-size: 20px;
-    cursor: pointer;
-    font-style: italic;
-    
+.next-arrow {
+  font-size: 20px;
+  cursor: pointer;
+  font-style: italic;
 }
-.previous-arrow{
-    font-size: 20px;
-    cursor: pointer;
-    font-style: italic;
-    
+.previous-arrow {
+  font-size: 20px;
+  cursor: pointer;
+  font-style: italic;
 }
