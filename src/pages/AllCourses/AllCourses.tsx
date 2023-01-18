@@ -52,8 +52,7 @@ const AllCourses = () => {
 					{courses.length > 0 ? (
 						courses.map((course: any, index: number) => {
 							return (
-								
-								<div key={index}>
+								<div key={index} className="allCourses_Cards">
 									<div id="all_courses_cat">
 										<h2>{course.category} courses</h2>
 									</div>
@@ -62,9 +61,7 @@ const AllCourses = () => {
 										<Link to={`/coursedetail/${course.id}`}>
 											<div className="all_courses_details">
 												<div key={course.id} className="all_courses_img">
-													
 													<img src={course.course_image} alt="course_logo" />
-													
 												</div>
 												<div className="all_courses_features">
 													<h2>{course.title}</h2>
@@ -81,53 +78,52 @@ const AllCourses = () => {
 													</p>
 												</div>
 											</div>
-											</Link>
-										
-										{show &&
+										</Link>
+
+										{show && (
 											// course.course.slice(6).map((c: any, index: number) => (
-												<div className="all_courses_details">
-													<div key={course.id} className="all_courses_img">
-														<img src={course.course_image} alt="course_logo" />
-													</div>
-													<div className="all_courses_features">
-														<h2>{course.title}</h2>
-														<p>{course.description}</p>
-														<p>
-															{course.rating}
-															<span>
-																<img src={coloredStar} />
-															</span>
-															<span>
-																<img src={star} />
-															</span>
-															<span>({index})</span>
-														</p>
-													</div>
+											<div className="all_courses_details">
+												<div key={course.id} className="all_courses_img">
+													<img src={course.course_image} alt="course_logo" />
 												</div>
-											}
+												<div className="all_courses_features">
+													<h2>{course.title}</h2>
+													<p>{course.description}</p>
+													<p>
+														{course.rating}
+														<span>
+															<img src={coloredStar} />
+														</span>
+														<span>
+															<img src={star} />
+														</span>
+														<span>({index})</span>
+													</p>
+												</div>
+											</div>
+										)}
 									</div>
-									{!show && (
-										<div className="all_courses_seeMore">
-											<a href="#" onClick={showMore}>
-												See more
-											</a>
-										</div>
-									)}
-									{show && (
-										<div className="all_courses_seeMore">
-											<a href="#" onClick={showMore}>
-												See less
-											</a>
-										</div>
-									)}
 								</div>
-								
 							);
 						})
 					) : (
 						<div>No courses for this category</div>
 					)}
 				</div>
+				{!show && (
+					<div className="all_courses_seeMore">
+						<a href="#" onClick={showMore}>
+							See more
+						</a>
+					</div>
+				)}
+				{show && (
+					<div className="all_courses_seeMore">
+						<a href="#" onClick={showMore}>
+							See less
+						</a>
+					</div>
+				)}
 			</div>
 		</div>
 	);

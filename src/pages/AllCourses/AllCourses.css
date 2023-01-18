@@ -8,10 +8,7 @@
     margin-left: 8em;
     margin-right: 8em;
     margin-bottom: 45px;
-    /* border: 2px solid grey; */
     justify-content: space-between;
-    
-    /* flex-direction: column; */
 }
 
 .all_courses_img > img{
@@ -20,10 +17,10 @@
     width: 375px;
 }
 .all_courses_container{
-    overflow: auto;
+    /* overflow: auto; */
     height: 90vh;
     /* border: 2px solid blue; */
-    background-color: white;
+    /* background-color: red; */
 }
 .all_courses_details{
     /* background-color: rgba(165, 42, 42, 0.122); */
@@ -72,4 +69,13 @@
 }
 .all_courses_seeMore{
 
+}
+.all_courses_card_container{
+    display: flex;
+    width: 100vw;
+    /* background-color: blue; */
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    /* justify-content: space-between; */
 }

@@ -131,3 +131,9 @@ export const courseDetails = {
 		updatedAt: "",
 	},
 };
+export interface Buttons {
+	type?: "submit" | "reset" | "button";
+	onClick?: () => void;
+	title?: string;
+	className?: string;
+}

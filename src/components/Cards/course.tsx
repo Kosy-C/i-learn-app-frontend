@@ -1,46 +1,94 @@
 import React, { useEffect, useState } from "react";
-import "../RecommendedCourses/RecommendedCourses.css";
+import "../TutorHome/TutorHome.css";
 import { Link } from "react-router-dom";
-import { apiGet } from "../../utils/api/axios";
+import { apiDelete, apiGet, apiUpdate } from "../../utils/api/axios";
 import { whiteStar } from "../../assets/index";
-import { Button } from "antd";
+import Button from "../Button/Button";
 import Rating from "../Rating/Rating";
+import { toast } from "react-toastify";
+import { User } from "../../utils/Interfaces/index.dto";
 
-const course = ({ course }: any) => {
-    
+const CourseCard = ({ course }: any) => {
+	const [user, setUser] = useState<User>();
+	const loggedInUser = async () => {
+		const { data } = await apiGet("/users/profile");
+		setUser(data.userDetails);
+	};
+	const handleEditedClick = async (id: string) => {
+		try {
+			const data = {};
+			const response = await apiUpdate(`/courses/updateCourse/${id}`);
+			console.log("response is ", response);
+		} catch (error: any) {
+			toast.error(error.response.data);
+		}
+	};
+	const handleDeletedClick = async (id: string) => {
+		try {
+			const response = await apiDelete(`/courses/deleteCourse/${id}`);
+			console.log("response is ", response);
+			// const remainingCourses = [...courses].filter((course)=>{
+			//     return course.id !== id
+			//   })
+			//   //Update state
+			//   setCourses(remainingCourses)
+			//   // setCourses(response.data.remainingCourses)
+		} catch (error: any) {
+			toast.error(error.response.data);
+		}
+		useEffect(() => {
+			return () => {
+				loggedInUser();
+			};
+		}, []);
+	};
 	return (
 		<>
-			<div className="course-container">
-									<div className="course-img">
-										<img
-											src={course.course_image}
-											alt=""
-											style={{ width: "350px" }}
-										/>
-									</div>
+			<div className="tutorCourse-container">
+				<div className="tutorCourse-img">
+					<img
+						className="tutorCourse_imageBody"
+						src={course.course_image}
+						alt="courseIcon"
+					/>
+				</div>
 
-									<div className="course-details">
-										<h3 className="course-title">{course.title}</h3>
-										<p className="course-name">
-											{course?.name !== undefined ? course.name : ""}
-										</p>
-										<div className="course-ratings">
-											<div>{course.rating}</div>
-											<div style={{ margin: "0 8px 0 8px" }}>
-													<div className="cd-rating">
-														<Rating
-															rating={Number(course.rating)}
-															image={""}
-															color={""}
-														/>
-													</div>
-												</div>
-											<div>{course.rating}</div>
-										</div>
-									</div>
-								</div>
+				<div className="tutorCourse-details">
+					<div>
+						<h3 className="tutorCourse-title">{course.title}</h3>
+					</div>
+					<div className="tutorCourse-nameContainer">
+						<div className="tutorCourse-name">
+							<p>{course?.name !== undefined ? course.name : ""}</p>
+						</div>
+						<div className="tutorCourse_rating">
+							<Rating
+								rating={Number(course.rating)}
+								image={""}
+								color={"#ffb400"}
+							/>
+						</div>
+					</div>
+				</div>
+				{user?.userType === "Tutor" && (
+					<div className="tutorCourse_button">
+						<Button
+							type={"button"}
+							onClick={async () => await handleEditedClick(course.id)}
+							className={"tutorCourse_editButton"}
+							title={"Edit"}
+						/>
+						<Button
+							type={"button"}
+							onClick={async () => await handleDeletedClick(course.id)}
+							className={"tutorCourse_deleteButton"}
+							title={"Delete"}
+						/>
+					</div>
+				)}
+			</div>
 		</>
 	);
 };
 
-export default course;
+export default CourseCard;
