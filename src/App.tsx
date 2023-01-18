@@ -23,6 +23,7 @@ import PaymentSummaryPage from "./pages/paymentSummary/paymentSummary";
 import RateCourses from "./pages/RateCourses/RateCourses";
 import TutorRating from "./pages/RateTutor/RatingTutor";
 import PaidCourses from "./pages/PaidCourses/PaidCourses";
+import NotFound from "./pages/NotFound/NotFound";
 // import Dataprovider from "./useContext/index";
 
 function App() {
@@ -51,8 +52,10 @@ function App() {
 					<Route path="/savedReminder" element={<SavedReminder />} />
 					<Route path="/rate-course/:courseId" element={<RateCourses />} />
 					<Route path="/tutorRating/:tutorId" element={<TutorRating />} />
-          <Route path="/Payment-Summary" element={<PaymentSummaryPage title={''} price={''} imageUrl={''} />} />
-		  <Route path="/paid-courses/:id" element={<PaidCourses />} />
+          			<Route path="/Payment-Summary" element={<PaymentSummaryPage title={''} price={''} imageUrl={''} />} />
+		 		    <Route path="/paid-courses/:id" element={<PaidCourses />} />
+		 		    <Route path="*" element={<NotFound/>} />
+		
 				</Routes>
 			</Router>
 		</React.Fragment>

@@ -6,6 +6,7 @@ import { apiGet } from "../../utils/api/axios";
 import { useParams } from "react-router-dom";
 import "react-pdf/dist/esm/Page/TextLayer.css";
 import { pdfjs } from "react-pdf";
+import ProgressBar from "../../components/ProgressBar/ProgressBar";
 pdfjs.GlobalWorkerOptions.workerSrc = `/pdf.worker.js`;
 
 const options = {
@@ -55,6 +56,7 @@ const PaidCourses = () => {
   return (
     <>
       <NavBar />
+     
       <div className="paidCourses header">
         <header>{course.title}</header>
         <div>
