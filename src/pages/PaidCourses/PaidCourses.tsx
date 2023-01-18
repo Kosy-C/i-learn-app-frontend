@@ -23,8 +23,8 @@ const PaidCourses = () => {
 
   useEffect(() => {
     const getPdf = async () => {
-      const { data } = await apiGet(`/courses/requestCourse/${params.id}`);
-      setcourse(data);
+      const { data } = await apiGet(`/courses/get-course/${params.id}`);
+      setcourse(data.course);
     };
     getPdf();
   }, [params.id]);

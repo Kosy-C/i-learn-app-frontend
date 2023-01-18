@@ -48,7 +48,7 @@
   height: 5vh;
   border-radius: 50px;
   border: none;
-  background: #0c7bcf;
+  background: #cf640c;
   color: #fff;
   display: block;
 }
@@ -58,7 +58,7 @@
   height: 5vh;
   border-radius: 50px;
   border: none;
-  background: #0c7bcf;
+  background: #cf640c;
   color: #fff;
   display: block;
 }
@@ -83,7 +83,7 @@
 
 .arrow-container {
   position: absolute;
-  top: 60%;
+  top: 50%;
   width: 20px;
   height: 50px;
   display: flex;
@@ -99,7 +99,7 @@
 .arrow {
   border-left: 30px solid transparent;
   border-right: 30px solid transparent;
-  border-top: 30px solid #0c7bcf;
+  border-top: 30px solid #cf640c;
   width: 0;
   height: 0;
 }
