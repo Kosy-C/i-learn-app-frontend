@@ -51,7 +51,12 @@ const TutorHeader = ({ tutor }: { tutor: User }) => {
 								</div>
 								<div className="tutor-overview-schedule"></div>
 								<div className="create-avail">
-									<TutorAvailability />
+									<TutorAvailability
+										id={tutor.id}
+										tutor={tutor}
+										title={"Set Availability"}
+										onClick={onOpenAvailability}
+									/>
 								</div>
 							</div>
 						</TabPanel>
@@ -67,9 +72,6 @@ const TutorHeader = ({ tutor }: { tutor: User }) => {
 					</div>
 				</Tabs>
 			</div>
-			<button type="submit" onClick={onOpenAvailability}>
-				Set Availability
-			</button>
 			<div>
 				<Modal open={available} onClose={onCloseAvailability}>
 					<CreateAvailability />
@@ -80,63 +82,3 @@ const TutorHeader = ({ tutor }: { tutor: User }) => {
 };
 
 export default TutorHeader;
-
-// import React, { useState } from 'react';
-// import { DatePicker, TimeSlot } from 'react-timeslots';
-// import axios from 'axios';
-
-// interface AvailableSlot {
-//   date: string;
-//   times: string[];
-// }
-
-// const AvailableTeachingTime: React.FC = () => {
-//   const [availableDate, setAvailableDate] = useState<string>('');
-//   const [availableTime, setAvailableTime] = useState<string[]>([]);
-
-//   const handleDateChange = (date: Date | null) => {
-//     if (date) {
-//       setAvailableDate(date.toISOString().slice(0, 10));
-//     }
-//   };
-
-//   const handleTimeChange = (times: string[]) => {
-//     setAvailableTime(times);
-//   };
-
-//   const handleSubmit = async (event: React.FormEvent) => {
-//     event.preventDefault();
-//     const availableSlot: AvailableSlot = {
-//       date: availableDate,
-//       times: availableTime
-//     }
-//     try {
-//       await axios.post('/api/available-slots', availableSlot);
-//       alert('Your available teaching times have been sent to the backend!');
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   };
-
-//   return (
-//     <form onSubmit={handleSubmit}>
-//       <label>
-//         Available Date:
-//         <DatePicker
-//           value={availableDate}
-//           onChange={handleDateChange}
-//           dateFormat="yyyy-MM-dd"
-//         />
-//       </label>
-//       <br />
-//       <label>
-//         Available Times:
-//         <TimeSlot onChange={handleTimeChange} />
-//       </label>
-//       <br />
-//       <button type="submit">Submit</button>
-//     </form>
-//   );
-// };
-
-// export default AvailableTeachingTime;

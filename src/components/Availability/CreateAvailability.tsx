@@ -33,15 +33,11 @@ const CreateAvailability = () => {
 	return (
 		<>
 			<div className="availa_container">
-				<form onSubmit={handleSubmit}>
+				<form onSubmit={handleSubmit} className="form-tag">
 					Available Dates:
-					{/* <input
-					placeholder="YYYY-MM-DD"
-					type="text"
-					value={availableDate}
-					onChange={(event) => setAvailableDate(event.target.value)}
-				/> */}
+					<br />
 					<DatePicker
+						className="date_picker"
 						value={availableDate}
 						onChange={(date: Date | null) => {
 							if (date != null) {
@@ -52,7 +48,7 @@ const CreateAvailability = () => {
 						dateFormat="dd/MM/yyyy"
 					/>
 					<br />
-					<label>
+					<label className="label-tag">
 						Available Times:
 						<br />
 						<select
@@ -67,14 +63,19 @@ const CreateAvailability = () => {
 								)
 							}
 						>
-							<option value="9:00 AM - 10:00 AM">9:00 AM - 10:00 AM</option>
-							<option value="10:00 AM - 11:00 AM">10:00 AM - 11:00 AM</option>
-							<option value="11:00 AM - 12:00 PM">11:00 AM - 12:00 PM</option>
-							<option value="12:00 PM - 1:00 PM">12:00 PM - 1:00 PM</option>
-							<option value="1:00 PM - 2:00 PM">1:00 PM - 2:00 PM</option>
-							<option value="2:00 PM - 3:00 PM">2:00 PM - 3:00 PM</option>
-							<option value="3:00 PM - 4:00 PM">3:00 PM - 4:00 PM</option>
-							<option value="4:00 PM - 5:00 PM">4:00 PM - 5:00 PM</option>
+							<option value="5:00 AM">5:00 AM</option>
+							<option value="6:00 AM">6:00 AM</option>
+							<option value="7:00 AM">7:00 AM</option>
+							<option value="8:00 AM">8:00 AM</option>
+							<option value="9:00 AM">9:00 AM</option>
+							<option value="10:00 AM">10:00 AM</option>
+							<option value="11:00 AM">11:00 AM</option>
+							<option value="12:00 PM">12:00 PM</option>
+							<option value="1:00 PM">1:00 PM</option>
+							<option value="2:00 PM">2:00 PM</option>
+							<option value="3:00 PM">3:00 PM</option>
+							<option value="4:00 PM">4:00 PM</option>
+							<option value="5:00 PM">5:00 PM</option>
 						</select>
 					</label>
 					<br />

@@ -1,16 +1,23 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 import React, { useEffect, useState } from "react";
 import "../profileDetails/profile.css";
-import Ellipse4 from "../../assets/images/Ellipse 4.svg";
+// import Ellipse4 from "../../assets/images/Ellipse 4.svg";
 import { AiOutlineSafetyCertificate } from "react-icons/ai";
 import { CiLocationOn } from "react-icons/ci";
 import { useParams } from "react-router-dom";
 import { apiGet } from "../../utils/api/axios";
 import TutorAvailability from "../Availability/ShowAvailabilty";
 import { Modal } from "react-responsive-modal";
+import { toast } from "react-toastify";
 
 const Profile = () => {
 	const [tutor, setTutor] = useState<any>({});
 	const [modalIsOpen, setIsOpen] = useState(false);
+	const params = useParams();
+
+	const handleBookSession = () => {
+		toast.success("Session booked successfully!");
+	};
 
 	function openModal() {
 		setIsOpen(true);
@@ -18,15 +25,15 @@ const Profile = () => {
 	function closeModal() {
 		setIsOpen(false);
 	}
-	const params = useParams();
+
 	useEffect(() => {
 		const fetch = async () => {
 			const { data } = await apiGet(`/users/atutordetail/${params.id}`);
 			console.log(data);
 			setTutor(data.message);
 		};
-		fetch();
-	}, []);
+		void fetch();
+	}, [params.id]);
 	return (
 		<>
 			<body className="profile-body">
@@ -75,7 +82,12 @@ const Profile = () => {
 							Availability
 						</button>
 						<Modal open={modalIsOpen} onClose={closeModal}>
-							<TutorAvailability />
+							<TutorAvailability
+								id={params?.id}
+								tutor={tutor}
+								title={"Book session"}
+								onClick={handleBookSession}
+							/>
 						</Modal>
 					</div>
 				</div>
