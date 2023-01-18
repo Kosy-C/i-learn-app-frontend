@@ -22,6 +22,8 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import PaymentSummaryPage from "./pages/paymentSummary/paymentSummary";
 import RateCourses from "./pages/RateCourses/RateCourses";
 import TutorRating from "./pages/RateTutor/RatingTutor";
+import PaidCourses from "./pages/PaidCourses/PaidCourses";
+import NotFound from "./pages/NotFound/NotFound";
 // import Dataprovider from "./useContext/index";
 
 function App() {
@@ -29,17 +31,17 @@ function App() {
 		<React.Fragment>
 			<ToastContainer />
 			<Router>
-			{/* <NavBar/> */}
+				{/* <NavBar/> */}
 				<Routes>
 					<Route path="/" element={<LandingPage />} />
 					<Route path="/navbar" element={<NavBar />} />
-					<Route path="/coursedetail/:id" element={<CourseDetail/>} />
+					<Route path="/coursedetail/:id" element={<CourseDetail />} />
 					<Route path="/contact_us" element={<Contact />} />
 					<Route path="/sign-up" element={<SignUpForm />} />
 					<Route path="/login" element={<LoginForm />} />
 					<Route path="/reset-password" element={<ResetPassword />} />
 					<Route path="/users/resetpassword" element={<SetNewPassword />} />
-					<Route path='/tutor-profile' element={<Profile />} />
+					<Route path="/tutor-profile" element={<Profile />} />
 					<Route path="/dashboard/:id?" element={<Dashboard />} />
 					<Route path="/history-page" element={<StudentHistoryPage />} />
 					<Route path="/all-tutors" element={<AllTutor />} />
@@ -50,7 +52,12 @@ function App() {
 					<Route path="/savedReminder" element={<SavedReminder />} />
 					<Route path="/rate-course/:courseId" element={<RateCourses />} />
 					<Route path="/tutorRating/:tutorId" element={<TutorRating />} />
-          <Route path="/Payment-Summary" element={<PaymentSummaryPage title={''} price={''} imageUrl={''} />} />
+					<Route
+						path="/Payment-Summary"
+						element={<PaymentSummaryPage title={""} price={""} imageUrl={""} />}
+					/>
+					<Route path="/paid-courses/:id" element={<PaidCourses />} />
+					<Route path="*" element={<NotFound />} />
 				</Routes>
 			</Router>
 		</React.Fragment>
@@ -58,5 +65,3 @@ function App() {
 }
 
 export default App;
-
-

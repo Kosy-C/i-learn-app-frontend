@@ -8,12 +8,19 @@ import "react-toastify/dist/ReactToastify.css";
 import { useParams } from "react-router-dom";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
+import { User } from "../../utils/Interfaces/index.dto";
 interface Available {
 	availableTime: string[];
 	availableDate: string;
 }
 
-const TutorAvailability = () => {
+interface Props {
+	tutor: User;
+	title: string;
+	onClick: () => void;
+	id: string | undefined;
+}
+const TutorAvailability: React.FC<Props> = ({ tutor, title, onClick, id }) => {
 	const [available, setAvailable] = useState<Available>({
 		availableTime: [],
 		availableDate: "",
@@ -51,11 +58,9 @@ const TutorAvailability = () => {
 	const params = useParams();
 	useEffect(() => {
 		const getAvailable = async () => {
-			if (params.id !== undefined) {
+			if (id !== undefined) {
 				try {
-					const { data } = await apiGet(
-						`/users/get-available-tutors/${params.id}`
-					);
+					const { data } = await apiGet(`/users/get-available-tutors/${id}`);
 					console.log(data.availabilities);
 					if (data.message) {
 						toast.success(data.message);
@@ -72,9 +77,8 @@ const TutorAvailability = () => {
 				}
 			}
 		};
-
 		void getAvailable();
-	}, [params.id]);
+	}, [id]);
 
 	// function that set the time
 	const setTime = (date: any, index: number) => {
@@ -86,17 +90,6 @@ const TutorAvailability = () => {
 	};
 
 	const selectedTime: string[] = [];
-
-	const handleBookSession = async () => {
-		const { data } = await apiPost(
-			// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-			`/${selectedTime[0]}/${params.id}/${availabilities[0].userId}`
-		);
-
-		// router.post("/scheduled-time/:tutorId/:studentId")
-		// );
-		toast.success("Session booked successfully!");
-	};
 
 	return (
 		<>
@@ -167,8 +160,8 @@ const TutorAvailability = () => {
 						))}
 					</div>
 					<div className="tutorAvailability-submitButton">
-						<button type="submit" onClick={handleBookSession}>
-							Book Session
+						<button type="submit" onClick={onClick}>
+							{title}
 						</button>
 					</div>
 				</div>

@@ -55,6 +55,12 @@ function Calender() {
 	const [days, setDays] = useState(reminder[1]);
 	const [hours] = useState(Hours);
 	const [minutes] = useState(Minutes);
+	// const [startDate setStartDate] = useState({days}-{months} {hours}-{minutes})
+
+	function Picker(event: React.MouseEvent<HTMLParagraphElement>) {
+		setDays(event.currentTarget.textContent);
+	}
+	console.log(days);
 	return (
 		<>
 			<NavBar />
@@ -102,7 +108,7 @@ function Calender() {
 											</p>
 										))}
 									</div>
-									<div id="days" className="days">
+									<div id="days" className="days" onClick={Picker}>
 										{days.map(
 											(
 												day:
