@@ -6,8 +6,14 @@ import { whiteStar } from "../../assets/index";
 import Button from "../Button/Button";
 import Rating from "../Rating/Rating";
 import { toast } from "react-toastify";
+import { User } from "../../utils/Interfaces/index.dto";
 
-const course = ({ course }: any) => {
+const CourseCard = ({ course }: any) => {
+	const [user, setUser] = useState<User>();
+	const loggedInUser = async () => {
+		const { data } = await apiGet("/users/profile");
+		setUser(data.userDetails);
+	};
 	const handleEditedClick = async (id: string) => {
 		try {
 			const data = {};
@@ -22,14 +28,19 @@ const course = ({ course }: any) => {
 			const response = await apiDelete(`/courses/deleteCourse/${id}`);
 			console.log("response is ", response);
 			// const remainingCourses = [...courses].filter((course)=>{
-				//     return course.id !== id
-				//   })
-				//   //Update state
-				//   setCourses(remainingCourses)
-				//   // setCourses(response.data.remainingCourses)
+			//     return course.id !== id
+			//   })
+			//   //Update state
+			//   setCourses(remainingCourses)
+			//   // setCourses(response.data.remainingCourses)
 		} catch (error: any) {
 			toast.error(error.response.data);
 		}
+		useEffect(() => {
+			return () => {
+				loggedInUser();
+			};
+		}, []);
 	};
 	return (
 		<>
@@ -59,23 +70,25 @@ const course = ({ course }: any) => {
 						</div>
 					</div>
 				</div>
-				<div className="tutorCourse_button">
-					<Button
-						type={"button"}
-						onClick={async () => await handleEditedClick(course.id)}
-						className={"tutorCourse_editButton"}
-						title={"Edit"}
-					/>
-					<Button
-						type={"button"}
-						onClick={async () => await handleDeletedClick(course.id)}
-						className={"tutorCourse_deleteButton"}
-						title={"Delete"}
-					/>
-				</div>
+				{user?.userType === "Tutor" && (
+					<div className="tutorCourse_button">
+						<Button
+							type={"button"}
+							onClick={async () => await handleEditedClick(course.id)}
+							className={"tutorCourse_editButton"}
+							title={"Edit"}
+						/>
+						<Button
+							type={"button"}
+							onClick={async () => await handleDeletedClick(course.id)}
+							className={"tutorCourse_deleteButton"}
+							title={"Delete"}
+						/>
+					</div>
+				)}
 			</div>
 		</>
 	);
 };
 
-export default course;
+export default CourseCard;
