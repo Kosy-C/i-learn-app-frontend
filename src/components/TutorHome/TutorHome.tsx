@@ -10,18 +10,23 @@ import Button from "../Button/Button";
 import { toast } from "react-toastify";
 import { Modal } from "react-responsive-modal";
 import TutorCreateForm from "../../pages/TutorCourseOperations/TutorCourseOperations";
+import avatar from "../../assets/avatar.jpeg";
 
 const TutorHeader = ({ tutor }: { tutor: User }) => {
 	const [profile, setProfile] = useState(false);
 	const onOpenProfile = () => setProfile(true);
 	const onCloseProfile = () => setProfile(false);
-
+	console.log(tutor);
 	const handleFormSubmit = () => {};
 	return (
 		<div className="tutorMainContainer">
 			<div className="tutorHeader">
 				<div className="tutorHeader-img">
-					<img className="tutor-Img" src={tutor.image} alt={tutor.image} />
+					<img
+						className="tutor-Img"
+						src={tutor.image !== "" ? tutor.image : avatar}
+						alt={tutor.image}
+					/>
 				</div>
 
 				<div className="tutorHeader-title">
