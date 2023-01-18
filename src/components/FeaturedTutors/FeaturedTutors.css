@@ -2,6 +2,8 @@
     display: flex;
     justify-content: space-between;
     margin-top: 40px;
+    margin-left: 5rem;
+
 }
 .all_container{
     /* margin-top: 10px; */
@@ -10,7 +12,9 @@
     /* justify-content: space-between; */
     /* margin-bottom: 2px; */
 }
-
+#head{
+    margin-left: 5rem;
+}
 .images {
     margin-bottom: 0;
 }
@@ -33,7 +37,7 @@
 .tutors-bar {
     display: flex;
     justify-content: space-between;
-    margin-top: 0;
+    margin-left: 5rem;
 }
 
 .see-all-tutors {

@@ -1,13 +1,13 @@
 .Card-Area {
   position: absolute;
   display: flex;
-  left: 66%;
-  top: 80px;
   width: 25%;
+  left: 66%;
   overflow: auto;
   background-color: #ffffff;
   animation: mymove 2s 1;
   margin-top: 5px;
+  box-shadow: 0 12px 15px 0 rgb(0 0 0 / 25%);
 }
 
 @media (max-width: 768px) {
@@ -29,3 +29,9 @@
     width: 100%;
   }
 }
+
+/*
+ left: 66%;
+  top: 80px;
+  width: 25%; 
+ */

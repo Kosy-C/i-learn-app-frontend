@@ -46,6 +46,20 @@ export interface User {
 	courses: Course[];
 }
 
+export interface Tutor {
+	id: string;
+	email: string;
+	name: string;
+	verified: boolean;
+	areaOfInterest: string;
+	userType: string;
+	image: string;
+	rating: number;
+	createdAt: Date;
+	updatedAt: Date;
+	courses: Course[];
+}
+
 // create interface for tutor to create, update and delete courses
 
 export interface UserCourse {
@@ -117,3 +131,9 @@ export const courseDetails = {
 		updatedAt: "",
 	},
 };
+export interface Buttons {
+	type?: "submit" | "reset" | "button";
+	onClick?: () => void;
+	title?: string;
+	className?: string;
+}

@@ -5,10 +5,12 @@ import { Link } from "react-router-dom";
 import { apiGet } from "../../utils/api/axios";
 import Profile from "../profileDetails/profile";
 import { Modal } from "react-responsive-modal";
+import Rating from "../Rating/Rating";
+
 const FeaturedTutors = () => {
 	const [tutors, setTutors] = useState([]);
 	const [profile, setProfile] = useState(false);
-	// const [profileProps, setProfileProps] = useState("");
+	const [profileProps, setProfileProps] = useState("");
 
 	const onOpenProfile = () => setProfile(true);
 	const onCloseProfile = () => setProfile(false);
@@ -45,7 +47,13 @@ const FeaturedTutors = () => {
 											<img src={el.image} alt="" width="68px" height="68px" />
 										</div>
 										<p className="names">{el.name}</p>
-										<p className="ratings">⭐ {el.rating}</p>
+										<div className="cd-rating">
+											<Rating
+												rating={Number(el.rating)}
+												image={""}
+												color={""}
+											/>
+										</div>
 									</button>
 								</Link>
 							</div>

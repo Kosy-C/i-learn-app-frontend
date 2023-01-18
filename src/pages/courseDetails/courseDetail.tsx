@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import './courseDetail.css'
 import Rating from '../../components/Rating/Rating'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { apiGet } from '../../utils/api/axios'
 import { CourseModel } from './interface'
 import { initialCourseState } from './interface'
@@ -27,13 +27,17 @@ const CourseDetail = () => {
     getCourseDetail()
   }, [])
 
+  const navigate = useNavigate()
+  const goBack=()=>{
+    navigate(-1)
+  }
   
 
   return (
     <>
-    <Link to='/all-courses'>
-    <button className="cd-rate_course_arrowButton">&#8249; Go Back</button>
-    </Link>
+    
+    <button className="cd-rate_course_arrowButton" onClick={goBack}>&#8249; Go Back</button>
+   
     
       <div className='heading-border'>
         <h1 className="cd-heading"> About the course</h1>
