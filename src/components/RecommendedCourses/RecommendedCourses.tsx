@@ -9,6 +9,7 @@ import Rating from "../Rating/Rating";
 
 const RecommendedCourses = () => {
 	const category: string | null = localStorage.getItem("user");
+	
 	const [courses, setCourses] = useState([]);
 
 	useEffect(() => {
@@ -42,37 +43,13 @@ const RecommendedCourses = () => {
 					{courses.length === 0 ? (
 						<p>No Courses found</p>
 					) : (
-						courses.map((el: any) => {
+						courses.map((item: any) => {
 							return (
-								<>
-									<div key={el.id} className="course-container">
-										<div className="course-img">
-											<img
-												src={el.course_image}
-												alt=""
-												style={{ width: "350px" }}
-											/>
-										</div>
-
-										<div className="course-details">
-											<h3 className="course-title">{el.title}</h3>
-											<p className="course-name">
-												{el.tutor.name !== undefined ? el.tutor.name : ""}
-											</p>
-											<div className="course-ratings">
-												<div style={{ margin: "0 8px 0 8px" }}>
-													<div className="cd-rating">
-														<Rating
-															rating={Number(el.rating)}
-															image={""}
-															color={""}
-														/>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</>
+								<Link to={`/coursedetail/${item.id}`} key={item.id}>
+									<div>
+									<Course course={item}/>
+								</div>
+								</Link>
 							);
 						})
 					)}
@@ -83,3 +60,5 @@ const RecommendedCourses = () => {
 };
 
 export default RecommendedCourses;
+
+// "/coursedetail/:id"

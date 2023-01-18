@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { apiGet } from "../../utils/api/axios";
 import { whiteStar } from "../../assets/index";
 import { Button } from "antd";
+import Rating from "../Rating/Rating";
 
 const course = ({ course }: any) => {
     
@@ -26,13 +27,14 @@ const course = ({ course }: any) => {
 										<div className="course-ratings">
 											<div>{course.rating}</div>
 											<div style={{ margin: "0 8px 0 8px" }}>
-												⭐ ⭐ ⭐ ⭐{" "}
-												<img
-													style={{ marginTop: "0.1rem" }}
-													src={whiteStar}
-													alt=""
-												/>
-											</div>
+													<div className="cd-rating">
+														<Rating
+															rating={Number(course.rating)}
+															image={""}
+															color={""}
+														/>
+													</div>
+												</div>
 											<div>{course.rating}</div>
 										</div>
 									</div>
