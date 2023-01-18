@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import React, { Fragment, ChangeEvent, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../signUp/signUp.css";
 import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
@@ -11,6 +11,7 @@ import { signInWithGooglePopup } from "../../utils/firebaseAuth/firebase";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { apiPost } from "../../utils/api/axios";
 
 const baseUrl = import.meta.env.SERVER_URL;
 
@@ -18,18 +19,24 @@ interface formFieldType {
 	userType: string;
 	email: string;
 	password: string;
-	password2: string;
-	interest: string;
+	areaOfInterest: string;
+	name: string;
 }
 const formField: formFieldType = {
+	name: "",
 	userType: "",
 	email: "",
 	password: "",
-	password2: "",
-	interest: "",
+	areaOfInterest: "",
 };
 
 function SignUpForm() {
+	const [formError, setFormError] = useState({});
+	const [isSubmit, setIsSubmit] = useState(false);
+	const [show, setShow] = useState(false);
+	const [formDetails, setFormDetails] = useState(formField);
+	const navigate = useNavigate();
+
 	const googleSignIn = async () => {
 		await signInWithGooglePopup();
 	};
@@ -40,19 +47,13 @@ function SignUpForm() {
 		const { name, value } = event.target;
 		setFormDetails({ ...formDetails, [name]: value });
 	};
-	const [show, setShow] = useState(false);
 
 	const display = () => {
 		setShow(!show);
 	};
 
-	const [formDetails, setFormDetails] = useState(formField);
-	const { userType, email, password, password2, interest } = formDetails;
-	const [formError, setFormError] = useState({});
-	const [isSubmit, setIsSubmit] = useState(false);
-
+	const { name, userType, email, password, areaOfInterest } = formDetails;
 	useEffect(() => {
-		console.log(formError);
 		if (Object.keys(formError).length === 0 && isSubmit) {
 			console.log(formDetails);
 		}
@@ -60,12 +61,15 @@ function SignUpForm() {
 
 	const validate = (values: formFieldType) => {
 		const errors: formFieldType = {
+			name: "",
 			userType: "",
 			email: "",
 			password: "",
-			interest: "",
-			password2: "",
+			areaOfInterest: "",
 		};
+		if (!values.name) {
+			errors.name = "Name is required";
+		}
 		if (!values.userType) {
 			errors.userType = "User Type is required";
 		}
@@ -75,8 +79,8 @@ function SignUpForm() {
 		if (!values.password) {
 			errors.password = "Password is required";
 		}
-		if (!values.interest) {
-			errors.interest = "Area of Interest is required";
+		if (!values.areaOfInterest) {
+			errors.areaOfInterest = "Area of Interest is required";
 		}
 		return errors;
 	};
@@ -84,6 +88,12 @@ function SignUpForm() {
 	const handleSubmit = async (event: ChangeEvent<HTMLFormElement>) => {
 		try {
 			event.preventDefault();
+			const response = await apiPost(`/users/signup`, formDetails);
+
+			if (response.status === 201) {
+				toast.success(response.data.message);
+			}
+
 			setFormError(validate(formDetails));
 			setIsSubmit(true);
 		} catch (err: any) {
@@ -108,6 +118,16 @@ function SignUpForm() {
 							<p>Create your account to connect with students</p>
 						</div>
 						<form onSubmit={handleSubmit} className="formInputs">
+							<div className="formLabel">
+								<label>Full Name</label>
+								<input
+									type="text"
+									name="name"
+									value={name}
+									onChange={handleChange}
+									placeholder="Enter your name"
+								/>
+							</div>
 							<div>
 								<label className="formLabel" id="userType">
 									User Type
@@ -147,8 +167,8 @@ function SignUpForm() {
 								<label id="interest">Area of Interest</label>
 								<select
 									id="interest"
-									name="interest"
-									value={interest}
+									name="areaOfInterest"
+									value={areaOfInterest}
 									onChange={handleChange}
 								>
 									<option value="">Select</option>
