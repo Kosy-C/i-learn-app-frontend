@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Card from "../CardModal/Card";
 import "./Notification.css";
 import { apiGet } from "../../utils/api/axios";
-import avatar from "../../assets/";
+import avatar from "../../assets/avatar.jpeg";
 import moment from "moment";
 moment().format();
 

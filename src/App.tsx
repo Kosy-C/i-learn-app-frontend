@@ -22,6 +22,7 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import PaymentSummaryPage from "./pages/paymentSummary/paymentSummary";
 import RateCourses from "./pages/RateCourses/RateCourses";
 import TutorRating from "./pages/RateTutor/RatingTutor";
+import PaidCourses from "./pages/PaidCourses/PaidCourses";
 // import Dataprovider from "./useContext/index";
 
 function App() {
@@ -51,6 +52,7 @@ function App() {
 					<Route path="/rate-course/:courseId" element={<RateCourses />} />
 					<Route path="/tutorRating/:tutorId" element={<TutorRating />} />
           <Route path="/Payment-Summary" element={<PaymentSummaryPage title={''} price={''} imageUrl={''} />} />
+		  <Route path="/paid-courses/:id" element={<PaidCourses />} />
 				</Routes>
 			</Router>
 		</React.Fragment>
