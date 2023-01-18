@@ -115,7 +115,7 @@ const TutorHeader = ({ tutor }: { tutor: User }) => {
 			</div>
 			<div>
 				<Modal open={available} onClose={onCloseAvailability}>
-					<CreateAvailability />
+					<CreateAvailability closeModal={onCloseAvailability}/>
 				</Modal>
 			</div>
 		</div>

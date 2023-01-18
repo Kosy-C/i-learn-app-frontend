@@ -8,7 +8,11 @@ import "./avail.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-const CreateAvailability = () => {
+interface modalProps {
+	closeModal: () => void;
+}
+
+const CreateAvailability = ({ closeModal }: modalProps) => {
 	const [availableDate, setAvailableDate] = useState<string>("");
 	const [availableTime, setAvailableTime] = useState<string[]>([]);
 
@@ -20,8 +24,10 @@ const CreateAvailability = () => {
 			if (date.isValid()) {
 				data.availableDate = date.toISOString();
 				const response = await apiPost("/users/tutors/availablity", data);
-
-				toast.success(response.data.message);
+				if (response.status === 200) {
+					closeModal();
+					toast.success(response.data.message);
+				}
 			} else {
 				toast.error("Invalid date format, please use format YYYY-MM-DD");
 			}

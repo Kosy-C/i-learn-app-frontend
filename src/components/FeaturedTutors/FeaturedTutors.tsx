@@ -10,7 +10,7 @@ import Rating from "../Rating/Rating";
 const FeaturedTutors = () => {
 	const [tutors, setTutors] = useState([]);
 	const [profile, setProfile] = useState(false);
-	const [profileProps, setProfileProps] = useState("");
+	// const [profileProps, setProfileProps] = useState("");
 
 	const onOpenProfile = () => setProfile(true);
 	const onCloseProfile = () => setProfile(false);
