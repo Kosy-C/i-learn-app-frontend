@@ -8,40 +8,40 @@ import Rating from "../Rating/Rating";
 import { toast } from "react-toastify";
 import { User } from "../../utils/Interfaces/index.dto";
 
-const CourseCard = ({ course }: any) => {
+const CourseCard = ({ course, setProps, allCourses }: any) => {
 	const [user, setUser] = useState<User>();
 	const loggedInUser = async () => {
 		const { data } = await apiGet("/users/profile");
+		console.log("data is ", data);
 		setUser(data.userDetails);
 	};
-	const handleEditedClick = async (id: string) => {
+	const handleEditedClick = async (course: {}): Promise<void> => {
 		try {
 			const data = {};
-			const response = await apiUpdate(`/courses/updateCourse/${id}`);
-			console.log("response is ", response);
+			// const response = await apiUpdate(`/courses/updateCourse/${id}`);
+			// console.log("response is ", response);
 		} catch (error: any) {
-			toast.error(error.response.data);
+			// toast.error(error.response.data);
 		}
 	};
 	const handleDeletedClick = async (id: string) => {
 		try {
 			const response = await apiDelete(`/courses/deleteCourse/${id}`);
 			console.log("response is ", response);
-			// const remainingCourses = [...courses].filter((course)=>{
-			//     return course.id !== id
-			//   })
+			const remainingCourses = [...allCourses].filter((course) => {
+				return course.id !== id;
+			});
 			//   //Update state
-			//   setCourses(remainingCourses)
-			//   // setCourses(response.data.remainingCourses)
+			setProps(remainingCourses);
 		} catch (error: any) {
 			toast.error(error.response.data);
 		}
-		useEffect(() => {
-			return () => {
-				loggedInUser();
-			};
-		}, []);
 	};
+	useEffect(() => {
+		return () => {
+			void loggedInUser();
+		};
+	}, []);
 	return (
 		<>
 			<div className="tutorCourse-container">
@@ -70,17 +70,18 @@ const CourseCard = ({ course }: any) => {
 						</div>
 					</div>
 				</div>
+				{}
 				{user?.userType === "Tutor" && (
 					<div className="tutorCourse_button">
 						<Button
 							type={"button"}
-							onClick={() => handleEditedClick(course.id)}
+							onClick={async () => await handleEditedClick(course)}
 							className={"tutorCourse_editButton"}
 							title={"Edit"}
 						/>
 						<Button
 							type={"button"}
-							onClick={() => handleDeletedClick(course.id)}
+							onClick={async () => await handleDeletedClick(course.id)}
 							className={"tutorCourse_deleteButton"}
 							title={"Delete"}
 						/>

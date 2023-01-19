@@ -12,11 +12,11 @@ import { Modal } from "react-responsive-modal";
 import TutorCreateForm from "../../pages/TutorCourseOperations/TutorCourseOperations";
 import avatar from "../../assets/avatar.jpeg";
 
-const TutorHeader = ({ tutor }: { tutor: User }) => {
+const TutorHeader = ({ tutor, userProps }: { tutor: User; userProps: {} }) => {
 	const [profile, setProfile] = useState(false);
 	const onOpenProfile = () => setProfile(true);
 	const onCloseProfile = () => setProfile(false);
-	console.log(tutor);
+	console.log("tutor is ", tutor);
 	const handleFormSubmit = () => {};
 	return (
 		<div className="tutorMainContainer">
@@ -84,7 +84,11 @@ const TutorHeader = ({ tutor }: { tutor: User }) => {
 									tutor?.courses.map((course) => {
 										return (
 											<div className="tutor_home_singleCard" key={course.id}>
-												<Card course={course} />
+												<Card
+													course={course}
+													allCourses={tutor?.courses}
+													setProps={userProps}
+												/>
 											</div>
 										);
 									})}
