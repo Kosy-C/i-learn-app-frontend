@@ -9,7 +9,7 @@ import TutorHome from "../TutorHome/TutorHome";
 
 import { apiGet } from "../../utils/api/axios";
 import { User } from "../../utils/Interfaces/index.dto";
-import Profile from "../profileDetails/profile";
+// import Profile from "../profileDetails/profile";
 
 const Dashboard = () => {
 	const [user, setUser] = useState<User>();
@@ -37,7 +37,7 @@ const Dashboard = () => {
 
 	useEffect(() => {
 		return () => {
-			loggedInUser();
+			void loggedInUser();
 		};
 	}, []);
 	return (

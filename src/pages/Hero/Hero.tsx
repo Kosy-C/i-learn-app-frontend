@@ -35,7 +35,6 @@ const Hero = ({ mystyle }: any) => {
             </li>
             <li>
               <Link to='/contact_us'>About Us</Link>
-              {/* <a href="#">About Us</a> */}
             </li>
             <span className='line'></span>
             <li>
