@@ -5,9 +5,11 @@ import { apiGet } from "../../utils/api/axios";
 import { whiteStar } from "../../assets/index";
 import { Button } from "antd";
 import Course from "../Cards/course";
+import Rating from "../Rating/Rating";
 
 const RecommendedCourses = () => {
 	const category: string | null = localStorage.getItem("user");
+	
 	const [courses, setCourses] = useState([]);
 
 	useEffect(() => {
@@ -29,7 +31,7 @@ const RecommendedCourses = () => {
 		<>
 			<div className="recommended-section">
 				<div className="recommended-courses-bar">
-					<h4>Recommended Courses</h4>
+					<h4 id="head_rec">Recommended Courses</h4>
 					<p>
 						<Link to="/all-courses" className="see-all-courses">
 							See all
@@ -43,9 +45,11 @@ const RecommendedCourses = () => {
 					) : (
 						courses.map((item: any) => {
 							return (
-								<div key={item.id}>
+								<Link to={`/coursedetail/${item.id}`} key={item.id}>
+									<div>
 									<Course course={item}/>
 								</div>
+								</Link>
 							);
 						})
 					)}
@@ -56,3 +60,5 @@ const RecommendedCourses = () => {
 };
 
 export default RecommendedCourses;
+
+// "/coursedetail/:id"
