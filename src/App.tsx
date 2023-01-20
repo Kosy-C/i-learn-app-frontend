@@ -32,7 +32,7 @@ function App() {
 			<Router>
 			{/* <NavBar/> */}
 				<Routes>
-					<Route path="/tutor/bookings" element={<TutorNotification/>}/>
+					<Route path="/bookings" element={<TutorNotification/>}/>
 					<Route path="/" element={<LandingPage />} />
 					<Route path="/navbar" element={<NavBar />} />
 					<Route path="/coursedetail/:id" element={<CourseDetail/>} />
