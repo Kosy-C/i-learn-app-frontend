@@ -40,6 +40,7 @@ function SignUpForm() {
 	const googleSignIn = async () => {
 		await signInWithGooglePopup();
 	};
+
 	const handleChange = async (
 		event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>
 	) => {
@@ -190,15 +191,20 @@ function SignUpForm() {
 									Login
 								</Link>
 							</div>
-							<div className="socialIcons">
-								<button type="submit" onClick={() => googleSignIn}>
-									<FcGoogle />
-								</button>
-								<button type="submit" className="fbBtn">
-									<FaFacebook />
-								</button>
-							</div>
 						</form>
+					</div>
+					<div className="socialIcons">
+						<button type="button" onClick={() => googleSignIn}>
+							<FcGoogle />
+						</button>
+						<a href="https://localhost:4000/facebook">testing</a>
+						{/* <input
+							onClick={async () => await facebookSignIn()}
+							className="fbBtn"
+							type="button"
+						>
+							<FaFacebook />
+						</input> */}
 					</div>
 				</div>
 			</div>

@@ -124,16 +124,19 @@ function LoginForm() {
 									Create
 								</Link>
 							</div>
-							<div className="socialIcons">
-								{/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
-								<button type="submit" onClick={googleSignIn}>
-									<FcGoogle />
-								</button>
-								<button type="submit" className="fbBtn">
+						</form>
+						<div className="socialIcons">
+							{/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
+							<button type="submit" onClick={googleSignIn}>
+								<FcGoogle />
+							</button>
+
+							<a href="https:localhost:4000/facebook">
+								<button className="fbBtn">
 									<FaFacebook />
 								</button>
-							</div>
-						</form>
+							</a>
+						</div>
 					</div>
 				</div>
 			</div>

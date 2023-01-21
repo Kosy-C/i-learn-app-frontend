@@ -1,7 +1,9 @@
 import "./resetPassword.css";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import * as qs from "query-string";
 // import { toast } from "react-toastify";
 import Group from "../../assets/Group.svg";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Link, useSearchParams } from "react-router-dom";
 import React, { useState } from "react";
 import axios from "axios";
@@ -36,7 +38,7 @@ const SetNewPassword = () => {
 		try {
 			e.preventDefault();
 			const response = await axios.post(
-				`http://localhost:4000/users/resetpassword/${userId}/${token}`,
+				`https://localhost:4000/users/resetpassword/${userId}/${token}`,
 				createForm
 			);
 			toast.success(response.data.message);
