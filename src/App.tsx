@@ -24,6 +24,7 @@ import RateCourses from "./pages/RateCourses/RateCourses";
 import TutorRating from "./pages/RateTutor/RatingTutor";
 import PaidCourses from "./pages/PaidCourses/PaidCourses";
 import Auth from "./pages/Auth/Auth";
+import NotFound from "./pages/NotFound/NotFound";
 // import Dataprovider from "./useContext/index";
 
 function App() {
@@ -58,6 +59,7 @@ function App() {
 						element={<PaymentSummaryPage title={""} price={""} imageUrl={""} />}
 					/>
 					<Route path="/paid-courses/:id" element={<PaidCourses />} />
+					<Route path="*" element={<NotFound />} />
 				</Routes>
 			</Router>
 		</React.Fragment>

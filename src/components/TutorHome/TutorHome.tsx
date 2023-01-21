@@ -1,23 +1,31 @@
-import React, { useEffect, useState } from "react";
-import { apiGet } from "../../utils/api/axios";
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
+import React, { useState } from "react";
+// import { apiGet } from "../../utils/api/axios";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
-import "./TutorHome.css";
-import { User } from "../../utils/Interfaces/index.dto";
-import { Link } from "react-router-dom";
+import CreateAvailability from "../../components/Availability/CreateAvailability";
+import TutorAvailability from "../../components/Availability/ShowAvailabilty";
+import { Modal } from "react-responsive-modal";
+import avatar from "../../assets/avatar.jpeg";
+import TutorCreateForm from "../../pages/TutorCourseOperations/TutorCourseOperations";
+// import { Link } from "react-router-dom";
 import Card from "../Cards/course";
 import Button from "../Button/Button";
-import { toast } from "react-toastify";
-import { Modal } from "react-responsive-modal";
-import TutorCreateForm from "../../pages/TutorCourseOperations/TutorCourseOperations";
-import avatar from "../../assets/avatar.jpeg";
+// import { toast } from "react-toastify";
+
+// import axios from "axios";
+import "./TutorHome.css";
+import { User } from "../../utils/Interfaces/index.dto";
 
 const TutorHeader = ({ tutor }: { tutor: User }) => {
+	const [available, setAvailability] = useState(false);
+	const onOpenAvailability = () => setAvailability(true);
+	const onCloseAvailability = () => setAvailability(false);
 	const [profile, setProfile] = useState(false);
 	const onOpenProfile = () => setProfile(true);
 	const onCloseProfile = () => setProfile(false);
 	console.log(tutor);
-	const handleFormSubmit = () => {};
+	// const handleFormSubmit = () => {};
 	return (
 		<div className="tutorMainContainer">
 			<div className="tutorHeader">
@@ -59,8 +67,14 @@ const TutorHeader = ({ tutor }: { tutor: User }) => {
 										things. I am an audiobook junkie and a voracious learner.
 									</p>
 								</div>
-								<div className="tutor-overview-schedule">
-									<h2>My Schedule</h2>
+								<div className="tutor-overview-schedule"></div>
+								<div className="create-avail">
+									<TutorAvailability
+										id={tutor.id}
+										tutor={tutor}
+										title={"Set Availability"}
+										onClick={onOpenAvailability}
+									/>
 								</div>
 							</div>
 						</TabPanel>
@@ -98,6 +112,11 @@ const TutorHeader = ({ tutor }: { tutor: User }) => {
 						</TabPanel>
 					</div>
 				</Tabs>
+			</div>
+			<div>
+				<Modal open={available} onClose={onCloseAvailability}>
+					<CreateAvailability closeModal={onCloseAvailability} />
+				</Modal>
 			</div>
 		</div>
 	);
