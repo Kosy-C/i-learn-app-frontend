@@ -21,7 +21,7 @@ const TutorNotification: React.FC = () => {
   //   const getNotification = async () => {
   //     try {
   //       // const id = localStorage.getItem("id");
-  //       // const { data } = await apiGet(`/get_bookings`);
+  //       // const { data } = await apiGet(`/users/tutor/bookings`);
   //       // setNotifications(data.requests);
   //
   //     } catch (error) {
