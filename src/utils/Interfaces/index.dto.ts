@@ -161,3 +161,4 @@ export interface UploadFile<T = any> {
 	xhr?: T;
 	preview?: string;
 }
+
