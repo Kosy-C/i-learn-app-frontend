@@ -12,6 +12,7 @@ import { apiGet } from "../../utils/api/axios";
 interface ProfileD {
   name: string;
   image: string;
+  id: string;
 }
 
 const logout = () => {
@@ -22,6 +23,7 @@ const StudentProfile = () => {
   const [user, setUser] = useState<ProfileD>({
     name: "",
     image: "",
+    id: "",
   });
 
   useEffect(() => {
@@ -44,14 +46,10 @@ const StudentProfile = () => {
       <div className="studentProfile-card">
         <div className="studentProfile-border">
           <div className="studentProfile-detailsbox">
-            <img
-              src={user.image === undefined ? user.image : avatar}
-              alt="Image"
-            />
+            <img src={user.image === "" ? avatar : user.image} alt="Image" />
             <CiCamera className="studentProfile-cam" />
-            <p>{user.name === undefined ? user.name : "user Name"} </p>
+            <p>{user.name === "" ? "user Name" : user.name} </p>
           </div>
-
           <div className="studentProfile-links">
             <div className="student-profile__link-div">
               <CgProfile
@@ -60,7 +58,10 @@ const StudentProfile = () => {
                   height: "25px",
                 }}
               />
-              <Link to="/" className="studentProfile-link">
+              <Link
+                to={`/userprofile/${user.id}`}
+                className="studentProfile-link"
+              >
                 {" "}
                 Edit profile
               </Link>
@@ -73,7 +74,7 @@ const StudentProfile = () => {
                   height: "25px",
                 }}
               />
-              <Link to="/" className="studentProfile-link">
+              <Link to="/users/resetpassword" className="studentProfile-link">
                 {" "}
                 Change password
               </Link>
