@@ -17,8 +17,8 @@ const CourseCard = ({ course }: any) => {
   const handleEditedClick = async (id: string) => {
     try {
       const data = {};
-      const response = await apiUpdate(`/courses/updateCourse/${id}`);
-      /console.log("response is ", response);
+    //   const response = await apiUpdate(`/courses/updateCourse/${id}`);
+    //   console.log("response is ", response);
     } catch (error: any) {
       toast.error(error.response.data);
     }
