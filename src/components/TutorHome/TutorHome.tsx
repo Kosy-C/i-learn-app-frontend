@@ -54,6 +54,7 @@ const TutorHeader = ({
 		try {
 			const response = await apiDelete(`/courses/deleteCourse/${id}`);
 			if (response.status === 204) {
+				toast.success("Successfully deleted course");
 				const { data } = await apiGet("/users/profile");
 				tutorProps(data.userDetails);
 				setLoading(false);
@@ -63,7 +64,6 @@ const TutorHeader = ({
 		}
 	};
 
-	const handleFormSubmit = () => {};
 
 	return (
 		<>

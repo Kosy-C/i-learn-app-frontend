@@ -2,7 +2,6 @@ import React, { ChangeEvent, useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { string } from "yup";
 import { apiPost, apiGet } from "../../utils/api/axios";
 import { User, UploadFile, Course } from "../../utils/Interfaces/index.dto";
 import LoadingIcons from "react-loading-icons";
@@ -54,7 +53,9 @@ const CourseManagement = ({
 			if (response.status === 200) {
 				toast.success("File uploaded successfully");
 				const { data } = await apiGet("/users/profile");
-				tutorProps(data.userDetails);
+				console.log("userdetails is ", data.userDetails);
+
+				tutorProps((previous: any) => (previous = data.userDetails));
 				setCourses((previous: CourseDetails) => (previous = courseDetails));
 				setLoading(false);
 				onCloseProfile();
