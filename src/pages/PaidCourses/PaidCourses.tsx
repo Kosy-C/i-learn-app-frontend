@@ -2,11 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Document, Page } from "react-pdf";
 import NavBar from "../../components/navBar/navBar";
 import "./PaidCourses.css";
-import { apiGet } from "../../utils/api/axios";
+import { apiGet, apiUpdate } from "../../utils/api/axios";
 import { useParams } from "react-router-dom";
 import "react-pdf/dist/esm/Page/TextLayer.css";
 import { pdfjs } from "react-pdf";
-import ProgressBar from "../../components/ProgressBar/ProgressBar";
 pdfjs.GlobalWorkerOptions.workerSrc = `/pdf.worker.js`;
 
 const options = {
@@ -19,14 +18,16 @@ const PaidCourses = () => {
   const [numPages, setNumPages] = useState(0);
   const [pageNumber, setPageNumber] = useState(1);
   const [course, setcourse] = useState<any>({});
-
+  const [progress, setProgress] = useState(0);
   const params = useParams();
 
   useEffect(() => {
     const getPdf = async () => {
       const { data } = await apiGet(`/courses/get-course/${params.id}`);
       setcourse(data.course);
+      console.log(pageNumber);
     };
+
     getPdf();
   }, [params.id]);
 
@@ -46,19 +47,43 @@ const PaidCourses = () => {
   }
 
   function previousPage() {
-    changePage(-1);
+    if (pageNumber > 1) {
+      changePage(-1);
+    }
   }
 
-  function nextPage() {
-    changePage(1);
+  async function nextPage() {
+    if (pageNumber < numPages) {
+      changePage(1);
+    }
+    await updateCourseProgress(course.id, pageNumber + 1);
   }
+
+  const updateCourseProgress = async (
+    courseId: string,
+    currentPage: number
+  ) => {
+    try {
+      const response = await apiUpdate("/users/students/courses", {
+        courseId,
+        currentPage,
+      });
+      setProgress(response.data.progress);
+      console.log(response);
+      //set the state of progress with the value returned by the backend
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
       <NavBar />
-     
+
       <div className="paidCourses header">
         <header>{course.title}</header>
+
+
         <div>
           <input
             className="paidCourses__go__input"
@@ -81,7 +106,7 @@ const PaidCourses = () => {
               onLoadSuccess={onDocumentLoadSuccess}
               options={options}
             >
-              <Page pageNumber={pageNumber || 1} />
+              <Page pageNumber={pageNumber || 1}width={800} height={1200} />
             </Document>
             <div className="arrow-container right" onClick={nextPage}>
               <div className="arrow right"></div>
