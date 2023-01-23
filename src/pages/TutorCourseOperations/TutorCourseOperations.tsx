@@ -6,18 +6,23 @@ import { apiPost, apiGet } from "../../utils/api/axios";
 import { User, UploadFile, Course } from "../../utils/Interfaces/index.dto";
 import LoadingIcons from "react-loading-icons";
 import FileUploaded from "../TutorCourseOperations/FileUploader";
+import { FileUploads } from "../../components/TutorHome/TutorHome";
 
 export interface CourseDetails {
 	title?: string;
 	description?: string;
 	category?: string;
 	pricing?: string;
+	image?: string;
+	material?: string;
 }
 export const courseDetails: CourseDetails = {
 	title: "",
 	description: "",
 	category: "",
 	pricing: "",
+	image: "",
+	material: "",
 };
 
 const CourseManagement = ({
@@ -25,6 +30,9 @@ const CourseManagement = ({
 	course,
 	tutorProps,
 	onCloseProfile,
+	show,
+	courseMaterial,
+	isEdit,
 }: // selectedImage,
 {
 	tutor?: User;
@@ -32,15 +40,19 @@ const CourseManagement = ({
 	course?: Course;
 	courses?: CourseDetails | any;
 	onCloseProfile: () => void;
+	show?: Boolean;
+	courseMaterial?: FileUploads;
+	isEdit?: Boolean;
 }) => {
 	const [loading, setLoading] = useState<Boolean>(false);
 	const [courses, setCourses] = useState<CourseDetails | any>(courseDetails);
-	const [selectedImage, setSelectedImage] = useState<UploadFile[]>();
+	const [selectedImage, setSelectedImage] = useState<UploadFile[] | null>(null);
 	const [selectedMaterial, setSelectedMaterial] = useState<UploadFile[]>();
 
 	const submitForm = async (e: any) => {
 		e.preventDefault();
 		setLoading(true);
+		console.log(selectedImage);
 		const formData = new FormData();
 		formData.append("title", courses.title);
 		formData.append("description", courses.description);
@@ -116,12 +128,45 @@ const CourseManagement = ({
 							name="category"
 							onChange={handleChange}
 						/>
-						<FileUploaded
-							selectedImage={selectedImage}
-							selectedMaterial={selectedMaterial}
-							setSelectedImage={setSelectedImage}
-							setSelectedMaterial={setSelectedMaterial}
-						/>
+						{!isEdit && (
+							<FileUploaded
+								selectedImage={selectedImage}
+								selectedMaterial={selectedMaterial}
+								setSelectedImage={setSelectedImage}
+								setSelectedMaterial={setSelectedMaterial}
+								show={show}
+								courseMaterial={courseMaterial}
+							/>
+						)}
+						{isEdit && (
+							<div>
+								<img
+									src={
+										selectedImage == null
+											? courses.image
+											: selectedImage[0].name
+									}
+									alt="image"
+								/>
+								<label>
+									<input
+										style={{ display: "none" }}
+										type="file"
+										onChange={(
+											e:
+												| ChangeEvent<HTMLInputElement>
+												| ChangeEvent<HTMLSelectElement>
+												| any
+										) => {
+											setSelectedImage(e.target.files[0]);
+											console.log(selectedImage);
+										}}
+										name="course_image"
+									/>
+									Change Image
+								</label>
+							</div>
+						)}
 						<button
 							type="submit"
 							onClick={submitForm}
