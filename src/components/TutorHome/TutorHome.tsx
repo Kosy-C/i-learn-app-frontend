@@ -17,6 +17,7 @@ import Button from "../Button/Button";
 import "./TutorHome.css";
 import { User } from "../../utils/Interfaces/index.dto";
 import { Link } from "react-router-dom";
+import TutorNotification from "../../pages/TutorPage/TutorPage";
 
 const TutorHeader = ({ tutor }: { tutor: User }) => {
   const [available, setAvailability] = useState(false);
@@ -53,9 +54,9 @@ const TutorHeader = ({ tutor }: { tutor: User }) => {
 
             <Tab className={"react-tabs__tab"}>Reviews</Tab>
 
-            <Link to= "/bookings">
+            
               <Tab className={"react-tabs__tab"}>Bookings</Tab>
-            </Link>
+           
           </TabList>
           <div>
             <TabPanel>
@@ -112,7 +113,7 @@ const TutorHeader = ({ tutor }: { tutor: User }) => {
               <p>You have no reviews yet</p>
             </TabPanel>
             <TabPanel>
-              <p>You have no Bookings yet</p>
+              <TutorNotification />
             </TabPanel>
           </div>
         </Tabs>

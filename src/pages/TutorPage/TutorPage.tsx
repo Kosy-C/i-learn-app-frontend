@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { tutorBookings } from "./mockReq";
 import "./tutorPage.css";
-import NavBar from "../../components/navBar/navBar";
+
 import { apiGet } from "../../utils/api/axios";
 
 interface Request {
@@ -34,10 +34,10 @@ const TutorNotification: React.FC = () => {
 
   return (
     <>
-      <NavBar />
+      
       <div className="tutor_container">
         <div className="tutor_bookings">
-          <h2>All Bookings</h2>
+          <h2 className="tutor_heading2">All Bookings</h2>
         </div>
         <div className="tutor_notifications">
           {notifications.map((request: Request) => (
