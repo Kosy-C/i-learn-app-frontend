@@ -53,7 +53,7 @@ const TutorHeader = ({ tutor }: { tutor: User }) => {
 
             <Tab className={"react-tabs__tab"}>Reviews</Tab>
 
-            <Link to= "../../pages/TutorPage/TuTorPage">
+            <Link to= "/bookings">
               <Tab className={"react-tabs__tab"}>Bookings</Tab>
             </Link>
           </TabList>
