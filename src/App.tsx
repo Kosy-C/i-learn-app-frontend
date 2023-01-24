@@ -34,7 +34,6 @@ function App() {
 			<Router>
 				{/* <NavBar/> */}
 				<Routes>
-					<Route path="/bookings" element={<TutorNotification/>}/>
 					<Route path="/" element={<LandingPage />} />
 					<Route path="/navbar" element={<NavBar />} />
 					<Route path="/coursedetail/:id" element={<CourseDetail />} />
@@ -58,6 +57,7 @@ function App() {
 						path="/Payment-Summary"
 						element={<PaymentSummaryPage title={""} price={""} imageUrl={""} />}
 					/>
+					<Route path="/bookings" element={<TutorNotification/>}/>
 					<Route path="/paid-courses/:id" element={<PaidCourses />} />
 					<Route path="*" element={<NotFound />} />
 				</Routes>
