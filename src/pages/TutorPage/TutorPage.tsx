@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { requests } from "./mockReq";
+import { tutorBookings } from "./mockReq";
 import "./tutorPage.css";
 import NavBar from "../../components/navBar/navBar";
 import { apiGet } from "../../utils/api/axios";
@@ -12,13 +12,17 @@ interface Request {
   picked_time: string;
 }
 
+
 const TutorNotification: React.FC = () => {
-  const [notifications, setNotifications] = useState<Request[]>(requests);
+  const [notifications, setNotifications] = useState<Request[]>(tutorBookings);
+  
 
   //   const getNotification = async () => {
   //     try {
-  //       // const { data } = await apiGet(`/users/tutor/bookings`);
-  //       // setNotifications(data.requests);
+  //       // const { data } = await apiGet(`/tutors/bookings`);
+  //       // setNotifications(data.tutorBookings);
+  //       // console.log(data.tutorBookings);
+  //    
   //
   //     } catch (error) {
   //       console.log(error);

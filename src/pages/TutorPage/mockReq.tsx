@@ -1,4 +1,4 @@
-export const requests = [
+export const tutorBookings = [
   {
     id: 1,
     studentName: "John Doe",
