@@ -58,7 +58,7 @@ const TutorAvailability: React.FC<Props> = ({ tutor, title, onClick, id }) => {
 			if (id !== undefined) {
 				try {
 					const { data } = await apiGet(`/users/get-available-tutors/${id}`);
-					console.log(data.availabilities);
+				
 					if (data.message) {
 						toast.success(data.message);
 					}

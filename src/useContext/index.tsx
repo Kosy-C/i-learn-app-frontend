@@ -28,10 +28,13 @@ const DataProvider = ({ children }: { children: React.ReactNode }) => {
 				"/users/login",
 				data
 			);
+    
 			const signature: string = response.data.signature;
 
 			localStorage.setItem("signature", signature);
 			localStorage.setItem("user", response.data.areaOfInterest || "backend");
+			localStorage.setItem("userType", response.data.userType);
+
 			if (response.status === 200) {
 				window.location.href = "/dashboard";
 			}

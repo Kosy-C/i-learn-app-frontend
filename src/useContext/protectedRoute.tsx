@@ -8,36 +8,34 @@ interface Props {
 export const ProtectedRoute: React.FC<Props> = ({ children }) => {
 	const location = useLocation();
 	const isAuthenticated = localStorage.getItem("signature");
-	const userType = localStorage.getItem("user");
-
+	const userType = localStorage.getItem("userType");
 	if (
-		isAuthenticated == null ||
-		userType === "Tutor" ||
-		userType === "Student"
+		isAuthenticated?.length !== 0 &&
+		(userType === "Tutor" || userType === "Student")
 	) {
-		return <Navigate to="/login" state={{ from: location }} />;
+		return <React.Fragment>{children}</React.Fragment>;
 	}
-	return <React.Fragment>{children}</React.Fragment>;
+	return <Navigate to="/login" state={{ from: location }} />;
 };
 
 export const ProtectedRouteTutor: React.FC<Props> = ({ children }) => {
 	const location = useLocation();
 	const isAuthenticated = localStorage.getItem("signature");
-	const userType = localStorage.getItem("user");
+	const userType = localStorage.getItem("userType");
 
-	if (isAuthenticated == null || userType === "Student") {
-		return <Navigate to="/login" state={{ from: location }} />;
+	if (isAuthenticated?.length !== 0 && userType === "Tutor") {
+		return <React.Fragment>{children}</React.Fragment>;
 	}
-	return <React.Fragment>{children}</React.Fragment>;
+	return <Navigate to="/login" state={{ from: location }} />;
 };
 
 export const ProtectedRouteStudent: React.FC<Props> = ({ children }) => {
 	const location = useLocation();
 	const isAuthenticated = localStorage.getItem("signature");
-	const userType = localStorage.getItem("user");
+	const userType = localStorage.getItem("userType");
 
-	if (isAuthenticated == null || userType === "Tutor") {
-		return <Navigate to="/login" state={{ from: location }} />;
+	if (isAuthenticated?.length !== 0 && userType === "Student") {
+		return <React.Fragment>{children}</React.Fragment>;
 	}
-	return <React.Fragment>{children}</React.Fragment>;
+	return <Navigate to="/login" state={{ from: location }} />;
 };
