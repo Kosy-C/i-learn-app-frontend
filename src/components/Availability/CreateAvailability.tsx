@@ -86,7 +86,7 @@ const CreateAvailability = ({ closeModal }: modalProps) => {
 					</label>
 					<br />
 					<button className="avail-btn" type="submit">
-						Create Availability
+						Create Availabilityss
 					</button>
 				</form>
 			</div>

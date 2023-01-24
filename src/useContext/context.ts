@@ -17,9 +17,9 @@ import { createContext, useState } from "react";
 //             upper,
 //             setLower,
 //             setUpper,
-//             initialValue, 
+//             initialValue,
 //             setInitialValue,
-//             initialGuess, 
+//             initialGuess,
 //             setInitialGuess,
 //             guess,
 //             setGuess,
@@ -32,8 +32,6 @@ import { createContext, useState } from "react";
 //       );
 // }
 // export default AppContext;
-
-
 
 // import React, { createContext, useState, useContext, Dispatch, SetStateAction } from "react";
 
@@ -62,7 +60,7 @@ import { createContext, useState } from "react";
 //   const [initialStar, setInitialStar] = useState(1);
 
 //   return (
-//     <GlobalStateContext.Provider 
+//     <GlobalStateContext.Provider
 //     value={{ state, setState, initialStar, setInitialStar
 //     }}>
 //       {children}
