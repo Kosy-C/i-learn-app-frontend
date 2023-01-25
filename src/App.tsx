@@ -25,6 +25,8 @@ import TutorRating from "./pages/RateTutor/RatingTutor";
 import PaidCourses from "./pages/PaidCourses/PaidCourses";
 import NotFound from "./pages/NotFound/NotFound";
 import DataProvider from "./useContext/index";
+import StudentProfile from "./pages/StudentProfile/StudentProfile ";
+
 
 function App() {
 	return (
@@ -61,11 +63,14 @@ function App() {
 						/>
 						<Route path="/paid-courses/:id" element={<PaidCourses />} />
 						<Route path="*" element={<NotFound />} />
+						<Route path="/studentProfile" element={<StudentProfile />} />
 					</Routes>
 				</Router>
 			</DataProvider>
 		</React.Fragment>
 	);
 }
+// import Dataprovider from "./useContext/index";
+
 
 export default App;
