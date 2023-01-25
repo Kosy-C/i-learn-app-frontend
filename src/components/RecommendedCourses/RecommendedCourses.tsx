@@ -9,6 +9,7 @@ import Rating from "../Rating/Rating";
 
 const RecommendedCourses = () => {
 	const category: string | null = localStorage.getItem("user");
+	console.log(category);
 	
 	const [courses, setCourses] = useState([]);
 
@@ -19,6 +20,8 @@ const RecommendedCourses = () => {
 					// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
 					`/users/recommended/${category}`
 				);
+				console.log(data);
+				
 				setCourses(data.recommendedCourse);
 			} catch (error) {
 				console.log(error);
@@ -47,8 +50,8 @@ const RecommendedCourses = () => {
 							return (
 								<Link to={`/coursedetail/${item.id}`} key={item.id}>
 									<div>
-									<Course course={item}/>
-								</div>
+										<Course course={item} />
+									</div>
 								</Link>
 							);
 						})

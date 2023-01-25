@@ -26,6 +26,7 @@ import PaidCourses from "./pages/PaidCourses/PaidCourses";
 import Auth from "./pages/Auth/Auth";
 import NotFound from "./pages/NotFound/NotFound";
 // import Dataprovider from "./useContext/index";
+import TutorCoursesPage from "./pages/TutorCoursesPage/TutorCoursesPage";
 
 function App() {
 	return (
@@ -60,6 +61,7 @@ function App() {
 					/>
 					<Route path="/paid-courses/:id" element={<PaidCourses />} />
 					<Route path="*" element={<NotFound />} />
+					<Route path="/tutorCoursesPage" element={<TutorCoursesPage />} />
 				</Routes>
 			</Router>
 		</React.Fragment>

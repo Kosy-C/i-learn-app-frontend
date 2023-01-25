@@ -20,8 +20,9 @@ const Auth = () => {
 					},
 				}
 			);
+			console.log(response);
 			localStorage.setItem("signature", token);
-			localStorage.setItem("user", response.data.user);
+			localStorage.setItem("user", "backend");
 			navigate("/dashboard");
 		} catch (error) {
 			console.log(error);
