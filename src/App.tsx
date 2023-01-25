@@ -24,8 +24,8 @@ import RateCourses from "./pages/RateCourses/RateCourses";
 import TutorRating from "./pages/RateTutor/RatingTutor";
 import PaidCourses from "./pages/PaidCourses/PaidCourses";
 import NotFound from "./pages/NotFound/NotFound";
-import DataProvider from "./useContext/index";
 import StudentProfile from "./pages/StudentProfile/StudentProfile ";
+import DataProvider from "./useContext/index";
 
 
 function App() {
@@ -70,7 +70,5 @@ function App() {
 		</React.Fragment>
 	);
 }
-// import Dataprovider from "./useContext/index";
-
 
 export default App;
