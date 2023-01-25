@@ -137,3 +137,28 @@ export interface Buttons {
 	title?: string;
 	className?: string;
 }
+export interface CourseProps {
+	course: Course;
+	tutor?: Tutor;
+	handleEditedClick: (course: Course) => Promise<void>;
+	handleDeletedClick: (id: string) => Promise<void>;
+}
+export interface UploadFile<T = any> {
+	uid: string;
+	size?: number;
+	name: string;
+	fileName?: string;
+	lastModified?: number;
+	lastModifiedDate?: Date;
+	url?: string;
+	percent?: number;
+	thumbUrl?: string;
+	crossOrigin?: React.ImgHTMLAttributes<HTMLImageElement>["crossOrigin"];
+	response?: T;
+	error?: any;
+	linkProps?: any;
+	type?: string;
+	xhr?: T;
+	preview?: string;
+}
+
