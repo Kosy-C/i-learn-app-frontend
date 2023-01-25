@@ -57,7 +57,9 @@ const AllCourses = () => {
 		setInitialText((previous) => (previous = value));
 		try {
 			const response = await apiGet(`/courses?query=${initialText}`);
-			setSearchResponse((previous) => (previous = response.data.findCourse));
+			if (response.status === 200){
+				setSearchResponse((previous) => (previous = response.data.findCourse));
+			} 
 
 		} catch (error) {
 			console.log(error);
