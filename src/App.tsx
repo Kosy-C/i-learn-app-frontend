@@ -27,6 +27,7 @@ import NotFound from "./pages/NotFound/NotFound";
 import StudentProfile from "./pages/StudentProfile/StudentProfile ";
 import DataProvider from "./useContext/index";
 
+
 function App() {
 	return (
 		<React.Fragment>
