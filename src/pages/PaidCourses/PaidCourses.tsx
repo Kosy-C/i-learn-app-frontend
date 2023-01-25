@@ -23,26 +23,20 @@ const PaidCourses = () => {
 
   useEffect(() => {
     const getPdf = async () => {
-      // const { data } = await apiGet(`/users/students/courses/${params.id}`);
       const { data } = await apiGet(`/users/students/courses/${params.id}`);
       setcourse(data.courseDetails);
-      setPageNumber(data.courseDetails.currentPage)
-      // console.log(data);
+      setPageNumber(data.courseDetails.currentPage);
     };
     getPdf();
   }, [params.id]);
-
-  
 
   interface OnDocumentLoadSuccessParams {
     numPages: number;
   }
   function onDocumentLoadSuccess(params: OnDocumentLoadSuccessParams) {
     const { numPages } = params;
-    console.log("onDocumentLoadSuccess params: ", params);
-    console.log("numPages: ", params.numPages);
+
     setNumPages(numPages);
-    // setPageNumber(1);
   }
 
   function changePage(offset: number) {
@@ -53,21 +47,14 @@ const PaidCourses = () => {
     if (pageNumber > 1) {
       changePage(-1);
     }
-    await updateCourseProgress(course.courseId, pageNumber)
+   
   }
-
-  // async function nextPage() {
-  //   if (pageNumber < numPages) {
-  //     changePage(1);
-  //   }
-  //   await updateCourseProgress(course.id, pageNumber + 1);
-  // }
 
   async function nextPage() {
     if (pageNumber < numPages) {
       changePage(1);
     }
-    await updateCourseProgress(course.courseId, pageNumber);
+    await updateCourseProgress(course.courseId, pageNumber + 1);
   }
 
   const updateCourseProgress = async (
@@ -81,84 +68,67 @@ const PaidCourses = () => {
         totalPages: numPages,
       });
       setProgress(response.data.progress);
-      console.log(response);
-      //set the state of progress with the value returned by the backend
     } catch (error) {
       console.log(error);
     }
   };
 
-  // useEffect(() => {
-  //   const getCurrentPage = async () => {
-  //     // const { data } = await apiGet(`/users/students/courses/${params.id}/`);
-  //     const { data } = await apiGet(`/users/students/courses/${params.id}/`);
-  //     console.log(data.courseDetails.currentPage);
-      
-  //     ;
-  //     console.log(data);
-  //   };
-  //   getCurrentPage();
-  // }, [params.id]);
-
   return (
     <>
-    <NavBar />
-    {course.course && (
-     
+      <NavBar />
+      {course.course && (
+        <div className="paidCourses header">
+          <header>{course.course.title}</header>
 
-       <div className="paidCourses header">
-         <header>{course.course.title}</header>
- 
-         <div>
-           <input
-             className="paidCourses__go__input"
-             type="number"
-             min={1}
-             max={numPages}
-             value={pageNumber}
-             onChange={(e) => setPageNumber(parseInt(e.target.value))}
-           />
- 
-           <p className="paidCourses__pages">
-             Page {pageNumber || (numPages ? 1 : "--")} of {numPages || "--"}
-           </p>
-           <div className="paidCourses__container__document">
-             <div className="arrow-container left" onClick={previousPage}>
-               <div className="arrow left"></div>
-             </div>
-             <Document
-               file={course.course.course_material}
-               onLoadSuccess={onDocumentLoadSuccess}
-               options={options}
-             >
-               <Page pageNumber={pageNumber || 1} width={800} height={1200} />
-             </Document>
-             <div className="arrow-container right" onClick={nextPage}>
-               <div className="arrow right"></div>
-             </div>
-             <div className="paidCourses__container__clicks">
-               <button
-                 className="paidCourses__previous__button"
-                 type="button"
-                 disabled={pageNumber <= 1}
-                 onClick={previousPage}
-               >
-                 Previous
-               </button>
-               <button
-                 className="paidCourses__next__button"
-                 type="button"
-                 disabled={pageNumber >= numPages}
-                 onClick={nextPage}
-               >
-                 Next
-               </button>
-             </div>
-           </div>
-         </div>
-       </div>
-    )}
-     
+          <div>
+            <input
+              className="paidCourses__go__input"
+              type="number"
+              min={1}
+              max={numPages}
+              value={pageNumber}
+              onChange={(e) => setPageNumber(parseInt(e.target.value))}
+            />
+
+            <p className="paidCourses__pages">
+              Page {pageNumber || (numPages ? 1 : "--")} of {numPages || "--"}
+            </p>
+            <div className="paidCourses__container__document">
+              <div className="arrow-container left" onClick={previousPage}>
+                <div className="arrow left"></div>
+              </div>
+              <Document
+                file={course.course.course_material}
+                onLoadSuccess={onDocumentLoadSuccess}
+                options={options}
+              >
+                <Page pageNumber={pageNumber || 1} width={800} height={1200} />
+              </Document>
+              <div className="arrow-container right" onClick={nextPage}>
+                <div className="arrow right"></div>
+              </div>
+              <div className="paidCourses__container__clicks">
+                <button
+                  className="paidCourses__previous__button"
+                  type="button"
+                  disabled={pageNumber <= 1}
+                  onClick={previousPage}
+                >
+                  Previous
+                </button>
+                <button
+                  className="paidCourses__next__button"
+                  type="button"
+                  disabled={pageNumber >= numPages}
+                  onClick={nextPage}
+                >
+                  Next
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };
