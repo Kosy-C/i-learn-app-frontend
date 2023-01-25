@@ -15,25 +15,23 @@
 
   border-radius: 2px;
 }
-
 .tutor-Availability-container hr {
   margin-top: 10px;
 }
 
 .tutorAvailability-buttonContainer {
   border: 1px solid rgb(196, 193, 193);
-
   border-radius: 5px;
-
   display: flex;
-
   flex-direction: column;
 
   justify-content: space-between;
 
   padding: 20px;
-
   margin: 20px;
+}
+.button-active {
+  border: 1px solid brown !important;
 }
 
 .tutorAvailability-buttonContainer2 {
@@ -42,7 +40,6 @@
   justify-content: space-between;
 
   padding: 30px;
-
   margin: 10px;
 }
 
@@ -54,7 +51,6 @@
   border-radius: 5px;
 
   cursor: pointer;
-
   margin: 10px;
 }
 
@@ -66,7 +62,6 @@
   border-radius: 5px;
 
   cursor: pointer;
-
   margin: 10px;
 }
 
@@ -98,4 +93,15 @@
   color: white;
 
   font-size: 18px;
+  cursor: pointer;
+}
+.next-arrow {
+  font-size: 20px;
+  cursor: pointer;
+  font-style: italic;
+}
+.previous-arrow {
+  font-size: 20px;
+  cursor: pointer;
+  font-style: italic;
 }

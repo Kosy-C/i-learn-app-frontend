@@ -1,354 +1,183 @@
-import React, { useState } from 'react';
-import { Form, Input, Upload, Button, Table } from 'antd';
-//import { PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
-import { PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
-import { UploadOutlined } from '@ant-design/icons';
-import { UploadChangeParam } from 'antd/lib/upload';
-import { UploadFile } from 'antd/lib/upload/interface';
-import { UploadListType } from 'antd/lib/upload/interface';
-import { UploadProps } from 'antd/lib/upload/interface';
-import { UploadRequestOption as RcCustomRequestOptions } from 'rc-upload/lib/interface';
-import { UploadFileStatus } from 'antd/lib/upload/interface';
-import { UploadListProps } from 'antd/lib/upload/interface';
-import { UploadLocale } from 'antd/lib/upload/interface';
-import NavBar from '../../components/navBar/navBar';
-import Footer from '../../components/Footer/Footer';
+import React, { ChangeEvent, useState } from "react";
 import { Link } from "react-router-dom";
-import footerLogo from "../../assets/footerImage.png";
-import SocialMedia from '../../components/SocialMedia/SocialMedia';
-import tutorLogo from "../../assets/logo.png";
 import { toast } from "react-toastify";
-import { ToastContainer, } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { apiPost, apiGet } from "../../utils/api/axios";
+import { User, UploadFile, Course } from "../../utils/Interfaces/index.dto";
+import LoadingIcons from "react-loading-icons";
+import FileUploaded from "../TutorCourseOperations/FileUploader";
+import { FileUploads } from "../../components/TutorHome/TutorHome";
 
-
-const baseUrl: string = import.meta.env.VITE_SERVER_URL;
-interface Course {
-  id: number;
-  image: string;
-  name: string;
-  tutor: string;
-  price: number;
+export interface CourseDetails {
+	title?: string;
+	description?: string;
+	category?: string;
+	pricing?: string;
+	image?: string;
+	material?: string;
 }
+export const courseDetails: CourseDetails = {
+	title: "",
+	description: "",
+	category: "",
+	pricing: "",
+	image: "",
+	material: "",
+};
 
-interface Props {}
+const CourseManagement = ({
+	tutor,
+	course,
+	tutorProps,
+	onCloseProfile,
+	show,
+	courseMaterial,
+	isEdit,
+}: // selectedImage,
+{
+	tutor?: User;
+	tutorProps?: any;
+	course?: Course;
+	courses?: CourseDetails | any;
+	onCloseProfile: () => void;
+	show?: Boolean;
+	courseMaterial?: FileUploads;
+	isEdit?: Boolean;
+}) => {
+	const [loading, setLoading] = useState<Boolean>(false);
+	const [courses, setCourses] = useState<CourseDetails | any>(courseDetails);
+	const [selectedImage, setSelectedImage] = useState<UploadFile[] | null>(null);
+	const [selectedMaterial, setSelectedMaterial] = useState<UploadFile[]>();
 
-const CourseManagement: React.FC<Props> = () => {
+	const submitForm = async (e: any) => {
+		e.preventDefault();
+		setLoading(true);
+		console.log(selectedImage);
+		const formData = new FormData();
+		formData.append("title", courses.title);
+		formData.append("description", courses.description);
+		formData.append("category", courses.category);
+		formData.append("pricing", courses.pricing);
+		formData.append("course_image", selectedImage as any);
+		formData.append("course_material", selectedMaterial as any);
+		try {
+			const response = await apiPost("/courses/createCourse", formData);
+			if (response.status === 200) {
+				toast.success("File uploaded successfully");
+				const { data } = await apiGet("/users/profile");
+				console.log("userdetails is ", data.userDetails);
 
+				tutorProps((previous: any) => (previous = data.userDetails));
+				setCourses((previous: CourseDetails) => (previous = courseDetails));
+				setLoading(false);
+				onCloseProfile();
+			} else if (response.status === 500) {
+				setLoading(false);
+			}
+		} catch (error: any) {
+			setLoading(false);
+			toast.error(error.response.data.error);
+		}
+	};
+	const handleChange = (
+		event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement> | any
+	) => {
+		event.preventDefault();
+		const { name, value } = event.target;
+		setCourses({ ...courses, [name]: value });
+	};
 
-  const [form] = Form.useForm();
-  const [image, setImage] = useState<string>("");
-  const [imageList, setImageList] = useState<UploadFile[]>([]);
-  const [uploading, setUploading] = useState<boolean>(false);
-  const [uploadButton, setUploadButton] = useState<boolean>(true);
-  
-  const [courses, setCourses] = useState<Course[]>([]);
-   const [courseToEdit, setCourseToEdit] = useState<Course | null>(null);
-   const toastId = React.useRef(null);
-   const toast = React.useRef(null);
-   const [isEdit, setIsEdit] = useState<boolean>(false);
-    const [editCourse, setEditCourse] = useState<Course | null>(null);
-    const [editImage, setEditImage] = useState<string>("");
-    const [editImageList, setEditImageList] = useState<UploadFile[]>([]);
-    const [editUploading, setEditUploading] = useState<boolean>(false);
-    const [editUploadButton, setEditUploadButton] = useState<boolean>(true);
-    const [editForm] = Form.useForm();
-    const [editCourseId, setEditCourseId] = useState<number>(0);
-    const [editCourseName, setEditCourseName] = useState<string>("");
-    const [editCourseTutor, setEditCourseTutor] = useState<string>("");
-    const [editCoursePrice, setEditCoursePrice] = useState<number>(0);
-    const [editCourseImage, setEditCourseImage] = useState<string>("");
-    const [editCourseImageList, setEditCourseImageList] = useState<UploadFile[]>([]);
-    const [editCourseUploading, setEditCourseUploading] = useState<boolean>(false);
-    const [editCourseUploadButton, setEditCourseUploadButton] = useState<boolean>(true);
-    const [editCourseForm] = Form.useForm();
-    // add the code for displaying toast success on file upload success and error on file upload error
-    const handleUpload = (options: RcCustomRequestOptions) => {};
-    const [showModal, setShowModal] = useState(false);
-    <button onClick={() => setShowModal(true)}>Open Modal</button>
-
-    
-    {showModal && 
-      <div className="modal">
-        <div className="modal-content">
-          {/* Add the rest of the page content here */}
-        </div>
-      </div>
-    }
-    
-
-
-
-
-
-    const Footer = () => {
-      return (
-        <div className="footer">
-          <div className="divider"></div>
-          <div id="footerGroup">
-            <h4>
-              <span>
-                </span>
-              <img src={footerLogo}
-                alt="logo"
-                style={{
-                  width: "75px",
-                  height: "50px",
-                  borderRadius: "50%",
-                  marginRight: "10px",
-                  position: "relative",
-                  marginTop: "auto",
-                  marginLeft: "-900px",
-
-                }}
-              />
-              <span id="footerText" style={{
-                
-                visibility: "visible",
-              }}>iLearn </span>
-            </h4>
-            
-
-            <div className= "socialMedia"
-            style={{
-              display: "flex",
-              position: "relative",
-              visibility: "visible",
-              marginRight: "-290px",
-            }}>
-              <SocialMedia/>
-              
-          </div>
-          </div>
-    
-          <div style={{
-            display: "flex",
-            position: "relative",
-            visibility: "visible",
-            marginLeft: "400px",
-            paddingTop: "130px",
-
-          }}>
-            <h4  style={{
-              position: "relative",
-            }}id="reserved">© 2022 iLearn. All rights reserved</h4>
-          </div>
-        </div>
-      );
-    };
-    
-    // write a ccode for diplaying toast success on file upload success and error on file upload error
-    
-
-  const columns = [
-    {
-      title: 'Image',
-      dataIndex: 'image',
-      key: 'image',
-      render: (image: string) => <img src={image} alt="Course" width={50} />,
-    },
-    {
-      title: 'Name',
-      dataIndex: 'name',
-      key: 'name',
-      render: (name: string) => <Link to="/tutorCourseDetails">{name}</Link>,
-    },
-    {
-      title: 'Tutor',
-      dataIndex: 'tutor',
-      key: 'tutor',
-      render: (tutor: string) => <Link to="/tutorProfile">{tutor}</Link>,
-    },
-    {
-      title: 'Price',
-      dataIndex: 'price',
-      key: 'price',
-      render : (price: number) => <Link to="/tutorCourseDetails">{price}</Link>,
-    },
-    {
-      title: 'Actions',
-      key: 'actions',
-      render: (course: Course) => (
-        <>
-          <Button onClick={() => handleEditClick(course)} icon={<EditOutlined />} />
-          <Button onClick={() => handleDeleteClick(course.id)} icon={<DeleteOutlined />} />
-        </>
-      ),
-    },
-  ];
-  
-
-  const handleEditClick = (course: Course) => {
-    setCourseToEdit(course);
-  };
-
-  const handleDeleteClick = (id: number) => {
-    setCourses((prevCourses) => prevCourses.filter((course) => course.id !== id));
-  };
-
-  const handleFormFinish = (values: any) => {
-    if (courseToEdit) {
-      setCourses((prevCourses) =>
-        prevCourses.map((course) => {
-          if (course.id === courseToEdit.id) {
-            return { ...course, ...values };
-          }
-          return course;
-        })
-      );
-      setCourseToEdit(null);
-    } else {
-      setCourses((prevCourses) => [
-        ...prevCourses,
-        { id: courses.length + 1, ...values },
-      ]);
-    }
-  };
-
-
-  return (
-    <>
-    <div>
-
-      <div 
-      ><NavBar
-       /*make the navbar sticky on scroll */
-      
-      {...NavBar} />
-        <div className="tutorLogo">
-
-        </div>
-
-        <Form style={{
-          paddingTop: "0px",
-          backgroundColor: "rgb(250,250,250)",
-          
-        }}
-          layout="vertical"
-          initialValues={courseToEdit &&
-            ({
-              image: courseToEdit?.image,
-              name: courseToEdit?.name,
-              tutor: courseToEdit?.tutor,
-              price: courseToEdit?.price,
-            } as any)}
-
-          onFinish={handleFormFinish}
-        >
-
-         <div style={{
-          display: "flex",
-          justifyContent: "center",
-         }}> 
-          <Form.Item 
-          /*make the image vissible*/
-          
-          
-
-            label="Image"
-            name="image"
-            valuePropName="fileList"
-            getValueFromEvent={(e: any) => e.fileList}
-            rules={[{ required: true, message: 'Please upload an image for the course' }]}
-          >
-            <Upload>
-              <Button style={{
-                backgroundColor: "rgb(239,104,48)",
-                color: "white",
-              }}> <PlusOutlined /> Upload</Button>
-            </Upload>
-          </Form.Item>
-          </div>
-            <div style={{
-              display: "flex",
-              justifyContent: "center",
-              position: "relative",
-              visibility: "visible"
-            }}>
-          <Form.Item
-            label="Name" style={{
-            }}
-            name="name"
-            rules={[{ required: true, message: 'Please enter the name of the course' }]}
-          >
-            <Input />
-          </Form.Item>
-          </div>
-
-<div style={{
-              display: "flex",
-              justifyContent: "center",
-            }}>
-          <Form.Item
-            label="Tutor"
-            name="tutor"
-            rules={[{ required: true, message: 'Please enter the name of the tutor' }]}
-
-          >
-            <Input />
-          </Form.Item>
-          </div>
-
-            <div style={{
-              display: "flex",
-              justifyContent: "center",
-            }} >
-          <Form.Item style={{
-            justifyContent: "center",
-          }}
-
-            label="Price"
-            name="price"
-            rules={[{ required: true, message: 'Please enter the price of the course' }]}
-          >
-
-            <Input />
-          </Form.Item>
-          </div>
-
-          <Form.Item>
-            <Button style={{
-              backgroundColor: "rgb(239,104,48)",
-              color: "white",
-              width: "110px",
-              display: "flex",
-              justifyContent: "center",
-              marginLeft: "580px",
-            }} type="primary" htmlType="submit">
-              {courseToEdit ? 'Update' : 'Add'}
-            </Button>
-
-            </Form.Item>
-        </Form>
-        
-            
-          </div>
-      <div style={{ 
-        paddingTop: "50px",
-      }}>
-
-
-
-        <Table columns={columns} dataSource={courses} />
-      </div>
-      <></>
-      <div style={{
-        paddingTop: "50px",
-      }}>
-
-
-      </div>
-    </div>
-    <div style={{
-      paddingTop: "20px",
-    }}>
-
-       <Footer {...Footer} />
-    </div>
-  
-    </> 
-    
-  );  
-  
+	return (
+		<>
+			{loading ? (
+				<LoadingIcons.Rings
+					stroke="#fd29593d"
+					strokeOpacity={1}
+					height={500}
+					width={780}
+				/>
+			) : (
+				<div>
+					<form>
+						<label>Course Title</label>
+						<input
+							type="text"
+							value={courses?.title}
+							name="title"
+							onChange={handleChange}
+							required
+						/>
+						<label>Description</label>
+						<input
+							type="text"
+							value={courses?.description}
+							name="description"
+							onChange={handleChange}
+						/>
+						<label> Price</label>
+						<input
+							type="text"
+							value={courses?.pricing}
+							name="pricing"
+							onChange={handleChange}
+						/>
+						<label> Category</label>
+						<input
+							type="text"
+							value={courses?.category}
+							name="category"
+							onChange={handleChange}
+						/>
+						{!isEdit && (
+							<FileUploaded
+								selectedImage={selectedImage}
+								selectedMaterial={selectedMaterial}
+								setSelectedImage={setSelectedImage}
+								setSelectedMaterial={setSelectedMaterial}
+								show={show}
+								courseMaterial={courseMaterial}
+							/>
+						)}
+						{isEdit && (
+							<div>
+								<img
+									src={
+										selectedImage == null
+											? courses.image
+											: selectedImage[0].name
+									}
+									alt="image"
+								/>
+								<label>
+									<input
+										style={{ display: "none" }}
+										type="file"
+										onChange={(
+											e:
+												| ChangeEvent<HTMLInputElement>
+												| ChangeEvent<HTMLSelectElement>
+												| any
+										) => {
+											setSelectedImage(e.target.files[0]);
+											console.log(selectedImage);
+										}}
+										name="course_image"
+									/>
+									Change Image
+								</label>
+							</div>
+						)}
+						<button
+							type="submit"
+							onClick={submitForm}
+							style={{ cursor: "pointer" }}
+						>
+							Submit
+						</button>
+					</form>
+				</div>
+			)}
+		</>
+	);
 };
 export default CourseManagement;
