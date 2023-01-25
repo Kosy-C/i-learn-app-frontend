@@ -24,6 +24,7 @@ import RateCourses from "./pages/RateCourses/RateCourses";
 import TutorRating from "./pages/RateTutor/RatingTutor";
 import PaidCourses from "./pages/PaidCourses/PaidCourses";
 import NotFound from "./pages/NotFound/NotFound";
+import StudentProfile from "./pages/StudentProfile/StudentProfile ";
 import DataProvider from "./useContext/index";
 
 function App() {
@@ -61,6 +62,7 @@ function App() {
 						/>
 						<Route path="/paid-courses/:id" element={<PaidCourses />} />
 						<Route path="*" element={<NotFound />} />
+						<Route path="/studentProfile" element={<StudentProfile />} />
 					</Routes>
 				</Router>
 			</DataProvider>
