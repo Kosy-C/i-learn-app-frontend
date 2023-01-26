@@ -33,7 +33,10 @@ const NavBar = () => {
     localStorage.clear();
   };
   const getSignature = localStorage.getItem("signature");
-
+  // const user = JSON.parse(localStorage.getItem('user')!) ? JSON.parse(localStorage.getItem('user')!) : null
+  const user = {
+    image: "/src/assets/images/profilepic.svg"
+  }
   return (
     <nav className="navbar">
    
@@ -97,7 +100,7 @@ const NavBar = () => {
               <ProfileModal userName={""} userEmail={""} userPicture={""} />
             )}
             <img
-              src="/src/assets/images/profilepic.svg"
+              src= {user.image ? user.image : "/src/assets/images/profilepic.svg"}
               className="profilepic"
             />
           </button>
