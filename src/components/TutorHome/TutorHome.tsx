@@ -50,23 +50,23 @@ const TutorHeader = ({
 	const onCloseProfile = () => setProfile(false);
 
 	const handleEditedClick = (course: Course) => {
-		
 		setIsEdit(true);
 		onOpenProfile();
 		console.log("course is ", course);
 		setCourses((previous: any) => {
-			previous.title = course.title;
-			previous.description = course.description;
 			previous.category = course.category;
+			previous.image = course.course_image;
+			previous.material = course.course_material;
+			previous.description = course.description;
+			previous.id = course.id;
 			previous.pricing = course.pricing;
-			previous.image = course.course_image;
-			previous.material = course.course_material;
+			previous.title = course.title;
 		});
-		setFileMaterials((previous: FileUploads) => {
-			previous.image = course.course_image;
-			previous.material = course.course_material;
-		});
-		setShow(!show);
+		// setFileMaterials((previous: FileUploads) => {
+		// 	previous.image = course.course_image;
+		// 	previous.material = course.course_material;
+		// });
+		// setShow(!show);
 
 		// setSelectedImage(
 		// 	(previous: UploadFile[]) => (previous[0] = course.course_image)

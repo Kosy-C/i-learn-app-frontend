@@ -149,7 +149,6 @@
   width: 150px;
   text-align: center;
   text-decoration: none;
-  border: 1px solid gray;
   border-radius: 22px 3px;
 }
 .tutorHome_addButton{
@@ -159,8 +158,11 @@
   width: 150px;
   text-align: center;
   text-decoration: none;
-  border: 1px solid gray;
   border-radius: 22px 3px;
+}
+.tutorCourse_editButton:hover, .tutorCourse_deleteButton:hover, .tutorHome_addButton:hover{
+  font-weight: 800;
+  background: rgba(253, 41, 89, 0.5);
 }
 .tutorHome_addContainer{
   display: flex;

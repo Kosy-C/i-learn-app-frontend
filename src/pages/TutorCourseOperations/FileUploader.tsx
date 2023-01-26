@@ -7,11 +7,9 @@ const FileUploader = ({
 	setSelectedMaterial,
 	show,
 	courseMaterial,
+	submitForm
 }: any) => {
 	const fileInput = useRef<HTMLInputElement>(null);
-	// console.log("selected image is ", courseMaterial.image);
-	// console.log("selected image is ", courseMaterial.material);
-	console.log("show is ", show);
 
 	// const handleFileInput = (
 	// 	event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement> | any
@@ -42,12 +40,6 @@ const FileUploader = ({
 					// value={selectedImage}
 					name="course_image"
 				/>
-				{/* <button
-					onClick={(e) =>
-						fileInput?.current != null && fileInput.current?.click()
-					}
-					className=""
-				></button> */}
 			</div>
 			{Boolean(show) && (
 				<div>
@@ -76,12 +68,9 @@ const FileUploader = ({
 					<h4>{courseMaterial !== undefined ? courseMaterial.material : ""}</h4>
 				</div>
 			)}
-			{/* <button
-				onClick={(e) =>
-					fileInput?.current != null && fileInput.current?.click()
-				}
-				className=""
-			></button> */}
+			<button type="submit" onClick={submitForm} style={{ cursor: "pointer" }}>
+				Submit
+			</button>
 		</div>
 	);
 };

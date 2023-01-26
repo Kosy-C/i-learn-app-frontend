@@ -1,0 +1,11 @@
+.tutorImageContainer{
+	height: 60px;
+    width: 60px;
+    border-radius: 50%;
+}
+.tutorImageJpg{
+	height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
