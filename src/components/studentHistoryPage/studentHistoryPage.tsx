@@ -11,13 +11,13 @@ import ProgressBar from "../ProgressBar/ProgressBars";
 
 const StudentHistoryPage = () => {
   const [courses, setCourses] = useState<any>([]);
- 
+  const params = useParams();
 
 
   useEffect(() => {
     const getHistory = async () => {
       try {
-        const { data } = await apiGet('/users/students/courses');
+        const { data } = await apiGet(`/users/students/courses/${courses.id}`);
         console.log(data);
         setCourses(data.courses);
       } catch (error) {
