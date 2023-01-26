@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
 import "./tutorPage.css";
+import avatar from "../../assets/avatar.jpeg";
 
 import { apiGet } from "../../utils/api/axios";
 
 
 interface Student {
-  name: string[];
+  name: string;
+  email: string;
+  image: string;
 }
 interface AvailableTime {
   availableTime: string[];
@@ -13,13 +16,10 @@ interface AvailableTime {
 }
 interface Request {
   id: string;
-  tutorId: string;
-  studentId: string;
   pickedTime: string;
   availabilityId: string;
   student: Student;
   availableTime: AvailableTime;
-  message: string;
 }
 
 const TutorNotification: React.FC = () => {
@@ -41,16 +41,16 @@ const TutorNotification: React.FC = () => {
   return (
     <>
       <div className="tutor_container">
-        <div className="tutor_bookings">
-          <h2 className="tutor_heading2">All Bookings</h2>
-        </div>
+
         <div className="tutor_notifications">
           {notifications.map((request: Request) => (
             <div className="tutor_notification" key={request.id}>
+              <div style={{width: '40%', height: '40% '}}>
+                <img src={request.student.image}></img>
+              </div>  
               <div className="tutor_title">
                 <h2>Student Name: {request.student.name}</h2>
-                <p className="date-time">Student Id: {request.studentId}</p>
-                <p className="date-time">Tutor Id: {request.tutorId}</p>
+                <p className="date-time">Email: {request.student.email}</p>
                 <p className="tutor_start_date">
                   Selected Date: { new Date(request.availableTime.availableDate).toLocaleString("en-NG").split(',')[0]}
                 </p>
