@@ -6,7 +6,7 @@ import { whiteStar } from "../../assets/index";
 import { Button } from "antd";
 import StudentCourse from "../Cards/course";
 import Rating from "../Rating/Rating";
-import { Course } from "../../utils/Interfaces/index.dto";
+import { Course, TutorCourses } from "../../utils/Interfaces/index.dto";
 
 const RecommendedCourses = () => {
 	const category: string | null = localStorage.getItem("user");
@@ -44,13 +44,43 @@ const RecommendedCourses = () => {
 					{courses.length === 0 ? (
 						<p>No Courses found</p>
 					) : (
-						courses.map((item: Course) => {
+						courses.map((course: TutorCourses, index: number) => {
 							return (
-								<Link to={`/coursedetail/${item.id}`} key={item.id}>
-									<div>
-										<StudentCourse course={item} />
+								<div key={course.id} className="allCourses_Cards">
+									<div className="all_courses_card">
+										{/* {course.course.slice(0, 6).map((c: any, index: number) => ( */}
+										<Link
+											to={`/coursedetail/${course.id}`}
+											className="all_coursesLink"
+										>
+											<div className="all_courses_details">
+												<div key={course.id} className="all_coursesHeader-img">
+													<img
+														className="all_courses-Img"
+														src={course.course_image}
+														alt="course_logo"
+													/>
+												</div>
+												<div className="all_courses_features">
+													<h2>
+														{course.title} by {course?.tutor?.name}
+													</h2>
+													<p>{course.description}</p>
+													<div className="all_coursesRating">
+														<p>
+															<Rating
+																rating={Number(course.rating)}
+																image={""}
+																color={"#ffb400"}
+															/>
+														</p>
+														<span>({index})</span>
+													</div>
+												</div>
+											</div>
+										</Link>
 									</div>
-								</Link>
+								</div>
 							);
 						})
 					)}
