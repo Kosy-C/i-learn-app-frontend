@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import "./student.css";
+import maths from "../../assets/maths.jpg";
+import axios from "axios";
+
 import { apiGet } from "../../utils/api/axios";
 import NavBar from "../navBar/navBar";
 import { response } from "express";
 import ProgressBar from "../ProgressBar/ProgressBars";
+
 const StudentHistoryPage = () => {
   const [courses, setCourses] = useState<any>([]);
+ 
+
 
   useEffect(() => {
     const getHistory = async () => {
@@ -37,7 +43,7 @@ const StudentHistoryPage = () => {
                 <div key={index} className="all-courses-card-container">
                   <div className="">
                     <div className="all-courses-pro">
-                      <Link className="Link" to={`/paid-courses/${course.id}`}>
+                      <Link className="Link" to={`/paid-courses/${course.courseId}`}>
                         <img
                           src={course.course.course_image}
                           alt=""
@@ -77,6 +83,7 @@ const StudentHistoryPage = () => {
                             </Link>
                           </div>
                         </div>
+                        
                         <div className="student-details">
                           <ProgressBar myProp={course.progress} />
                           <h3 className="courses-description">
