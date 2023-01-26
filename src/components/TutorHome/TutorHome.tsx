@@ -19,6 +19,7 @@ import { User, Course, UploadFile } from "../../utils/Interfaces/index.dto";
 import LoadingIcons from "react-loading-icons";
 import { toast } from "react-toastify";
 import FileUploaded from "../../pages/TutorCourseOperations/FileUploader";
+import ReviewTutorCard from "../../components/ReviewTutor/ReviewTutor";
 
 export interface FileUploads {
 	image: string;
@@ -50,7 +51,6 @@ const TutorHeader = ({
 	const onCloseProfile = () => setProfile(false);
 
 	const handleEditedClick = (course: Course) => {
-		
 		setIsEdit(true);
 		onOpenProfile();
 		console.log("course is ", course);
@@ -208,7 +208,8 @@ const TutorHeader = ({
 									</div>
 								</TabPanel>
 								<TabPanel>
-									<p>You have no reviews yet</p>
+									<ReviewTutorCard tutorId={tutor.id} />
+									{/* <p>You have no reviews yet</p> */}
 								</TabPanel>
 								<TabPanel>
 									<p>You have no Bookings yet</p>

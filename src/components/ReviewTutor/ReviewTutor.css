@@ -1,0 +1,33 @@
+.tutor-review {
+    float: left;
+    width: 33.33%;
+    padding: 10px;
+    height: 300px;
+    border: 2px solid gold;
+
+}
+
+.tutor-review-block {
+    display: flex;
+    /* justify-content: space-between; */
+    padding: 10px 0;
+}
+
+.tutor-review-write {
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
+.tutor-review-block img {
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+}
+
+@media screen and (max-width: 1070px) {
+    .tutor-review {
+        width: 100%;
+        display: block;
+        margin-bottom: 20px;
+    }
+}
