@@ -1,8 +1,8 @@
 
 .all_courses_card{
-   border: 2px solid blueviolet;
-   width: 350px;
-   margin-right: 2em;
+    box-shadow: 4px 4px 4px 2px #D3D3D3;
+    width: 350px;
+    margin-right: 2em;
 }
 
 .all_courses_container{
@@ -69,6 +69,7 @@
 }
 .all_coursesLink{
     text-decoration: none;
+    color: black
 }
 .all_coursesRating{
     /* background-color: blueviolet; */
