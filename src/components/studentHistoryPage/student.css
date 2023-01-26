@@ -38,7 +38,7 @@
 
 }
 .all-courses-card-container:hover{
-    box-shadow: 0px 30px 18px -8px rgba(0, 0, 0, 0.7);  
+    box-shadow: 0px 30px 18px -8px rgba(0, 0, 0, 0.4);  
     cursor: pointer;
   
 

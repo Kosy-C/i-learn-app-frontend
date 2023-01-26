@@ -5,9 +5,9 @@ interface Props {
     totalPages: number;
 }
 const ProgressBar: React.FC<Props> = ({ currentPage, totalPages }) => {
-    const [percentage, setPercentage] = useState(0);
+    const [percentage, setPercentage] = useState(1);
     React.useEffect(() => {
-        setPercentage((currentPage / totalPages) * 100);
+        setPercentage((currentPage / totalPages) * 1000);
     }, [currentPage, totalPages]);
     return (
         <div className="progress-bar">

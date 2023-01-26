@@ -48,6 +48,12 @@
 }
 
 /* overview tab section */
+.create-avail{
+  /* margin-top: 40px; */
+  margin: 0 auto;
+  width:40%;
+  
+}
 
 .tutor-overview__container {
   display: flex;
@@ -55,6 +61,138 @@
 .tutor-overview-details {
   width: 50%;
 }
+
+.modal-container {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tutor_home_courseCard{
+  display: flex;
+  flex-wrap: wrap;
+  width: 86vw;
+  justify-content: space-between;
+  /* background-color: blue; */
+}
+.tutor_home_singleCard{
+  /* background-color: brown; */
+  border: 2px solid gray;
+  width: 23em;
+  height: 23em;
+  position: relative;
+  margin: 3em auto;
+}
+.tutorCourse-img{
+  /* background-color: violet; */
+  width: 22.8em;
+  height: 21vh;
+}
+.tutorCourse_imageBody{
+  width: 100%;
+  object-fit: cover;
+  height: 100%;
+}
+.tutorCourse_button{
+  display: flex;
+  position: absolute;
+  /* background-color: blue; */
+  justify-content: space-between;
+  align-items:flex-end;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  width: 80%;
+  max-width: 600px;
+}
+
+.modal-header {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.modal-body {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modal-button {
+  padding: 10px 20px;
+  border: none;
+  background-color: blue;
+  color: white;
+  cursor: pointer;
+}
+
+.modal-button:hover {
+  background-color: darkblue;
+}
+.tutorCourse_editButton, .tutorCourse_deleteButton{
+  cursor: pointer;
+  background: rgba(253, 41, 89, 0.2);
+  padding: 10px;
+  width: 150px;
+  text-align: center;
+  text-decoration: none;
+  border: 1px solid gray;
+  border-radius: 22px 3px;
+}
+.tutorHome_addButton{
+  cursor: pointer;
+  background: rgba(253, 41, 89, 0.2);
+  padding: 10px;
+  width: 150px;
+  text-align: center;
+  text-decoration: none;
+  border: 1px solid gray;
+  border-radius: 22px 3px;
+}
+.tutorHome_addContainer{
+  display: flex;
+  /* background-color: blue; */
+  justify-content: flex-end;
+  align-items: center;
+}
+.tutorCourse-details{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 100%;
+  height: 8em;
+  /* background-color: aquamarine; */
+  padding: 0 .8em;
+}
+
+.tutorCourse-nameContainer{
+  display: flex;
+  /* background-color: blue; */
+  width: 20.5em;
+  padding-left: .7em;
+  justify-content: center;
+}
+.tutorCourse-name{
+  /* margin-right: 2em; */
+}
+.tutorCourse_rating{
+  /* margin-left: 21px;
+  padding-left: 21px; */
+}
+
 
 @media screen and (max-width: 600px) {
   .tutorMainContainer {
