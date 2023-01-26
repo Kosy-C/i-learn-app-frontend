@@ -41,7 +41,6 @@ const AllCourses = () => {
 			const response = await apiGet(
 				`/courses?page=${pageNumber}&limit=${coursesPerPage}`
 			);
-			console.log("res. data ", response.data);
 			setCourses(response.data.findCourse);
 		} catch (error) {
 			console.log(error);
@@ -51,16 +50,16 @@ const AllCourses = () => {
 	const changingTextFunc = async (
 		event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement> | any
 	) => {
-		setIsSearch(true)
+		setIsSearch(true);
 		const { value } = event.target;
 
 		setInitialText((previous) => (previous = value));
 		try {
 			const response = await apiGet(`/courses?query=${initialText}`);
-			if (response.status === 200){
+			console.log("find course is ", response.data.findCourse);
+			if (response.status === 200) {
 				setSearchResponse((previous) => (previous = response.data.findCourse));
-			} 
-
+			}
 		} catch (error) {
 			console.log(error);
 		}
@@ -70,16 +69,21 @@ const AllCourses = () => {
 		void getCourses();
 	}, []);
 	useEffect(() => {
-		function handleClickOutside(event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement> | any) {
-		  if (ref.current && !ref.current.contains(event.target)) {
-			setIsSearch(false)
-		  }
+		function handleClickOutside(
+			event:
+				| ChangeEvent<HTMLInputElement>
+				| ChangeEvent<HTMLSelectElement>
+				| any
+		) {
+			if (ref.current != null && !ref.current.contains(event.target)) {
+				setIsSearch(false);
+			}
 		}
 		document.addEventListener("mousedown", handleClickOutside);
 		return () => {
-		  document.removeEventListener("mousedown", handleClickOutside);
+			document.removeEventListener("mousedown", handleClickOutside);
 		};
-	  }, [ref]);
+	}, [ref]);
 
 	return (
 		<div>
@@ -96,28 +100,31 @@ const AllCourses = () => {
 						onKeyDown={changingTextFunc}
 					/>
 				</div>
-				{isSearch &&
-				<div className="all_courses_overlayContainer" ref={ref}>
-				{searchResponse.map((course: any, index: number) => (
-				
-
-					<>
-						<Link to={`/coursedetail/${course.id}`} className="all_coursesLink">
-						<div key={index} className="all_courses_InnerContainer">
-							<div className="all_courses_overlay">
-							  <img className="all_coursesOverlayImg" src={course.course_image} alt="course_logo" />
-							</div>
-							<div>
-							   <p>{course.title}</p>
-							</div>
-						</div>
-						</Link>
-						</>
-
-
-				))}
-				</div>
-				}
+				{isSearch && (
+					<div className="all_courses_overlayContainer" ref={ref}>
+						{searchResponse.map((course: any, index: number) => (
+							<>
+								<Link
+									to={`/coursedetail/${course.id}`}
+									className="all_coursesLink"
+								>
+									<div key={index} className="all_courses_InnerContainer">
+										<div className="all_courses_overlay">
+											<img
+												className="all_coursesOverlayImg"
+												src={course.course_image}
+												alt="course_logo"
+											/>
+										</div>
+										<div>
+											<p>{course.title}</p>
+										</div>
+									</div>
+								</Link>
+							</>
+						))}
+					</div>
+				)}
 				<div className="all_courses_card_container">
 					{courses.map((course: TutorCourses, index: number) => {
 						return (
@@ -173,52 +180,3 @@ const AllCourses = () => {
 	);
 };
 export default AllCourses;
-
-/* {show && (
-										// course.course.slice(6).map((c: any, index: number) => (
-										<div className="all_courses_details">
-											<div key={course.id} className="all_courses_img">
-												<img src={course.course_image} alt="course_logo" />
-											</div>
-											<div className="all_courses_features">
-												<h2>{course.title}</h2>
-												<p>{course.description}</p>
-												<p>
-													{course.rating}
-													<span>
-														<img src={coloredStar} />
-													</span>
-													<span>
-														<img src={star} />
-													</span>
-													<span>({index})</span>
-												</p>
-											</div>
-										</div>
-									)} */
-
-{
-	/* );
-						})
-					// ) : (
-					// 	<div>No courses for this category</div>
-					// )}
-				</div> */
-}
-// {!show && (
-// 	<div className="all_courses_seeMore">
-// 		<a href="#" onClick={showMore}>
-// 			See more
-// 		</a>
-// 	</div>
-// )}
-// {show && (
-// 	<div className="all_courses_seeMore">
-// 		<a href="#" onClick={showMore}>
-// 			See less
-// 		</a>
-// 	</div>
-// )}
-// 		</div>
-// 	);
-// };

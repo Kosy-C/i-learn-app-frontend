@@ -78,7 +78,7 @@ export interface UserCourse {
 	];
 }
 export interface TutorCourses {
-	id?: string;
+	id: string;
 	title?: string;
 	description?: string;
 	course_image?: string;
