@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState, useRef } from "react";
 import NavBar from "../../components/navBar/navBar";
 import "../AllCourses/AllCourses.css";
 import { Link } from "react-router-dom";
@@ -9,13 +9,14 @@ import Pagination from "../Pagination/Pagination";
 import { AxiosResponse } from "axios";
 
 const AllCourses = () => {
-	const [show, setShow] = useState(false);
+	const [isSearch, setIsSearch] = useState(false);
 	const [courses, setCourses] = useState([]);
 	const [currentPage, setCurrentPage] = useState<number>(1);
 	const [coursesPerPage, setCoursesPerPage] = useState<number>(6);
 	const [totalCourses, setTotalCourses] = useState<number>(0);
 	const [initialText, setInitialText] = useState<string>("");
 	const [searchResponse, setSearchResponse] = useState([]);
+	const ref = useRef<HTMLInputElement>(null);
 
 	const getCourses = async () => {
 		try {
@@ -50,33 +51,35 @@ const AllCourses = () => {
 	const changingTextFunc = async (
 		event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement> | any
 	) => {
+		setIsSearch(true)
 		const { value } = event.target;
-		console.log("value is ", value);
-		console.log("event key ", event.key);
-		console.log("event code ", event.code);
 
 		setInitialText((previous) => (previous = value));
 		try {
 			const response = await apiGet(`/courses?query=${initialText}`);
-			console.log("search response is ", response.data);
-			setSearchResponse((previous) => (previous = response.data.findCourse));
+			if (response.status === 200){
+				setSearchResponse((previous) => (previous = response.data.findCourse));
+			} 
 
 		} catch (error) {
 			console.log(error);
 		}
 	};
 	// const searchFunction = async () => {
-	// 	try {
-	// 		const response = await apiGet(`/courses?query=${initialText}`);
-	// 		console.log("click response is ", response.data);
-	// 	} catch (error) {
-	// 		console.log(error);
-	// 	}
-	// };
-
 	useEffect(() => {
 		void getCourses();
 	}, []);
+	useEffect(() => {
+		function handleClickOutside(event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement> | any) {
+		  if (ref.current && !ref.current.contains(event.target)) {
+			setIsSearch(false)
+		  }
+		}
+		document.addEventListener("mousedown", handleClickOutside);
+		return () => {
+		  document.removeEventListener("mousedown", handleClickOutside);
+		};
+	  }, [ref]);
 
 	return (
 		<div>
@@ -87,13 +90,34 @@ const AllCourses = () => {
 					<input
 						className="all_courses_search"
 						type="text"
-						placeholder="Search"
+						placeholder="Search for courses by title"
 						onChange={changingTextFunc}
 						onClick={changingTextFunc}
 						onKeyDown={changingTextFunc}
 					/>
-					
 				</div>
+				{isSearch &&
+				<div className="all_courses_overlayContainer" ref={ref}>
+				{searchResponse.map((course: any, index: number) => (
+				
+
+					<>
+						<Link to={`/coursedetail/${course.id}`} className="all_coursesLink">
+						<div key={index} className="all_courses_InnerContainer">
+							<div className="all_courses_overlay">
+							  <img className="all_coursesOverlayImg" src={course.course_image} alt="course_logo" />
+							</div>
+							<div>
+							   <p>{course.title}</p>
+							</div>
+						</div>
+						</Link>
+						</>
+
+
+				))}
+				</div>
+				}
 				<div className="all_courses_card_container">
 					{courses.map((course: TutorCourses, index: number) => {
 						return (

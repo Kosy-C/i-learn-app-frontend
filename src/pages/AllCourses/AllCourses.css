@@ -21,6 +21,7 @@
     /* margin-left: 4em; */
     background: rgba(253, 41, 89, 0.1);
     height: 183px;
+    /* position: fixed; */
     /* margin-bottom: 3em; */
 }
 .all_courses_search{
@@ -75,4 +76,43 @@
     display: flex;
     width: 8em;
     justify-content: space-around;
+}
+.all_courses_overlayContainer{
+    position: absolute;
+ display: flex;   
+ width: 70vw;
+ height: 150px;
+ margin-left: 8em;
+ overflow-y: scroll;
+ overflow-x: scroll;
+ z-index: 2;
+ background-color: white;
+ box-shadow: 4px 4px 4px 2px #D3D3D3;
+}
+.all_courses_overlay{
+    width: 5em;
+    height: 5em;
+    border: 1px solid rgb(232, 229, 229);
+    border-radius: 50%;
+}
+.all_coursesOverlayImg{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 50%;
+}
+.all_courses_InnerContainer{
+    /* display: flex; */
+    /* position: relative; */
+    margin-right: 25px;
+    height: 150px;
+    width: 122px;
+    box-shadow: 4px 4px 4px 2px #D3D3D3;
+    cursor: pointer;
+}
+.all_courses_InnerContainer:hover{
+    background-color: rgba(253, 41, 89, 0.1);
+}
+.all_coursesLink{
+    text-decoration: none;
 }
