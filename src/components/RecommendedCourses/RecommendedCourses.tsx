@@ -4,12 +4,13 @@ import { Link } from "react-router-dom";
 import { apiGet } from "../../utils/api/axios";
 import { whiteStar } from "../../assets/index";
 import { Button } from "antd";
-import Course from "../Cards/course";
+import StudentCourse from "../Cards/course";
 import Rating from "../Rating/Rating";
+import { Course } from "../../utils/Interfaces/index.dto";
 
 const RecommendedCourses = () => {
 	const category: string | null = localStorage.getItem("user");
-	
+
 	const [courses, setCourses] = useState([]);
 
 	useEffect(() => {
@@ -43,12 +44,12 @@ const RecommendedCourses = () => {
 					{courses.length === 0 ? (
 						<p>No Courses found</p>
 					) : (
-						courses.map((item: any) => {
+						courses.map((item: Course) => {
 							return (
 								<Link to={`/coursedetail/${item.id}`} key={item.id}>
 									<div>
-									<Course course={item}/>
-								</div>
+										<StudentCourse course={item} />
+									</div>
 								</Link>
 							);
 						})
