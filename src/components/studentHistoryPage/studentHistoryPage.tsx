@@ -43,7 +43,7 @@ const StudentHistoryPage = () => {
                 <div key={index} className="all-courses-card-container">
                   <div className="">
                     <div className="all-courses-pro">
-                      <Link className="Link" to={`/paid-courses/${course.courseId}`}>
+                      <Link className="Link" to={`/paid-courses/${course.id}`}>
                         <img
                           src={course.course.course_image}
                           alt=""
