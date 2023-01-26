@@ -1,40 +1,45 @@
 import { useState, useEffect } from "react";
-import { tutorBookings } from "./mockReq";
 import "./tutorPage.css";
 
 import { apiGet } from "../../utils/api/axios";
 
+
+interface Student {
+  name: string[];
+}
+interface AvailableTime {
+  availableTime: string[];
+  availableDate: Date;
+}
 interface Request {
-  id: number;
-  studentName: string;
+  id: string;
+  tutorId: string;
+  studentId: string;
+  pickedTime: string;
+  availabilityId: string;
+  student: Student;
+  availableTime: AvailableTime;
   message: string;
-  picked_date: string;
-  picked_time: string;
 }
 
-
 const TutorNotification: React.FC = () => {
-  const [notifications, setNotifications] = useState<Request[]>(tutorBookings);
-  
+  const [notifications, setNotifications] = useState<Request[]>([]);
 
-  //   const getNotification = async () => {
-  //     try {
-  //       // const { data } = await apiGet(`/tutors/bookings`);
-  //       // setNotifications(data.tutorBookings);
-  //       // console.log(data.tutorBookings);
-  //    
-  //
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   useEffect(() => {
-  //     getNotification();
-  //   }, []);
+  const getNotification = async () => {
+    try {
+      const { data } = await apiGet(`/users/tutors/bookings`);
+      setNotifications(data.bookings);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    getNotification();
+  }, []);
 
+  new Date().toLocaleString("en-NG")
   return (
     <>
-      
       <div className="tutor_container">
         <div className="tutor_bookings">
           <h2 className="tutor_heading2">All Bookings</h2>
@@ -43,13 +48,13 @@ const TutorNotification: React.FC = () => {
           {notifications.map((request: Request) => (
             <div className="tutor_notification" key={request.id}>
               <div className="tutor_title">
-                <h2>Student Name: {request.studentName}</h2>
-                <p className="message">Message: {request.message}</p>
-
+                <h2>Student Name: {request.student.name}</h2>
+                <p className="date-time">Student Id: {request.studentId}</p>
+                <p className="date-time">Tutor Id: {request.tutorId}</p>
                 <p className="tutor_start_date">
-                  picked date: {request.picked_date}{" "}
+                  Selected Date: { new Date(request.availableTime.availableDate).toLocaleString("en-NG").split(',')[0]}
                 </p>
-                <p className="date-time">Picked time: {request.picked_time}</p>
+                <p className="date-time">Selected Time: {request.pickedTime}</p>
               </div>
             </div>
           ))}
