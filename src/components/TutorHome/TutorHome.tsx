@@ -18,8 +18,9 @@ import "./TutorHome.css";
 import { User, Course, UploadFile } from "../../utils/Interfaces/index.dto";
 import LoadingIcons from "react-loading-icons";
 import { toast } from "react-toastify";
+import TutorNotification from "../../pages/TutorPage/TutorPage";
 import FileUploaded from "../../pages/TutorCourseOperations/FileUploader";
-import ReviewTutorCard from "../../components/ReviewTutor/ReviewTutor";
+import ReviewTutor from "../../components/ReviewTutor/ReviewTutor";
 
 export interface FileUploads {
 	image: string;
@@ -208,11 +209,11 @@ const TutorHeader = ({
 									</div>
 								</TabPanel>
 								<TabPanel>
-									<ReviewTutorCard tutorId={tutor.id} />
+									<ReviewTutor tutorId={tutor.id} />
 									{/* <p>You have no reviews yet</p> */}
 								</TabPanel>
 								<TabPanel>
-									<p>You have no Bookings yet</p>
+									<TutorNotification />
 								</TabPanel>
 							</div>
 						</Tabs>

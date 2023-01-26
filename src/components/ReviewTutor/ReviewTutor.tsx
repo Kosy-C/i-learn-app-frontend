@@ -3,11 +3,11 @@ import chem from "../../assets/chem.jpg";
 import { useEffect, useState } from "react";
 import { apiGet } from "../../utils/api/axios";
 
-const TutorReview = ({ tutorId }) => {
+const ReviewTutor = () => {
 	const [review, setReview] = useState([]);
 	const getReview = async () => {
 		try {
-			const response = await apiGet(`/users/tutors/${tutorId}/review`);
+			const response = await apiGet(`/users/tutors/:id/review`);
 			console.log("data is ", response.data);
 		} catch (error) {
 			console.log(error);
@@ -85,4 +85,4 @@ const TutorReview = ({ tutorId }) => {
 	);
 };
 
-export default TutorReview;
+export default ReviewTutor;

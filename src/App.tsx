@@ -26,7 +26,10 @@ import PaidCourses from "./pages/PaidCourses/PaidCourses";
 import NotFound from "./pages/NotFound/NotFound";
 import StudentProfile from "./pages/StudentProfile/StudentProfile ";
 import DataProvider from "./useContext/index";
-import TutorReview from "./components/ReviewTutor/ReviewTutor";
+import ReviewTutor from "./components/ReviewTutor/ReviewTutor";
+import TutorNotification from "./pages/TutorPage/TutorPage";
+// import DataProvider from "./useContext";
+// import Dataprovider from "./useContext/index";
 
 function App() {
 	return (
@@ -62,9 +65,10 @@ function App() {
 							}
 						/>
 						<Route path="/paid-courses/:id" element={<PaidCourses />} />
+						<Route path="/bookings" element={<TutorNotification />} />
 						<Route path="*" element={<NotFound />} />
 						<Route path="/studentProfile" element={<StudentProfile />} />
-						<Route path="/Review" element={<TutorReview />} />
+						<Route path="/Review" element={<ReviewTutor />} />
 					</Routes>
 				</Router>
 			</DataProvider>
