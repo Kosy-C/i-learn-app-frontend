@@ -18,6 +18,7 @@ import "./TutorHome.css";
 import { User, Course, UploadFile } from "../../utils/Interfaces/index.dto";
 import LoadingIcons from "react-loading-icons";
 import { toast } from "react-toastify";
+import TutorNotification from "../../pages/TutorPage/TutorPage";
 import FileUploaded from "../../pages/TutorCourseOperations/FileUploader";
 
 export interface FileUploads {
@@ -211,7 +212,7 @@ const TutorHeader = ({
 									<p>You have no reviews yet</p>
 								</TabPanel>
 								<TabPanel>
-									<p>You have no Bookings yet</p>
+									<TutorNotification/>
 								</TabPanel>
 							</div>
 						</Tabs>
