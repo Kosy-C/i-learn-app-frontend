@@ -67,7 +67,6 @@ function App() {
 						<Route path="/bookings" element={<TutorNotification />} />
 						<Route path="*" element={<NotFound />} />
 						<Route path="/studentProfile" element={<StudentProfile />} />
-
 					</Routes>
 				</Router>
 			</DataProvider>
