@@ -74,7 +74,8 @@ const ReviewTutor: React.FC<ReviewTutorProps> = ({ tutorId }) => {
                                 <img src={data.student.image} alt="" />
                                 <div className="tutor-review-write">
                                     <h3>Name:{data.student.name}</h3>
-                                    <Rating rating={data.ratingValue} color="#3cb371" image="" />
+                                    <Rating rating={data.ratingValue} color="#FD2959
+" image="" />
                                 </div>
                             </div>
                             <p>{data.description}</p>
