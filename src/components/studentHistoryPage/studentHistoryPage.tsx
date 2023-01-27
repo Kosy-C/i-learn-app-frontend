@@ -11,13 +11,11 @@ import ProgressBar from "../ProgressBar/ProgressBars";
 
 const StudentHistoryPage = () => {
   const [courses, setCourses] = useState<any>([]);
-  const params = useParams();
-
-
-  useEffect(() => {
+ 
+   useEffect(() => {
     const getHistory = async () => {
       try {
-        const { data } = await apiGet(`/users/students/courses/${courses.id}`);
+        const { data } = await apiGet("/users/students/courses");
         console.log(data);
         setCourses(data.courses);
       } catch (error) {
@@ -43,7 +41,7 @@ const StudentHistoryPage = () => {
                 <div key={index} className="all-courses-card-container">
                   <div className="">
                     <div className="all-courses-pro">
-                      <Link className="Link" to={`/paid-courses/${course.id}`}>
+                      <Link className="Link" to={`/paid-courses/${course.courseId}`}>
                         <img
                           src={course.course.course_image}
                           alt=""
