@@ -1,88 +1,90 @@
-import "./ReviewTutor.css";
-import chem from "../../assets/chem.jpg";
-import { useEffect, useState } from "react";
+// import "./ReviewTutor.css";
+// import { useEffect, useState } from "react";
+// import { apiGet } from "../../utils/api/axios";
+// import Rating from "../Rating/Rating";
+
+// const ReviewTutor = ({ tutorId }: any) => {
+//     const [review, setReview] = useState([]);
+//     const getReview = async () => {
+//         try {
+//             const response = await apiGet(`/users/tutors/${tutorId}/review`);
+//             console.log("data is ", response.data);
+//             setReview(response.data.tutorReviewInfo);
+//         } catch (error) {
+//             console.log(error);
+//         }
+//     };
+//     useEffect(() => {
+//         void getReview();
+//     }, []);
+//     return (
+//         <>
+//             {review.map((data: any) => {
+//                 return (
+//                     <div className="tutor-review" key={data.id}>
+//                         <div className="tutor-review-block" key={data.id}>
+//                             <img src={data.student.image} alt="" />
+//                             <div className="tutor-review-write">
+//                                 <h3>Name:{data.student.name}</h3>
+//                                 <Rating rating={data.ratingValue} color="#3cb371" image="" />
+//                             </div>
+//                         </div>
+//                         <p>{data.description}</p>
+//                     </div>
+//                 );
+//             })}
+//         </>
+//     );
+// };
+
+// export default ReviewTutor;
+
+import React, { useEffect, useState } from "react";
 import { apiGet } from "../../utils/api/axios";
+import Rating from "../Rating/Rating";
+import "./ReviewTutor.css";
 
-const ReviewTutor = () => {
-	const [review, setReview] = useState([]);
-	const getReview = async () => {
-		try {
-			const response = await apiGet(`/users/tutors/:id/review`);
-			console.log("data is ", response.data);
-		} catch (error) {
-			console.log(error);
-		}
-	};
-	useEffect(() => {
-		void getReview();
-	});
-	return (
-		<div>
-			<div className="tutor-review">
-				<div className="tutor-review-block">
-					<img src={chem} alt="" />
-					<div className="tutor-review-write">
-						<h3>StudentName</h3>
-						<h3>rating star</h3>
-					</div>
-				</div>
-				<p>
-					Description Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-					Ipsa sapiente, harum, deserunt quo tempore pariatur ipsum minima,
-					rerum esse sunt aut voluptatem et eius nemo explicabo non error. A,
-					esse!
-				</p>
-			</div>
+interface ReviewTutorProps {
+    tutorId: any;
+}
 
-			<div className="tutor-review">
-				<div className="tutor-review-block">
-					<img src={chem} alt="" />
-					<div className="tutor-review-write">
-						<h3>StudentName</h3>
-						<h3>rating star</h3>
-					</div>
-				</div>
-				<p>
-					Description Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-					Ipsa sapiente, harum, deserunt quo tempore pariatur ipsum minima,
-					rerum esse sunt aut voluptatem et eius nemo explicabo non error. A,
-					esse!
-				</p>
-			</div>
+const ReviewTutor: React.FC<ReviewTutorProps> = ({ tutorId }) => {
+    const [review, setReview] = useState([]);
 
-			<div className="tutor-review">
-				<div className="tutor-review-block">
-					<img src={chem} alt="" />
-					<div className="tutor-review-write">
-						<h3>StudentName</h3>
-						<h3>rating star</h3>
-					</div>
-				</div>
-				<p>
-					Description Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-					Ipsa sapiente, harum, deserunt quo tempore pariatur ipsum minima,
-					rerum esse sunt aut voluptatem et eius nemo explicabo non error. A,
-					esse!
-				</p>
-			</div>
+    const getReview = async () => {
+        try {
+            const response = await apiGet(`/users/tutors/${tutorId}/review`);
+            setReview(response.data.tutorReviewInfo);
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
-			<div className="tutor-review">
-				<div className="tutor-review-block">
-					<img src={chem} alt="" />
-					<div className="tutor-review-write">
-						<h3>StudentName</h3>
-						<h3>rating star</h3>
-					</div>
-				</div>
-				<p>
-					Description Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-					Ipsa sapiente, harum, deserunt quo tempore pariatur ipsum minima,
-					rerum esse sunt aut voluptatem et eius nemo explicabo non error. A,
-					esse!
-				</p>
-			</div>
-		</div>
-	);
+    useEffect(() => {
+        void getReview();
+    }, []);
+
+    return (
+        <>
+            {review.length > 0 ? (
+                review.map((data: any) => {
+                    return (
+                        <div className="tutor-review" key={data.id}>
+                            <div className="tutor-review-block" key={data.id}>
+                                <img src={data.student.image} alt="" />
+                                <div className="tutor-review-write">
+                                    <h3>Name:{data.student.name}</h3>
+                                    <Rating rating={data.ratingValue} color="#3cb371" image="" />
+                                </div>
+                            </div>
+                            <p>{data.description}</p>
+                        </div>
+                    );
+                })
+            ) : (
+                <h1>No Reviews yet</h1>
+            )}
+        </>
+    );
 };
-
 export default ReviewTutor;
