@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import React, { Dispatch, SetStateAction, useState } from 'react'
 import '../tutorCreateCourseModal/createCourse.css'
 import { toast } from 'react-toastify'
 
@@ -23,22 +23,11 @@ const CreateCourse: React.FC<Props> = ({
   const [dig, setDig] = useState(false)
   const [Chemistry, setChemistry] = useState(false)
 
-  const Courses = {
-    Mathematics: false,
-    Coding: false,
-    Physics: false,
-    GraphicsDesign: false,
-    VideoEditing: false,
-    DigitalMarketing: false,
-    Chemistry: false,
-  }
 
   const checkChecks = () => {
     const checks = [mathematics, Coding, Physics, Graphics, video, dig, Chemistry]
     let number = 1
     checks.forEach(x=> x === true ? number++ : number)
-    console.log(number);
-    
     return number 
   }
 
@@ -69,7 +58,7 @@ const CreateCourse: React.FC<Props> = ({
         setPhysics(!Physics)
         handlePush(Physics, event.target.value)
       }
-      if (event.target.value == 'GraphicsDesign') {
+      if (event.target.value == 'Graphics Design') {
         setGraphics(!Graphics)
         handlePush(Graphics, event.target.value)
       }
@@ -81,7 +70,7 @@ const CreateCourse: React.FC<Props> = ({
         setDig(!dig)
         handlePush(dig, event.target.value)
       }
-      if (event.target.value == 'VideoEditing') {
+      if (event.target.value == 'Video Editing') {
         setVideo(!video)
         handlePush(video, event.target.value)
       }
@@ -160,8 +149,8 @@ const CreateCourse: React.FC<Props> = ({
               <input
                 onChange={handleCheck}
                 type="checkbox"
-                name="GraphicsDesign"
-                value="GraphicsDesign"
+                name="Graphics Design"
+                value="Graphics Design"
                 disabled={disabled}
                 checked={Graphics}
               />
@@ -171,8 +160,8 @@ const CreateCourse: React.FC<Props> = ({
               <input
                 onChange={handleCheck}
                 type="checkbox"
-                name="VideoEditing"
-                value="VideoEditing"
+                name="Video Editing"
+                value="Video Editing"
                 disabled={disabled}
                 checked={video}
               />
@@ -204,7 +193,7 @@ const CreateCourse: React.FC<Props> = ({
             
             <div className="up-buttons">
               <button
-                type="button"
+                type="submit"
                 onClick={selectFiveAreas}
                 className="up-done-picking-courses"
               >
