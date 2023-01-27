@@ -1,12 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import  { useEffect, useState } from "react";
+import { Link} from "react-router-dom";
 import "./student.css";
-import maths from "../../assets/maths.jpg";
-import axios from "axios";
-
 import { apiGet } from "../../utils/api/axios";
 import NavBar from "../navBar/navBar";
-import { response } from "express";
 import ProgressBar from "../ProgressBar/ProgressBars";
 
 const StudentHistoryPage = () => {
