@@ -9,3 +9,14 @@
     object-fit: cover;
     border-radius: 50%;
 }
+.submitButton{
+    cursor: pointer;
+    background: rgba(253, 41, 89, 0.3);
+    width: 8em;
+    height: 2em;
+    border-radius: 5px;
+}
+.submitButton:hover{
+    font-weight: 800;
+    background: rgba(253, 41, 89, 0.6);
+}

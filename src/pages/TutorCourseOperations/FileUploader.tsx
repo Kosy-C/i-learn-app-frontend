@@ -68,7 +68,7 @@ const FileUploader = ({
 					<h4>{courseMaterial !== undefined ? courseMaterial.material : ""}</h4>
 				</div>
 			)}
-			<button type="submit" onClick={submitForm} style={{ cursor: "pointer" }}>
+			<button type="submit" onClick={submitForm} className="submitButton">
 				Submit
 			</button>
 		</div>

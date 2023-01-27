@@ -20,6 +20,7 @@ import LoadingIcons from "react-loading-icons";
 import { toast } from "react-toastify";
 import TutorNotification from "../../pages/TutorPage/TutorPage";
 import FileUploaded from "../../pages/TutorCourseOperations/FileUploader";
+import { Link } from "react-router-dom";
 
 export interface FileUploads {
 	image: string;
@@ -34,7 +35,7 @@ const TutorHeader = ({
 }) => {
 	const [available, setAvailability] = useState(false);
 	const [loading, setLoading] = useState<Boolean>(false);
-	const [courses, setCourses] = useState<CourseDetails | any>(courseDetails);
+	const [course, setCourse] = useState<CourseDetails | any>(courseDetails);
 	const [selectedImage, setSelectedImage] = useState<UploadFile[]>();
 	const [selectedMaterial, setSelectedMaterial] = useState<UploadFile[]>();
 	const [show, setShow] = useState<Boolean>(false);
@@ -48,31 +49,15 @@ const TutorHeader = ({
 	const onCloseAvailability = () => setAvailability(false);
 	const [profile, setProfile] = useState(false);
 	const onOpenProfile = () => setProfile(true);
-	const onCloseProfile = () => setProfile(false);
+	const onCloseProfile = () => {
+		setProfile(false);
+	};
 
 	const handleEditedClick = (course: Course) => {
 		setIsEdit(true);
 		onOpenProfile();
-		console.log("course is ", course);
-		setCourses((previous: any) => {
-			previous.category = course.category;
-			previous.image = course.course_image;
-			previous.material = course.course_material;
-			previous.description = course.description;
-			previous.id = course.id;
-			previous.pricing = course.pricing;
-			previous.title = course.title;
-		});
-		// setFileMaterials((previous: FileUploads) => {
-		// 	previous.image = course.course_image;
-		// 	previous.material = course.course_material;
-		// });
-		// setShow(!show);
-
-		// setSelectedImage(
-		// 	(previous: UploadFile[]) => (previous[0] = course.course_image)
-		// );
-		// setSelectedMaterial(course.course_material);
+		setCourse(course);
+		//  setCourses((previous: any) => (previous = course));
 	};
 	const handleDeletedClick = async (id: string) => {
 		setLoading(true);
@@ -169,12 +154,12 @@ const TutorHeader = ({
 										<TutorCreateForm
 											tutor={tutor}
 											tutorProps={tutorProps}
-											courses={courses}
+											course={course}
 											onCloseProfile={onCloseProfile}
 											show={show}
 											isEdit={isEdit}
-											// selectedImage={selectedImage}
 											courseMaterial={fileMaterials}
+											setCourse={setCourse}
 											// setSelectedImage={setSelectedImage}
 											// setSelectedMaterial={setSelectedMaterial}
 										/>
@@ -195,7 +180,9 @@ const TutorHeader = ({
 															course={course}
 															tutor={tutor}
 															handleDeletedClick={handleDeletedClick}
-															handleEditedClick={handleEditedClick}
+															handleEditedClick={() =>
+																handleEditedClick(course)
+															}
 														/>
 													</div>
 												);
@@ -212,7 +199,7 @@ const TutorHeader = ({
 									<p>You have no reviews yet</p>
 								</TabPanel>
 								<TabPanel>
-									<TutorNotification/>
+									<TutorNotification />
 								</TabPanel>
 							</div>
 						</Tabs>
