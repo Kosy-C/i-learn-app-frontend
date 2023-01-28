@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import FeaturedTutors from "../FeaturedTutors/FeaturedTutors";
 import RecommendedCourses from "../RecommendedCourses/RecommendedCourses";
 import SubNavbar from "../SubNavbar/SubNavbar";
@@ -9,16 +9,17 @@ import TutorHome from "../TutorHome/TutorHome";
 import LoadingIcons from "react-loading-icons";
 import { apiGet } from "../../utils/api/axios";
 import { User } from "../../utils/Interfaces/index.dto";
+import { useAuth } from "../../useContext";
 // import Profile from "../profileDetails/profile";
 
 const Dashboard = () => {
   const [user, setUser] = useState<User>();
   const [loading, setLoading] = useState<Boolean>(true);
+
   const loggedInUser = async () => {
     const { data } = await apiGet("/users/profile");
     setUser(data.userDetails);
     setLoading(false);
-    localStorage.setItem("user", JSON.stringify(data.userDetails));
   };
   const getDashboard = () => {
     if (user?.userType === "Student") {

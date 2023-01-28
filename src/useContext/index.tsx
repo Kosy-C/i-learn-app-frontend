@@ -1,12 +1,12 @@
 import React, { createContext, useState } from "react";
-import { apiPost } from "../utils/api/axios";
+import { apiGet, apiPost } from "../utils/api/axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
   courseDetails,
   CourseDetails,
 } from "../pages/TutorCourseOperations/TutorCourseOperations";
-import { UploadFile } from "../utils/Interfaces/index.dto";
+import { UploadFile, User } from "../utils/Interfaces/index.dto";
 import { AxiosResponse } from "axios";
 
 export interface LoginData {
@@ -15,10 +15,17 @@ export interface LoginData {
 }
 export interface GlobalStateInterface {
   LoginConfig: (data: LoginData) => Promise<void>;
+  user: User | undefined;
+  loading: Boolean;
+  error: null | String;
+  loggedInUser: () => void;
 }
 export const dataContext = createContext<GlobalStateInterface | null>(null);
 
 const DataProvider = ({ children }: { children: React.ReactNode }) => {
+  const [user, setUser] = useState<User>();
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<String | null>(null);
   /** ==============Login======= **/
   const LoginConfig: (data: LoginData) => Promise<void> = async (
     data: LoginData
@@ -41,10 +48,21 @@ const DataProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
+  // method should be placed into actions
+  const loggedInUser = async () => {
+    const { data } = await apiGet("/users/profile");
+    setUser(data.userDetails);
+    setLoading(false);
+  };
+
   return (
     <dataContext.Provider
       value={{
         LoginConfig,
+        loggedInUser,
+        user,
+        loading,
+        error,
       }}
     >
       {children}
@@ -53,7 +71,7 @@ const DataProvider = ({ children }: { children: React.ReactNode }) => {
 };
 
 export const useAuth = () => {
-  const context = React.useContext(dataContext);
+  const context = React.useContext(dataContext) as GlobalStateInterface;
   if (context === undefined) {
     throw new Error("useAuth must be used within the auth provider");
   }

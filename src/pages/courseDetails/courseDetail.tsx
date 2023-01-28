@@ -4,27 +4,27 @@ import Rating from "../../components/Rating/Rating";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { apiGet } from "../../utils/api/axios";
 import { CourseModel } from "./interface";
+
+import MakePayment from "../../components/Payments/MakePayment";
+import { useAuth } from "../../useContext";
 // import { initialCourseState } from "./interface";
 
 const CourseDetail = () => {
-  const [modal, setModal] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
   const [course, setCourse] = useState<CourseModel>();
-  const openModal = () => {
-    setModal(true);
-  };
-  const closeModal = () => {
-    setModal(false);
-  };
-  const params = useParams();
 
+  const { user, loggedInUser, loading } = useAuth();
+
+  // const [email, setEmail] = useState(user?.email);
+  const params = useParams();
   useEffect(() => {
     const getCourseDetail = async () => {
       const { data } = await apiGet(`/courses/get-course/${params.id}`);
       setCourse(data.course);
-      // console.log(course.rating);
       course?.rating;
     };
     getCourseDetail();
+    loggedInUser();
   }, []);
 
   const navigate = useNavigate();
@@ -32,7 +32,13 @@ const CourseDetail = () => {
     navigate(-1);
   };
 
-  return (
+  const makePayment = () => {
+    setModalOpen(true);
+  };
+
+  return !user || !course ? (
+    <p>loading...</p>
+  ) : (
     <>
       <button className="cd-rate_course_arrowButton" onClick={goBack}>
         &#8249; Go Back
@@ -98,7 +104,15 @@ const CourseDetail = () => {
           </div>
         </div>
         <div className="cd-buttons">
-          <button className="cal-button">Pay Now</button>
+          <button className="cal-button" onClick={makePayment}>
+            Pay Now
+          </button>
+          <MakePayment
+            course={course!}
+            openModal={modalOpen}
+            closeModal={() => setModalOpen(false)}
+            email={user?.email}
+          />
         </div>
       </div>
     </>
