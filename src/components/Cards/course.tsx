@@ -34,7 +34,9 @@ const CourseCard = ({
 					</div>
 					<div className="tutorCourse-nameContainer">
 						<div className="tutorCourse-name">
-							<p>{course?.title !== undefined ? course.title : ""}</p>
+							<p>
+								{course?.description !== undefined ? course.description : ""}
+							</p>
 						</div>
 						<div className="tutorCourse_rating">
 							<Rating
