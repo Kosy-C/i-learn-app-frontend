@@ -15,10 +15,14 @@ export interface LoginData {
 }
 export interface GlobalStateInterface {
 	LoginConfig: (data: LoginData) => Promise<void>;
+	loading: Boolean;
+	setLoading: React.Dispatch<React.SetStateAction<Boolean>>;
 }
 export const dataContext = createContext<GlobalStateInterface | null>(null);
 
 const DataProvider = ({ children }: { children: React.ReactNode }) => {
+	const [loading, setLoading] = useState<Boolean>(true);
+
 	/** ==============Login======= **/
 	const LoginConfig: (data: LoginData) => Promise<void> = async (
 		data: LoginData
@@ -45,6 +49,8 @@ const DataProvider = ({ children }: { children: React.ReactNode }) => {
 		<dataContext.Provider
 			value={{
 				LoginConfig,
+				loading,
+				setLoading,
 			}}
 		>
 			{children}
