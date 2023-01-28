@@ -7,7 +7,7 @@ import { CourseModel } from "./interface";
 
 import MakePayment from "../../components/Payments/MakePayment";
 import { useAuth } from "../../useContext";
-// import { initialCourseState } from "./interface";
+import LoaderRings from "../../components/Loader/LoaderRings";
 
 const CourseDetail = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -37,7 +37,7 @@ const CourseDetail = () => {
   };
 
   return !user || !course ? (
-    <p>loading...</p>
+    <LoaderRings />
   ) : (
     <>
       <button className="cd-rate_course_arrowButton" onClick={goBack}>
@@ -52,29 +52,29 @@ const CourseDetail = () => {
           className="cd-course-container"
           style={{
             backgroundImage: `url(
-            ${course?.course_image}
+            ${course.course_image}
           )`,
           }}
         >
-          <h2 className="cd-title">{course?.title}</h2>
-          <p className="cd-p">{course?.description}</p>
+          <h2 className="cd-title">{course.title}</h2>
+          <p className="cd-p">{course.description}</p>
           <div className="cd-rating">
-            <Rating rating={Number(course?.rating)} image={""} color={""} />
+            <Rating rating={Number(course.rating)} image={""} color={""} />
           </div>
           <p>
             Updated{" "}
             {course && new Date(course.createdAt).toLocaleString("en-NG")}
           </p>
 
-          <p>{`₦${course?.pricing}`}</p>
+          <p>{`₦${Number(course.pricing).toLocaleString()}`}</p>
         </div>
 
         <div className="cd-tutor-container">
           <p className="cd-tutor-title">About the Tutor</p>
           <div className="cd-tutor-profile">
-            <img src={course?.tutor.image} alt="tutor" />
+            <img src={course.tutor.image} alt="tutor" />
             <div className="cd-name-courses">
-              <span className="cd-tutor-name">{course?.tutor.name}</span>
+              <span className="cd-tutor-name">{course.tutor.name}</span>
               <span className="course-no">62 Courses</span>
             </div>
           </div>
