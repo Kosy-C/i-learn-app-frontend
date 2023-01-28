@@ -1,119 +1,116 @@
-import React, { useEffect, useState } from 'react'
-import { FiArrowLeft } from 'react-icons/fi'
-import { HiOutlinePlusCircle } from 'react-icons/hi'
-import { useNavigate, useParams } from 'react-router-dom'
-import { apiGet, apiPutFormData } from '../../utils/api/axios'
-import CreateCourse from '../../components/tutorCreateCourseModal/createCourse'
-import { Modal } from 'react-responsive-modal'
-import { TutorModel, initialTutorState } from '../courseDetails/interface'
-import { AiOutlineCamera } from 'react-icons/ai'
-import NavBar from '../../components/navBar/navBar'
-import './UserProfile.css'
-import AreasOfInterest from '../../components/areasOfInterest/AreasOfInterest'
-import { toast } from 'react-toastify'
-import unknownavatar from '../../assets/unknownavatar.webp'
-import LoadingIcons from 'react-loading-icons'
+import React, { useEffect, useState } from "react";
+import { FiArrowLeft } from "react-icons/fi";
+import { HiOutlinePlusCircle } from "react-icons/hi";
+import { useNavigate, useParams } from "react-router-dom";
+import { apiGet, apiPutFormData } from "../../utils/api/axios";
+import CreateCourse from "../../components/tutorCreateCourseModal/createCourse";
+import { Modal } from "react-responsive-modal";
+import { TutorModel } from "../courseDetails/interface";
+import { AiOutlineCamera } from "react-icons/ai";
+import NavBar from "../../components/navBar/navBar";
+import "./UserProfile.css";
+import AreasOfInterest from "../../components/areasOfInterest/AreasOfInterest";
+import { toast } from "react-toastify";
+import unknownavatar from "../../assets/unknownavatar.webp";
+import LoadingIcons from "react-loading-icons";
 
 const UserProfile = () => {
+  const [user, setUser] = useState<TutorModel>();
+  const [areaOfInterests, setAreaOfInterests] = useState(false);
+  const [upModalIsOpen, setUpModalIsOpen] = useState(false);
 
-  const [user, setUser] = useState<TutorModel>(initialTutorState)
-  const [areaOfInterests, setAreaOfInterests] = useState(false)
-  const [upModalIsOpen, setUpModalIsOpen] = useState(false)
+  const [interests, setInterests] = useState<string[]>([]);
 
-  const [interests, setInterests] = useState<string[]>([])
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [location, setLocation] = useState("");
+  const [about, setAbout] = useState("");
+  const [image, setImage] = useState({});
+  const [updated, setUpdated] = useState("");
 
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [location, setLocation] = useState('')
-  const [about, setAbout] = useState('')
-  const [image, setImage] = useState({})
-  const [updated, setUpdated] = useState("")
-  
-
-  const params = useParams()
+  const params = useParams();
 
   const handleSubmitEditedProfile = async (
     e: React.FormEvent<HTMLFormElement>
   ) => {
-    e.preventDefault()
-    console.log(image)
-    const { data } = await apiPutFormData('/users/edit-profile', {
+    e.preventDefault();
+    console.log(image);
+    const { data } = await apiPutFormData("/users/edit-profile", {
       name,
       location,
       about,
       expertise: interests,
-      image
-    })
+      image,
+    });
     if (data) {
-      toast.success(data.message)
-      setUpdated(data.message)
+      toast.success(data.message);
+      setUpdated(data.message);
     } else {
-      toast.error('There was an error, please try again')
+      toast.error("There was an error, please try again");
     }
-    localStorage.removeItem('areasOfInterest')
-    setInterests([])
-    setName('')
-    setLocation('')
-    setAbout('')
-  }
+    localStorage.removeItem("areasOfInterest");
+    setInterests([]);
+    setName("");
+    setLocation("");
+    setAbout("");
+  };
 
   const handleSubmitStudentEditedProfile = async (
     e: React.FormEvent<HTMLFormElement>
   ) => {
-    e.preventDefault()
-    console.log(image)
-    const { data } = await apiPutFormData('/users/edit-profile', {
+    e.preventDefault();
+    console.log(image);
+    const { data } = await apiPutFormData("/users/edit-profile", {
       name,
       areaOfInterest: interests,
-      image
-    })
+      image,
+    });
 
     if (data) {
-      toast.success(data.message)
-      setUpdated(data.message)
+      toast.success(data.message);
+      setUpdated(data.message);
     } else {
-      toast.error('There was an error, please try again')
+      toast.error("There was an error, please try again");
     }
-    setName('')
-    setEmail('')
-    localStorage.removeItem('areasOfInterest')
-    setInterests([])
-  }
+    setName("");
+    setEmail("");
+    localStorage.removeItem("areasOfInterest");
+    setInterests([]);
+  };
 
   const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setImage(e.target.files![0])
-  }
+    setImage(e.target.files![0]);
+  };
 
   useEffect(() => {
     const fecthUser = async () => {
-      const { data } = await apiGet(`/users/atutordetail/${params.userid}`)
-      setUser(data.message)
-    }
-    fecthUser()
-  }, [updated])
+      const { data } = await apiGet(`/users/atutordetail/${params.userid}`);
+      setUser(data.message);
+    };
+    fecthUser();
+  }, [updated]);
 
   useEffect(() => {
-    const areas = JSON.parse(localStorage.getItem('areasOfInterest')!)
+    const areas = JSON.parse(localStorage.getItem("areasOfInterest")!);
     if (areas) {
-      setInterests(areas)
+      setInterests(areas);
     }
-  }, [areaOfInterests])
+  }, [areaOfInterests]);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleChange = () => {
-    setUpModalIsOpen(true)
-    setAreaOfInterests(false)
-  }
+    setUpModalIsOpen(true);
+    setAreaOfInterests(false);
+  };
 
   const upGoBack = () => {
-    navigate(-1)
-  }
-
+    navigate(-1);
+  };
 
   return (
     <>
-      {user && user.userType === 'Tutor' ? (
+      {user && user.userType === "Tutor" ? (
         <div className="up-parent-containing-div">
           <NavBar />
           <div className="up-button-back">
@@ -127,22 +124,22 @@ const UserProfile = () => {
           </div>
 
           <div className="up-second-container">
-            <form onSubmit={handleSubmitEditedProfile} >
+            <form onSubmit={handleSubmitEditedProfile}>
               <div className="up-pictureAndName">
                 <img
                   src={user.image ? user.image : unknownavatar}
                   alt="profile"
                 />
-               
-                <div className='iconimagewrapper'>
-                <div className='imageforupload'>
-                <AiOutlineCamera className="up-camera-icon" />
+
+                <div className="iconimagewrapper">
+                  <div className="imageforupload">
+                    <AiOutlineCamera className="up-camera-icon" />
+                  </div>
+                  <input type="file" onChange={(e) => handleFile(e)} />
                 </div>
-                <input type='file' onChange={(e)=>handleFile(e)}/>
-                </div>
-                
+
                 <p className="up-name">
-                  {user.name ? user.name : 'Please update name'}
+                  {user.name ? user.name : "Please update name"}
                 </p>
               </div>
 
@@ -161,7 +158,7 @@ const UserProfile = () => {
                     onChange={(e) => setName(e.target.value)}
                   />
                 </div>
-                
+
                 <div>
                   <label>Location</label>
                   <input
@@ -212,7 +209,7 @@ const UserProfile = () => {
             </Modal>
           </div>
         </div>
-      ) : user && user.userType === 'Student' ? (
+      ) : user && user.userType === "Student" ? (
         <div className="up-parent-containing-div">
           <NavBar />
           <div className="up-button-back">
@@ -228,14 +225,16 @@ const UserProfile = () => {
           <div className="up-second-container">
             <form onSubmit={handleSubmitStudentEditedProfile}>
               <div className="up-pictureAndName">
-                <img src={user.image ? user.image : unknownavatar} alt="profile" />
-                <div className='iconimagewrapper'>
-                <div className='imageforupload'>
-                <AiOutlineCamera className="up-camera-icon" />
+                <img
+                  src={user.image ? user.image : unknownavatar}
+                  alt="profile"
+                />
+                <div className="iconimagewrapper">
+                  <div className="imageforupload">
+                    <AiOutlineCamera className="up-camera-icon" />
+                  </div>
+                  <input type="file" onChange={(e) => handleFile(e)} />
                 </div>
-                <input type='file' onChange={(e)=>handleFile(e)}/>
-                </div>
-                
 
                 <p className="up-name">{user.name}</p>
               </div>
@@ -298,14 +297,14 @@ const UserProfile = () => {
         </div>
       ) : (
         <LoadingIcons.Rings
-					stroke="#fd29593d"
-					strokeOpacity={1}
-					height={500}
-					width={1400}
-				/>
+          stroke="#fd29593d"
+          strokeOpacity={1}
+          height={500}
+          width={1400}
+        />
       )}
     </>
-  )
-}
+  );
+};
 
-export default UserProfile
+export default UserProfile;
