@@ -7,13 +7,14 @@ import "../signUp/signUp.css";
 import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import logo from "../../assets/logo.png";
-import { signInWithGooglePopup } from "../../utils/firebaseAuth/firebase";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { apiPost } from "../../utils/api/axios";
+import { app } from "../../utils/firebaseAuth/firebase";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
-const baseUrl = import.meta.env.SERVER_URL;
+const googleLoginUrl: string = import.meta.env.VITE_SERVER_URL;
 
 interface formFieldType {
 	userType: string;
@@ -31,15 +32,46 @@ const formField: formFieldType = {
 };
 
 function SignUpForm() {
+	const firebaseAuth = getAuth(app);
+	const provider = new GoogleAuthProvider();
+
+	const signInWithGoogle = async (): Promise<void> => {
+		await signInWithPopup(firebaseAuth, provider)
+			.then((userCred) => {
+				console.log(userCred);
+				if (userCred !== undefined) {
+					firebaseAuth.onAuthStateChanged((userCred) => {
+						if (userCred !== undefined) {
+							// console.log(userCred);
+							void userCred?.getIdToken().then((token) => {
+								axios
+									.get(`${googleLoginUrl}/users/googleLogin`, {
+										headers: { Authorization: `Bearer ${token}` },
+									})
+									.then((res) =>
+										localStorage.setItem("signature", res.data.signature)
+									)
+									.then((e) => navigate(`/dashboard`, { replace: true }))
+									.catch((e) => e);
+								// localStorage.setItem("signature", token);
+							});
+						} else {
+							navigate("/login");
+						}
+					});
+				}
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
+
 	const [formError, setFormError] = useState({});
 	const [isSubmit, setIsSubmit] = useState(false);
 	const [show, setShow] = useState(false);
 	const [formDetails, setFormDetails] = useState(formField);
 	const navigate = useNavigate();
 
-	const googleSignIn = async () => {
-		await signInWithGooglePopup();
-	};
 	const handleChange = async (
 		event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>
 	) => {
@@ -126,6 +158,7 @@ function SignUpForm() {
 									value={name}
 									onChange={handleChange}
 									placeholder="Enter your name"
+									className="signUp-input"
 								/>
 							</div>
 							<div>
@@ -137,6 +170,7 @@ function SignUpForm() {
 									name="userType"
 									value={userType}
 									onChange={handleChange}
+									className="signUp-select"
 								>
 									<option value="">Select</option>
 									<option value="Tutor">Tutor</option>
@@ -151,6 +185,7 @@ function SignUpForm() {
 									value={email}
 									onChange={handleChange}
 									placeholder="Enter your email"
+									className="signUp-input"
 								/>
 							</div>
 							<div className="formLabel">
@@ -161,6 +196,7 @@ function SignUpForm() {
 									value={password}
 									onChange={handleChange}
 									placeholder="Enter your password..."
+									className="signUp-input"
 								/>
 							</div>
 							<div className="formLabel">
@@ -170,6 +206,7 @@ function SignUpForm() {
 									name="areaOfInterest"
 									value={areaOfInterest}
 									onChange={handleChange}
+									className="signUp-select"
 								>
 									<option value="">Select</option>
 									<option value="Tutor">Mathematics</option>
@@ -191,7 +228,7 @@ function SignUpForm() {
 								</Link>
 							</div>
 							<div className="socialIcons">
-								<button type="submit" onClick={() => googleSignIn}>
+								<button type="submit" onClick={signInWithGoogle}>
 									<FcGoogle />
 								</button>
 								<button type="submit" className="fbBtn">
