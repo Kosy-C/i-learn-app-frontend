@@ -46,6 +46,37 @@ const TutorAvailability: React.FC<Props> = ({ tutor, title, id, onClick }) => {
 
 	const [num, setNum] = useState(3);
 
+	const userType = localStorage.getItem("userType");
+
+	const getAvailable = async () => {
+		if (id !== undefined) {
+			try {
+				const { data } = await apiGet(`/users/get-available-tutors/${id}`);
+				console.log(data.availabilities);
+				if (data.message) {
+					toast.success(data.message);
+				}
+
+				const filteredDates = data?.availabilities?.filter(
+					(available: Availability) => available.availableSlots > 0
+				);
+				setAvailableDates(filteredDates);
+				setAvailabletime(filteredDates[0].availableTime);
+				setAvailabilities(data.availabilities);
+				setAvailable({
+					availableTime: data.availabilities[0].availableTime,
+					availableDate: data.availabilities[0].availableDate,
+				});
+				setPickedDateId(filteredDates[0].id);
+				setPickedTime(filteredDates[0].availableTime[0]);
+				console.log(filteredDates[0].availableTime);
+			} catch (err: any) {
+				console.error(err);
+				toast.error(err.message);
+			}
+		}
+	};
+
 	function getMonthName(monthNumber: any) {
 		const date = new Date();
 		date.setMonth(monthNumber - 1);
@@ -78,6 +109,7 @@ const TutorAvailability: React.FC<Props> = ({ tutor, title, id, onClick }) => {
 				availabilityId,
 				pickedTime,
 			});
+			void getAvailable();
 
 			toast.success("session booked successfully");
 			return null;
@@ -89,36 +121,8 @@ const TutorAvailability: React.FC<Props> = ({ tutor, title, id, onClick }) => {
 	};
 
 	useEffect(() => {
-		const getAvailable = async () => {
-			if (id !== undefined) {
-				try {
-					const { data } = await apiGet(`/users/get-available-tutors/${id}`);
-					console.log(data.availabilities);
-					if (data.message) {
-						toast.success(data.message);
-					}
-
-					const filteredDates = data?.availabilities?.filter(
-						(available: Availability) => available.availableSlots > 0
-					);
-					setAvailableDates(filteredDates);
-					setAvailabletime(filteredDates[0].availableTime);
-					setAvailabilities(data.availabilities);
-					setAvailable({
-						availableTime: data.availabilities[0].availableTime,
-						availableDate: data.availabilities[0].availableDate,
-					});
-					setPickedDateId(filteredDates[0].id);
-					setPickedTime(filteredDates[0].availableTime[0]);
-					console.log(filteredDates[0].availableTime);
-				} catch (err: any) {
-					console.error(err);
-					toast.error(err.message);
-				}
-			}
-		};
 		void getAvailable();
-	}, [id]);
+	}, [getAvailable, id]);
 
 	const returnAvailibilty = () => {
 		return availableDates
@@ -203,23 +207,18 @@ const TutorAvailability: React.FC<Props> = ({ tutor, title, id, onClick }) => {
 							</button>
 						))}
 					</div>
-					<div>
-						<button
-							className="tutorAvailability-submitButton"
-							onClick={async () =>
-								await handleBookSession(pickedDateId, pickedTime)
-							}
-						>
-							{title}
-						</button>
-						<br />
-
-						<button
-							className="tutorAvailability-submitButton"
-							onClick={onClick}
-						>
-							set Availability
-						</button>
+					<div className="tutorAvailability-submitButton">
+						{userType && userType === "Tutor" ? (
+							<button onClick={onClick}>set Availability</button>
+						) : (
+							<button
+								onClick={async () =>
+									await handleBookSession(pickedDateId, pickedTime)
+								}
+							>
+								{title}
+							</button>
+						)}
 					</div>
 				</div>
 			)}
