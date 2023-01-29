@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
-import React, { useEffect, useState } from "react";
+import React, { lazy, useEffect, useState } from "react";
 import "../profileDetails/profile.css";
 // import Ellipse4 from "../../assets/images/Ellipse 4.svg";
 import { AiOutlineSafetyCertificate } from "react-icons/ai";
@@ -16,12 +16,20 @@ const Profile = () => {
 	const [modalIsOpen, setIsOpen] = useState(false);
 	const params = useParams();
 
-	const handleBookSession = async () => {
-		// const { data } = await apiPost(
-		// 	`/users/scheduled-time/${tutorId}/:${studentId}'`
-		// );
-		// //
-		toast.success("Session booked successfully!");
+	const handleBookSession = async (availabilityId: any, pickedTime: any) => {
+		try {
+			const response = await apiPost("/users/book-session", {
+				availabilityId,
+				pickedTime,
+			});
+
+			if (response.status === 200) {
+				toast.success("session booked successfully");
+			}
+		} catch (err: any) {
+			console.log(err);
+			toast.error(err.message);
+		}
 	};
 
 	function openModal() {
@@ -90,7 +98,6 @@ const Profile = () => {
 								id={params?.id}
 								tutor={tutor}
 								title={"Book session"}
-								onClick={handleBookSession}
 							/>
 						</Modal>
 					</div>

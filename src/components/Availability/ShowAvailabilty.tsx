@@ -14,13 +14,24 @@ interface Available {
 	availableDate: string;
 }
 
+export interface Availability {
+	id: string;
+	userId: string;
+	availableTime: string[];
+	availableDate: Date;
+	availableSlots: number;
+	selectedTime: string[];
+	createdAt: Date;
+	updatedAt: Date;
+}
+
 interface Props {
 	tutor: User;
 	title: string;
-	onClick: () => void;
 	id: string | undefined;
+	onClick?: () => void;
 }
-const TutorAvailability: React.FC<Props> = ({ tutor, title, onClick, id }) => {
+const TutorAvailability: React.FC<Props> = ({ tutor, title, id, onClick }) => {
 	const [available, setAvailable] = useState<Available>({
 		availableTime: [],
 		availableDate: "",
@@ -29,6 +40,9 @@ const TutorAvailability: React.FC<Props> = ({ tutor, title, onClick, id }) => {
 	const [availabletime, setAvailabletime] = useState([]);
 	const [activeSlotIndex, setActiveSlotIndex] = useState<number>(0);
 	const [activeButtonIndex, setActiveButtonIndex] = useState<number>(0);
+	const [pickedTime, setPickedTime] = useState<string>("");
+	const [pickedDateId, setPickedDateId] = useState<string>("");
+	const [availableDates, setAvailableDates] = useState<Availability[]>([]);
 
 	const [num, setNum] = useState(3);
 
@@ -44,15 +58,36 @@ const TutorAvailability: React.FC<Props> = ({ tutor, title, onClick, id }) => {
 	const handleDateClick = (date: any, index: number) => {
 		setAvailabletime(date.availableTime);
 		setActiveButtonIndex(index);
+		setPickedDateId(date.id);
+		console.log(availableDates.length);
 	};
 
 	// This change the selected time state
-	const handleTimeClick = (timeslot: any, index: number) => {
+	const handleTimeClick = (timeslot: string, index: number) => {
 		selectedTime.push(timeslot);
 		setActiveSlotIndex(index);
+		setPickedTime(timeslot);
+		availabletime.filter((time) => time !== timeslot);
 	};
 
-	const params = useParams();
+	const handleBookSession = async (availabilityId: any, pickedTime: any) => {
+		console.log(availabilityId, pickedTime);
+
+		try {
+			await apiPost("/users/book-session", {
+				availabilityId,
+				pickedTime,
+			});
+
+			toast.success("session booked successfully");
+			return null;
+		} catch (err: any) {
+			console.log(err);
+			toast.error(err.message);
+			return null;
+		}
+	};
+
 	useEffect(() => {
 		const getAvailable = async () => {
 			if (id !== undefined) {
@@ -62,12 +97,20 @@ const TutorAvailability: React.FC<Props> = ({ tutor, title, onClick, id }) => {
 					if (data.message) {
 						toast.success(data.message);
 					}
-					setAvailabletime(data.availabilities[0].availableTime);
+
+					const filteredDates = data?.availabilities?.filter(
+						(available: Availability) => available.availableSlots > 0
+					);
+					setAvailableDates(filteredDates);
+					setAvailabletime(filteredDates[0].availableTime);
 					setAvailabilities(data.availabilities);
 					setAvailable({
 						availableTime: data.availabilities[0].availableTime,
 						availableDate: data.availabilities[0].availableDate,
 					});
+					setPickedDateId(filteredDates[0].id);
+					setPickedTime(filteredDates[0].availableTime[0]);
+					console.log(filteredDates[0].availableTime);
 				} catch (err: any) {
 					console.error(err);
 					toast.error(err.message);
@@ -77,12 +120,41 @@ const TutorAvailability: React.FC<Props> = ({ tutor, title, onClick, id }) => {
 		void getAvailable();
 	}, [id]);
 
+	const returnAvailibilty = () => {
+		return availableDates
+			.slice(0, num)
+			.map((date: Availability, index: number) => (
+				<button key={index} onClick={() => handleDateClick(date, index)}>
+					<div
+						key={index}
+						className={
+							`tutorAvailability-buttonContainer ` +
+							(index === activeButtonIndex ? `button-active` : "")
+						}
+					>
+						<div>
+							{
+								new Date(date.availableDate)
+									.toLocaleString("en-NG")
+									.split("/")[0]
+							}
+						</div>
+						<div>
+							{getMonthName(
+								new Date(date.availableDate)
+									.toLocaleString("en-NG")
+									.split("/")[1]
+							)}
+						</div>
+						<div>{date.availableTime.length} slot</div>
+					</div>
+				</button>
+			));
+	};
+
 	// function that set the time
 	const setTime = (date: any, index: number) => {
 		setAvailabletime(date.availableTime);
-		// setButtonActive(!buttonActive);
-		// if (index === buttonIndex) {
-		// }
 		console.log(`availButton${index}`);
 	};
 
@@ -97,48 +169,23 @@ const TutorAvailability: React.FC<Props> = ({ tutor, title, onClick, id }) => {
 						<h3>Available Sessions</h3>
 					</div>
 					<hr />
-					{availabilities &&
-						availabilities.slice(0, num).map((date: any, index: number) => (
-							<button key={index} onClick={() => handleDateClick(date, index)}>
-								<div
-									key={index}
-									className={
-										`tutorAvailability-buttonContainer ` +
-										(index === activeButtonIndex ? `button-active` : "")
-									}
-								>
-									<div>
-										{
-											new Date(date.availableDate)
-												.toLocaleString("en-NG")
-												.split("/")[0]
-										}
-									</div>
-									<div>
-										{getMonthName(
-											new Date(date.availableDate)
-												.toLocaleString("en-NG")
-												.split("/")[1]
-										)}
-									</div>
-									<div>{date.availableTime.length} slot</div>
-								</div>
-							</button>
-						))}
-					{num === 3 ? (
+					{availabilities && returnAvailibilty()}
+					{availableDates.length > 3 && num === 3 ? (
 						<>
 							<button className="next-arrow" onClick={() => setNum(num + 30)}>
 								Load More
 							</button>
 							<IoIosArrowForward />
 						</>
-					) : (
+					) : num > 6 && num <= 34 ? (
 						<>
 							<IoIosArrowBack />
 							<button className="previous-arrow" onClick={() => setNum(3)}>
 								See Less
 							</button>
 						</>
+					) : (
+						<></>
 					)}
 
 					<div>
@@ -156,9 +203,22 @@ const TutorAvailability: React.FC<Props> = ({ tutor, title, onClick, id }) => {
 							</button>
 						))}
 					</div>
-					<div className="tutorAvailability-submitButton">
-						<button type="submit" onClick={onClick}>
+					<div>
+						<button
+							className="tutorAvailability-submitButton"
+							onClick={async () =>
+								await handleBookSession(pickedDateId, pickedTime)
+							}
+						>
 							{title}
+						</button>
+						<br />
+
+						<button
+							className="tutorAvailability-submitButton"
+							onClick={onClick}
+						>
+							set Availability
 						</button>
 					</div>
 				</div>
