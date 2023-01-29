@@ -44,7 +44,7 @@ function App() {
 					<Route path="/tutor-profile" element={<Profile />} />
 					<Route path="/dashboard/:id?" element={<Dashboard />} />
 					<Route path="/history-page" element={<StudentHistoryPage />} />
-					<Route path="/all-tutors" element={<AllTutor />} />
+					<Route path="/all-tutors/:keyword?" element={<AllTutor />} />
 					<Route path="/all-courses" element={<AllCoursesPage />} />
 					<Route path="/verify" element={<VerifyPage />} />
 					<Route path="/reminder" element={<Reminder />} />
