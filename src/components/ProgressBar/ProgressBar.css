@@ -1,17 +1,19 @@
-.progress-bar-inner{
-  
-    border-radius: 20px;
-    background-color: green;
-    border: 1px gold solid;
-    transform: scale(0.4);
+.progress-bar {
     width: 100%;
-    }
+    transform: scaleY(0.2);
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
 
+.progress {
+    height: 100%;
+    background-color: #4CAF50;
+    transition: width 0.2s ease-in-out;
+    position: absolute;
+    left: 0;  
+}
 
-    .progress-bar{
-        margin-right: 15rem;
-        margin-top: -2rem;
-        border-radius: 20px;
-       
-    
-    }

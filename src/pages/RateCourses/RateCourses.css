@@ -10,8 +10,7 @@
     align-items: center;
     margin-top: 1em;
     width: 75vw;
-    /* flex-wrap: wrap; */
-    /* justify-content: space-evenly; */
+  
 }
 .rate_course_left{
     /* margin: 0em 12rem; */
@@ -23,6 +22,8 @@
     /* background-color: aquamarine; */
 }
 .rate_course_right{
+    /* margin-left: 4rem; */
+    text-align: center;
     flex: 6;
     /* background-color: blueviolet; */
 }
