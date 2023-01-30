@@ -81,7 +81,7 @@ const MakePayment = ({
         title={"Confirm Details"}
         okButtonProps={{
           size: "large",
-          style: { width: "100%", backgroundColor: "orange" },
+          style: { width: "100%", backgroundColor: "#fd2959" },
           loading: isPaid,
           disabled: isPaid,
         }}
