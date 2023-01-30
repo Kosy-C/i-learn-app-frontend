@@ -14,6 +14,7 @@ import Ellipse from "../../assets/images/Ellipse 4.png";
 import Rating from "../Rating/Rating";
 import avatar from "../../assets/tutorAvatar.jpg";
 import { TutorModel } from "../../pages/courseDetails/interface";
+import LoadingIcons from "react-loading-icons";
 
 const AllTutor = () => {
   const [readMore, setReadMore] = useState(6);
@@ -29,9 +30,11 @@ const AllTutor = () => {
   const getAllTutor = async () => {
     try {
       const response = await apiGet("/users/all-tutors");
-      console.log(response.data.findTutor);
-      setTutor(response.data.findTutor);
-      setSearchSubmitted(false);
+      if (response.status === 200){
+        setLoading(false)
+        setTutor(response.data.findTutor);
+        setSearchSubmitted(false);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -69,7 +72,16 @@ const AllTutor = () => {
     }
   };
   return (
-    <>
+    <div>
+    {loading ? (
+      <LoadingIcons.Rings 
+      width={1400}
+      height={700}
+      strokeOpacity={1}
+      stroke="#fd29593d"
+      />
+    ):(
+      <>
       <NavBar />
 
       <div className="allTutorsContainer">
@@ -126,7 +138,9 @@ const AllTutor = () => {
           )}
         </div>
       </div>
-    </>
+      </>
+      )}
+  </div>
   );
 };
 
