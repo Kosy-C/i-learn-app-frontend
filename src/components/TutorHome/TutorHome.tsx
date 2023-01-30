@@ -18,7 +18,13 @@ import "./TutorHome.css";
 import { User, Course } from "../../utils/Interfaces/index.dto";
 import LoadingIcons from "react-loading-icons";
 import { toast } from "react-toastify";
+import TutorNotification from "../../pages/TutorPage/TutorPage";
+import FileUploaded from "../../pages/TutorCourseOperations/FileUploader";
 
+export interface FileUploads {
+	image: string;
+	material: string;
+}
 const TutorHeader = ({
 	tutor,
 	tutorProps,
@@ -29,8 +35,14 @@ const TutorHeader = ({
 	const [available, setAvailability] = useState(false);
 	const [loading, setLoading] = useState<Boolean>(false);
 	const [courses, setCourses] = useState<CourseDetails | any>(courseDetails);
-	// const [selectedImage, setSelectedImage] = useState<UploadFile[]>();
-	// const [selectedMaterial, setSelectedMaterial] = useState<UploadFile[]>();
+	const [selectedImage, setSelectedImage] = useState<UploadFile[]>();
+	const [selectedMaterial, setSelectedMaterial] = useState<UploadFile[]>();
+	const [show, setShow] = useState<Boolean>(false);
+	const [fileMaterials, setFileMaterials] = useState<FileUploads | any>({
+		image: "",
+		material: "",
+	});
+	const [isEdit, setIsEdit] = useState<Boolean>(false);
 
 	const onOpenAvailability = () => setAvailability(true);
 	const onCloseAvailability = () => setAvailability(false);
@@ -39,14 +51,26 @@ const TutorHeader = ({
 	const onCloseProfile = () => setProfile(false);
 
 	const handleEditedClick = (course: Course) => {
+		setIsEdit(true);
 		onOpenProfile();
+		console.log("course is ", course);
 		setCourses((previous: any) => {
 			previous.title = course.title;
 			previous.description = course.description;
 			previous.category = course.category;
 			previous.pricing = course.pricing;
+			previous.image = course.course_image;
+			previous.material = course.course_material;
 		});
-		// setSelectedImage((previous) => (previous[0] = course.course_image));
+		setFileMaterials((previous: FileUploads) => {
+			previous.image = course.course_image;
+			previous.material = course.course_material;
+		});
+		setShow(!show);
+
+		// setSelectedImage(
+		// 	(previous: UploadFile[]) => (previous[0] = course.course_image)
+		// );
 		// setSelectedMaterial(course.course_material);
 	};
 	const handleDeletedClick = async (id: string) => {
@@ -54,6 +78,7 @@ const TutorHeader = ({
 		try {
 			const response = await apiDelete(`/courses/deleteCourse/${id}`);
 			if (response.status === 204) {
+				toast.success("Successfully deleted course");
 				const { data } = await apiGet("/users/profile");
 				tutorProps(data.userDetails);
 				setLoading(false);
@@ -62,8 +87,6 @@ const TutorHeader = ({
 			toast.error(error.response.data);
 		}
 	};
-
-	// const handleFormSubmit = () => {};
 
 	return (
 		<>
@@ -133,7 +156,10 @@ const TutorHeader = ({
 									<div className="tutorHome_addContainer">
 										<Button
 											type="submit"
-											onClick={onOpenProfile}
+											onClick={() => {
+												onOpenProfile();
+												setIsEdit(false);
+											}}
 											title={"Add Course"}
 											className={"tutorHome_addButton"}
 										/>
@@ -144,8 +170,10 @@ const TutorHeader = ({
 											tutorProps={tutorProps}
 											courses={courses}
 											onCloseProfile={onCloseProfile}
+											show={show}
+											isEdit={isEdit}
 											// selectedImage={selectedImage}
-											// selectedMaterial={selectedMaterial}
+											courseMaterial={fileMaterials}
 											// setSelectedImage={setSelectedImage}
 											// setSelectedMaterial={setSelectedMaterial}
 										/>
@@ -183,7 +211,7 @@ const TutorHeader = ({
 									<p>You have no reviews yet</p>
 								</TabPanel>
 								<TabPanel>
-									<p>You have no Bookings yet</p>
+									<TutorNotification />
 								</TabPanel>
 							</div>
 						</Tabs>
