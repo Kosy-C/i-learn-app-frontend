@@ -1,201 +1,202 @@
-
-.cd-container{
-    left: 0px;
-    top: 0px;
-    background: #ffffff;
-    width: 60%;
-    margin: 0px auto;
+.cd-container {
+  left: 0px;
+  top: 0px;
+  background: #ffffff;
+  width: 60%;
+  margin: 0px auto;
 }
 
-.cd-heading{
-    padding-bottom: 5px;
-    position: relative;
-    text-align: left;
-    padding-top: 30px;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 20px;
-    color: #21334F;
-    width: 60%;
-    margin: 0px auto;
+.cd-heading {
+  padding-bottom: 5px;
+  position: relative;
+  text-align: left;
+  padding-top: 30px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  color: #21334f;
+  width: 60%;
+  margin: 0px auto;
 }
 
-.heading-border{
-    border-bottom: 2px solid rgba(0, 0, 0, 0.16);
-    width: 100vw;
+.heading-border {
+  border-bottom: 2px solid rgba(0, 0, 0, 0.16);
+  width: 100vw;
 }
 
-.cd-course-container{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-top: 30px;
-    padding: 10px 40px;
-    text-align: left;
-    gap: 8px;
-    width: 900px;
-    height: 250px;
-    color: #ffffff;
-    background: rgba(0, 0, 0, 0.6);
-    background-repeat: no-repeat;
-    background-size: cover;
-    filter: blur(px);
+.cd-course-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 30px;
+  padding: 10px 40px;
+  text-align: left;
+  gap: 8px;
+  width: 900px;
+  height: 250px;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.6);
+  background-repeat: no-repeat;
+  background-size: cover;
+  filter: blur(px);
 }
 
-.cd-tutor-title{
-    width: 500px;
-    text-align: left;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 14px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.16);
-    padding-bottom: 10px;
+.cd-tutor-title {
+  width: 500px;
+  text-align: left;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.16);
+  padding-bottom: 10px;
 }
 
-.cd-tutor-container{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-top: 30px;
-    padding: 15px 32px;
-    gap: 8px;
-    width: 900px;
-    left: 0px;
-    top: 1px;
-    padding-left: 0;
+.cd-tutor-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 30px;
+  padding: 15px 32px;
+  gap: 8px;
+  width: 900px;
+  left: 0px;
+  top: 1px;
+  padding-left: 0;
 }
 
-.ratings-container{
-    border: 1px solid rgba(0, 0, 0, 0.16);
-    padding:10px 0px 30px 10px;
-    margin-top: 5px;
+.ratings-container {
+  border: 1px solid rgba(0, 0, 0, 0.16);
+  padding: 10px 0px 30px 10px;
+  margin-top: 5px;
 }
 
-.cd-tutor-name{
-    padding-bottom: 23px;
-    width: 132px;
-    height: 17px;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 17px;
-    color: #21334F;
-    
+.cd-tutor-name {
+  padding-bottom: 23px;
+  width: 132px;
+  height: 17px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  color: #21334f;
 }
 
-.cd-tutor-profile{
-    padding-top: 17px;
-    display: flex;
+.cd-tutor-profile {
+  padding-top: 17px;
+  display: flex;
 }
 
-.cd-name-courses{
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    position: relative;
-    left: 15px;
-    top:8px;
+.cd-name-courses {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  position: relative;
+  left: 15px;
+  top: 8px;
 }
 
-.course-no{
-    padding-left: 0px;
-    padding-right: 29px;
-    height: 17px;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 17px;
-    color: #21334F;
+.course-no {
+  padding-left: 0px;
+  padding-right: 29px;
+  height: 17px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #21334f;
 }
 
-.cd-about-tutor{
-    padding-top: 10px;
+.cd-about-tutor {
+  padding-top: 10px;
 }
 
-.cd-schedule-time{
-    display: flex;
-    padding-top: 10px;
+.cd-schedule-time {
+  display: flex;
+  padding-top: 10px;
 }
 
-.carlendar-icon{
-    padding-left: 10px;
-    padding-top: 5px;
-    color: #FD2959;
-    
+.carlendar-icon {
+  padding-left: 10px;
+  padding-top: 5px;
+  color: #fd2959;
 }
 
-.cd-icon{
-    padding-top: 3px;
-    font-size: 30px;
-    color: #FD2959;
+.cd-icon {
+  padding-top: 3px;
+  font-size: 30px;
+  color: #fd2959;
 }
 
-.cd-time-container{
-    text-align: left;
-    width: 900px;
+.cd-time-container {
+  text-align: left;
+  width: 900px;
 }
-
 
 .cd-ratings {
-    font-weight: 600;
-    padding-bottom: 10px;
+  font-weight: 600;
+  padding-bottom: 10px;
 }
 
-.cd-rating{
-    width: 76px;
-    height: 17px;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 15px;
-    line-height: 17px;
+.cd-rating {
+  width: 76px;
+  height: 17px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 17px;
 }
 
-.rating-heading{
-    height: 15px;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 15px;
+.rating-heading {
+  height: 15px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 15px;
 }
 
-.rating-body{
-    padding: 12px 0px;
+.rating-body {
+  padding: 12px 0px;
 }
 
-.cal-button{
-    padding-top: 4px;
-    width: 900px;
-    height: 52px;
-    color: #fff;
-    background: #FD2959;
-    border-radius: 4px;
-    margin-bottom: 10px;
+.cal-button {
+  padding-top: 4px;
+  width: 900px;
+  height: 52px;
+  color: #fff;
+  background: #fd2959;
+  border-radius: 4px;
+  margin-bottom: 10px;
 }
-.cd-buttons{
-    margin: 30px 0px;
+.cd-buttons {
+  margin: 30px 0px;
 }
-.cd-title{
-    padding-top: 30px
+.cd-title {
+  padding-top: 30px;
 }
 
-.cd-rate_course_arrowButton{
+.cd-rate_course_arrowButton {
+  font-size: 20px;
 
-    font-size: 20px;
-
-    /* /* margin-right: .4em; */
-    padding-top: 25px; 
-     margin-left: 60px; 
-    position: relative;
-    text-align: left;
-    cursor: pointer;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 600;
-
+  /* /* margin-right: .4em; */
+  padding-top: 25px;
+  margin-left: 60px;
+  position: relative;
+  text-align: left;
+  cursor: pointer;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+}
+/* Global styles */
+button {
+  cursor: pointer;
+}
+a {
+  text-decoration: none;
 }
