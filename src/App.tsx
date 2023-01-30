@@ -34,8 +34,6 @@ import StudentProfile from "./pages/StudentProfile/StudentProfile ";
 import TutorNotification from "./pages/TutorPage/TutorPage";
 import TutorCoursesPage from "./pages/TutorCoursePage/TutorCoursePage";
 
-
-
 function App() {
 	return (
 		<React.Fragment>

@@ -48,7 +48,7 @@ const TutorCoursesPage: React.FC = () => {
                                         <div className="all_courses_details">
                                             <Link
                                                 to={`/coursedetail/${course.id}`}
-                                                style={{ textDecoration: "none", color: 'black' }}
+                                                style={{ textDecoration: "none", color: "black" }}
                                             >
                                                 <div key={course.id} className="all_coursesHeader-img">
                                                     <img
