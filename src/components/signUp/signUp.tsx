@@ -48,9 +48,15 @@ function SignUpForm() {
 									.get(`${googleLoginUrl}/users/googleLogin`, {
 										headers: { Authorization: `Bearer ${token}` },
 									})
-									.then((res) =>
-										localStorage.setItem("signature", res.data.signature)
-									)
+									.then((res) => {
+										console.log("res.data is ", res.data);
+										localStorage.setItem("signature", res.data.signature);
+										localStorage.setItem(
+											"user",
+											res.data.user.areaOfInterest || "backend"
+										);
+										localStorage.setItem("userType", res.data.user.userType);
+									})
 									.then((e) => navigate(`/dashboard`, { replace: true }))
 									.catch((e) => e);
 								// localStorage.setItem("signature", token);
@@ -227,15 +233,15 @@ function SignUpForm() {
 									Login
 								</Link>
 							</div>
-							<div className="socialIcons">
-								<button type="submit" onClick={signInWithGoogle}>
-									<FcGoogle />
-								</button>
-								<button type="submit" className="fbBtn">
-									<FaFacebook />
-								</button>
-							</div>
 						</form>
+						<div className="socialIcons">
+							<button type="submit" onClick={signInWithGoogle}>
+								<FcGoogle />
+							</button>
+							<button type="submit" className="fbBtn">
+								<FaFacebook />
+							</button>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -243,3 +249,9 @@ function SignUpForm() {
 	);
 }
 export default SignUpForm;
+
+// const localStorageItems = {
+// 	signature: res.data.signature,
+// 	areaOfInterest: res.data.areaOfInterest,
+// 	userType: res.data.userType
+// }

@@ -100,6 +100,7 @@ function LoginForm() {
 									ref={emailRef}
 									placeholder="Enter your email"
 									required
+									className="signUp-input"
 								/>
 							</div>
 							{error.length > 0 && error.includes("email") && (
@@ -113,6 +114,7 @@ function LoginForm() {
 									ref={passwordRef}
 									placeholder="Enter your password..."
 									required
+									className="signUp-input"
 								/>
 							</div>
 							<h5 id="forgot">
