@@ -5,7 +5,7 @@ import { apiGet, apiPost } from "../../utils/api/axios";
 import "./show.css";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 import { User } from "../../utils/Interfaces/index.dto";
@@ -53,26 +53,26 @@ const TutorAvailability: React.FC<Props> = ({ tutor, title, id, onClick }) => {
 			try {
 				const { data } = await apiGet(`/users/get-available-tutors/${id}`);
 				console.log(data.availabilities);
-				if (data.message) {
-					toast.success(data.message);
-				}
 
-				const filteredDates = data?.availabilities?.filter(
-					(available: Availability) => available.availableSlots > 0
-				);
-				setAvailableDates(filteredDates);
-				setAvailabletime(filteredDates[0].availableTime);
-				setAvailabilities(data.availabilities);
-				setAvailable({
-					availableTime: data.availabilities[0].availableTime,
-					availableDate: data.availabilities[0].availableDate,
-				});
-				setPickedDateId(filteredDates[0].id);
-				setPickedTime(filteredDates[0].availableTime[0]);
-				console.log(filteredDates[0].availableTime);
+				if (data.availabilities.length > 0) {
+					setAvailabletime(data.availabilities[0].availableTime);
+					setAvailabilities(data.availabilities);
+					setAvailable({
+						availableTime: data.availabilities[0].availableTime,
+						availableDate: data.availabilities[0].availableDate,
+					});
+
+					const filteredDates = data?.availabilities?.filter(
+						(available: Availability) => available.availableSlots > 0
+					);
+					setAvailableDates(filteredDates);
+					setAvailabletime(filteredDates[0].availableTime);
+					setAvailabilities(data.availabilities);
+					setPickedDateId(filteredDates[0].id);
+					setPickedTime(filteredDates[0].availableTime[0]);
+				}
 			} catch (err: any) {
 				console.error(err);
-				toast.error(err.message);
 			}
 		}
 	};
@@ -114,15 +114,13 @@ const TutorAvailability: React.FC<Props> = ({ tutor, title, id, onClick }) => {
 			toast.success("session booked successfully");
 			return null;
 		} catch (err: any) {
-			console.log(err);
-			toast.error(err.message);
 			return null;
 		}
 	};
 
 	useEffect(() => {
 		void getAvailable();
-	}, [getAvailable, id]);
+	});
 
 	const returnAvailibilty = () => {
 		return availableDates
@@ -156,12 +154,6 @@ const TutorAvailability: React.FC<Props> = ({ tutor, title, id, onClick }) => {
 			));
 	};
 
-	// function that set the time
-	const setTime = (date: any, index: number) => {
-		setAvailabletime(date.availableTime);
-		console.log(`availButton${index}`);
-	};
-
 	const selectedTime: string[] = [];
 
 	return (
@@ -173,7 +165,7 @@ const TutorAvailability: React.FC<Props> = ({ tutor, title, id, onClick }) => {
 						<h3>Available Sessions</h3>
 					</div>
 					<hr />
-					{availabilities && returnAvailibilty()}
+					{availabilities.length > 0 && returnAvailibilty()}
 					{availableDates.length > 3 && num === 3 ? (
 						<>
 							<button className="next-arrow" onClick={() => setNum(num + 30)}>

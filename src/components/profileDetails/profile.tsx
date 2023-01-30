@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 import React, { lazy, useEffect, useState } from "react";
 import "../profileDetails/profile.css";
@@ -5,38 +6,23 @@ import "../profileDetails/profile.css";
 import { AiOutlineSafetyCertificate } from "react-icons/ai";
 import { CiLocationOn } from "react-icons/ci";
 import { useParams } from "react-router-dom";
-import { apiGet, apiPost } from "../../utils/api/axios";
+import { apiGet } from "../../utils/api/axios";
 import TutorAvailability from "../Availability/ShowAvailabilty";
 import { Modal } from "react-responsive-modal";
 // import { Tutor } from "../../utils/Interfaces/index.dto";
 import { toast } from "react-toastify";
 
-const Profile = () => {
+const Profile = ({ onClick }) => {
 	const [tutor, setTutor] = useState<any>({});
 	const [modalIsOpen, setIsOpen] = useState(false);
 	const params = useParams();
-
-	const handleBookSession = async (availabilityId: any, pickedTime: any) => {
-		try {
-			const response = await apiPost("/users/book-session", {
-				availabilityId,
-				pickedTime,
-			});
-
-			if (response.status === 200) {
-				toast.success("session booked successfully");
-			}
-		} catch (err: any) {
-			console.log(err);
-			toast.error(err.message);
-		}
-	};
 
 	function openModal() {
 		setIsOpen(true);
 	}
 	function closeModal() {
 		setIsOpen(false);
+		onClick();
 	}
 	useEffect(() => {
 		const fetch = async () => {
