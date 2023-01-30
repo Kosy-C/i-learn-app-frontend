@@ -24,6 +24,7 @@ const AllTutor = () => {
   const [keyword, setKeyword] = useState("");
   const [firstNos, setFirstNos] = useState(6);
   const [checkkeyword, setCheckKeyword] = useState(true);
+  const [loading, setLoading] = useState<Boolean>(true);
   const navigate = useNavigate();
   const getAllTutor = async () => {
     try {
