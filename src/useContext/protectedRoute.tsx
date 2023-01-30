@@ -30,7 +30,7 @@ export const ProtectedRoute: React.FC<Props> = ({ children }) => {
 			isAuthenticated?.length !== 0 &&
 			(userType === "Tutor" || userType === "Student")
 		) {
-			setRedirectUrl("");
+			setRedirectUrl("/login");
 			return;
 		}
 
@@ -52,7 +52,7 @@ export const ProtectedRouteTutor: React.FC<Props> = ({ children }) => {
 		const userType = localStorage.getItem("userType");
 
 		if (isAuthenticated?.length !== 0 && userType === "Tutor") {
-			setRedirectUrl("");
+			setRedirectUrl("/login");
 			return;
 		}
 
@@ -74,7 +74,7 @@ export const ProtectedRouteStudent: React.FC<Props> = ({ children }) => {
 		const userType = localStorage.getItem("userType");
 
 		if (isAuthenticated?.length !== 0 && userType === "Student") {
-			setRedirectUrl("");
+			setRedirectUrl("/login");
 			return;
 		}
 
