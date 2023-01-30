@@ -19,6 +19,7 @@ import { User, Course } from "../../utils/Interfaces/index.dto";
 import LoadingIcons from "react-loading-icons";
 import { toast } from "react-toastify";
 import TutorNotification from "../../pages/TutorPage/TutorPage";
+import ReviewTutor from "../../components/ReviewTutor/ReviewTutor";
 
 export interface FileUploads {
 	image: string;
@@ -171,8 +172,6 @@ const TutorHeader = ({
 											isEdit={isEdit}
 											// selectedImage={selectedImage}
 											courseMaterial={fileMaterials}
-											// setSelectedImage={setSelectedImage}
-											// setSelectedMaterial={setSelectedMaterial}
 										/>
 									</Modal>
 									{/* </Link> */}
@@ -205,7 +204,9 @@ const TutorHeader = ({
 									</div>
 								</TabPanel>
 								<TabPanel>
-									<p>You have no reviews yet</p>
+									<div className="review-class">
+										<ReviewTutor tutorId={tutor.id} />
+									</div>
 								</TabPanel>
 								<TabPanel>
 									<TutorNotification />

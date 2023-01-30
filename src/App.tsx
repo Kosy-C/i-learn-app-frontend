@@ -22,7 +22,6 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import PaymentSummaryPage from "./pages/paymentSummary/paymentSummary";
 import RateCourses from "./pages/RateCourses/RateCourses";
 import TutorRating from "./pages/RateTutor/RatingTutor";
-import UserProfile from "./pages/userprofile/UserProfile";
 import PaidCourses from "./pages/PaidCourses/PaidCourses";
 import NotFound from "./pages/NotFound/NotFound";
 import {
@@ -33,7 +32,6 @@ import {
 import DataProvider from "./useContext/index";
 import StudentProfile from "./pages/StudentProfile/StudentProfile ";
 import TutorNotification from "./pages/TutorPage/TutorPage";
-// import Dataprovider from "./useContext/index";
 
 function App() {
 	return (
@@ -165,6 +163,8 @@ function App() {
 								</ProtectedRouteTutor>
 							}
 						/>
+						<Route path="/paid-courses/:id" element={<PaidCourses />} />
+						<Route path="/bookings" element={<TutorNotification />} />
 						<Route path="*" element={<NotFound />} />
 						<Route
 							path="/studentProfile"
