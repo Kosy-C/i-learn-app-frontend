@@ -24,12 +24,15 @@ import RateCourses from "./pages/RateCourses/RateCourses";
 import TutorRating from "./pages/RateTutor/RatingTutor";
 import PaidCourses from "./pages/PaidCourses/PaidCourses";
 import NotFound from "./pages/NotFound/NotFound";
+import {
+	ProtectedRoute,
+	ProtectedRouteTutor,
+	ProtectedRouteStudent,
+} from "../src/useContext/protectedRoute";
+import DataProvider from "./useContext/index";
 import StudentProfile from "./pages/StudentProfile/StudentProfile ";
 import TutorNotification from "./pages/TutorPage/TutorPage";
 import TutorCoursesPage from "./pages/TutorCoursePage/TutorCoursePage";
-
-import DataProvider from "./useContext";
-// import Dataprovider from "./useContext/index";
 
 function App() {
 	return (
@@ -47,21 +50,118 @@ function App() {
 						<Route path="/login" element={<LoginForm />} />
 						<Route path="/reset-password" element={<ResetPassword />} />
 						<Route path="/users/resetpassword" element={<SetNewPassword />} />
-						<Route path="/tutor-profile" element={<Profile />} />
-						<Route path="/dashboard/:id?" element={<Dashboard />} />
-						<Route path="/history-page" element={<StudentHistoryPage />} />
-						<Route path="/all-tutors" element={<AllTutor />} />
-						<Route path="/all-courses" element={<AllCoursesPage />} />
+						<Route
+							path="/tutor-profile"
+							element={
+								<ProtectedRouteTutor>
+									<Profile />
+								</ProtectedRouteTutor>
+							}
+						/>
+						<Route
+							path="/dashboard/:id?"
+							element={
+								<ProtectedRoute>
+									<Dashboard />
+								</ProtectedRoute>
+							}
+						/>
+						<Route
+							path="/history-page"
+							element={
+								<ProtectedRouteStudent>
+									<StudentHistoryPage />
+								</ProtectedRouteStudent>
+							}
+						/>
+						<Route
+							path="/all-tutors"
+							element={
+								<ProtectedRoute>
+									<AllTutor />
+								</ProtectedRoute>
+							}
+						/>
+						<Route
+							path="/all-courses"
+							element={
+								<ProtectedRoute>
+									<AllCoursesPage />
+								</ProtectedRoute>
+							}
+						/>
 						<Route path="/verify" element={<VerifyPage />} />
-						<Route path="/reminder" element={<Reminder />} />
-						<Route path="/calender" element={<Calender />} />
-						<Route path="/savedReminder" element={<SavedReminder />} />
-						<Route path="/rate-course/:courseId" element={<RateCourses />} />
-						<Route path="/tutorRating/:tutorId" element={<TutorRating />} />
+						<Route
+							path="/reminder"
+							element={
+								<ProtectedRoute>
+									<Reminder />
+								</ProtectedRoute>
+							}
+						/>
+						<Route
+							path="/calender"
+							element={
+								<ProtectedRoute>
+									<Calender />
+								</ProtectedRoute>
+							}
+						/>
+						<Route
+							path="/savedReminder"
+							element={
+								<ProtectedRoute>
+									<SavedReminder />
+								</ProtectedRoute>
+							}
+						/>
+						<Route
+							path="/rate-course/:courseId"
+							element={
+								<ProtectedRouteStudent>
+									<RateCourses />
+								</ProtectedRouteStudent>
+							}
+						/>
+						<Route
+							path="/tutorRating/:tutorId"
+							element={
+								<ProtectedRouteStudent>
+									<TutorRating />
+								</ProtectedRouteStudent>
+							}
+						/>
 						<Route
 							path="/Payment-Summary"
 							element={
-								<PaymentSummaryPage title={""} price={""} imageUrl={""} />
+								<ProtectedRouteStudent>
+									<PaymentSummaryPage title={""} price={""} imageUrl={""} />
+								</ProtectedRouteStudent>
+							}
+						/>
+						<Route
+							path="/paid-courses/:id"
+							element={
+								<ProtectedRouteStudent>
+									<PaidCourses />
+								</ProtectedRouteStudent>
+							}
+						/>
+						<Route
+							path="/paid-courses/:id"
+							element={
+								<ProtectedRouteStudent>
+									<PaidCourses />
+								</ProtectedRouteStudent>
+							}
+						/>
+
+						<Route
+							path="/bookings"
+							element={
+								<ProtectedRouteTutor>
+									<TutorNotification />
+								</ProtectedRouteTutor>
 							}
 						/>
 						<Route path="/paid-courses/:id" element={<PaidCourses />} />
@@ -71,6 +171,14 @@ function App() {
 						<Route
 							path="/tutorCourse/:tutorId"
 							element={<TutorCoursesPage />}
+						/>
+						<Route
+							path="/studentProfile"
+							element={
+								<ProtectedRouteStudent>
+									<StudentProfile />
+								</ProtectedRouteStudent>
+							}
 						/>
 					</Routes>
 				</Router>
