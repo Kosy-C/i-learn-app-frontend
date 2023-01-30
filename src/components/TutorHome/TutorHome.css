@@ -80,12 +80,14 @@
   /* background-color: blue; */
 }
 .tutor_home_singleCard{
-  /* background-color: brown; */
-  border: 2px solid gray;
-  width: 23em;
+  box-shadow: 4px 4px 14px 2px #D3D3D3;
+  width: 22.8em;
   height: 23em;
   position: relative;
   margin: 3em auto;
+  border-bottom-right-radius: 23px;
+  border-bottom-left-radius: 23px;
+
 }
 .tutorCourse-img{
   /* background-color: violet; */
@@ -145,15 +147,23 @@
 .modal-button:hover {
   background-color: darkblue;
 }
-.tutorCourse_editButton, .tutorCourse_deleteButton{
+.tutorCourse_deleteButton{
   cursor: pointer;
   background: rgba(253, 41, 89, 0.2);
   padding: 10px;
   width: 150px;
   text-align: center;
   text-decoration: none;
-  border: 1px solid gray;
   border-radius: 22px 3px;
+}
+.tutorCourse_editButton{
+  cursor: pointer;
+  background: rgba(253, 41, 89, 0.2);
+  padding: 10px;
+  width: 150px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 3px 22px;
 }
 .tutorHome_addButton{
   cursor: pointer;
@@ -162,8 +172,11 @@
   width: 150px;
   text-align: center;
   text-decoration: none;
-  border: 1px solid gray;
   border-radius: 22px 3px;
+}
+.tutorCourse_editButton:hover, .tutorCourse_deleteButton:hover, .tutorHome_addButton:hover{
+  font-weight: 800;
+  background: rgba(253, 41, 89, 0.5);
 }
 .tutorHome_addContainer{
   display: flex;
@@ -183,17 +196,19 @@
 
 .tutorCourse-nameContainer{
   display: flex;
+  flex-direction: column;
   /* background-color: blue; */
   width: 20.5em;
   padding-left: .7em;
   justify-content: center;
+  height: 65px;
 }
 .tutorCourse-name{
   /* margin-right: 2em; */
 }
 .tutorCourse_rating{
   /* margin-left: 21px;
-  padding-left: 21px; */
+*/
 }
 
 

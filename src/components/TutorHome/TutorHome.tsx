@@ -11,7 +11,6 @@ import TutorCreateForm, {
 	CourseDetails,
 	courseDetails,
 } from "../../pages/TutorCourseOperations/TutorCourseOperations";
-// import { Link } from "react-router-dom";
 import Card from "../Cards/course";
 import Button from "../Button/Button";
 import "./TutorHome.css";
@@ -34,7 +33,7 @@ const TutorHeader = ({
 }) => {
 	const [available, setAvailability] = useState(false);
 	const [loading, setLoading] = useState<Boolean>(false);
-	const [courses, setCourses] = useState<CourseDetails | any>(courseDetails);
+	const [course, setCourse] = useState<CourseDetails | any>(courseDetails);
 	const [show, setShow] = useState<Boolean>(false);
 	const [fileMaterials, setFileMaterials] = useState<FileUploads | any>({
 		image: "",
@@ -46,30 +45,15 @@ const TutorHeader = ({
 	const onCloseAvailability = () => setAvailability(false);
 	const [profile, setProfile] = useState(false);
 	const onOpenProfile = () => setProfile(true);
-	const onCloseProfile = () => setProfile(false);
+	const onCloseProfile = () => {
+		setProfile(false);
+	};
 
 	const handleEditedClick = (course: Course) => {
 		setIsEdit(true);
 		onOpenProfile();
-		console.log("course is ", course);
-		setCourses((previous: any) => {
-			previous.title = course.title;
-			previous.description = course.description;
-			previous.category = course.category;
-			previous.pricing = course.pricing;
-			previous.image = course.course_image;
-			previous.material = course.course_material;
-		});
-		setFileMaterials((previous: FileUploads) => {
-			previous.image = course.course_image;
-			previous.material = course.course_material;
-		});
-		setShow(!show);
-
-		// setSelectedImage(
-		// 	(previous: UploadFile[]) => (previous[0] = course.course_image)
-		// );
-		// setSelectedMaterial(course.course_material);
+		setCourse(course);
+		//  setCourses((previous: any) => (previous = course));
 	};
 	const handleDeletedClick = async (id: string) => {
 		setLoading(true);
@@ -166,12 +150,13 @@ const TutorHeader = ({
 										<TutorCreateForm
 											tutor={tutor}
 											tutorProps={tutorProps}
-											courses={courses}
+											course={course}
 											onCloseProfile={onCloseProfile}
 											show={show}
 											isEdit={isEdit}
-											// selectedImage={selectedImage}
 											courseMaterial={fileMaterials}
+											setCourse={setCourse}
+											setIsEdit={setIsEdit}
 										/>
 									</Modal>
 									{/* </Link> */}
@@ -190,7 +175,9 @@ const TutorHeader = ({
 															course={course}
 															tutor={tutor}
 															handleDeletedClick={handleDeletedClick}
-															handleEditedClick={handleEditedClick}
+															handleEditedClick={() =>
+																handleEditedClick(course)
+															}
 														/>
 													</div>
 												);
