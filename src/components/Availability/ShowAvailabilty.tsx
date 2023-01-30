@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/prefer-optional-chain */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import React, { useState, useEffect } from "react";
-import { apiGet, apiPost } from "../../utils/api/axios";
+import { apiGet } from "../../utils/api/axios";
 import "./show.css";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 import { User } from "../../utils/Interfaces/index.dto";
@@ -52,7 +52,6 @@ const TutorAvailability: React.FC<Props> = ({ tutor, title, onClick, id }) => {
 		setActiveSlotIndex(index);
 	};
 
-	const params = useParams();
 	useEffect(() => {
 		const getAvailable = async () => {
 			if (id !== undefined) {
@@ -76,14 +75,7 @@ const TutorAvailability: React.FC<Props> = ({ tutor, title, onClick, id }) => {
 		void getAvailable();
 	}, [id]);
 
-	// function that set the time
-	const setTime = (date: any, index: number) => {
-		setAvailabletime(date.availableTime);
-		// setButtonActive(!buttonActive);
-		// if (index === buttonIndex) {
-		// }
-		console.log(`availButton${index}`);
-	};
+
 
 	const selectedTime: string[] = [];
 

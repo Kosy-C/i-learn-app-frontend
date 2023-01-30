@@ -15,11 +15,10 @@ import TutorCreateForm, {
 import Card from "../Cards/course";
 import Button from "../Button/Button";
 import "./TutorHome.css";
-import { User, Course, UploadFile } from "../../utils/Interfaces/index.dto";
+import { User, Course } from "../../utils/Interfaces/index.dto";
 import LoadingIcons from "react-loading-icons";
 import { toast } from "react-toastify";
 import TutorNotification from "../../pages/TutorPage/TutorPage";
-import FileUploaded from "../../pages/TutorCourseOperations/FileUploader";
 import ReviewTutor from "../../components/ReviewTutor/ReviewTutor";
 
 export interface FileUploads {
@@ -36,8 +35,6 @@ const TutorHeader = ({
 	const [available, setAvailability] = useState(false);
 	const [loading, setLoading] = useState<Boolean>(false);
 	const [courses, setCourses] = useState<CourseDetails | any>(courseDetails);
-	const [selectedImage, setSelectedImage] = useState<UploadFile[]>();
-	const [selectedMaterial, setSelectedMaterial] = useState<UploadFile[]>();
 	const [show, setShow] = useState<Boolean>(false);
 	const [fileMaterials, setFileMaterials] = useState<FileUploads | any>({
 		image: "",
@@ -175,8 +172,8 @@ const TutorHeader = ({
 											isEdit={isEdit}
 											// selectedImage={selectedImage}
 											courseMaterial={fileMaterials}
-											// setSelectedImage={setSelectedImage}
-											// setSelectedMaterial={setSelectedMaterial}
+										// setSelectedImage={setSelectedImage}
+										// setSelectedMaterial={setSelectedMaterial}
 										/>
 									</Modal>
 									{/* </Link> */}
