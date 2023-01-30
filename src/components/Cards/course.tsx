@@ -7,6 +7,7 @@ import Modal from "react-responsive-modal";
 import TutorCreateForm, {
 	courseDetails,
 } from "../../pages/TutorCourseOperations/TutorCourseOperations";
+import { Link } from "react-router-dom";
 
 const CourseCard = ({
 	course,
@@ -27,7 +28,6 @@ const CourseCard = ({
 						alt="courseIcon"
 					/>
 				</div>
-
 				<div className="tutorCourse-details">
 					<div>
 						<h3 className="tutorCourse-title">{course.title}</h3>
@@ -40,9 +40,9 @@ const CourseCard = ({
 						</div>
 						<div className="tutorCourse_rating">
 							<Rating
-								rating={Number(course.rating)}
-								image={""}
-								color={"#ffb400"}
+									rating={Number(course.rating)}
+									image={""}
+									color={"#ffb400"}
 							/>
 						</div>
 					</div>
