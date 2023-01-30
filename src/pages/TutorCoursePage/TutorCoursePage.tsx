@@ -6,6 +6,7 @@ import { apiGet } from "../../utils/api/axios";
 import { Link, useParams } from "react-router-dom";
 import Rating from "../../components/Rating/Rating";
 import { BiArrowBack } from "react-icons/bi";
+import { TutorCourses } from "../../utils/Interfaces/index.dto";
 
 interface Course {
     id: string;
@@ -19,9 +20,9 @@ interface Course {
 const TutorCoursesPage: React.FC = () => {
     const [details, setDetails] = useState<Course[]>([]);
 
-    // const { tutorId } = useParams();
+    const { tutorId } = useParams();
 
-    const tutorId = "c9a60c59-750b-40c1-9492-19025fa60beb";
+    // const tutorId = "c9a60c59-750b-40c1-9492-19025fa60beb";
 
     useEffect(() => {
         async function getData() {
@@ -37,29 +38,43 @@ const TutorCoursesPage: React.FC = () => {
                 <SubNavbar name="" welcome="" />
                 <p>
                     <Link to="/all-tutors" className="coursesPage-icon">
-                        <BiArrowBack /> Back
+                        <BiArrowBack style={{ color: "black" }} /> Back
                     </Link>
                 </p>
-                <div className="coursePage-container">
-                    {details.map((detail) => (
-                        <div className="coursePage-details" key={detail.id}>
-                            <div className="coursePage-image">
-                                <img src={detail.course_image} alt="Course Image" />{" "}
-                            </div>
-                            <div className="coursePage-writeUps">
-                                <h3 className="CoursePage-title">{detail.title}</h3>
-                                <h4 className="coursePage-desc">{detail.description}</h4>
-                                <div className="coursePage-price">
-                                    <h4 className="coursePage-price">
-                                        Price:💲 {detail.pricing}
-                                    </h4>
+                <div className="parent-course-container">
+                    {details.map((course: any, index: number) => {
+                        return (
+                            <div key={course.id} className="allCourses_Cards">
+                                <div className="all_courses_card">
+                                    <div className="all_courses_details">
+                                        <div key={course.id} className="all_coursesHeader-img">
+                                            <img
+                                                className="all_courses-Img"
+                                                src={course.course_image}
+                                                alt="course_logo"
+                                            />
+                                        </div>
+                                        <div className="all_courses_features">
+                                            <h2>
+                                                {course.title} by {course?.tutor?.name}
+                                            </h2>
+                                            <p>{course.description}</p>
+                                            <p className="">Price: {course.pricing}</p>
+                                            <div className="all_coursesRating">
+                                                <p>
+                                                    <Rating
+                                                        rating={Number(course.rating)}
+                                                        image={""}
+                                                        color={"#ffb400"}
+                                                    />
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="coursePage-rating">
-                                    <Rating rating={detail.rating} image={""} color={""} />
-                                </div>
                             </div>
-                        </div>
-                    ))}
+                        );
+                    })}
                 </div>
             </div>
         </>
