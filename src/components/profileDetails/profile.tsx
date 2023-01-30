@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 import React, { useEffect, useState } from "react";
 import "../profileDetails/profile.css";
@@ -5,7 +6,7 @@ import "../profileDetails/profile.css";
 import { AiOutlineSafetyCertificate } from "react-icons/ai";
 import { CiLocationOn } from "react-icons/ci";
 import { useParams } from "react-router-dom";
-import { apiGet, apiPost } from "../../utils/api/axios";
+import { apiGet } from "../../utils/api/axios";
 import TutorAvailability from "../Availability/ShowAvailabilty";
 import { Modal } from "react-responsive-modal";
 // import { Tutor } from "../../utils/Interfaces/index.dto";

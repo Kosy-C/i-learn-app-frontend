@@ -15,11 +15,10 @@ import TutorCreateForm, {
 import Card from "../Cards/course";
 import Button from "../Button/Button";
 import "./TutorHome.css";
-import { User, Course, UploadFile } from "../../utils/Interfaces/index.dto";
+import { User, Course } from "../../utils/Interfaces/index.dto";
 import LoadingIcons from "react-loading-icons";
 import { toast } from "react-toastify";
 import TutorNotification from "../../pages/TutorPage/TutorPage";
-import FileUploaded from "../../pages/TutorCourseOperations/FileUploader";
 
 export interface FileUploads {
 	image: string;
@@ -35,8 +34,6 @@ const TutorHeader = ({
 	const [available, setAvailability] = useState(false);
 	const [loading, setLoading] = useState<Boolean>(false);
 	const [courses, setCourses] = useState<CourseDetails | any>(courseDetails);
-	const [selectedImage, setSelectedImage] = useState<UploadFile[]>();
-	const [selectedMaterial, setSelectedMaterial] = useState<UploadFile[]>();
 	const [show, setShow] = useState<Boolean>(false);
 	const [fileMaterials, setFileMaterials] = useState<FileUploads | any>({
 		image: "",
@@ -51,7 +48,6 @@ const TutorHeader = ({
 	const onCloseProfile = () => setProfile(false);
 
 	const handleEditedClick = (course: Course) => {
-		
 		setIsEdit(true);
 		onOpenProfile();
 		console.log("course is ", course);
@@ -212,7 +208,7 @@ const TutorHeader = ({
 									<p>You have no reviews yet</p>
 								</TabPanel>
 								<TabPanel>
-									<TutorNotification/>
+									<TutorNotification />
 								</TabPanel>
 							</div>
 						</Tabs>
