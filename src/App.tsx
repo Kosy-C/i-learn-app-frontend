@@ -27,7 +27,6 @@ import NotFound from "./pages/NotFound/NotFound";
 import StudentProfile from "./pages/StudentProfile/StudentProfile ";
 import TutorNotification from "./pages/TutorPage/TutorPage";
 import DataProvider from "./useContext";
-// import Dataprovider from "./useContext/index";
 
 
 function App() {
