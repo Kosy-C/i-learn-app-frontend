@@ -35,7 +35,7 @@ const Table: React.FC<TableProps> = ({ onEdit, onDelete }) => {
 	};
 
 	// Logic for displaying page numbers
-	const pageNumbers = [];
+	const pageNumbers: number[] = [];
 	for (let i = 1; i <= Math.ceil(courses.length / coursesPerPage); i++) {
 		pageNumbers.push(i);
 	}
