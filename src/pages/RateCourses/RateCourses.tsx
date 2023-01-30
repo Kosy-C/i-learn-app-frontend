@@ -1,5 +1,3 @@
-// import React, { useState, BaseSyntheticEvent, useEffect } from "react";
-
 import { useState, BaseSyntheticEvent, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import NavBar from "../../components/navBar/navBar";
