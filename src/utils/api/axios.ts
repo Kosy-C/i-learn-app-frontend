@@ -19,13 +19,34 @@ export const apiPost = async (path: string, body = {}) => {
 	};
 	return await axios.post(`${baseUrl}${path}`, body, config);
 };
-export const apiUpdate = async (path: string, body = {}, auth = true) => {
+export const apiUpdate = async (path: string, body: {}) => {
 	const config = {
 		headers: {
 			Authorization: `Bearer ${localStorage.getItem("signature") as string}`,
 		},
 	};
+	//console.log(path, body);
+
 	return await axios.patch(`${baseUrl}${path}`, body, config);
+};
+
+export const apiPut = async (path: string, body = {}, auth=true) => {
+	const config = {
+		headers: {
+			Authorization: `Bearer ${localStorage.getItem("signature") as string}`,
+		},
+	};
+	return await axios.put(`${baseUrl}${path}`, body, config);
+};
+
+export const apiPutFormData = async (path: string, body = {}, auth=true) => {
+	const config = {
+		headers: {
+			Authorization: `Bearer ${localStorage.getItem("signature") as string}`,
+			"Content-Type": "multipart/form-data"
+		},
+	};
+	return await axios.put(`${baseUrl}${path}`, body, config);
 };
 export const apiDelete = async (path: string, auth = true) => {
 	const config = {
