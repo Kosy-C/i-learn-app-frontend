@@ -73,9 +73,13 @@ const ReviewTutor: React.FC<ReviewTutorProps> = ({ tutorId }) => {
                             <div className="tutor-review-block" key={data.id}>
                                 <img src={data.student.image} alt="" />
                                 <div className="tutor-review-write">
-                                    <h3>Name:{data.student.name}</h3>
-                                    <Rating rating={data.ratingValue} color="#FD2959
-" image="" />
+                                    <h3>{data.student.name}</h3>
+                                    <Rating
+                                        rating={data.ratingValue}
+                                        color="#FD2959
+"
+                                        image=""
+                                    />
                                 </div>
                             </div>
                             <p>{data.description}</p>

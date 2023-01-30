@@ -204,8 +204,9 @@ const TutorHeader = ({
 									</div>
 								</TabPanel>
 								<TabPanel>
-									<ReviewTutor tutorId={tutor.id} />
-									{/* <p>You have no reviews yet</p> */}
+									<div className="review-class">
+										<ReviewTutor tutorId={tutor.id} />
+									</div>
 								</TabPanel>
 								<TabPanel>
 									<TutorNotification />
