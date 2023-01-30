@@ -25,6 +25,7 @@
     border: 1px solid red;
     width: 50%;
     box-shadow: 5px 5px;
+    line-height: 2.3;
     /* padding: 2rem 0; */
 }
 
@@ -42,12 +43,22 @@
 }
 
 .coursePage-rating {
-    padding-left: 0.8rem;
+    padding-left: 0.9rem;
+    /* text-align: center; */
+    /* line-height: 2.2; */
     /* display: flex; */
+    margin-top: 10px;
+}
+.coursesPage-icon{
+    font-size:xx-large;
+    padding-left: 20px;
+    margin-bottom: 10px;
+    text-decoration: none;
 }
 
 .coursePage-price {
     /* margin-top: 5rem; */
+    /* padding-left: -10px; */
 }
 
 .seeMore {

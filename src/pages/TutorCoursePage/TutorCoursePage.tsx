@@ -5,10 +5,22 @@ import "./TutorCoursePage.css";
 import { apiGet } from "../../utils/api/axios";
 import { Link, useParams } from "react-router-dom";
 import Rating from "../../components/Rating/Rating";
+import { BiArrowBack } from "react-icons/bi";
 
-const TutorCoursesPage = () => {
-    const [details, setDetails] = useState([]);
+interface Course {
+    id: string;
+    title: string;
+    description: string;
+    course_image: string;
+    pricing: number;
+    rating: number;
+}
+
+const TutorCoursesPage: React.FC = () => {
+    const [details, setDetails] = useState<Course[]>([]);
+
     // const { tutorId } = useParams();
+
     const tutorId = "c9a60c59-750b-40c1-9492-19025fa60beb";
 
     useEffect(() => {
@@ -21,7 +33,13 @@ const TutorCoursesPage = () => {
     return (
         <>
             <div className="contentPage">
-                <NavBar /> <SubNavbar name={"TutorName, TutorID"} welcome={undefined} />
+                <NavBar />
+                <SubNavbar name="" welcome="" />
+                <p>
+                    <Link to="/all-tutors" className="coursesPage-icon">
+                        <BiArrowBack /> Back
+                    </Link>
+                </p>
                 <div className="coursePage-container">
                     {details.map((detail) => (
                         <div className="coursePage-details" key={detail.id}>
@@ -31,19 +49,21 @@ const TutorCoursesPage = () => {
                             <div className="coursePage-writeUps">
                                 <h3 className="CoursePage-title">{detail.title}</h3>
                                 <h4 className="coursePage-desc">{detail.description}</h4>
-                                <h4 className="coursePage-price">Price: {detail.pricing}</h4>
-
+                                <div className="coursePage-price">
+                                    <h4 className="coursePage-price">
+                                        Price:💲 {detail.pricing}
+                                    </h4>
+                                </div>
                                 <div className="coursePage-rating">
                                     <Rating rating={detail.rating} image={""} color={""} />
                                 </div>
                             </div>
                         </div>
                     ))}
-
-                    <hr />
                 </div>
             </div>
         </>
     );
 };
+
 export default TutorCoursesPage;
