@@ -6,7 +6,7 @@ import { apiGet } from "../../utils/api/axios";
 import { Link, useParams } from "react-router-dom";
 import Rating from "../../components/Rating/Rating";
 import { BiArrowBack } from "react-icons/bi";
-import { TutorCourses } from "../../utils/Interfaces/index.dto";
+
 
 interface Course {
     id: string;
