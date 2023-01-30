@@ -1,10 +1,22 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import React, { useState, useEffect } from "react";
 import { useLocation, Navigate } from "react-router-dom";
+import { Location } from "history";
 
 interface Props {
 	children: React.ReactNode;
 }
+
+interface LocationState {
+	from: {
+		pathname: string;
+	};
+}
+
+const getPreviousRoute = (location: Location): string => {
+	const state = location.state as LocationState;
+	return state?.from?.pathname || "/";
+};
 
 export const ProtectedRoute: React.FC<Props> = ({ children }) => {
 	const location = useLocation();
@@ -22,12 +34,11 @@ export const ProtectedRoute: React.FC<Props> = ({ children }) => {
 			return;
 		}
 
-		// setRedirectUrl(state);
-		setRedirectUrl("/login");
+		setRedirectUrl(getPreviousRoute(location));
 	}, [location]);
 
 	if (redirectUrl) {
-		return <Navigate to={redirectUrl} />;
+		return <Navigate to={{ pathname: redirectUrl }} />;
 	}
 	return <React.Fragment>{children}</React.Fragment>;
 };
@@ -45,12 +56,11 @@ export const ProtectedRouteTutor: React.FC<Props> = ({ children }) => {
 			return;
 		}
 
-		// setRedirectUrl(location.pathname);
-		setRedirectUrl("/login");
+		setRedirectUrl(getPreviousRoute(location));
 	}, [location]);
 
 	if (redirectUrl) {
-		return <Navigate to={redirectUrl} />;
+		return <Navigate to={{ pathname: redirectUrl }} />;
 	}
 	return <React.Fragment>{children}</React.Fragment>;
 };
@@ -68,110 +78,11 @@ export const ProtectedRouteStudent: React.FC<Props> = ({ children }) => {
 			return;
 		}
 
-		// setRedirectUrl(location.pathname);
-		setRedirectUrl("/login");
+		setRedirectUrl(getPreviousRoute(location));
 	}, [location]);
 
 	if (redirectUrl) {
-		return <Navigate to={redirectUrl} />;
+		return <Navigate to={{ pathname: redirectUrl }} />;
 	}
 	return <React.Fragment>{children}</React.Fragment>;
 };
-
-// import React, { useEffect } from "react";
-// import { useLocation, Navigate } from "react-router-dom";
-
-// interface Props {
-// 	children: React.ReactNode;
-// }
-
-// export const ProtectedRouteStudent: React.FC<Props> = ({ children }) => {
-// 	const location = useLocation();
-
-// 	const isAuthenticated = localStorage.getItem("signature");
-// 	const userType = localStorage.getItem("userType");
-
-// 	useEffect(() => {
-// 		if (isAuthenticated?.length !== 0) {
-// 			localStorage.setItem("redirectUrl", location.pathname);
-// 		}
-// 	}, [isAuthenticated, location.pathname]);
-
-// 	if (isAuthenticated?.length !== 0 && userType === "Student") {
-// 		return <React.Fragment>{children}</React.Fragment>;
-// 	}
-
-// 	return (
-// 		<Navigate
-// 			to={{ pathname: "/login", state: { redirectUrl: location.pathname } }}
-// 		/>
-// 	);
-// };
-
-// export const ProtectedRoute: React.FC<Props> = ({ children }) => {
-// 	const location = useLocation();
-
-// 	const isAuthenticated = localStorage.getItem("signature");
-// 	const userType = localStorage.getItem("userType");
-
-// 	useEffect(() => {
-// 		if (isAuthenticated?.length !== 0) {
-// 			localStorage.setItem("redirectUrl", location.pathname);
-// 		}
-// 	}, [isAuthenticated, location.pathname]);
-
-// 	if (
-// 		isAuthenticated?.length !== 0 &&
-// 		(userType === "Tutor" || userType === "Student")
-// 	) {
-// 		return <React.Fragment>{children}</React.Fragment>;
-// 	}
-
-// 	return (
-// 		<Navigate
-// 			to={{ pathname: "/login", state: { redirectUrl: location.pathname } }}
-// 		/>
-// 	);
-// };
-
-// export const ProtectedRoute: React.FC<Props> = ({ children }) => {
-// 	const location = useLocation();
-
-// 	const isAuthenticated = localStorage.getItem("signature");
-// 	const userType = localStorage.getItem("userType");
-
-// 	if (
-// 		isAuthenticated?.length !== 0 &&
-// 		(userType === "Tutor" || userType === "Student")
-// 	) {
-// 		return <React.Fragment>{children}</React.Fragment>;
-// 	}
-
-// 	return <Navigate to="/login" state={{ from: location }} />;
-// };
-
-// export const ProtectedRouteTutor: React.FC<Props> = ({ children }) => {
-// 	const location = useLocation();
-
-// 	const isAuthenticated = localStorage.getItem("signature");
-// 	const userType = localStorage.getItem("userType");
-
-// 	if (isAuthenticated?.length !== 0 && userType === "Tutor") {
-// 		return <React.Fragment>{children}</React.Fragment>;
-// 	}
-
-// 	return <Navigate to="/login" state={{ from: location }} />;
-// };
-
-// export const ProtectedRouteStudent: React.FC<Props> = ({ children }) => {
-// 	const location = useLocation();
-
-// 	const isAuthenticated = localStorage.getItem("signature");
-// 	const userType = localStorage.getItem("userType");
-
-// 	if (isAuthenticated?.length !== 0 && userType === "Student") {
-// 		return <React.Fragment>{children}</React.Fragment>;
-// 	}
-
-// 	return <Navigate to="/login" state={{ from: location }} />;
-// };

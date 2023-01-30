@@ -148,10 +148,32 @@ function App() {
 								</ProtectedRouteStudent>
 							}
 						/>
-						<Route path="/paid-courses/:id" element={<PaidCourses />} />
-						<Route path="/bookings" element={<TutorNotification />} />
+						<Route
+							path="/paid-courses/:id"
+							element={
+								<ProtectedRouteStudent>
+									<PaidCourses />
+								</ProtectedRouteStudent>
+							}
+						/>
+
+						<Route
+							path="/bookings"
+							element={
+								<ProtectedRouteTutor>
+									<TutorNotification />
+								</ProtectedRouteTutor>
+							}
+						/>
 						<Route path="*" element={<NotFound />} />
-						<Route path="/studentProfile" element={<StudentProfile />} />
+						<Route
+							path="/studentProfile"
+							element={
+								<ProtectedRouteStudent>
+									<StudentProfile />
+								</ProtectedRouteStudent>
+							}
+						/>
 					</Routes>
 				</Router>
 			</DataProvider>

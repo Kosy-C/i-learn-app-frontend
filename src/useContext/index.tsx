@@ -17,7 +17,6 @@ export const dataContext = createContext<GlobalStateInterface | null>(null);
 
 const DataProvider = ({ children }: { children: React.ReactNode }) => {
 	/** ==============Login======= **/
-	// const location = useLocation();
 
 	const LoginConfig: (data: LoginData) => Promise<void> = async (
 		data: LoginData
