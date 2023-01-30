@@ -7,67 +7,74 @@ const FileUploader = ({
 	setSelectedMaterial,
 	show,
 	courseMaterial,
-	submitForm
+	submitForm,
+	imageError,
+	setImageError,
+	isPdf,
+	setPdf,
+	pdfError,
+	setPdfError,
+	isImage,
+	setImage,
 }: any) => {
 	const fileInput = useRef<HTMLInputElement>(null);
-
-	// const handleFileInput = (
-	// 	event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement> | any
-	// ) => {
-	// 	// handle Validation
-	// 	console.log("uploaded file is ", event.target.files[0]);
-	// 	selectedMaterial(event.target.files[0]);
-	// 	const file = event.target.files[0];
-	// 	// if (file.size > 18908024) {
-	// 	// 	onFileSelectError({ error: "File size cannot exceed more than 8MB" });
-	// 	// } else {
-	// 	// 	onFileSelectSuccess(file);
-	// 	// }
-	// };
+	const handleImageChange = (
+		e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement> | any
+	) => {
+		const file = e.target.files[0];
+		const supportedImageFormats = ["image/jpeg", "image/jpg", "image/png"];
+		if (file !== undefined && file.size > 5242880) {
+			setImage(true);
+			setImageError("File size cannot exceed 5MB");
+		} else if (
+			file !== undefined &&
+			!supportedImageFormats.includes(file.type)
+		) {
+			setImage(true);
+			setImageError("unsupported file format");
+		} else {
+			setSelectedImage(e.target.files[0]);
+			setImage(false);
+		}
+	};
+	const handlePdfChange = (
+		e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement> | any
+	) => {
+		const file = e.target.files[0];
+		if (file !== undefined && file.size > 16971520) {
+			setPdf(true);
+			setPdfError("File size cannot exceed 16MB");
+		} else if (file !== undefined && !["application/pdf"].includes(file.type)) {
+			setPdf(true);
+			setPdfError("unsupported file format");
+		} else {
+			setSelectedMaterial(e.target.files[0]);
+			setPdf(false);
+		}
+	};
 
 	return (
 		<div className="file-uploader">
 			<div>
-				<label>Upload course Image</label>
+				<label>Upload course Image (*jpg *jpeg *png)</label>
 				<input
 					type="file"
-					onChange={(
-						e:
-							| ChangeEvent<HTMLInputElement>
-							| ChangeEvent<HTMLSelectElement>
-							| any
-					) => setSelectedImage(e.target.files[0])}
+					onChange={handleImageChange}
 					// value={selectedImage}
 					name="course_image"
 				/>
+				{isImage && <p style={{ color: "red" }}>{imageError}</p>}
 			</div>
-			{Boolean(show) && (
-				<div>
-					<img
-						src={courseMaterial !== undefined ? courseMaterial.image : ""}
-						alt="course_icon"
-					/>
-				</div>
-			)}
 			<div>
-				<label>Upload course material</label>
+				<label>Upload course material (*pdf)</label>
 				<input
 					type="file"
-					onChange={(
-						e:
-							| ChangeEvent<HTMLInputElement>
-							| ChangeEvent<HTMLSelectElement>
-							| any
-					) => setSelectedMaterial(e.target.files[0])}
+					onChange={handlePdfChange}
 					// value={selectedMaterial}
 					name="course_material"
 				/>
+				{isPdf && <p style={{ color: "red" }}>{pdfError}</p>}
 			</div>
-			{Boolean(show) && (
-				<div>
-					<h4>{courseMaterial !== undefined ? courseMaterial.material : ""}</h4>
-				</div>
-			)}
 			<button type="submit" onClick={submitForm} className="submitButton">
 				Submit
 			</button>

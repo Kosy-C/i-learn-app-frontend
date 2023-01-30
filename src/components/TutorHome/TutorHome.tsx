@@ -11,16 +11,13 @@ import TutorCreateForm, {
 	CourseDetails,
 	courseDetails,
 } from "../../pages/TutorCourseOperations/TutorCourseOperations";
-// import { Link } from "react-router-dom";
 import Card from "../Cards/course";
 import Button from "../Button/Button";
 import "./TutorHome.css";
-import { User, Course, UploadFile } from "../../utils/Interfaces/index.dto";
+import { User, Course } from "../../utils/Interfaces/index.dto";
 import LoadingIcons from "react-loading-icons";
 import { toast } from "react-toastify";
 import TutorNotification from "../../pages/TutorPage/TutorPage";
-import FileUploaded from "../../pages/TutorCourseOperations/FileUploader";
-import { Link } from "react-router-dom";
 
 export interface FileUploads {
 	image: string;
@@ -36,8 +33,6 @@ const TutorHeader = ({
 	const [available, setAvailability] = useState(false);
 	const [loading, setLoading] = useState<Boolean>(false);
 	const [course, setCourse] = useState<CourseDetails | any>(courseDetails);
-	const [selectedImage, setSelectedImage] = useState<UploadFile[]>();
-	const [selectedMaterial, setSelectedMaterial] = useState<UploadFile[]>();
 	const [show, setShow] = useState<Boolean>(false);
 	const [fileMaterials, setFileMaterials] = useState<FileUploads | any>({
 		image: "",
@@ -160,8 +155,7 @@ const TutorHeader = ({
 											isEdit={isEdit}
 											courseMaterial={fileMaterials}
 											setCourse={setCourse}
-											// setSelectedImage={setSelectedImage}
-											// setSelectedMaterial={setSelectedMaterial}
+											setIsEdit={setIsEdit}
 										/>
 									</Modal>
 									{/* </Link> */}

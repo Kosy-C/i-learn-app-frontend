@@ -193,17 +193,19 @@
 
 .tutorCourse-nameContainer{
   display: flex;
+  flex-direction: column;
   /* background-color: blue; */
   width: 20.5em;
   padding-left: .7em;
   justify-content: center;
+  height: 65px;
 }
 .tutorCourse-name{
   /* margin-right: 2em; */
 }
 .tutorCourse_rating{
   /* margin-left: 21px;
-  padding-left: 21px; */
+*/
 }
 
 
