@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
-import React, { createContext } from "react";
+import React, { createContext, useState } from "react";
 import { apiPost } from "../utils/api/axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -12,10 +12,14 @@ export interface LoginData {
 }
 export interface GlobalStateInterface {
 	LoginConfig: (data: LoginData) => Promise<void>;
+	loading: Boolean;
+	setLoading: React.Dispatch<React.SetStateAction<Boolean>>;
 }
 export const dataContext = createContext<GlobalStateInterface | null>(null);
 
 const DataProvider = ({ children }: { children: React.ReactNode }) => {
+	const [loading, setLoading] = useState<Boolean>(true);
+
 	/** ==============Login======= **/
 
 	const LoginConfig: (data: LoginData) => Promise<void> = async (
@@ -46,6 +50,8 @@ const DataProvider = ({ children }: { children: React.ReactNode }) => {
 		<dataContext.Provider
 			value={{
 				LoginConfig,
+				loading,
+				setLoading,
 			}}
 		>
 			{children}
