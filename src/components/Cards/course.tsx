@@ -32,6 +32,12 @@ const CourseCard = ({
 					<div>
 						<h3 className="tutorCourse-title">{course.title}</h3>
 					</div>
+					<div>
+						<h3 className="tutorCourse-title">
+							<span>&#x20A6;</span>
+							{course.pricing}
+						</h3>
+					</div>
 					<div className="tutorCourse-nameContainer">
 						<div className="tutorCourse-name">
 							<p>
@@ -40,9 +46,9 @@ const CourseCard = ({
 						</div>
 						<div className="tutorCourse_rating">
 							<Rating
-									rating={Number(course.rating)}
-									image={""}
-									color={"#ffb400"}
+								rating={Number(course.rating)}
+								image={""}
+								color={"#ffb400"}
 							/>
 						</div>
 					</div>
