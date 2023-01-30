@@ -1,25 +1,24 @@
-// import React, { useState, BaseSyntheticEvent, useEffect } from "react";
-
 import { useState, BaseSyntheticEvent, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import NavBar from "../../components/navBar/navBar";
 import StarRatingComponent from "react-star-rating-component";
 import "./RateCourses.css";
 import { apiGet, apiPost } from "../../utils/api/axios";
 import { toast } from "react-toastify";
+import { FaChevronLeft } from "react-icons/fa";
 import { courseDetails, Courses } from "../../utils/Interfaces/index.dto";
-// import { useGlobalState, GlobalStateInterface } from "../../useContext/context"
+
 
 
 const RateCourses = () => {
-	// const {initialStar, setInitialStar} = useGlobalState()
-
+	
 	const [initialStar, setInitialStar] = useState(1);
 	const [halfStar, setHalfStar] = useState(0)
 	const [initialComment, setInitialComment] = useState({ comment: "" });
 	const [courses, setCourse] = useState(courseDetails);
 
 	const { courseId } = useParams();
+	const navigate = useNavigate()
 
 	const fetchCourseDetails = async () => {
 		try {
@@ -54,6 +53,7 @@ const RateCourses = () => {
 			setInitialComment({ comment: "" });
 			setInitialStar((prev)=>prev=1)
 			const res = await apiPost(`/courses/rate-courses/${courseId}`, data);
+			navigate('/history-page')
 			toast.success(res.data.message);
 		} catch (error: any) {
 			toast.error(error.response.data.message);
@@ -67,10 +67,15 @@ const RateCourses = () => {
 			<NavBar />
 			<div className="rate_course_container">
 				<div className="rate_course_subNavbar">
-					<div className="rate_course_left">
-						<button className="rate_course_arrowButton">&#8249;</button>
-						<button className="rate_course_backButton">Back</button>
-					</div>
+				<Link className="back" to={"/history-page"}>
+						<p>
+							{" "}
+							<span id="icon">
+								<FaChevronLeft />
+							</span>
+							&nbsp; Back
+						</p>
+					</Link>
 					<div className="rate_course_right">
 						<h1>Rate Course</h1>
 					</div>
@@ -78,10 +83,7 @@ const RateCourses = () => {
 				<hr className="rate_course_line" />
 				<div className="rate_course_body">
 					<div className="rate_course_firstContainer">
-						{/* <div className="rate_course_logo">
-							<img src="" alt="course_logo" />
-						</div> */}
-						{
+						
 							<div className="rate_course_titleDesc">
 								<div className="rate_course_logo">
 									<img
@@ -97,8 +99,7 @@ const RateCourses = () => {
 								</div>
 							</div>
 
-							// <div className="rate_course_titleDesc">No courses</div>
-						}
+						
 					</div>
 					<div className="rate_course_starContainer">
 						<h3>Rate Course</h3>

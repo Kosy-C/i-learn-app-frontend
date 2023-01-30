@@ -7,6 +7,7 @@ import Modal from "react-responsive-modal";
 import TutorCreateForm, {
 	courseDetails,
 } from "../../pages/TutorCourseOperations/TutorCourseOperations";
+import { Link } from "react-router-dom";
 
 const CourseCard = ({
 	course,
@@ -27,10 +28,15 @@ const CourseCard = ({
 						alt="courseIcon"
 					/>
 				</div>
-
 				<div className="tutorCourse-details">
 					<div>
 						<h3 className="tutorCourse-title">{course.title}</h3>
+					</div>
+					<div>
+						<h3 className="tutorCourse-title">
+							<span>&#x20A6;</span>
+							{course.pricing}
+						</h3>
 					</div>
 					<div className="tutorCourse-nameContainer">
 						<div className="tutorCourse-name">

@@ -3,7 +3,7 @@ import { apiGet, apiPost } from "../../utils/api/axios";
 import StarRating from "../../components/StarRating/StarRating";
 import "./RatingTutor.css";
 import NavBar from "../../components/navBar/navBar";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 
 import { FaChevronLeft, FaRegEnvelope } from "react-icons/fa";
 import { toast } from "react-toastify";
@@ -20,7 +20,7 @@ const Card: React.FC = () => {
 	});
 
 	const [tutorDetails, setTutorDetails] = useState<any>({});
-
+	const navigate = useNavigate()
 	const { tutorId } = useParams();
 
 	const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -33,8 +33,8 @@ const Card: React.FC = () => {
 			setFormData({ ratingValue: 0, description: "" });
 			const postComment = await apiPost(
 				`/users/tutors/${tutorId}/rate`,
-				formData
-			);
+				formData)
+				navigate('/history-page');
 			toast.success(postComment.data.message);
 		} catch (error: any) {
 			toast.error(error.response.data.message);
@@ -45,10 +45,9 @@ const Card: React.FC = () => {
 
 	useEffect(() => {
 		const fetch = async () => {
-			// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+			
 			try {
 				const response = await apiGet(`/users/atutordetail/${tutorId}`);
-				// console.log(response.data);
 				setTutorDetails(response.data.message);
 			} catch (error) {
 				console.log(error);
@@ -66,7 +65,7 @@ const Card: React.FC = () => {
 			<NavBar />
 			<div className="tutorContainer">
 				<div className="lineup">
-					<Link className="back" to="#">
+					<Link className="back" to="/history-page">
 						<p>
 							{" "}
 							<span id="icon">
@@ -98,7 +97,6 @@ const Card: React.FC = () => {
 					<div className="card-footer">
 						<StarRating
 							onClick={handleStarRatingClick}
-							// value={formData.ratingValue}
 						/>
 						<label id="page">Comment</label>
 						<textarea

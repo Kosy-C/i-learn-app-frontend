@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import React, { createContext, useState } from "react";
 import { apiGet, apiPost } from "../utils/api/axios";
 import { toast } from "react-toastify";
@@ -6,8 +7,9 @@ import {
   courseDetails,
   CourseDetails,
 } from "../pages/TutorCourseOperations/TutorCourseOperations";
-import { UploadFile, User } from "../utils/Interfaces/index.dto";
+import { User } from "../utils/Interfaces/index.dto";
 import { AxiosResponse } from "axios";
+
 
 export interface LoginData {
   email: string;
@@ -19,6 +21,7 @@ export interface GlobalStateInterface {
   loading: Boolean;
   error: null | String;
   loggedInUser: () => void;
+	setLoading: React.Dispatch<React.SetStateAction<Boolean>> |any;
 }
 export const dataContext = createContext<GlobalStateInterface | null>(null);
 
@@ -39,6 +42,7 @@ const DataProvider = ({ children }: { children: React.ReactNode }) => {
 
       localStorage.setItem("signature", signature);
       localStorage.setItem("user", response.data.areaOfInterest || "backend");
+      localStorage.setItem("userType", response.data.userType);
       if (response.status === 200) {
         window.location.href = "/dashboard";
       }
@@ -60,6 +64,7 @@ const DataProvider = ({ children }: { children: React.ReactNode }) => {
       value={{
         LoginConfig,
         loggedInUser,
+        setLoading,
         user,
         loading,
         error,
@@ -68,6 +73,11 @@ const DataProvider = ({ children }: { children: React.ReactNode }) => {
       {children}
     </dataContext.Provider>
   );
+	// const [loading, setLoading] = useState<Boolean>(true);
+
+
+
+
 };
 
 export const useAuth = () => {
