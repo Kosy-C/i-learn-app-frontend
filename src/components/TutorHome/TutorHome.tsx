@@ -172,8 +172,6 @@ const TutorHeader = ({
 											isEdit={isEdit}
 											// selectedImage={selectedImage}
 											courseMaterial={fileMaterials}
-										// setSelectedImage={setSelectedImage}
-										// setSelectedMaterial={setSelectedMaterial}
 										/>
 									</Modal>
 									{/* </Link> */}

@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { apiGet } from "../../utils/api/axios";
 import "./show.css";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // import { useParams } from "react-router-dom";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
@@ -74,8 +74,6 @@ const TutorAvailability: React.FC<Props> = ({ tutor, title, onClick, id }) => {
 		};
 		void getAvailable();
 	}, [id]);
-
-
 
 	const selectedTime: string[] = [];
 
