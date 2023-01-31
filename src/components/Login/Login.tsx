@@ -34,7 +34,6 @@ function LoginForm() {
 
 	const handleLogin = () => {
 		setLoading(true);
-		console.log("click me")
 	};
 	const handleSubmit = async (event: ChangeEvent<HTMLFormElement>) => {
 		event.preventDefault();
