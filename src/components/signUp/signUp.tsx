@@ -8,7 +8,6 @@ import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import logo from "../../assets/logo.png";
 import { signInWithGooglePopup } from "../../utils/firebaseAuth/firebase";
-import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { apiPost } from "../../utils/api/axios";
@@ -37,7 +36,6 @@ function SignUpForm() {
 	const [isSubmit, setIsSubmit] = useState(false);
 	const [show, setShow] = useState(false);
 	const [formDetails, setFormDetails] = useState(formField);
-	const [areaOfInterestArray, setAreaOfInterestArray] = useState<any>([]);
 	const navigate = useNavigate();
 
 	const googleSignIn = async () => {
@@ -49,11 +47,6 @@ function SignUpForm() {
 		event.preventDefault();
 		const { name, value } = event.target;
 		setFormDetails({ ...formDetails, [name]: value });
-	};
-	const setInterest = () => {
-		setAreaOfInterestArray(formDetails.areaOfInterest);
-		formDetails.areaOfInterest = areaOfInterestArray;
-		console.log(formDetails);
 	};
 
 	const { loading, setLoading } = useAuth() as any;
@@ -100,15 +93,12 @@ function SignUpForm() {
 	};
 
 	const handleSubmit = async (event: ChangeEvent<HTMLFormElement>) => {
-		console.log("form before ", formDetails)
 		const areaArray: any[] = [];
-		areaArray.push(formDetails.areaOfInterest)
-		formDetails.areaOfInterest = areaArray
-		console.log("form details is ", formDetails)
-		setInterest();
+		areaArray.push(formDetails.areaOfInterest);
+		formDetails.areaOfInterest = areaArray;
+
 		try {
 			event.preventDefault();
-			// formDetails["areaOfInterest"] = areaOfInterestArray;
 			const response = await apiPost(`/users/signup`, formDetails);
 
 			if (response.status === 201) {

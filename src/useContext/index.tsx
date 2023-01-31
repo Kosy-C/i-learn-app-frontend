@@ -48,6 +48,7 @@ const DataProvider = ({ children }: { children: React.ReactNode }) => {
         window.location.href = "/dashboard";
       }
     } catch (err: any) {
+      setLoading(false);
       if (err.response?.data?.Error === "Internal server Error"){
         toast.error("Something went wrong, please hang on");
       } else {
