@@ -58,6 +58,7 @@ const CreateAvailability = ({ closeModal }: modalProps) => {
 						Available Times:
 						<br />
 						<select
+							className="avail-select"
 							multiple
 							value={availableTime}
 							onChange={(event) =>

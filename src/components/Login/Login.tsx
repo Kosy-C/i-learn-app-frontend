@@ -8,18 +8,58 @@ import React, {
 	useRef,
 	useEffect,
 } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "../signUp/signUp.css";
 import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import logo from "../../assets/logo.png";
-import { signInWithGooglePopup } from "../../utils/firebaseAuth/firebase";
 import { useAuth } from "../../useContext/index";
 import LoadingIcons from "react-loading-icons";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { app } from "../../utils/firebaseAuth/firebase";
+import axios from "axios";
+
+const baseUrl: string = import.meta.env.VITE_SERVER_URL;
 
 function LoginForm() {
-	const googleSignIn = async () => {
-		await signInWithGooglePopup();
+	const navigate = useNavigate();
+
+	const firebaseAuth = getAuth(app);
+	const provider = new GoogleAuthProvider();
+
+	const signInWithGoogle = async (): Promise<void> => {
+		await signInWithPopup(firebaseAuth, provider)
+			.then((userCred) => {
+				console.log(userCred);
+				if (userCred !== undefined) {
+					firebaseAuth.onAuthStateChanged((userCred) => {
+						if (userCred !== undefined) {
+							void userCred?.getIdToken().then((token) => {
+								axios
+									.get(`${baseUrl}/users/googleLogin`, {
+										headers: { Authorization: `Bearer ${token}` },
+									})
+									.then((res) => {
+										localStorage.setItem("signature", res.data.signature);
+										localStorage.setItem(
+											"user",
+											res.data.user.areaOfInterest || "backend"
+										);
+										localStorage.setItem("userType", res.data.user.userType);
+									})
+									.then((e) => navigate(`/dashboard`, { replace: true }))
+									.catch((e) => e);
+								// localStorage.setItem("signature", token);
+							});
+						} else {
+							navigate("/login");
+						}
+					});
+				}
+			})
+			.catch((err) => {
+				console.log(err);
+			});
 	};
 	const emailRef = useRef<HTMLInputElement>(null);
 	const passwordRef = useRef<HTMLInputElement>(null);
@@ -79,6 +119,7 @@ function LoginForm() {
 									ref={emailRef}
 									placeholder="Enter your email"
 									required
+									className="signUp-input"
 								/>
 							</div>
 							{error.length > 0 && error.includes("email") && (
@@ -92,6 +133,7 @@ function LoginForm() {
 									ref={passwordRef}
 									placeholder="Enter your password..."
 									required
+									className="signUp-input"
 								/>
 							</div>
 							<h5 id="forgot">
@@ -135,7 +177,7 @@ function LoginForm() {
 							</div>
 							<div className="socialIcons">
 								{/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
-								<button type="submit" onClick={googleSignIn}>
+								<button type="submit" onClick={signInWithGoogle}>
 									<FcGoogle />
 								</button>
 								<button type="submit" className="fbBtn">
