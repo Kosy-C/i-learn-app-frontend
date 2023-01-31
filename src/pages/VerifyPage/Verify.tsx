@@ -1,19 +1,12 @@
 import React, { Fragment, ChangeEvent, useState, useRef } from "react";
-import { Link } from "react-router-dom";
 import "../VerifyPage/Verify.css";
-import { FaFacebook } from "react-icons/fa";
-import { FcGoogle } from "react-icons/fc";
 import logo from "../../assets/logo.png";
-import { signInWithGooglePopup } from "../../utils/firebaseAuth/firebase";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const baseUrl = import.meta.env.SERVER_URL;
 const VerifyPage = () => {
-	const googleSignIn = async () => {
-		await signInWithGooglePopup();
-	};
 	const emailRef = useRef<HTMLInputElement>(null);
 	const passwordRef = useRef<HTMLInputElement>(null);
 	const interestRef = useRef<HTMLSelectElement>(null);

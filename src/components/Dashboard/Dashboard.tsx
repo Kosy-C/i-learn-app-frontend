@@ -13,72 +13,72 @@ import { useAuth } from "../../useContext";
 // import Profile from "../profileDetails/profile";
 
 const Dashboard = () => {
-  const [user, setUser] = useState<User>();
-  const [loading, setLoading] = useState<Boolean>(true);
+	const [user, setUser] = useState<User>();
+	const [loading, setLoading] = useState<Boolean>(true);
 
-  const loggedInUser = async () => {
-    const { data } = await apiGet("/users/profile");
-    setUser(data.userDetails);
-    setLoading(false);
-  };
-  const getDashboard = () => {
-    if (user?.userType === "Student") {
-      return (
-        <div className="container">
-          <FeaturedTutors />
-          <RecommendedCourses />
-        </div>
-      );
-    }
-    if (user?.userType === "Tutor") {
-      return (
-        <>
-          <TutorHome tutor={user} tutorProps={setUser} />
-        </>
-      );
-    }
-  };
+	const loggedInUser = async () => {
+		const { data } = await apiGet("/users/profile");
+		setUser(data.userDetails);
+		setLoading(false);
+	};
+	const getDashboard = () => {
+		if (user?.userType === "Student") {
+			return (
+				<div className="container">
+					<FeaturedTutors />
+					<RecommendedCourses />
+				</div>
+			);
+		}
+		if (user?.userType === "Tutor") {
+			return (
+				<>
+					<TutorHome tutor={user} tutorProps={setUser} />
+				</>
+			);
+		}
+	};
 
-  const setNavbarText = () => {
-    if (user?.userType === "Student") {
-      return {
-        username: user?.name || "John Doe",
-        welcomeText: "welcome",
-      };
-    } else {
-      return {
-        username: undefined,
-        welcomeText: undefined,
-      };
-    }
-  };
+	const setNavbarText = () => {
+		if (user?.userType === "Student") {
+			return {
+				username: user?.name || "John Doe",
+				welcomeText: "welcome",
+			};
+		} else {
+			return {
+				username: undefined,
+				welcomeText: undefined,
+			};
+		}
+	};
 
-  // <Profile id= {}/>
+	// <Profile id= {}/>
 
-  useEffect(() => {
-    return () => {
-      void loggedInUser();
-    };
-  }, []);
-  return (
-    <div>
-      <NavBar />
-      <SubNavbar
-        name={setNavbarText().username}
-        welcome={setNavbarText().welcomeText}
-      />
-      {loading ? (
-        <LoadingIcons.Rings
-          stroke="#fd29593d"
-          strokeOpacity={1}
-          height={500}
-          width={1400}
-        />
-      ) : (
-        <>{getDashboard()}</>
-      )}
-    </div>
-  );
+	useEffect(() => {
+		return () => {
+			void loggedInUser();
+		};
+	}, []);
+	return (
+		<div>
+			<NavBar />
+			<SubNavbar
+				name={setNavbarText().username}
+				welcome={setNavbarText().welcomeText}
+			/>
+			{loading ? (
+				<LoadingIcons.Rings
+					stroke="#fd29593d"
+					strokeOpacity={1}
+					height={500}
+					width={1400}
+				/>
+			) : (
+				<>{getDashboard()}</>
+			)}
+		</div>
+	);
 };
 
 export default Dashboard;
