@@ -17,11 +17,11 @@
 }
 
 .parent-course-container{
-  
     margin-top: 30px;
     display: grid;
-    grid-template-columns: auto auto auto;
-    grid-gap: 22px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    /* grid-template-columns: auto auto auto; */
+    grid-gap: 35px;
     margin-left: 5rem;
 }
 

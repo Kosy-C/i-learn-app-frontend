@@ -1,7 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
-import React, { Fragment, ChangeEvent, useState, useRef } from "react";
+import React, {
+	Fragment,
+	ChangeEvent,
+	useState,
+	useRef,
+	useEffect,
+} from "react";
 import { Link } from "react-router-dom";
 import "../signUp/signUp.css";
 import { FaFacebook } from "react-icons/fa";
@@ -9,6 +15,7 @@ import { FcGoogle } from "react-icons/fc";
 import logo from "../../assets/logo.png";
 import { signInWithGooglePopup } from "../../utils/firebaseAuth/firebase";
 import { useAuth } from "../../useContext/index";
+import LoadingIcons from "react-loading-icons";
 
 function LoginForm() {
 	const googleSignIn = async () => {
@@ -23,10 +30,15 @@ function LoginForm() {
 		else if (password.length < 8)
 			return setError("Password character cannot be less than 8");
 	};
-	const { LoginConfig } = useAuth() as any;
+	const { LoginConfig, loading, setLoading } = useAuth() as any;
 
+	const handleLogin = () => {
+		setLoading(true);
+		console.log("click me")
+	};
 	const handleSubmit = async (event: ChangeEvent<HTMLFormElement>) => {
 		event.preventDefault();
+
 		validate(emailRef.current?.value, passwordRef.current?.value);
 		const data = {
 			email: emailRef.current?.value,
@@ -34,6 +46,9 @@ function LoginForm() {
 		};
 		LoginConfig(data);
 	};
+	useEffect(() => {
+		setLoading(false);
+	}, []);
 
 	return (
 		<Fragment>
@@ -92,10 +107,27 @@ function LoginForm() {
 							{error.length > 0 && error.includes("Interest") && (
 								<div className="errorMsg">{error}</div>
 							)}
+							{/* //true */}
 
-							<button type="submit" className="signUp-button">
+							<button
+								type="submit"
+								className="signUp-button"
+								onClick={handleLogin}
+							>
 								Login
 							</button>
+
+							{/* false */}
+							{loading && (
+								<div className="login_loading">
+									<LoadingIcons.Oval
+										stroke="black"
+										strokeOpacity={1}
+										height={45}
+										width={398}
+									/>
+								</div>
+							)}
 							<div className="login-formAlt">
 								Don't have an account?
 								<Link to="/sign-up" className="login-link">

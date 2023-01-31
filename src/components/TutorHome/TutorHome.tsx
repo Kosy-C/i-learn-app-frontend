@@ -161,7 +161,7 @@ const TutorHeader = ({
 									</Modal>
 									{/* </Link> */}
 									<div className="tutor_home_courseCard">
-										{tutor?.courses !== undefined ? (
+										{tutor?.courses.length > 0 ? (
 											tutor?.courses.map((course) => {
 												return (
 													<div
@@ -183,10 +183,10 @@ const TutorHeader = ({
 												);
 											})
 										) : (
-											<p>
+											<h4>
 												You have no courses yet, click on the Add Course button
 												to add a course.
-											</p>
+											</h4>
 										)}
 									</div>
 								</TabPanel>

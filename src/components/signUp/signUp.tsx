@@ -12,6 +12,8 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { apiPost } from "../../utils/api/axios";
+import LoadingIcons from "react-loading-icons";
+import { useAuth } from "../../useContext";
 
 const baseUrl = import.meta.env.SERVER_URL;
 
@@ -19,7 +21,7 @@ interface formFieldType {
 	userType: string;
 	email: string;
 	password: string;
-	areaOfInterest: string;
+	areaOfInterest: string | any[];
 	name: string;
 }
 const formField: formFieldType = {
@@ -35,6 +37,7 @@ function SignUpForm() {
 	const [isSubmit, setIsSubmit] = useState(false);
 	const [show, setShow] = useState(false);
 	const [formDetails, setFormDetails] = useState(formField);
+	const [areaOfInterestArray, setAreaOfInterestArray] = useState<any>([]);
 	const navigate = useNavigate();
 
 	const googleSignIn = async () => {
@@ -47,12 +50,23 @@ function SignUpForm() {
 		const { name, value } = event.target;
 		setFormDetails({ ...formDetails, [name]: value });
 	};
+	const setInterest = () => {
+		setAreaOfInterestArray(formDetails.areaOfInterest);
+		formDetails.areaOfInterest = areaOfInterestArray;
+		console.log(formDetails);
+	};
+
+	const { loading, setLoading } = useAuth() as any;
+	const handleLogin = () => {
+		setLoading(true);
+	};
 
 	const display = () => {
 		setShow(!show);
 	};
 
 	const { name, userType, email, password, areaOfInterest } = formDetails;
+
 	useEffect(() => {
 		if (Object.keys(formError).length === 0 && isSubmit) {
 			console.log(formDetails);
@@ -86,20 +100,37 @@ function SignUpForm() {
 	};
 
 	const handleSubmit = async (event: ChangeEvent<HTMLFormElement>) => {
+		console.log("form before ", formDetails)
+		const areaArray: any[] = [];
+		areaArray.push(formDetails.areaOfInterest)
+		formDetails.areaOfInterest = areaArray
+		console.log("form details is ", formDetails)
+		setInterest();
 		try {
 			event.preventDefault();
+			// formDetails["areaOfInterest"] = areaOfInterestArray;
 			const response = await apiPost(`/users/signup`, formDetails);
 
 			if (response.status === 201) {
+				setLoading(false);
 				toast.success(response.data.message);
 			}
 
 			setFormError(validate(formDetails));
 			setIsSubmit(true);
 		} catch (err: any) {
-			toast.error(err.response.data.Error);
+			setLoading(false);
+
+			if (err.response?.data?.Error === "Internal server Error") {
+				toast.error("Something went wrong, please hang on");
+			} else {
+				toast.error(err.response?.data?.Error || "Something went wrong");
+			}
 		}
 	};
+	useEffect(() => {
+		setLoading(false);
+	}, []);
 	return (
 		<Fragment>
 			<div className="formContainer">
@@ -172,18 +203,32 @@ function SignUpForm() {
 									onChange={handleChange}
 								>
 									<option value="">Select</option>
-									<option value="Tutor">Mathematics</option>
-									<option value="physics">Physics</option>
-									<option value="coding">Coding</option>
-									<option value="graphics">Graphics design</option>
-									<option value="video">Video Editing</option>
-									<option value="chemistry">Chemistry</option>
-									<option value="digital">Digital Marketing</option>
+									<option value="Mathematics">Mathematics</option>
+									<option value="Physics">Physics</option>
+									<option value="Coding">Coding</option>
+									<option value="Graphics Design">Graphics design</option>
+									<option value="Video Editing">Video Editing</option>
+									<option value="Chemistry">Chemistry</option>
+									{/* <option value="digital">Digital Marketing</option> */}
 								</select>
 							</div>
-							<button type="submit" className="signUp-button">
+							<button
+								type="submit"
+								className="signUp-button"
+								onClick={handleLogin}
+							>
 								Sign Up
 							</button>
+							{loading && (
+								<div className="signup_loading">
+									<LoadingIcons.Oval
+										stroke="black"
+										strokeOpacity={1}
+										height={45}
+										width={398}
+									/>
+								</div>
+							)}
 							<div className="formAlt">
 								Already have an account?
 								<Link to="/login" className="login-link">
