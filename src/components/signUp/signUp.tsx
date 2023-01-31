@@ -197,13 +197,17 @@ function SignUpForm() {
 						<button type="button" onClick={() => googleSignIn}>
 							<FcGoogle />
 						</button>
-						<a href="https://localhost:4000/facebook">testing</a>
+						<a href="https://localhost:4000/facebook">
+							<button className="fbBtn">
+								<FaFacebook />
+							</button>
+						</a>
+
 						{/* <input
 							onClick={async () => await facebookSignIn()}
 							className="fbBtn"
 							type="button"
 						>
-							<FaFacebook />
 						</input> */}
 					</div>
 				</div>
