@@ -32,8 +32,7 @@ import {
 import DataProvider from "./useContext/index";
 import StudentProfile from "./pages/StudentProfile/StudentProfile ";
 import TutorNotification from "./pages/TutorPage/TutorPage";
-
-
+import TutorCoursesPage from "./pages/TutorCoursePage/TutorCoursePage";
 
 function App() {
 	return (
@@ -55,7 +54,7 @@ function App() {
 							path="/tutor-profile"
 							element={
 								<ProtectedRouteTutor>
-									<Profile />
+									<Profile onClick={undefined} />
 								</ProtectedRouteTutor>
 							}
 						/>
@@ -168,6 +167,11 @@ function App() {
 						<Route path="/paid-courses/:id" element={<PaidCourses />} />
 						<Route path="/bookings" element={<TutorNotification />} />
 						<Route path="*" element={<NotFound />} />
+						<Route path="/studentProfile" element={<StudentProfile />} />
+						<Route
+							path="/tutorCourse/:tutorId"
+							element={<TutorCoursesPage />}
+						/>
 						<Route
 							path="/studentProfile"
 							element={

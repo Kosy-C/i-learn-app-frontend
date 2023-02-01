@@ -95,3 +95,17 @@
   margin-bottom: 5px;
   color: rgb(54, 6, 6);
 }
+
+
+
+@media (max-width: 849px) and (min-width: 320px){
+.tutor_notifications {
+  justify-content: space-around;
+  width: 100vw;
+  margin: 0px;
+}
+.tutor_notification {
+  margin-bottom: 12px;
+  width: 250px;
+}
+}

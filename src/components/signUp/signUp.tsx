@@ -7,19 +7,22 @@ import "../signUp/signUp.css";
 import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import logo from "../../assets/logo.png";
-import { signInWithGooglePopup } from "../../utils/firebaseAuth/firebase";
-import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { apiPost } from "../../utils/api/axios";
+import LoadingIcons from "react-loading-icons";
+import { useAuth } from "../../useContext";
+import axios from "axios";
+import { app } from "../../utils/firebaseAuth/firebase";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
-const baseUrl = import.meta.env.SERVER_URL;
+const googleLoginUrl: string = import.meta.env.VITE_SERVER_URL;
 
 interface formFieldType {
 	userType: string;
 	email: string;
 	password: string;
-	areaOfInterest: string;
+	areaOfInterest: string | any[];
 	name: string;
 }
 const formField: formFieldType = {
@@ -31,21 +34,81 @@ const formField: formFieldType = {
 };
 
 function SignUpForm() {
+	const firebaseAuth = getAuth(app);
+	const provider = new GoogleAuthProvider();
+
+	const signInWithGoogle = async (): Promise<void> => {
+		await signInWithPopup(firebaseAuth, provider)
+			.then((userCred) => {
+				console.log(userCred);
+				if (userCred !== undefined) {
+					firebaseAuth.onAuthStateChanged((userCred) => {
+						if (userCred !== undefined) {
+							// console.log(userCred);
+							void userCred?.getIdToken().then((token) => {
+								axios
+									.get(`${googleLoginUrl}/users/googleLogin`, {
+										headers: { Authorization: `Bearer ${token}` },
+									})
+									.then((res) => {
+										console.log("res.data is ", res.data);
+										localStorage.setItem("signature", res.data.signature);
+										localStorage.setItem(
+											"user",
+											res.data.user.areaOfInterest || "backend"
+										);
+										localStorage.setItem("userType", res.data.user.userType);
+									})
+									.then((e) => navigate(`/dashboard`, { replace: true }))
+									.catch((e) => e);
+								// localStorage.setItem("signature", token);
+							});
+						} else {
+							navigate("/login");
+						}
+					});
+				}
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
+
 	const [formError, setFormError] = useState({});
+	const [nameError, setNameError] = useState("");
+	const [userTypeError, setUserTypeError] = useState("");
+	const [emailError, setEmailError] = useState("");
+	const [passWordError, setPassWordError] = useState("");
+
+	const [interestError, setInterestError] = useState("");
+
 	const [isSubmit, setIsSubmit] = useState(false);
 	const [show, setShow] = useState(false);
 	const [formDetails, setFormDetails] = useState(formField);
+	const [isName, setIsName] = useState(false);
+	const [isUsertype, setIsUsertype] = useState(false);
+	const [isEmail, setIsEmail] = useState(false);
+	const [isPassword, setIsPassword] = useState(false);
+	const [isAreaOfInterest, setIsAreaOfInterest] = useState(false);
+
 	const navigate = useNavigate();
 
-	const googleSignIn = async () => {
-		await signInWithGooglePopup();
-	};
 	const handleChange = async (
 		event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>
 	) => {
 		event.preventDefault();
+		setNameError("");
+		setUserTypeError("");
+		setEmailError("");
+		setPassWordError("");
+		setInterestError("");
 		const { name, value } = event.target;
 		setFormDetails({ ...formDetails, [name]: value });
+	};
+
+	const { loading, setLoading } = useAuth() as any;
+	const handleLogin = () => {
+		// setLoading(true);
 	};
 
 	const display = () => {
@@ -53,53 +116,74 @@ function SignUpForm() {
 	};
 
 	const { name, userType, email, password, areaOfInterest } = formDetails;
+
 	useEffect(() => {
 		if (Object.keys(formError).length === 0 && isSubmit) {
 			console.log(formDetails);
 		}
 	}, [formError]);
 
-	const validate = (values: formFieldType) => {
-		const errors: formFieldType = {
-			name: "",
-			userType: "",
-			email: "",
-			password: "",
-			areaOfInterest: "",
-		};
-		if (!values.name) {
-			errors.name = "Name is required";
-		}
-		if (!values.userType) {
-			errors.userType = "User Type is required";
-		}
-		if (!values.email) {
-			errors.email = "Email is required";
-		}
-		if (!values.password) {
-			errors.password = "Password is required";
-		}
-		if (!values.areaOfInterest) {
-			errors.areaOfInterest = "Area of Interest is required";
-		}
-		return errors;
-	};
-
 	const handleSubmit = async (event: ChangeEvent<HTMLFormElement>) => {
-		try {
-			event.preventDefault();
-			const response = await apiPost(`/users/signup`, formDetails);
+		event.preventDefault();
+		console.log(formDetails);
+		if (formDetails.name === "") {
+			setIsName(true);
+			return setNameError("Name field is required");
+		} else if (formDetails.userType === "") {
+			setIsUsertype(true);
+			return setUserTypeError("Usertype is required");
+		} else if (formDetails.email === "" || !formDetails.email.includes("@")) {
+			setIsEmail(true);
+			return setEmailError("Please provide a valid email");
+		} else if (
+			formDetails.password.length < 6 ||
+			formDetails.password.match(/^[a-zA-Z][0-9]$/) !== null
+		) {
+			setIsPassword(true);
+			return setPassWordError(
+				"Password should be alphanumeric & not less than 8 characters"
+			);
+		} else if (formDetails.areaOfInterest === "") {
+			setIsAreaOfInterest(true);
+			return setInterestError("Area of interest is required");
+		} else {
+			setLoading(true);
 
-			if (response.status === 201) {
-				toast.success(response.data.message);
+			let areaArray: any[] = [];
+			const interestArea = formDetails.areaOfInterest;
+
+			if (interestArea === "") {
+				return null;
+			} else if (interestArea !== "" || !areaArray.includes(interestArea)) {
+				areaArray.push(interestArea);
+				formDetails.areaOfInterest = areaArray;
 			}
-
-			setFormError(validate(formDetails));
-			setIsSubmit(true);
-		} catch (err: any) {
-			toast.error(err.response.data.Error);
+			setTimeout(async () => {
+				try {
+					areaArray = [];
+					const response = await apiPost(`/users/signup`, formDetails);
+					if (response.status === 201) {
+						setLoading(false);
+						toast.success(response.data.message);
+					}
+					setIsSubmit(true);
+					areaArray = [];
+				} catch (err: any) {
+					areaArray = [];
+					console.log(err);
+					setLoading(false);
+					if (err.response?.data?.Error === "Internal server Error") {
+						toast.error("Something went wrong, please hang on");
+					} else {
+						toast.error(err.response?.data?.Error || "Something went wrong");
+					}
+				}
+			}, 4000);
 		}
 	};
+	useEffect(() => {
+		setLoading(false);
+	}, []);
 	return (
 		<Fragment>
 			<div className="formContainer">
@@ -126,8 +210,12 @@ function SignUpForm() {
 									value={name}
 									onChange={handleChange}
 									placeholder="Enter your name"
+									className="signUp-input"
 								/>
 							</div>
+							{isName && nameError.length > 0 && (
+								<div className="errorMsg">{nameError}</div>
+							)}
 							<div>
 								<label className="formLabel" id="userType">
 									User Type
@@ -137,12 +225,17 @@ function SignUpForm() {
 									name="userType"
 									value={userType}
 									onChange={handleChange}
+									className="signUp-select"
 								>
 									<option value="">Select</option>
 									<option value="Tutor">Tutor</option>
 									<option value="Student">Student</option>
 								</select>
 							</div>
+							{isUsertype && userTypeError.length > 0 && (
+								<div className="errorMsg">{userTypeError}</div>
+							)}
+
 							<div className="formLabel">
 								<label>Email</label>
 								<input
@@ -151,8 +244,13 @@ function SignUpForm() {
 									value={email}
 									onChange={handleChange}
 									placeholder="Enter your email"
+									className="signUp-input"
 								/>
 							</div>
+							{isEmail && emailError.length > 0 && (
+								<div className="errorMsg">{emailError}</div>
+							)}
+
 							<div className="formLabel">
 								<label>Password</label>
 								<input
@@ -161,8 +259,13 @@ function SignUpForm() {
 									value={password}
 									onChange={handleChange}
 									placeholder="Enter your password..."
+									className="signUp-input"
 								/>
 							</div>
+							{isPassword && passWordError.length > 0 && (
+								<div className="errorMsg">{passWordError}</div>
+							)}
+
 							<div className="formLabel">
 								<label id="interest">Area of Interest</label>
 								<select
@@ -170,35 +273,54 @@ function SignUpForm() {
 									name="areaOfInterest"
 									value={areaOfInterest}
 									onChange={handleChange}
+									className="signUp-select"
 								>
 									<option value="">Select</option>
-									<option value="Tutor">Mathematics</option>
-									<option value="physics">Physics</option>
-									<option value="coding">Coding</option>
-									<option value="graphics">Graphics design</option>
-									<option value="video">Video Editing</option>
-									<option value="chemistry">Chemistry</option>
-									<option value="digital">Digital Marketing</option>
+									<option value="Mathematics">Mathematics</option>
+									<option value="Physics">Physics</option>
+									<option value="Coding">Coding</option>
+									<option value="Graphics Design">Graphics design</option>
+									<option value="Video Editing">Video Editing</option>
+									<option value="Chemistry">Chemistry</option>
+									{/* <option value="digital">Digital Marketing</option> */}
 								</select>
 							</div>
-							<button type="submit" className="signUp-button">
+							{isAreaOfInterest && interestError.length > 0 && (
+								<div className="errorMsg">{interestError}</div>
+							)}
+
+							<button
+								type="submit"
+								className="signUp-button"
+								onClick={handleLogin}
+							>
 								Sign Up
 							</button>
+							{loading && (
+								<div className="signup_loading">
+									<LoadingIcons.Oval
+										stroke="black"
+										strokeOpacity={1}
+										height={45}
+										width={398}
+									/>
+								</div>
+							)}
 							<div className="formAlt">
 								Already have an account?
 								<Link to="/login" className="login-link">
 									Login
 								</Link>
 							</div>
-							<div className="socialIcons">
-								<button type="submit" onClick={() => googleSignIn}>
-									<FcGoogle />
-								</button>
-								<button type="submit" className="fbBtn">
-									<FaFacebook />
-								</button>
-							</div>
 						</form>
+						<div className="socialIcons">
+							<button type="submit" onClick={signInWithGoogle}>
+								<FcGoogle />
+							</button>
+							<button type="submit" className="fbBtn">
+								<FaFacebook />
+							</button>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -206,3 +328,9 @@ function SignUpForm() {
 	);
 }
 export default SignUpForm;
+
+// const localStorageItems = {
+// 	signature: res.data.signature,
+// 	areaOfInterest: res.data.areaOfInterest,
+// 	userType: res.data.userType
+// }
