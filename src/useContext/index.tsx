@@ -44,11 +44,16 @@ const DataProvider = ({ children }: { children: React.ReactNode }) => {
       localStorage.setItem("user", response.data.areaOfInterest || "backend");
       localStorage.setItem("userType", response.data.userType);
       if (response.status === 200) {
+        setLoading(false);
         window.location.href = "/dashboard";
       }
     } catch (err: any) {
-      console.log(err.response.data, "error message");
-      toast.error(err.response?.data?.Error || "Something went wrong");
+      setLoading(false);
+      if (err.response?.data?.Error === "Internal server Error"){
+        toast.error("Something went wrong, please hang on");
+      } else {
+        toast.error(err.response?.data?.Error || "Something went wrong");
+      }
     }
   };
 

@@ -49,7 +49,6 @@ const AllTutor = () => {
 	const submitSearch = async () => {
 		try {
 			const response = await apiGet(`/users/all-tutors?query=${keyword}`);
-			console.log(response.data.findTutor);
 			setTutor(response.data.findTutor);
 			setSearchSubmitted(true);
 			navigate(`/all-tutors/${keyword}`);
@@ -86,7 +85,7 @@ const AllTutor = () => {
 
 					<div className="allTutorsContainer">
 						<div className="allTutors-header">
-							<h1>All Tutors</h1>
+							<h1 className="all_tutorsHeading">All Tutors</h1>
 							<div className="allTutor-inputField">
 								<input
 									className="unique_all_courses_search"
@@ -102,7 +101,7 @@ const AllTutor = () => {
 							<h1 className="header-our-tutor">Our Tutors</h1>
 							<div className="allTutors-cardContainer">
 								{tutors.slice(0, firstNos).map((tutor) => (
-									<div className="allTutors-card" key={tutor?.id}>
+									<div className="allTutors-card">
 										<div className="allTutor-img">
 											<img
 												src={tutor.image ? tutor.image : avatar}
@@ -111,6 +110,9 @@ const AllTutor = () => {
 											<div className="allTutors-subBody">
 												<div className="tutor-name-heading">
 													<h3>{tutor.name}</h3>
+												</div>
+												<div className="tutor-name-heading">
+													<h3>{tutor.email}</h3>
 												</div>
 												<div>
 													<Rating

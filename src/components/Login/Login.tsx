@@ -1,13 +1,20 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
-import React, { Fragment, ChangeEvent, useState, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, {
+	Fragment,
+	ChangeEvent,
+	useState,
+	useRef,
+	useEffect,
+} from "react";
+import { useNavigate, Link } from "react-router-dom";
 import "../signUp/signUp.css";
 import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import logo from "../../assets/logo.png";
 import { useAuth } from "../../useContext/index";
+import LoadingIcons from "react-loading-icons";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { app } from "../../utils/firebaseAuth/firebase";
 import axios from "axios";
@@ -32,9 +39,14 @@ function LoginForm() {
 									.get(`${baseUrl}/users/googleLogin`, {
 										headers: { Authorization: `Bearer ${token}` },
 									})
-									.then((res) =>
-										localStorage.setItem("signature", res.data.signature)
-									)
+									.then((res) => {
+										localStorage.setItem("signature", res.data.signature);
+										localStorage.setItem(
+											"user",
+											res.data.user.areaOfInterest || "backend"
+										);
+										localStorage.setItem("userType", res.data.user.userType);
+									})
 									.then((e) => navigate(`/dashboard`, { replace: true }))
 									.catch((e) => e);
 								// localStorage.setItem("signature", token);
@@ -58,10 +70,14 @@ function LoginForm() {
 		else if (password.length < 8)
 			return setError("Password character cannot be less than 8");
 	};
-	const { LoginConfig } = useAuth() as any;
+	const { LoginConfig, loading, setLoading } = useAuth() as any;
 
+	const handleLogin = () => {
+		setLoading(true);
+	};
 	const handleSubmit = async (event: ChangeEvent<HTMLFormElement>) => {
 		event.preventDefault();
+
 		validate(emailRef.current?.value, passwordRef.current?.value);
 		const data = {
 			email: emailRef.current?.value,
@@ -69,6 +85,9 @@ function LoginForm() {
 		};
 		LoginConfig(data);
 	};
+	useEffect(() => {
+		setLoading(false);
+	}, []);
 
 	return (
 		<Fragment>
@@ -129,10 +148,27 @@ function LoginForm() {
 							{error.length > 0 && error.includes("Interest") && (
 								<div className="errorMsg">{error}</div>
 							)}
+							{/* //true */}
 
-							<button type="submit" className="signUp-button">
+							<button
+								type="submit"
+								className="signUp-button"
+								onClick={handleLogin}
+							>
 								Login
 							</button>
+
+							{/* false */}
+							{loading && (
+								<div className="login_loading">
+									<LoadingIcons.Oval
+										stroke="black"
+										strokeOpacity={1}
+										height={45}
+										width={398}
+									/>
+								</div>
+							)}
 							<div className="login-formAlt">
 								Don't have an account?
 								<Link to="/sign-up" className="login-link">
@@ -154,11 +190,6 @@ function LoginForm() {
 							<button type="submit" onClick={signInWithGoogle}>
 								<FcGoogle />
 							</button>
-							{/* <a href="https:localhost:4000/facebook">
-								<button type="submit" className="fbBtn">
-									<FaFacebook />
-								</button>
-							</a> */}
 							<a href={`${import.meta.env.VITE_SERVER_URL}/facebook`}>
 								<button className="fbBtn">
 									<FaFacebook />

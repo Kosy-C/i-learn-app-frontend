@@ -46,7 +46,7 @@ const ReviewTutor: React.FC<ReviewTutorProps> = ({ tutorId }) => {
                     );
                 })
             ) : (
-                <h1>No Reviews yet</h1>
+                <h4>No Reviews yet</h4>
             )}
         </>
     );

@@ -66,6 +66,10 @@ const RecommendedCourses = () => {
 													<h2>
 														{course.title} by {course?.tutor?.name}
 													</h2>
+													<p>
+														<span>&#x20A6;</span>
+														{course.pricing}
+													</p>
 													<p>{course.description}</p>
 													<div className="all_coursesRating">
 														<p>

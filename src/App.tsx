@@ -26,7 +26,7 @@ import PaidCourses from "./pages/PaidCourses/PaidCourses";
 import Auth from "./pages/Auth/Auth";
 import NotFound from "./pages/NotFound/NotFound";
 // import Dataprovider from "./useContext/index";
-import TutorCoursesPage from "./pages/TutorCoursesPage/TutorCoursesPage";
+// import TutorCoursesPage from "./pages/TutorCoursesPage/TutorCoursesPage";
 import {
 	ProtectedRoute,
 	ProtectedRouteTutor,
@@ -35,6 +35,8 @@ import {
 import DataProvider from "./useContext/index";
 import StudentProfile from "./pages/StudentProfile/StudentProfile ";
 import TutorNotification from "./pages/TutorPage/TutorPage";
+import TutorCoursesPage from "./pages/TutorCoursePage/TutorCoursePage";
+import UserProfile from "./pages/userprofile/UserProfile";
 
 function App() {
 	return (
@@ -58,7 +60,7 @@ function App() {
 							path="/tutor-profile"
 							element={
 								<ProtectedRouteTutor>
-									<Profile />
+									<Profile onClick={undefined} />
 								</ProtectedRouteTutor>
 							}
 						/>
@@ -182,6 +184,14 @@ function App() {
 								<ProtectedRouteStudent>
 									<StudentProfile />
 								</ProtectedRouteStudent>
+							}
+						/>
+						<Route
+							path="/userprofile/:userid"
+							element={
+								<ProtectedRouteTutor>
+									<UserProfile />
+								</ProtectedRouteTutor>
 							}
 						/>
 					</Routes>
