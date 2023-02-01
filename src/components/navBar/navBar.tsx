@@ -100,7 +100,7 @@ const NavBar = () => {
         <li>
           <button onClick={togglePopup}>
             {showModal && (
-              <ProfileModal userName={user!.name} userEmail={user!.email} userPicture={user!.image} />
+              <ProfileModal userName={user!.name} userEmail={user!.email} userPicture={user!.image} user={user} />
             )}
             <img
               src= {user && user.image ? user.image : "/src/assets/images/profilepic.svg"}
