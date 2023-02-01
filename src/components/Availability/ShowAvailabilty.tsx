@@ -119,8 +119,10 @@ const TutorAvailability: React.FC<Props> = ({ tutor, title, id, onClick }) => {
 	};
 
 	useEffect(() => {
-		void getAvailable();
-	});
+		return () => {
+			void getAvailable();
+		};
+	}, [id]);
 
 	const returnAvailibilty = () => {
 		return availableDates
