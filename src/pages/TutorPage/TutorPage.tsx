@@ -43,7 +43,7 @@ const TutorNotification: React.FC = () => {
       <div className="tutor_container">
 
         <div className="tutor_notifications">
-          {notifications.map((request: Request) => (
+          {notifications.length !== 0 ? (notifications.map((request: Request) => (
             <div className="tutor_notification" key={request.id}>
               <div style={{width: '40%', height: '40% '}}>
                 <img src={request.student.image}></img>
@@ -57,7 +57,7 @@ const TutorNotification: React.FC = () => {
                 <p className="date-time">Selected Time: {request.pickedTime}</p>
               </div>
             </div>
-          ))}
+          ))):(<h4>You have no bookings yet</h4>)}
         </div>
       </div>
     </>

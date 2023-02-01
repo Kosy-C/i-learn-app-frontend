@@ -44,7 +44,7 @@ const FeaturedTutors = () => {
 								<Link to={`/dashboard/${el.id}`}>
 									<button type="submit" onClick={onOpenProfile}>
 										<div className="images">
-											<img src={el.image} alt="" width="68px" height="68px" />
+											<img src={el.image} alt="" className="featured_image" />
 										</div>
 										<p className="names">{el.name}</p>
 										<div className="cd-rating">

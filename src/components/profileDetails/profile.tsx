@@ -44,7 +44,7 @@ const Profile = ({ onClick }) => {
 					</div>
 					<hr />
 					<div className="profile-tutor">
-						<img src={tutor?.image} alt="avatar" />
+						<img src={tutor?.image} alt="avatar" className="tutorAvatar" />
 						<div className="profile-tutor-details">
 							<h2>{tutor?.name}</h2>
 							<p>

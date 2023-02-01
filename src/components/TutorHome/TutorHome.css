@@ -92,7 +92,7 @@
 .tutorCourse-img{
   /* background-color: violet; */
   width: 22.8em;
-  height: 21vh;
+  height: 180px;
 }
 .tutorCourse_imageBody{
   width: 100%;
@@ -211,15 +211,81 @@
 */
 }
 
-
-@media screen and (max-width: 600px) {
+@media (max-width: 849px) and (min-width: 320px){
+  .parent-container{
+    width: 100vw;    
+    height: 100px;
+    justify-content: flex-start;
+    margin-bottom: 0px;
+    /* background-color: blue; */
+  }
+  .welcome-box{
+    margin-left: 0em;
+  }
+  .search-icon{
+    margin: 10px;
+  }
+  .input-type-search{
+    width: 80vw;
+    height: 38px;
+    border: 1px solid rgba(0, 0, 0, 0.16);
+  }
   .tutorMainContainer {
-    margin-left: 100px;
+    margin-left: 0px;
     margin-top: 0px;
+    margin-right: 0px;
   }
   .tutorHeader {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 99vw;
+    /* background-color: aqua; */
   }
+ .tutor_home_courseCard{
+  width: 86vw;
+  /* background-color: aqua; */
+  justify-content: space-between;
+ }
+.tutor_home_singleCard{
+  width: 18em;
+  height: 23em;
+  position: relative;
+}
+.tutorCourse-img{
+  width: 18em;
+}
+.tutorHome_addContainer{
+  width: 83vw;
+}
+.tutorCourse_editButton, .tutorCourse_deleteButton {
+  width: 100px;
+}
+.tutorHome_addButton{
+  width: 140px;
+}
+
+.tutor-overview__container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    /* background-color: red; */
+}
+.tutor-overview-details {
+  width: 100vw;
+}
+.create-avail{
+  /* margin-top: 40px; */
+  margin: 0;
+  width:100vw;
+  /* background-color: blueviolet; */
+  
+}
+.tutor-Availability-container {
+    width: 100vw;
+}
+.tutorAvailability-submitButton > button {
+  width: 3em;
+}
+
 }

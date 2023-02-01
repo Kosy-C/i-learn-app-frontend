@@ -49,7 +49,7 @@ const StudentHistoryPage = () => {
                           <div className="subje">
                             <Link
                               className="Link"
-                              to={`/paid-courses/${course.id}`}
+                              to={`/paid-courses/${course.courseId}`}
                             >
                               <h3>
                                 <b>
