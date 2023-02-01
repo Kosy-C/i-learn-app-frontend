@@ -18,7 +18,7 @@ const UserProfile = () => {
   const [user, setUser] = useState<TutorModel>();
   const [areaOfInterests, setAreaOfInterests] = useState(false);
   const [upModalIsOpen, setUpModalIsOpen] = useState(false);
-
+  const [loading, setLoading] = useState(false)
   const [interests, setInterests] = useState<string[]>([]);
 
   const [name, setName] = useState("");
@@ -34,22 +34,22 @@ const UserProfile = () => {
     e: React.FormEvent<HTMLFormElement>
   ) => {
     e.preventDefault();
-    console.log(image);
+    setLoading(true)
     const { data } = await apiPutFormData("/users/edit-profile", {
-      name,
-      location,
-      about,
+      name: name ? name : user?.name,
+      location: location ? location : user?.location,
+      about: about ? about : user?.about,
       expertise: interests,
       image,
     });
+   
     if (data) {
+      setLoading(false)
       toast.success(data.message);
       setUpdated(data.message);
     } else {
       toast.error("There was an error, please try again");
     }
-    localStorage.removeItem("areasOfInterest");
-    setInterests([]);
     setName("");
     setLocation("");
     setAbout("");
@@ -59,14 +59,15 @@ const UserProfile = () => {
     e: React.FormEvent<HTMLFormElement>
   ) => {
     e.preventDefault();
-    console.log(image);
+    setLoading(true)
     const { data } = await apiPutFormData("/users/edit-profile", {
-      name,
+      name: name ? name : user?.name,
       areaOfInterest: interests,
       image,
     });
 
     if (data) {
+      setLoading(false)
       toast.success(data.message);
       setUpdated(data.message);
     } else {
@@ -74,8 +75,6 @@ const UserProfile = () => {
     }
     setName("");
     setEmail("");
-    localStorage.removeItem("areasOfInterest");
-    setInterests([]);
   };
 
   const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -83,9 +82,12 @@ const UserProfile = () => {
   };
 
   useEffect(() => {
+    setLoading(false);
     const fecthUser = async () => {
       const { data } = await apiGet(`/users/atutordetail/${params.userid}`);
       setUser(data.message);
+      
+      console.log(data.message);
     };
     fecthUser();
   }, [updated]);
@@ -152,9 +154,8 @@ const UserProfile = () => {
                   <label>Full Name</label>
                   <input
                     type="text"
-                    placeholder="Full Name"
                     name="name"
-                    value={name}
+                    defaultValue={user.name}
                     onChange={(e) => setName(e.target.value)}
                   />
                 </div>
@@ -163,18 +164,16 @@ const UserProfile = () => {
                   <label>Location</label>
                   <input
                     type="text"
-                    placeholder="Enter Location"
+                    defaultValue={user.location}
                     name="location"
-                    value={location}
                     onChange={(e) => setLocation(e.target.value)}
                   />
                 </div>
                 <div>
                   <label>About</label>
                   <input
-                    placeholder="Give a short bio"
                     name="about"
-                    value={about}
+                    defaultValue={user.about}
                     onChange={(e) => setAbout(e.target.value)}
                   />
                 </div>
@@ -194,6 +193,16 @@ const UserProfile = () => {
                 </div>
                 <div className="up-submitButton">
                   <button type="submit">Save</button>
+                  {loading && (
+								<div className="up-login_loading">
+									<LoadingIcons.Oval
+										stroke="black"
+										strokeOpacity={1}
+										height={15}
+										width={198}
+									/>
+								</div>
+							)}
                 </div>
               </div>
             </form>
@@ -248,9 +257,8 @@ const UserProfile = () => {
                   <label>Full Name</label>
                   <input
                     type="text"
-                    placeholder="Full Name"
                     name="name"
-                    value={name}
+                    defaultValue={user.name}
                     onChange={(e) => setName(e.target.value)}
                   />
                 </div>
@@ -258,9 +266,8 @@ const UserProfile = () => {
                   <label>Email</label>
                   <input
                     type="email"
-                    placeholder="Enter your email"
                     name="email"
-                    value={email}
+                    defaultValue={user.email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
@@ -280,6 +287,16 @@ const UserProfile = () => {
                 </div>
                 <div className="up-submitButton">
                   <button type="submit">Save</button>
+                  {loading && (
+								<div className="up-login_loading">
+									<LoadingIcons.Oval
+										stroke="black"
+										strokeOpacity={1}
+										height={45}
+										width={398}
+									/>
+								</div>
+							)}
                 </div>
               </div>
             </form>

@@ -26,6 +26,8 @@ export interface TutorModel {
   rating: string;
   createdAt: string;
   updatedAt: string;
+  location: string;
+  about: string
 }
 
 // export const initialTutorState = {

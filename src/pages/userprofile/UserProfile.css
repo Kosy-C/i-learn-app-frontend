@@ -133,6 +133,15 @@ input[type=file]{
     width:20px;
   }
 
+  .up-login_loading{
+    z-index: 2;
+    position: relative;
+    top: 0;
+    left: 20;
+    right: 230;
+    /* padding-top: 780px; */
+  }
+
   
  
   
