@@ -216,13 +216,14 @@ const CourseManagement = ({
 				/>
 			) : (
 				<div className="tutor_formContainer" ref={ref}>
-					<form>
+					<form className="crudForm">
 						<label>Course Title</label>
 						<input
 							type="text"
 							value={courses?.title}
 							name="title"
 							onChange={handleChange}
+							className="tutorCourse-searchInput"
 							required
 							placeholder="Enter your course title"
 						/>
@@ -230,11 +231,11 @@ const CourseManagement = ({
 							<div className="tutorError">{titleError}</div>
 						) : null}
 						<label>Description</label>
-						<input
-							type="text"
+						<textarea
 							value={courses?.description}
 							name="description"
 							onChange={handleChange}
+							className="tutorCourse-searchInput"
 							placeholder="Enter your course description"
 						/>
 						{isDescription === true ? (
@@ -250,6 +251,7 @@ const CourseManagement = ({
 							value={courses?.pricing}
 							name="pricing"
 							onChange={handleChange}
+							className="tutorCourse-searchInput"
 							placeholder="Enter your price here"
 						/>
 						{isPricing === true ? (
@@ -261,6 +263,7 @@ const CourseManagement = ({
 							value={courses?.category}
 							name="category"
 							onChange={handleChange}
+							className="tutorCourse-searchInput"
 							placeholder="Enter your category here"
 						/>
 						{isCategory === true ? (
@@ -299,6 +302,7 @@ const CourseManagement = ({
 									<label style={{ cursor: "pointer", display: "flex" }}>
 										<input
 											// style={{ display: "none" }}
+											className="tutorCourse-searchInput"
 											type="file"
 											onChange={(
 												e:
@@ -340,6 +344,8 @@ const CourseManagement = ({
 									<label style={{ cursor: "pointer" }}>
 										<input
 											// style={{ display: "none" }}
+											className="tutorCourse-searchInput"
+
 											type="file"
 											onChange={(
 												e:

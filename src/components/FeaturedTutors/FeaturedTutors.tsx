@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
 import React, { useEffect, useState } from "react";
 import "./FeaturedTutors.css";
 import { Link } from "react-router-dom";
@@ -6,6 +5,7 @@ import { apiGet } from "../../utils/api/axios";
 import Profile from "../profileDetails/profile";
 import { Modal } from "react-responsive-modal";
 import Rating from "../Rating/Rating";
+import { User } from "../../utils/Interfaces/index.dto";
 
 const FeaturedTutors = () => {
 	const [tutors, setTutors] = useState([]);
@@ -38,13 +38,13 @@ const FeaturedTutors = () => {
 					</p>
 				</div>
 				<div className="tutor-details">
-					{tutors.map((el: any) => {
+					{tutors.map((el: User) => {
 						return (
 							<div key={el.id} className="img-name">
 								<Link to={`/dashboard/${el.id}`}>
 									<button type="submit" onClick={onOpenProfile}>
 										<div className="images">
-											<img src={el.image} alt="" width="68px" height="68px" />
+											<img src={el.image} alt="" className="featured_image" />
 										</div>
 										<p className="names">{el.name}</p>
 										<div className="cd-rating">
@@ -62,7 +62,7 @@ const FeaturedTutors = () => {
 				</div>
 
 				<Modal open={profile} onClose={onCloseProfile}>
-					<Profile />
+					<Profile onClick={onCloseProfile} />
 				</Modal>
 			</div>
 		</>

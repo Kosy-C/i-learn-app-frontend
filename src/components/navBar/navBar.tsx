@@ -1,25 +1,21 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./navBar.css";
 import { FaBars } from "react-icons/fa";
 import { ImCross } from "react-icons/im";
 import Notification from "../NotificationModal/Notification";
-import Profile from "../profileDetails/profile";
-import { useContext } from "react";
 import { Modal } from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
 import ProfileModal from "../ProfileModal/ProfileModal";
-import { dataContext } from "../../useContext";
-import { GlobalStateInterface } from "../../useContext";
-import { User } from "../../utils/Interfaces/index.dto";
+import { useAuth } from "../../useContext";
+
 
 const NavBar = () => {
   const [Mobile, setMobile] = useState(false);
   const [notificationModal, setNotificationModal] = useState(false);
-  const [profile, setProfile] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
-  const {user, loggedInUser} = useContext(dataContext)
+  const {user, loggedInUser} = useAuth()
 
   useEffect(()=>{
     loggedInUser()
@@ -43,10 +39,7 @@ const NavBar = () => {
     localStorage.clear();
   };
   const getSignature = localStorage.getItem("signature");
-  // const user = JSON.parse(localStorage.getItem('user')!) ? JSON.parse(localStorage.getItem('user')!) : null
-  // const user = {
-  //   image: "/src/assets/images/profilepic.svg"
-  // }
+ 
   return (
     <nav className="navbar">
    
@@ -107,7 +100,7 @@ const NavBar = () => {
         <li>
           <button onClick={togglePopup}>
             {showModal && (
-              <ProfileModal userName={user.name} userEmail={user.email} userPicture={user.image} />
+              <ProfileModal userName={user!.name} userEmail={user!.email} userPicture={user!.image} />
             )}
             <img
               src= {user && user.image ? user.image : "/src/assets/images/profilepic.svg"}

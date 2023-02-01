@@ -42,47 +42,52 @@ const MakePayment = ({
       checkIsPaid();
     };
   }, [course]);
+  // payment for paystack
+
   const handlePayment = async () => {
-    setIsPaid(true);
-    const paystack = new PaystackPop();
-    paystack.newTransaction({
-      key: import.meta.env.VITE_PAYSTACK_PKEY,
-      email: usermail,
-      amount: Number(course?.pricing) * 100,
+    try {
+      const paystack = new PaystackPop();
+      await paystack.newTransaction({
+        key: import.meta.env.VITE_PAYSTACK_PKEY,
+        email: usermail,
+        amount: Number(course?.pricing) * 100,
+        onSuccess: async (transaction: any) => {
+          closeModal();
+          try {
+            const response = await apiPost(
+              `/users/payments/${transaction.reference}`,
+              {
+                courseId: course.id,
+              }
+            );
+            setIsPaid(true);
+            console.log(response);
+          } catch (error) {
+            console.log(error);
+          }
 
-      onSuccess: async (transaction: any) => {
-        try {
-          const response = await apiPost(
-            `/users/payments/${transaction.reference}`,
-            {
-              courseId: course.id,
-            }
-          );
-          setIsPaid(true);
-          console.log(response);
-        } catch (error) {
-          console.log(error);
-        }
-
-        // Payment complete! Reference: transaction.reference
-        // window.alert(JSON.stringify(transaction));
-        console.log(transaction);
-      },
-      onCancel: () => {
-        setIsPaid(false);
-        // user closed popup
-      },
-    });
+          // Payment complete! Reference: transaction.reference
+          // window.alert(JSON.stringify(transaction));
+          console.log(transaction);
+        },
+        onCancel: () => {
+          setIsPaid(false);
+          closeModal;
+          // user closed popup
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <div>
       <Modal
-        title={"Confirm Details"}
+        title={isPaid ? "you have paid already" : "Confirm Details"}
         okButtonProps={{
           size: "large",
           style: { width: "100%", backgroundColor: "#fd2959" },
-          loading: isPaid,
           disabled: isPaid,
         }}
         okText={"Make Payment"}

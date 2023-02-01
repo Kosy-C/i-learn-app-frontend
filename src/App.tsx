@@ -55,7 +55,7 @@ function App() {
 							path="/tutor-profile"
 							element={
 								<ProtectedRouteTutor>
-									<Profile />
+									<Profile onClick={undefined} />
 								</ProtectedRouteTutor>
 							}
 						/>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./courseDetail.css";
 import Rating from "../../components/Rating/Rating";
 import { Link, useNavigate, useParams } from "react-router-dom";

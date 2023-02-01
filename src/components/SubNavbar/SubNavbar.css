@@ -41,3 +41,20 @@
     text-indent: 40px;
     margin-right: 2rem;
 }
+@media (max-width: 849px) and (min-width: 320px){
+    .welcome-box{
+
+    }
+    .student-name{
+    margin-top: 0;
+    text-align: left;
+    margin-left:11px;
+    font-size: 15px;
+    }
+    .welcome{
+        font-size: 14px;
+    }
+    .welcome-box {
+        margin-left: 0rem;
+    }
+}
