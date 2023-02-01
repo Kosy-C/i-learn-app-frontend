@@ -5,7 +5,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const baseUrl = import.meta.env.SERVER_URL;
+const baseUrl = import.meta.env.VITE_SERVER_URL as string;
 const VerifyPage = () => {
 	const emailRef = useRef<HTMLInputElement>(null);
 	const passwordRef = useRef<HTMLInputElement>(null);
@@ -57,7 +57,6 @@ const VerifyPage = () => {
 			});
 		} catch (err: any) {
 			toast.error(err.response.data.Error);
-			// window.alert(err.response.data.Error);
 		}
 	};
 	return (
@@ -86,32 +85,6 @@ const VerifyPage = () => {
 									pattern="\d{1}"
 								/>
 							</div>
-
-							{/* <div className="verify_formLabel">
-								<label>OTP</label>
-								<input
-									type="number"
-									name="otp"
-									placeholder="Enter your otp"
-								/>
-							</div>
-							<div className="verify_formLabel">
-								<label>OTP</label>
-								<input
-									type="number"
-									name="otp"
-									placeholder="Enter your otp"
-								/>
-							</div> */}
-							{/* <div className="verify_formLabel">
-								<label>OTP</label>
-								<input
-									type="number"
-									name="otp"
-									placeholder="Enter your otp"
-								/>
-							</div>
-							 */}
 							<button type="submit" className="signUp-button">
 								Verify Me
 							</button>

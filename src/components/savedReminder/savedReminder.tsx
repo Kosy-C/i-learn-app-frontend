@@ -7,14 +7,13 @@ import "react-calendar/dist/Calendar.css";
 import "./savedReminder.css";
 import { Calendar } from "react-calendar";
 import axios from "axios";
-const jsonUrl = "http://localhost:8000";
+const baseUrl = import.meta.env.VITE_SERVER_URL as string;
 
 function SavedReminder() {
 	const [reminder, setReminder] = useState([]);
 	const getReminder = async () => {
 		try {
-			const response = await axios.get(jsonUrl);
-			console.log("response data is ", response.data);
+			const response = await axios.get(baseUrl);
 			setReminder(response.data);
 		} catch (error) {
 			console.log(error);
@@ -51,21 +50,6 @@ function SavedReminder() {
 							<Calendar />
 						</div>
 						<div className="savedDetails">
-							{/* <div className="savedDuration"> */}
-							{/* <p>
-									{new Date().getMonth()} {new Date().getDate()},{" "}
-									{new Date().getFullYear()}
-								</p>
-								<p>
-									{new Date().getMonth()} {new Date().getDate()},{" "}
-									{new Date().getFullYear()}
-								</p>
-							</div> */}
-							{/* <div className="savedCard">
-								<p>Learn Coding</p>
-								<br />
-								<span>Javascript coding practice</span>
-							</div> */}
 							<div className="taskContainer">
 								<div>
 									<h4>10:15</h4>
