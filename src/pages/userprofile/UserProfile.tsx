@@ -137,7 +137,7 @@ const UserProfile = () => {
                   <div className="imageforupload">
                     <AiOutlineCamera className="up-camera-icon" />
                   </div>
-                  <input type="file" onChange={(e) => handleFile(e)} />
+                  <input className="updateFile" type="file" onChange={(e) => handleFile(e)} />
                 </div>
 
                 <p className="up-name">
@@ -242,7 +242,7 @@ const UserProfile = () => {
                   <div className="imageforupload">
                     <AiOutlineCamera className="up-camera-icon" />
                   </div>
-                  <input type="file" onChange={(e) => handleFile(e)} />
+                  <input className="updateFile" type="file" onChange={(e) => handleFile(e)} />
                 </div>
 
                 <p className="up-name">{user.name}</p>

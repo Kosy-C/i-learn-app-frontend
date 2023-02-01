@@ -43,6 +43,7 @@ export interface User {
 	rating: number;
 	createdAt: Date;
 	updatedAt: Date;
+	about: string;
 	courses: Course[];
 }
 
@@ -57,6 +58,7 @@ export interface Tutor {
 	rating: number;
 	createdAt: Date;
 	updatedAt: Date;
+	about: string;
 	courses: Course[];
 }
 
