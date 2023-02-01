@@ -111,14 +111,9 @@ const TutorHeader = ({
 									<div className="tutor-overview__container">
 										<div className="tutor-overview-details">
 											<p>
-												Hello! I started my career working in Theatrical design
-												in various entertainment areas. I switched to digital UX
-												six years ago. Since then, I have been working in
-												events, healthcare, cybersecurity, financial, and now I
-												am working in Data Center Automation at AWS. In my free
-												time, I hang with my dog, garden, tinker in my garage
-												building weird things. I am an audiobook junkie and a
-												voracious learner.
+												{tutor.about
+													? tutor.about
+													: "Kindly add description to your profile"}
 											</p>
 										</div>
 										<div className="tutor-overview-schedule"></div>
