@@ -62,7 +62,7 @@ const ProfileModal: React.FC<Props> = ({
 												className="mycourses"
 												onClick={studentHistoryPage}
 											>
-												? <li>My Courses</li>
+												<li>My Courses</li>
 											</Link>
 										</>
 									) : null}
