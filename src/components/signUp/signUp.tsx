@@ -75,22 +75,40 @@ function SignUpForm() {
 	};
 
 	const [formError, setFormError] = useState({});
+	const [nameError, setNameError] = useState("");
+	const [userTypeError, setUserTypeError] = useState("");
+	const [emailError, setEmailError] = useState("");
+	const [passWordError, setPassWordError] = useState("");
+
+	const [interestError, setInterestError] = useState("");
+
 	const [isSubmit, setIsSubmit] = useState(false);
 	const [show, setShow] = useState(false);
 	const [formDetails, setFormDetails] = useState(formField);
+	const [isName, setIsName] = useState(false);
+	const [isUsertype, setIsUsertype] = useState(false);
+	const [isEmail, setIsEmail] = useState(false);
+	const [isPassword, setIsPassword] = useState(false);
+	const [isAreaOfInterest, setIsAreaOfInterest] = useState(false);
+
 	const navigate = useNavigate();
 
 	const handleChange = async (
 		event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>
 	) => {
 		event.preventDefault();
+		setNameError("");
+		setUserTypeError("");
+		setEmailError("");
+		setPassWordError("");
+		setInterestError("");
 		const { name, value } = event.target;
 		setFormDetails({ ...formDetails, [name]: value });
 	};
 
 	const { loading, setLoading } = useAuth() as any;
 	const handleLogin = () => {
-		setLoading(true);
+		// setLoading(true);
 	};
 
 	const display = () => {
@@ -105,56 +123,62 @@ function SignUpForm() {
 		}
 	}, [formError]);
 
-	const validate = (values: formFieldType) => {
-		const errors: formFieldType = {
-			name: "",
-			userType: "",
-			email: "",
-			password: "",
-			areaOfInterest: "",
-		};
-		if (!values.name) {
-			errors.name = "Name is required";
-		}
-		if (!values.userType) {
-			errors.userType = "User Type is required";
-		}
-		if (!values.email) {
-			errors.email = "Email is required";
-		}
-		if (!values.password) {
-			errors.password = "Password is required";
-		}
-		if (!values.areaOfInterest) {
-			errors.areaOfInterest = "Area of Interest is required";
-		}
-		return errors;
-	};
-
 	const handleSubmit = async (event: ChangeEvent<HTMLFormElement>) => {
-		const areaArray: any[] = [];
-		areaArray.push(formDetails.areaOfInterest);
-		formDetails.areaOfInterest = areaArray;
+		event.preventDefault();
+		console.log(formDetails);
+		if (formDetails.name === "") {
+			setIsName(true);
+			return setNameError("Name field is required");
+		} else if (formDetails.userType === "") {
+			setIsUsertype(true);
+			return setUserTypeError("Usertype is required");
+		} else if (formDetails.email === "" || !formDetails.email.includes("@")) {
+			setIsEmail(true);
+			return setEmailError("Please provide a valid email");
+		} else if (
+			formDetails.password.length < 6 ||
+			formDetails.password.match(/^[a-zA-Z][0-9]$/) !== null
+		) {
+			setIsPassword(true);
+			return setPassWordError(
+				"Password should be alphanumeric & not less than 8 characters"
+			);
+		} else if (formDetails.areaOfInterest === "") {
+			setIsAreaOfInterest(true);
+			return setInterestError("Area of interest is required");
+		} else {
+			setLoading(true);
 
-		try {
-			event.preventDefault();
-			const response = await apiPost(`/users/signup`, formDetails);
+			let areaArray: any[] = [];
+			const interestArea = formDetails.areaOfInterest;
 
-			if (response.status === 201) {
-				setLoading(false);
-				toast.success(response.data.message);
+			if (interestArea === "") {
+				return null;
+			} else if (interestArea !== "" || !areaArray.includes(interestArea)) {
+				areaArray.push(interestArea);
+				formDetails.areaOfInterest = areaArray;
 			}
-
-			setFormError(validate(formDetails));
-			setIsSubmit(true);
-		} catch (err: any) {
-			setLoading(false);
-
-			if (err.response?.data?.Error === "Internal server Error") {
-				toast.error("Something went wrong, please hang on");
-			} else {
-				toast.error(err.response?.data?.Error || "Something went wrong");
-			}
+			setTimeout(async () => {
+				try {
+					areaArray = [];
+					const response = await apiPost(`/users/signup`, formDetails);
+					if (response.status === 201) {
+						setLoading(false);
+						toast.success(response.data.message);
+					}
+					setIsSubmit(true);
+					areaArray = [];
+				} catch (err: any) {
+					areaArray = [];
+					console.log(err);
+					setLoading(false);
+					if (err.response?.data?.Error === "Internal server Error") {
+						toast.error("Something went wrong, please hang on");
+					} else {
+						toast.error(err.response?.data?.Error || "Something went wrong");
+					}
+				}
+			}, 4000);
 		}
 	};
 	useEffect(() => {
@@ -189,6 +213,9 @@ function SignUpForm() {
 									className="signUp-input"
 								/>
 							</div>
+							{isName && nameError.length > 0 && (
+								<div className="errorMsg">{nameError}</div>
+							)}
 							<div>
 								<label className="formLabel" id="userType">
 									User Type
@@ -205,6 +232,10 @@ function SignUpForm() {
 									<option value="Student">Student</option>
 								</select>
 							</div>
+							{isUsertype && userTypeError.length > 0 && (
+								<div className="errorMsg">{userTypeError}</div>
+							)}
+
 							<div className="formLabel">
 								<label>Email</label>
 								<input
@@ -216,6 +247,10 @@ function SignUpForm() {
 									className="signUp-input"
 								/>
 							</div>
+							{isEmail && emailError.length > 0 && (
+								<div className="errorMsg">{emailError}</div>
+							)}
+
 							<div className="formLabel">
 								<label>Password</label>
 								<input
@@ -227,6 +262,10 @@ function SignUpForm() {
 									className="signUp-input"
 								/>
 							</div>
+							{isPassword && passWordError.length > 0 && (
+								<div className="errorMsg">{passWordError}</div>
+							)}
+
 							<div className="formLabel">
 								<label id="interest">Area of Interest</label>
 								<select
@@ -246,6 +285,10 @@ function SignUpForm() {
 									{/* <option value="digital">Digital Marketing</option> */}
 								</select>
 							</div>
+							{isAreaOfInterest && interestError.length > 0 && (
+								<div className="errorMsg">{interestError}</div>
+							)}
+
 							<button
 								type="submit"
 								className="signUp-button"

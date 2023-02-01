@@ -62,3 +62,12 @@
    padding-left: 11px;
 
 }
+
+@media (max-width: 1919px) and (min-width: 1631px) {
+    .parent-course-container{
+        margin-top: 30px;
+        display: flex;
+        flex-wrap: wrap;
+        margin-left: 5rem;
+    }
+}
