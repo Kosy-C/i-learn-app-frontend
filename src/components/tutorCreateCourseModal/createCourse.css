@@ -8,6 +8,9 @@
 .createCourseBody{
     padding: 30px;
 }
+.createCourseSelectOption > div{
+    padding: 10px;
+}
 
 .up-buttons{
     display: flex;

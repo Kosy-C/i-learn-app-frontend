@@ -7,7 +7,7 @@
   width: 30%;
   height: 66%;
   overflow: auto;
-  
+  box-shadow: 10px 10px 5px #eee;
 }
 
 .Modal-content {
