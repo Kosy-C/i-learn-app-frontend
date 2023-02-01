@@ -55,21 +55,25 @@ const FileUploader = ({
 
 	return (
 		<div className="file-uploader">
-			<div>
+			<div className="imgContainer-tutor">
 				<label>Upload course Image (*jpg *jpeg *png)</label>
 				<input
 					type="file"
 					onChange={handleImageChange}
+					className="tutorCourse-searchInput"
+
 					// value={selectedImage}
 					name="course_image"
 				/>
 				{isImage && <p style={{ color: "red" }}>{imageError}</p>}
 			</div>
-			<div>
+			<div className="imgContainer-tutor">
 				<label>Upload course material (*pdf)</label>
 				<input
 					type="file"
 					onChange={handlePdfChange}
+					className="tutorCourse-searchInput"
+
 					// value={selectedMaterial}
 					name="course_material"
 				/>
