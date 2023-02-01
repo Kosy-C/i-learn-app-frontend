@@ -1,6 +1,8 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
 import "../tutorCreateCourseModal/createCourse.css";
 import { toast } from "react-toastify";
+import { useAuth } from "../../useContext";
+
 
 interface Props {
 	closeThisModal: Dispatch<SetStateAction<boolean>>;
@@ -11,7 +13,6 @@ const CreateCourse: React.FC<Props> = ({
 	closeThisModal,
 	setAreaOfInterests,
 }) => {
-	const [areasOfInterest, setAreasOfInterest] = useState<string[]>([]);
 
 	const [disabled, setDisabled] = useState(false);
 
@@ -23,35 +24,25 @@ const CreateCourse: React.FC<Props> = ({
 	const [dig, setDig] = useState(false);
 	const [Chemistry, setChemistry] = useState(false);
 
-	const checkChecks = () => {
-		const checks = [
-			mathematics,
-			Coding,
-			Physics,
-			Graphics,
-			video,
-			dig,
-			Chemistry,
-		];
-		let number = 1;
-		checks.forEach((x) => (x ? number++ : number));
-		return number;
-	};
+	const {aInterests, setAInterests} = useAuth()
 
 	const handlePush = (value: boolean, insertee: string) => {
 		if (!value) {
-			setAreasOfInterest([...areasOfInterest, insertee]);
+			if(!aInterests.includes(insertee)){
+			setAInterests([...aInterests, insertee])
+			}else{
+				toast.error(`${insertee} is already selected`)
+			}
 		} else {
-			const result = areasOfInterest.filter(
+			const result = aInterests.filter(
 				(area: string) => area !== insertee
 			);
-			setAreasOfInterest(result);
+			setAInterests(result);
 		}
 	};
 
 	const handleCheck = (event: React.ChangeEvent<HTMLInputElement>) => {
-		const number = checkChecks();
-		if (number <= 5) {
+		if (aInterests.length < 5) {
 			if (event.target.value === "Mathematics") {
 				setMathematics(!mathematics);
 				handlePush(mathematics, event.target.value);
@@ -80,7 +71,7 @@ const CreateCourse: React.FC<Props> = ({
 				setVideo(!video);
 				handlePush(video, event.target.value);
 			}
-		} else if (number > 5) {
+		} else if (aInterests.length = 5) {
 			toast.error("You cannot select more than five areas of interest");
 			setDisabled(true);
 		}
@@ -90,14 +81,12 @@ const CreateCourse: React.FC<Props> = ({
 		e: React.MouseEvent<HTMLButtonElement, MouseEvent>
 	) => {
 		e.preventDefault();
-		localStorage.setItem("areasOfInterest", JSON.stringify(areasOfInterest));
 		closeThisModal(false);
 		setAreaOfInterests(true);
-		refreshSelected();
 	};
 
 	const refreshSelected = () => {
-		setAreasOfInterest([]);
+		setAInterests([]);
 		setDisabled(false);
 		setMathematics(false);
 		setCoding(false);

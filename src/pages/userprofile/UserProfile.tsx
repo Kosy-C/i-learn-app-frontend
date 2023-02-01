@@ -13,6 +13,7 @@ import AreasOfInterest from "../../components/areasOfInterest/AreasOfInterest";
 import { toast } from "react-toastify";
 import unknownavatar from "../../assets/unknownavatar.webp";
 import LoadingIcons from "react-loading-icons";
+import { useAuth } from "../../useContext";
 
 const UserProfile = () => {
   const [user, setUser] = useState<TutorModel>();
@@ -27,6 +28,8 @@ const UserProfile = () => {
   const [about, setAbout] = useState("");
   const [image, setImage] = useState({});
   const [updated, setUpdated] = useState("");
+
+  const {aInterests, setAInterests} = useAuth()
 
   const params = useParams();
 
@@ -86,18 +89,9 @@ const UserProfile = () => {
     const fecthUser = async () => {
       const { data } = await apiGet(`/users/atutordetail/${params.userid}`);
       setUser(data.message);
-      
-      console.log(data.message);
     };
     fecthUser();
   }, [updated]);
-
-  useEffect(() => {
-    const areas = JSON.parse(localStorage.getItem("areasOfInterest")!);
-    if (areas) {
-      setInterests(areas);
-    }
-  }, [areaOfInterests]);
 
   const navigate = useNavigate();
 
@@ -181,8 +175,8 @@ const UserProfile = () => {
                   <label>Area of Interest</label>
                   <div>
                     <AreasOfInterest
-                      interests={interests}
-                      setInterests={setInterests}
+                      interests={aInterests}
+                      setInterests={setAInterests}
                     />
                   </div>
                   <div className="up-add-area-of-interest">
@@ -275,8 +269,8 @@ const UserProfile = () => {
                   <label>Area of Interest</label>
                   <div>
                     <AreasOfInterest
-                      interests={interests}
-                      setInterests={setInterests}
+                      interests={aInterests}
+                      setInterests={setAInterests}
                     />
                   </div>
                   <div className="up-add-area-of-interest">
