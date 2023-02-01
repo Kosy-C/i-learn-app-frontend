@@ -7,24 +7,50 @@ import "../signUp/signUp.css";
 import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import logo from "../../assets/logo.png";
-import { signInWithGooglePopup } from "../../utils/firebaseAuth/firebase";
+import { useAuth } from "../../useContext/index";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { app } from "../../utils/firebaseAuth/firebase";
 import axios from "axios";
-import { toast } from "react-toastify";
-// eslint-disable-next-line @typescript-eslint/no-unused-expressions
-import.meta.env;
 
 const baseUrl: string = import.meta.env.VITE_SERVER_URL;
 
 function LoginForm() {
-	const googleSignIn = async () => {
-		await signInWithGooglePopup();
-	};
-
 	const navigate = useNavigate();
 
+	const firebaseAuth = getAuth(app);
+	const provider = new GoogleAuthProvider();
+
+	const signInWithGoogle = async (): Promise<void> => {
+		await signInWithPopup(firebaseAuth, provider)
+			.then((userCred) => {
+				console.log(userCred);
+				if (userCred !== undefined) {
+					firebaseAuth.onAuthStateChanged((userCred) => {
+						if (userCred !== undefined) {
+							void userCred?.getIdToken().then((token) => {
+								axios
+									.get(`${baseUrl}/users/googleLogin`, {
+										headers: { Authorization: `Bearer ${token}` },
+									})
+									.then((res) =>
+										localStorage.setItem("signature", res.data.signature)
+									)
+									.then((e) => navigate(`/dashboard`, { replace: true }))
+									.catch((e) => e);
+								// localStorage.setItem("signature", token);
+							});
+						} else {
+							navigate("/login");
+						}
+					});
+				}
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
 	const emailRef = useRef<HTMLInputElement>(null);
 	const passwordRef = useRef<HTMLInputElement>(null);
-
 	const [error, setError] = useState("");
 
 	const validate = (email: string = "", password: string = "") => {
@@ -32,29 +58,16 @@ function LoginForm() {
 		else if (password.length < 8)
 			return setError("Password character cannot be less than 8");
 	};
+	const { LoginConfig } = useAuth() as any;
 
 	const handleSubmit = async (event: ChangeEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		validate(emailRef.current?.value, passwordRef.current?.value);
-		// const { name, value } = event.target
-		console.log(emailRef.current?.value);
 		const data = {
 			email: emailRef.current?.value,
 			password: passwordRef.current?.value,
 		};
-		console.log(data);
-
-		try {
-			const response = await axios.post(`${baseUrl}/users/login`, data);
-			const signature = response.data.signature;
-			console.log(response.data, "response is");
-			localStorage.setItem("signature", signature);
-			localStorage.setItem("user", response.data.areaOfInterest || "backend");
-			navigate("/dashboard");
-		} catch (err: any) {
-			console.log(err.response.data, "error message");
-			toast.error(err.response?.data?.Error || "Something went wrong");
-		}
+		LoginConfig(data);
 	};
 
 	return (
@@ -87,6 +100,7 @@ function LoginForm() {
 									ref={emailRef}
 									placeholder="Enter your email"
 									required
+									className="signUp-input"
 								/>
 							</div>
 							{error.length > 0 && error.includes("email") && (
@@ -100,6 +114,7 @@ function LoginForm() {
 									ref={passwordRef}
 									placeholder="Enter your password..."
 									required
+									className="signUp-input"
 								/>
 							</div>
 							<h5 id="forgot">
@@ -125,13 +140,26 @@ function LoginForm() {
 								</Link>
 							</div>
 						</form>
+						{/* <div className="socialIcons"> */}
+						{/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
+						{/* <button type="submit" onClick={googleSignIn}>
+								<FcGoogle />
+							</button> */}
+
+						{/* <a href="https:localhost:4000/facebook">
+								<button className="fbBtn"> */}
+
 						<div className="socialIcons">
 							{/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
-							<button type="submit" onClick={googleSignIn}>
+							<button type="submit" onClick={signInWithGoogle}>
 								<FcGoogle />
 							</button>
-
-							<a href="https:localhost:4000/facebook">
+							{/* <a href="https:localhost:4000/facebook">
+								<button type="submit" className="fbBtn">
+									<FaFacebook />
+								</button>
+							</a> */}
+							<a href={`${import.meta.env.VITE_SERVER_URL}/facebook`}>
 								<button className="fbBtn">
 									<FaFacebook />
 								</button>

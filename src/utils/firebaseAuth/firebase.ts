@@ -1,26 +1,15 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { initializeApp, getApp, getApps } from "firebase/app";
+import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-	apiKey: "AIzaSyCpixD0QmQ3iqA-G2G7_5ZDgNOsRLqqjNg",
-	authDomain: "ilearn-app-4f00b.firebaseapp.com",
-	projectId: "ilearn-app-4f00b",
-	storageBucket: "ilearn-app-4f00b.appspot.com",
-	messagingSenderId: "161045286532",
-	appId: "1:161045286532:web:e667ddc2290616c3d0fcd1",
+	apiKey: "AIzaSyBTLV0tgL1Pxwck7XB_Fx6Vof788_Xx-Ng",
+	authDomain: "mynewapp-302d7.firebaseapp.com",
+	projectId: "mynewapp-302d7",
+	storageBucket: "mynewapp-302d7.appspot.com",
+	messagingSenderId: "668303989927",
+	appId: "1:668303989927:web:b0ef267895794ad86fcf82",
 };
 
-// Initialize Firebase
-initializeApp(firebaseConfig);
-
-const provider = new GoogleAuthProvider();
-provider.setCustomParameters({
-	prompt: "select_account",
-});
-
-export const auth = getAuth();
-export const signInWithGooglePopup = async () =>
-	await signInWithPopup(auth, provider);
-export const db = getFirestore();
+export const app =
+	getApps.length > 0 ? getApp() : initializeApp(firebaseConfig);
+export const storage = getStorage(app);

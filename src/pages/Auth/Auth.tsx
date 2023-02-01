@@ -23,6 +23,7 @@ const Auth = () => {
 			console.log(response);
 			localStorage.setItem("signature", token);
 			localStorage.setItem("user", "backend");
+			localStorage.setItem("userType", response.data.userDetails.userType)
 			navigate("/dashboard");
 		} catch (error) {
 			console.log(error);

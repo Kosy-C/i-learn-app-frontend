@@ -4,13 +4,12 @@ import { Link } from "react-router-dom";
 import { apiGet } from "../../utils/api/axios";
 import { whiteStar } from "../../assets/index";
 import { Button } from "antd";
-import Course from "../Cards/course";
+import StudentCourse from "../Cards/course";
 import Rating from "../Rating/Rating";
+import { Course, TutorCourses } from "../../utils/Interfaces/index.dto";
 
 const RecommendedCourses = () => {
 	const category: string | null = localStorage.getItem("user");
-	console.log(category);
-	
 	const [courses, setCourses] = useState([]);
 
 	useEffect(() => {
@@ -21,7 +20,7 @@ const RecommendedCourses = () => {
 					`/users/recommended/${category}`
 				);
 				console.log(data);
-				
+
 				setCourses(data.recommendedCourse);
 			} catch (error) {
 				console.log(error);
@@ -46,13 +45,43 @@ const RecommendedCourses = () => {
 					{courses.length === 0 ? (
 						<p>No Courses found</p>
 					) : (
-						courses.map((item: any) => {
+						courses.map((course: TutorCourses, index: number) => {
 							return (
-								<Link to={`/coursedetail/${item.id}`} key={item.id}>
-									<div>
-										<Course course={item} />
+								<div key={course.id} className="allCourses_Cards">
+									<div className="all_courses_card">
+										{/* {course.course.slice(0, 6).map((c: any, index: number) => ( */}
+										<Link
+											to={`/coursedetail/${course.id}`}
+											className="all_coursesLink"
+										>
+											<div className="all_courses_details">
+												<div key={course.id} className="all_coursesHeader-img">
+													<img
+														className="all_courses-Img"
+														src={course.course_image}
+														alt="course_logo"
+													/>
+												</div>
+												<div className="all_courses_features">
+													<h2>
+														{course.title} by {course?.tutor?.name}
+													</h2>
+													<p>{course.description}</p>
+													<div className="all_coursesRating">
+														<p>
+															<Rating
+																rating={Number(course.rating)}
+																image={""}
+																color={"#ffb400"}
+															/>
+														</p>
+														<span>({index})</span>
+													</div>
+												</div>
+											</div>
+										</Link>
 									</div>
-								</Link>
+								</div>
 							);
 						})
 					)}
