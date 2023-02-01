@@ -8,11 +8,13 @@ import { FiLogOut } from "react-icons/fi";
 import { GrBook } from "react-icons/gr";
 import { Link } from "react-router-dom";
 import studentHistoryPage from "../studentHistoryPage/studentHistoryPage";
+import { User } from "../../utils/Interfaces/index.dto";
 
 interface Props {
 	userName: string;
 	userEmail: string;
 	userPicture: string;
+	user: any;
 }
 const logout = () => {
 	localStorage.clear();
