@@ -33,6 +33,7 @@ import DataProvider from "./useContext/index";
 import StudentProfile from "./pages/StudentProfile/StudentProfile ";
 import TutorNotification from "./pages/TutorPage/TutorPage";
 import TutorCoursesPage from "./pages/TutorCoursePage/TutorCoursePage";
+import UserProfile from "./pages/userprofile/UserProfile";
 
 function App() {
 	return (
@@ -178,6 +179,14 @@ function App() {
 								<ProtectedRouteStudent>
 									<StudentProfile />
 								</ProtectedRouteStudent>
+							}
+						/>
+						<Route
+							path="/userprofile/:userid"
+							element={
+								<ProtectedRouteTutor>
+									<UserProfile />
+								</ProtectedRouteTutor>
 							}
 						/>
 					</Routes>

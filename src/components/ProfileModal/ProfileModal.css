@@ -1,5 +1,5 @@
 .profile-modal {
-  background-color: #ffffff;
+  background-color:#fff;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -9,6 +9,10 @@
   width: 100%;
   text-decoration: none;
   z-index: 5000;
+}
+
+.profile-modal-container{
+  box-shadow: 10px 10px 5px rgb(243, 184, 184);
 }
 
 .profile-profile {
@@ -140,4 +144,10 @@
   font-size: 0rem;
   font-weight: 300;
   text-decoration: none;
+}
+
+.modal-profile-pic{
+  width: 32px;
+  height: 37px;
+  border-radius: 50%;
 }

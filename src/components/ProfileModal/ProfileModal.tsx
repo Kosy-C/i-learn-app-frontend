@@ -24,14 +24,14 @@ const ProfileModal: React.FC<Props> = ({
   userPicture,
 }) => {
   return (
-    <div>
+    <div className="profile-modal-container">
       <Modal>
         <div className="profile-modal">
           <div className="profile-profile">
-            <img src={ellipse} alt="" className="profile-pic" />
+            <img src={userPicture ? userPicture : ellipse} alt="" className="modal-profile-pic" />
             <div className="profile-name">
-              <p className="user-name">John Doe</p>
-              <p className="user-email">johndoe@gmail.com</p>
+              <p className="user-name">{userName}</p>
+              <p className="user-email">{userEmail}</p>
             </div>
           </div>
           <div className="profile-line"></div>

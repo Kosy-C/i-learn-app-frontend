@@ -100,7 +100,10 @@ h3 {
 }
 
 .profilepic {
-  padding-bottom: 14px;
+  padding-bottom: 5px;
+  width: 32px;
+  height: 37px;
+  border-radius: 50%;
 }
 .customModal {
   background: none !important;

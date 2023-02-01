@@ -5,15 +5,25 @@ import { FaBars } from "react-icons/fa";
 import { ImCross } from "react-icons/im";
 import Notification from "../NotificationModal/Notification";
 import Profile from "../profileDetails/profile";
+import { useContext } from "react";
 import { Modal } from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
 import ProfileModal from "../ProfileModal/ProfileModal";
+import { dataContext } from "../../useContext";
+import { GlobalStateInterface } from "../../useContext";
+import { User } from "../../utils/Interfaces/index.dto";
 
 const NavBar = () => {
   const [Mobile, setMobile] = useState(false);
   const [notificationModal, setNotificationModal] = useState(false);
   const [profile, setProfile] = useState(false);
   const [showModal, setShowModal] = useState(false);
+
+  const {user, loggedInUser} = useContext(dataContext)
+
+  useEffect(()=>{
+    loggedInUser()
+  }, [])
 
   const onOpenModal = () => {
     setNotificationModal(true);
@@ -34,9 +44,9 @@ const NavBar = () => {
   };
   const getSignature = localStorage.getItem("signature");
   // const user = JSON.parse(localStorage.getItem('user')!) ? JSON.parse(localStorage.getItem('user')!) : null
-  const user = {
-    image: "/src/assets/images/profilepic.svg"
-  }
+  // const user = {
+  //   image: "/src/assets/images/profilepic.svg"
+  // }
   return (
     <nav className="navbar">
    
@@ -97,10 +107,10 @@ const NavBar = () => {
         <li>
           <button onClick={togglePopup}>
             {showModal && (
-              <ProfileModal userName={""} userEmail={""} userPicture={""} />
+              <ProfileModal userName={user.name} userEmail={user.email} userPicture={user.image} />
             )}
             <img
-              src= {user.image ? user.image : "/src/assets/images/profilepic.svg"}
+              src= {user && user.image ? user.image : "/src/assets/images/profilepic.svg"}
               className="profilepic"
             />
           </button>
