@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
-import React, { useEffect, useState } from "react";
+import React, { lazy, useEffect, useState } from "react";
 import "../profileDetails/profile.css";
 // import Ellipse4 from "../../assets/images/Ellipse 4.svg";
 import { AiOutlineSafetyCertificate } from "react-icons/ai";
@@ -12,24 +12,17 @@ import { Modal } from "react-responsive-modal";
 // import { Tutor } from "../../utils/Interfaces/index.dto";
 import { toast } from "react-toastify";
 
-const Profile = () => {
+const Profile = ({ onClick }) => {
 	const [tutor, setTutor] = useState<any>({});
 	const [modalIsOpen, setIsOpen] = useState(false);
 	const params = useParams();
-
-	const handleBookSession = async () => {
-		// const { data } = await apiPost(
-		// 	`/users/scheduled-time/${tutorId}/:${studentId}'`
-		// );
-		// //
-		toast.success("Session booked successfully!");
-	};
 
 	function openModal() {
 		setIsOpen(true);
 	}
 	function closeModal() {
 		setIsOpen(false);
+		onClick();
 	}
 	useEffect(() => {
 		const fetch = async () => {
@@ -91,7 +84,6 @@ const Profile = () => {
 								id={params?.id}
 								tutor={tutor}
 								title={"Book session"}
-								onClick={handleBookSession}
 							/>
 						</Modal>
 					</div>
