@@ -257,15 +257,6 @@ const UserProfile = () => {
                   />
                 </div>
                 <div>
-                  <label>Email</label>
-                  <input
-                    type="email"
-                    name="email"
-                    defaultValue={user.email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </div>
-                <div>
                   <label>Area of Interest</label>
                   <div>
                     <AreasOfInterest
