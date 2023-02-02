@@ -29,7 +29,7 @@ const UserProfile = () => {
   const [image, setImage] = useState({});
   const [updated, setUpdated] = useState("");
 
-  const {aInterests, setAInterests} = useAuth()
+  const {areasOfInterests, setAreasOfInterests} = useAuth()
 
   const params = useParams();
 
@@ -175,8 +175,8 @@ const UserProfile = () => {
                   <label>Area of Interest</label>
                   <div>
                     <AreasOfInterest
-                      interests={aInterests}
-                      setInterests={setAInterests}
+                      interests={areasOfInterests}
+                      setInterests={setAreasOfInterests}
                     />
                   </div>
                   <div className="up-add-area-of-interest">
@@ -260,8 +260,8 @@ const UserProfile = () => {
                   <label>Area of Interest</label>
                   <div>
                     <AreasOfInterest
-                      interests={aInterests}
-                      setInterests={setAInterests}
+                      interests={areasOfInterests}
+                      setInterests={setAreasOfInterests}
                     />
                   </div>
                   <div className="up-add-area-of-interest">

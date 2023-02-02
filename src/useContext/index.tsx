@@ -22,8 +22,8 @@ export interface GlobalStateInterface {
   error: null | String;
   loggedInUser: () => void;
 	setLoading: React.Dispatch<React.SetStateAction<Boolean>> |any;
-  aInterests: string[];
-  setAInterests: React.Dispatch<React.SetStateAction<string[]>>
+  areasOfInterests: string[];
+  setAreasOfInterests: React.Dispatch<React.SetStateAction<string[]>>
 }
 export const dataContext = createContext<GlobalStateInterface | null>(null);
 
@@ -31,7 +31,7 @@ const DataProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User>();
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<String | null>(null);
-  const [aInterests, setAInterests] = useState<string[]>([])
+  const [areasOfInterests, setAreasOfInterests] = useState<string[]>([])
   /** ==============Login======= **/
   const LoginConfig: (data: LoginData) => Promise<void> = async (
     data: LoginData
@@ -76,8 +76,8 @@ const DataProvider = ({ children }: { children: React.ReactNode }) => {
         user,
         loading,
         error,
-        aInterests,
-        setAInterests
+        areasOfInterests,
+        setAreasOfInterests
       }}
     >
       {children}

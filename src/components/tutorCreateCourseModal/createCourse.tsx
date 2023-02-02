@@ -24,25 +24,26 @@ const CreateCourse: React.FC<Props> = ({
 	const [dig, setDig] = useState(false);
 	const [Chemistry, setChemistry] = useState(false);
 
-	const {aInterests, setAInterests} = useAuth()
+	const {areasOfInterests, setAreasOfInterests} = useAuth()
+
 
 	const handlePush = (value: boolean, insertee: string) => {
 		if (!value) {
-			if(!aInterests.includes(insertee)){
-			setAInterests([...aInterests, insertee])
+			if(!areasOfInterests.includes(insertee)){
+				setAreasOfInterests([...areasOfInterests, insertee])
 			}else{
 				toast.error(`${insertee} is already selected`)
 			}
 		} else {
-			const result = aInterests.filter(
+			const result = areasOfInterests.filter(
 				(area: string) => area !== insertee
 			);
-			setAInterests(result);
+			setAreasOfInterests(result);
 		}
 	};
 
 	const handleCheck = (event: React.ChangeEvent<HTMLInputElement>) => {
-		if (aInterests.length < 5) {
+		if (areasOfInterests.length < 5) {
 			if (event.target.value === "Mathematics") {
 				setMathematics(!mathematics);
 				handlePush(mathematics, event.target.value);
@@ -71,7 +72,7 @@ const CreateCourse: React.FC<Props> = ({
 				setVideo(!video);
 				handlePush(video, event.target.value);
 			}
-		} else if (aInterests.length = 5) {
+		} else if (areasOfInterests.length = 5) {
 			toast.error("You cannot select more than five areas of interest");
 			setDisabled(true);
 		}
@@ -86,7 +87,7 @@ const CreateCourse: React.FC<Props> = ({
 	};
 
 	const refreshSelected = () => {
-		setAInterests([]);
+		setAreasOfInterests([]);
 		setDisabled(false);
 		setMathematics(false);
 		setCoding(false);
