@@ -23,7 +23,10 @@ import PaymentSummaryPage from "./pages/paymentSummary/paymentSummary";
 import RateCourses from "./pages/RateCourses/RateCourses";
 import TutorRating from "./pages/RateTutor/RatingTutor";
 import PaidCourses from "./pages/PaidCourses/PaidCourses";
+import Auth from "./pages/Auth/Auth";
 import NotFound from "./pages/NotFound/NotFound";
+// import Dataprovider from "./useContext/index";
+// import TutorCoursesPage from "./pages/TutorCoursesPage/TutorCoursesPage";
 import {
 	ProtectedRoute,
 	ProtectedRouteTutor,
@@ -50,6 +53,8 @@ function App() {
 						<Route path="/sign-up" element={<SignUpForm />} />
 						<Route path="/login" element={<LoginForm />} />
 						<Route path="/reset-password" element={<ResetPassword />} />
+						<Route path="/auth/social/:token?" element={<Auth />} />
+
 						<Route path="/users/resetpassword" element={<SetNewPassword />} />
 						<Route
 							path="/tutor-profile"

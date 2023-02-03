@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable @typescript-eslint/no-misused-promises */
@@ -313,14 +314,17 @@ function SignUpForm() {
 								</Link>
 							</div>
 						</form>
-						<div className="socialIcons">
-							<button type="submit" onClick={signInWithGoogle}>
-								<FcGoogle />
-							</button>
-							<button type="submit" className="fbBtn">
+					</div>
+					<div className="socialIcons">
+						<button type="button" onClick={signInWithGoogle}>
+							<FcGoogle />
+						</button>
+
+						<a href={`${import.meta.env.VITE_SERVER_URL}/facebook`}>
+							<button className="fbBtn">
 								<FaFacebook />
 							</button>
-						</div>
+						</a>
 					</div>
 				</div>
 			</div>

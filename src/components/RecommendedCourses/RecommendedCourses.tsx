@@ -10,7 +10,6 @@ import { Course, TutorCourses } from "../../utils/Interfaces/index.dto";
 
 const RecommendedCourses = () => {
 	const category: string | null = localStorage.getItem("user");
-
 	const [courses, setCourses] = useState([]);
 
 	useEffect(() => {
@@ -20,6 +19,8 @@ const RecommendedCourses = () => {
 					// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
 					`/users/recommended/${category}`
 				);
+				console.log(data);
+
 				setCourses(data.recommendedCourse);
 			} catch (error) {
 				console.log(error);

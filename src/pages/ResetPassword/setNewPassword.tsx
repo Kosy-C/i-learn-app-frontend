@@ -1,4 +1,5 @@
 import "./resetPassword.css";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import * as qs from "query-string";
 import Group from "../../assets/Group.svg";
 import { Link } from "react-router-dom";
