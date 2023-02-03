@@ -13,12 +13,13 @@ import AreasOfInterest from "../../components/areasOfInterest/AreasOfInterest";
 import { toast } from "react-toastify";
 import unknownavatar from "../../assets/unknownavatar.webp";
 import LoadingIcons from "react-loading-icons";
+import { useAuth } from "../../useContext";
 
 const UserProfile = () => {
   const [user, setUser] = useState<TutorModel>();
   const [areaOfInterests, setAreaOfInterests] = useState(false);
   const [upModalIsOpen, setUpModalIsOpen] = useState(false);
-
+  const [loading, setLoading] = useState(false)
   const [interests, setInterests] = useState<string[]>([]);
 
   const [name, setName] = useState("");
@@ -28,45 +29,51 @@ const UserProfile = () => {
   const [image, setImage] = useState({});
   const [updated, setUpdated] = useState("");
 
+  const {areasOfInterests, setAreasOfInterests} = useAuth()
+
   const params = useParams();
+
+  const navigate = useNavigate();
 
   const handleSubmitEditedProfile = async (
     e: React.FormEvent<HTMLFormElement>
   ) => {
     e.preventDefault();
-    console.log(image);
+    setLoading(true)
     const { data } = await apiPutFormData("/users/edit-profile", {
-      name,
-      location,
-      about,
+      name: name ? name : user?.name,
+      location: location ? location : user?.location,
+      about: about ? about : user?.about,
       expertise: interests,
       image,
     });
+   
     if (data) {
+      setLoading(false)
       toast.success(data.message);
       setUpdated(data.message);
     } else {
       toast.error("There was an error, please try again");
     }
-    localStorage.removeItem("areasOfInterest");
-    setInterests([]);
     setName("");
     setLocation("");
     setAbout("");
+    navigate(`/dashboard/${user?.id}`)
   };
 
   const handleSubmitStudentEditedProfile = async (
     e: React.FormEvent<HTMLFormElement>
   ) => {
     e.preventDefault();
-    console.log(image);
+    setLoading(true)
     const { data } = await apiPutFormData("/users/edit-profile", {
-      name,
+      name: name ? name : user?.name,
       areaOfInterest: interests,
       image,
     });
 
     if (data) {
+      setLoading(false)
       toast.success(data.message);
       setUpdated(data.message);
     } else {
@@ -74,8 +81,7 @@ const UserProfile = () => {
     }
     setName("");
     setEmail("");
-    localStorage.removeItem("areasOfInterest");
-    setInterests([]);
+    navigate(`/dashboard/${user?.id}`)
   };
 
   const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -83,6 +89,7 @@ const UserProfile = () => {
   };
 
   useEffect(() => {
+    setLoading(false);
     const fecthUser = async () => {
       const { data } = await apiGet(`/users/atutordetail/${params.userid}`);
       setUser(data.message);
@@ -90,14 +97,7 @@ const UserProfile = () => {
     fecthUser();
   }, [updated]);
 
-  useEffect(() => {
-    const areas = JSON.parse(localStorage.getItem("areasOfInterest")!);
-    if (areas) {
-      setInterests(areas);
-    }
-  }, [areaOfInterests]);
-
-  const navigate = useNavigate();
+  
 
   const handleChange = () => {
     setUpModalIsOpen(true);
@@ -152,9 +152,8 @@ const UserProfile = () => {
                   <label>Full Name</label>
                   <input
                     type="text"
-                    placeholder="Full Name"
                     name="name"
-                    value={name}
+                    defaultValue={user.name}
                     onChange={(e) => setName(e.target.value)}
                   />
                 </div>
@@ -163,18 +162,16 @@ const UserProfile = () => {
                   <label>Location</label>
                   <input
                     type="text"
-                    placeholder="Enter Location"
+                    defaultValue={user.location}
                     name="location"
-                    value={location}
                     onChange={(e) => setLocation(e.target.value)}
                   />
                 </div>
                 <div>
                   <label>About</label>
                   <input
-                    placeholder="Give a short bio"
                     name="about"
-                    value={about}
+                    defaultValue={user.about}
                     onChange={(e) => setAbout(e.target.value)}
                   />
                 </div>
@@ -182,8 +179,8 @@ const UserProfile = () => {
                   <label>Area of Interest</label>
                   <div>
                     <AreasOfInterest
-                      interests={interests}
-                      setInterests={setInterests}
+                      interests={areasOfInterests}
+                      setInterests={setAreasOfInterests}
                     />
                   </div>
                   <div className="up-add-area-of-interest">
@@ -194,6 +191,16 @@ const UserProfile = () => {
                 </div>
                 <div className="up-submitButton">
                   <button type="submit">Save</button>
+                  {loading && (
+								<div className="up-login_loading">
+									<LoadingIcons.Oval
+										stroke="black"
+										strokeOpacity={1}
+										height={15}
+										width={198}
+									/>
+								</div>
+							)}
                 </div>
               </div>
             </form>
@@ -248,28 +255,17 @@ const UserProfile = () => {
                   <label>Full Name</label>
                   <input
                     type="text"
-                    placeholder="Full Name"
                     name="name"
-                    value={name}
+                    defaultValue={user.name}
                     onChange={(e) => setName(e.target.value)}
-                  />
-                </div>
-                <div>
-                  <label>Email</label>
-                  <input
-                    type="email"
-                    placeholder="Enter your email"
-                    name="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
                 <div>
                   <label>Area of Interest</label>
                   <div>
                     <AreasOfInterest
-                      interests={interests}
-                      setInterests={setInterests}
+                      interests={areasOfInterests}
+                      setInterests={setAreasOfInterests}
                     />
                   </div>
                   <div className="up-add-area-of-interest">
@@ -280,6 +276,16 @@ const UserProfile = () => {
                 </div>
                 <div className="up-submitButton">
                   <button type="submit">Save</button>
+                  {loading && (
+								<div className="up-login_loading">
+									<LoadingIcons.Oval
+										stroke="black"
+										strokeOpacity={1}
+										height={45}
+										width={398}
+									/>
+								</div>
+							)}
                 </div>
               </div>
             </form>

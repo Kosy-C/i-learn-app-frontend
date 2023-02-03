@@ -133,6 +133,14 @@
     width:20px;
   } */
 
+  .up-login_loading{
+    z-index: 2;
+    position: relative;
+    top: 0;
+    left: 20;
+    right: 230;
+  }
+
   .updateFile{
     opacity:0;
     position: absolute;

@@ -189,9 +189,9 @@ function App() {
 						<Route
 							path="/userprofile/:userid"
 							element={
-								<ProtectedRouteTutor>
+								<ProtectedRoute>
 									<UserProfile />
-								</ProtectedRouteTutor>
+								</ProtectedRoute>
 							}
 						/>
 					</Routes>
