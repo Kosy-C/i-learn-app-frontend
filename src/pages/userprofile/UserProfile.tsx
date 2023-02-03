@@ -81,7 +81,7 @@ const UserProfile = () => {
     }
     setName("");
     setEmail("");
-    navigate('/dashboard')
+    navigate(`/dashboard/${user?.id}`)
   };
 
   const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
