@@ -3,10 +3,6 @@ import React, { createContext, useState } from "react";
 import { apiGet, apiPost } from "../utils/api/axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {
-	courseDetails,
-	CourseDetails,
-} from "../pages/TutorCourseOperations/TutorCourseOperations";
 import { User } from "../utils/Interfaces/index.dto";
 import { AxiosResponse } from "axios";
 
@@ -19,8 +15,10 @@ export interface GlobalStateInterface {
 	user: User | undefined;
 	loading: Boolean;
 	error: null | String;
-	loggedInUser: () => void;
+	loggedInUser: () => Promise<void>;
 	setLoading: React.Dispatch<React.SetStateAction<Boolean>> | any;
+	areasOfInterests: string[];
+	setAreasOfInterests: React.Dispatch<React.SetStateAction<string[]>>;
 }
 export const dataContext = createContext<GlobalStateInterface | null>(null);
 
@@ -28,6 +26,7 @@ const DataProvider = ({ children }: { children: React.ReactNode }) => {
 	const [user, setUser] = useState<User>();
 	const [loading, setLoading] = useState<boolean>(true);
 	const [error, setError] = useState<String | null>(null);
+	const [areasOfInterests, setAreasOfInterests] = useState<string[]>([]);
 	/** ==============Login======= **/
 	const LoginConfig: (data: LoginData) => Promise<void> = async (
 		data: LoginData
@@ -72,12 +71,13 @@ const DataProvider = ({ children }: { children: React.ReactNode }) => {
 				user,
 				loading,
 				error,
+				areasOfInterests,
+				setAreasOfInterests,
 			}}
 		>
 			{children}
 		</dataContext.Provider>
 	);
-	// const [loading, setLoading] = useState<Boolean>(true);
 };
 
 export const useAuth = () => {

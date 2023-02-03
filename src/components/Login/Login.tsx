@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
@@ -175,16 +176,27 @@ function LoginForm() {
 									Create
 								</Link>
 							</div>
-							<div className="socialIcons">
-								{/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
-								<button type="submit" onClick={signInWithGoogle}>
-									<FcGoogle />
-								</button>
-								<button type="submit" className="fbBtn">
+						</form>
+						{/* <div className="socialIcons"> */}
+						{/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
+						{/* <button type="submit" onClick={googleSignIn}>
+								<FcGoogle />
+							</button> */}
+
+						{/* <a href="https:localhost:4000/facebook">
+								<button className="fbBtn"> */}
+
+						<div className="socialIcons">
+							{/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
+							<button type="submit" onClick={signInWithGoogle}>
+								<FcGoogle />
+							</button>
+							<a href={`${import.meta.env.VITE_SERVER_URL}/facebook`}>
+								<button className="fbBtn">
 									<FaFacebook />
 								</button>
-							</div>
-						</form>
+							</a>
+						</div>
 					</div>
 				</div>
 			</div>
