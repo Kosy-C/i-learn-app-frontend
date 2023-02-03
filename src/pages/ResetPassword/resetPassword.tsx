@@ -5,7 +5,7 @@ import Group from "../../assets/Group.svg";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
-const baseUrl = import.meta.env.SERVER_URL;
+const baseUrl = import.meta.env.VITE_SERVER_URL as string;
 
 const ResetPassword = () => {
 	const [createForm, setCreateForm] = useState({});
@@ -21,11 +21,10 @@ const ResetPassword = () => {
 	const fetchLink = async () => {
 		try {
 			const response = await axios.post(
-				`http://localhost:4000/users/forgot-password`,
+				`${baseUrl}/users/forgot-password`,
 				createForm
 			);
 			toast.success(response.data.message);
-			// http://localhost:4000/users/forgot-password
 		} catch (error: any) {
 			console.log(error);
 			toast.error(error);

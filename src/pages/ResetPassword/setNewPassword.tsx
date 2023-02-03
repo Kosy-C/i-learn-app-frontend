@@ -1,17 +1,12 @@
 import "./resetPassword.css";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import * as qs from "query-string";
-// import { toast } from "react-toastify";
 import Group from "../../assets/Group.svg";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Link, useSearchParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-// import dotenv from "dotenv";
-// dotenv.config();
-
-// const url = "http://192.168.0.200:4000";
+const baseUrl = import.meta.env.VITE_SERVER_URL as string;
 
 const SetNewPassword = () => {
 	const [createForm, setCreateForm] = useState({});
@@ -19,16 +14,10 @@ const SetNewPassword = () => {
 	const queryParams = new URLSearchParams(window.location.search);
 	const userId = queryParams.get("userId") as string;
 	const token = queryParams.get("token") as string;
-	// console.log(token, userId);
 
 	const submitDetails = (e: any) => {
-		// console.log(location.search);
-		// const parsed = qs.parse(location.search);
-
 		e.preventDefault();
 		const { name, value } = e.target;
-		console.log({ name, value });
-		console.log({ userId, token });
 		setCreateForm({
 			...createForm,
 			[name]: value,
@@ -38,7 +27,7 @@ const SetNewPassword = () => {
 		try {
 			e.preventDefault();
 			const response = await axios.post(
-				`https://localhost:4000/users/resetpassword/${userId}/${token}`,
+				`${baseUrl}/users/resetpassword/${userId}/${token}`,
 				createForm
 			);
 			toast.success(response.data.message);
