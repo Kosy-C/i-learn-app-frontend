@@ -33,6 +33,8 @@ const UserProfile = () => {
 
   const params = useParams();
 
+  const navigate = useNavigate();
+
   const handleSubmitEditedProfile = async (
     e: React.FormEvent<HTMLFormElement>
   ) => {
@@ -56,6 +58,7 @@ const UserProfile = () => {
     setName("");
     setLocation("");
     setAbout("");
+    navigate(`/dashboard/${user?.id}`)
   };
 
   const handleSubmitStudentEditedProfile = async (
@@ -78,6 +81,7 @@ const UserProfile = () => {
     }
     setName("");
     setEmail("");
+    navigate('/dashboard')
   };
 
   const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -93,7 +97,7 @@ const UserProfile = () => {
     fecthUser();
   }, [updated]);
 
-  const navigate = useNavigate();
+  
 
   const handleChange = () => {
     setUpModalIsOpen(true);
