@@ -8,18 +8,19 @@ import { Modal } from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
 import ProfileModal from "../ProfileModal/ProfileModal";
 import { useAuth } from "../../useContext";
-
+import logo from "../../assets/logo.png";
+import profilePic from "../../assets/profilepic.svg";
 
 const NavBar = () => {
   const [Mobile, setMobile] = useState(false);
   const [notificationModal, setNotificationModal] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
-  const {user, loggedInUser} = useAuth()
+  const { user, loggedInUser } = useAuth();
 
-  useEffect(()=>{
-    loggedInUser()
-  }, [])
+  useEffect(() => {
+    loggedInUser();
+  }, []);
 
   const onOpenModal = () => {
     setNotificationModal(true);
@@ -30,7 +31,6 @@ const NavBar = () => {
   const toggleModal = () => {
     setNotificationModal(!notificationModal);
   };
-  
 
   const togglePopup = () => {
     setShowModal(!showModal);
@@ -39,12 +39,11 @@ const NavBar = () => {
     localStorage.clear();
   };
   const getSignature = localStorage.getItem("signature");
- 
+
   return (
     <nav className="navbar">
-   
       <div className="logotext">
-        <img src="/src/assets/images/fulllogo.svg" />
+        <img src={logo} />
         <h3>iLearn</h3>
       </div>
 
@@ -100,10 +99,15 @@ const NavBar = () => {
         <li>
           <button onClick={togglePopup}>
             {showModal && (
-              <ProfileModal userName={user!.name} userEmail={user!.email} userPicture={user!.image} user={user} />
+              <ProfileModal
+                userName={user!.name}
+                userEmail={user!.email}
+                userPicture={user!.image}
+                user={user}
+              />
             )}
             <img
-              src= {user && user.image ? user.image : "/src/assets/images/profilepic.svg"}
+              src={user != null && user.image ? user.image : profilePic}
               className="profilepic"
             />
           </button>
