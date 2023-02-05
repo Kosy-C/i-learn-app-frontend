@@ -163,7 +163,7 @@ function LoginForm() {
 										stroke="black"
 										strokeOpacity={1}
 										height={45}
-										width={691}
+										width={511}
 									/>
 								</div>
 							)}

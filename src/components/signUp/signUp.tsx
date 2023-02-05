@@ -312,7 +312,7 @@ function SignUpForm() {
 										stroke="black"
 										strokeOpacity={1}
 										height={45}
-										width={691}
+										width={491}
 									/>
 								</div>
 							)}
