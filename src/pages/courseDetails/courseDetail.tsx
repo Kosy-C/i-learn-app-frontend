@@ -52,21 +52,25 @@ const CourseDetail = () => {
           className="cd-course-container"
           style={{
             backgroundImage: `url(
-            ${course.course_image}
-          )`,
+              ${course.course_image}
+              )`,
           }}
         >
-          <h2 className="cd-title">{course.title}</h2>
-          <p className="cd-p">{course.description}</p>
-          <div className="cd-rating">
-            <Rating rating={Number(course.rating)} image={""} color={""} />
-          </div>
-          <p>
-            Updated{" "}
-            {course && new Date(course.createdAt).toLocaleString("en-NG")}
-          </p>
+          <div className="course-overlay">
+            <div className="course--container__content">
+              <h2 className="cd-title">{course.title}</h2>
+              <p className="cd-p">{course.description}</p>
+              <div className="cd-rating">
+                <Rating rating={Number(course.rating)} image={""} color={""} />
+              </div>
+              <p>
+                Updated{" "}
+                {course && new Date(course.createdAt).toLocaleString("en-NG")}
+              </p>
 
-          <p>{`₦${Number(course.pricing).toLocaleString()}`}</p>
+              <p>{`₦${Number(course.pricing).toLocaleString()}`}</p>
+            </div>
+          </div>
         </div>
 
         <div className="cd-tutor-container">
