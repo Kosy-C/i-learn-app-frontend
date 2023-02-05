@@ -27,27 +27,41 @@ const ResetPassword = () => {
 			toast.success(response.data.message);
 		} catch (error: any) {
 			console.log(error);
-			toast.error(error);
+			if (error.response?.data?.Error === "Internal server Error") {
+				toast.error("Something went wrong, please hang on");
+			} else {
+				toast.error(error.response?.data?.Error || "Something went wrong");
+			}
 		}
 	};
 
 	return (
 		<div className="overallDiv">
+			{" "}
 			<div className="resetPassword">
+				{" "}
+				<Link to="/">
 				<div className="tutor-buddy">
-					<img src={Group} />
-					<h3 className="learn">iLearn</h3>
-				</div>
+					{" "}
+					<img src={Group} /> <h3 className="learn">iLearn</h3>{" "}
+				</div>{" "}
+				</Link>
 				<div className="form-con">
+					{" "}
 					<div className="form-box">
+						{" "}
 						<div className="contain">
-							<h4>Forgot Password?</h4>
-							<p>Send a link to your email to resend password</p>
-						</div>
+							{" "}
+							<h4>Forgot Password?</h4>{" "}
+							<p className="ppp">
+								Send a link to your email to resend password
+							</p>{" "}
+						</div>{" "}
 						<form>
-							{/* <div className="form-group">
-								<label htmlFor="email">Email</label>
-								<br />
+							{" "}
+							<div className="form-group">
+								{" "}
+								<label htmlFor="email">Email</label> <br />{" "}
 								<input
 									type="email"
 									className="form-control"
@@ -55,37 +69,31 @@ const ResetPassword = () => {
 									name="email"
 									onChange={submitDetails}
 									placeholder="Enter email"
-								/>
-							</div> */}
-							<div>
-								<label htmlFor="email">Email</label>
-								<br />
-								<input
-									type="email"
-									name="email"
-									onChange={submitDetails}
-									placeholder="Enter email"
-								/>
-							</div>
+								/>{" "}
+							</div>{" "}
 							<button
 								type="submit"
 								onClick={async () => await fetchLink()}
 								className="btn-primary"
 							>
+								{" "}
 								<Link to="" className="btn">
-									Send Reset Link
-								</Link>
-							</button>
+									{" "}
+									Send Reset Link{" "}
+								</Link>{" "}
+							</button>{" "}
 							<p>
+								{" "}
 								Already have an account?{" "}
 								<span className="login">
+									{" "}
 									<Link to="/login">Login</Link>{" "}
-								</span>
-							</p>
-						</form>
-					</div>
-				</div>
-			</div>
+								</span>{" "}
+							</p>{" "}
+						</form>{" "}
+					</div>{" "}
+				</div>{" "}
+			</div>{" "}
 		</div>
 	);
 };

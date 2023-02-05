@@ -30,55 +30,81 @@ const SetNewPassword = () => {
 				`${baseUrl}/users/resetpassword/${userId}/${token}`,
 				createForm
 			);
-			toast.success(response.data.message);
+			if (response.status === 200) {
+				toast.success(response.data.message);
+				setTimeout(() => {
+					window.location.href = "/login";
+				}, 1000);
+			}
 		} catch (error: any) {
 			console.log(error);
-			toast.error(error);
+			if (error.response?.data?.Error === "Internal server Error") {
+				toast.error("Something went wrong, please hang on");
+			} else {
+				toast.error(error.response?.data?.Error || "Something went wrong");
+			}
 		}
 	};
 	return (
 		<div className="overallDiv">
+			{" "}
 			<div className="resetPassword">
+				{" "}
+				<Link to="/">
 				<div className="tutor-buddy">
-					<img src={Group} />
-					<h3 className="learn">iLearn</h3>
-				</div>
+					{" "}
+					<img src={Group} /> <h3 className="learn">iLearn</h3>{" "}
+				</div>{" "}
+				</Link>
 				<div className="form-cont">
+					{" "}
 					<div className="form-box">
+						{" "}
 						<div className="contain">
-							<h4>Reset Password</h4>
-							<p>Please choose a new password</p>
-						</div>
+							{" "}
+							<h4>Reset Password</h4> <p>Please choose a new password</p>{" "}
+						</div>{" "}
 						<form>
+							{" "}
 							<div>
-								<label htmlFor="email">New Password</label>
-								<br />
+								{" "}
+								<label htmlFor="email">
+									New Password<span className="astericks">*</span>
+								</label>{" "}
+								<br />{" "}
 								<input
 									type="password"
+									className="form-control2"
 									name="password"
 									onChange={submitDetails}
 									placeholder="Enter a new password"
-								/>
-							</div>
+								/>{" "}
+							</div>{" "}
 							<div>
-								<label htmlFor="email">Confirm Password</label>
-								<br />
+								{" "}
+								<label htmlFor="email">
+									Confirm Password<span className="astericks">*</span>
+								</label>{" "}
+								<br />{" "}
 								<input
 									type="password"
+									className="form-control2"
 									name="confirm_password"
 									onChange={submitDetails}
 									placeholder="Confirm your password"
-								/>
-							</div>
+								/>{" "}
+							</div>{" "}
 							<button type="submit" className="btn-primary" onClick={fetchLink}>
-								<Link to="/login" className="btn">
-									Change Password
-								</Link>
-							</button>
-						</form>
-					</div>
-				</div>
-			</div>
+								{" "}
+								<Link to="" className="btn">
+									{" "}
+									Change Password{" "}
+								</Link>{" "}
+							</button>{" "}
+						</form>{" "}
+					</div>{" "}
+				</div>{" "}
+			</div>{" "}
 		</div>
 	);
 };
