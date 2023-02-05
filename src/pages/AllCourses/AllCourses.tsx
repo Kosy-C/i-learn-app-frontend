@@ -140,10 +140,11 @@ const AllCourses = () => {
 														/>
 													</div>
 													<div className="all_courses_features">
-														<h2 className="all_coursesTitleHeading">
+														<h3 className="all_coursesTitleHeading">
 															{course.title} by {course?.tutor?.name}
-														</h2>
+														</h3>
 														<p>{course.description}</p>
+														<p><span>&#x20A6;</span>{course.pricing}</p>
 														<div className="all_coursesRating">
 															<p>
 																<Rating
