@@ -61,20 +61,20 @@ const CourseDetail = () => {
               <h2 className="cd-title">{course.title}</h2>
               <p className="cd-p">{course.description}</p>
               <div className="cd-rating">
-                <Rating rating={Number(course.rating)} image={""} color={""} />
+                <Rating rating={course.rating} image={""} color={""} />
               </div>
               <p>
                 Updated{" "}
                 {course && new Date(course.createdAt).toLocaleString("en-NG")}
               </p>
 
-              <p>{`₦${Number(course.pricing).toLocaleString()}`}</p>
+              <h4>{`₦${Number(course.pricing).toLocaleString()}`}</h4>
             </div>
           </div>
         </div>
 
         <div className="cd-tutor-container">
-          <p className="cd-tutor-title">About the Tutor</p>
+          <h2 className="cd-tutor-title">About the Tutor</h2>
           <div className="cd-tutor-profile">
             <img src={course.tutor.image} alt="tutor" />
             <div className="cd-name-courses">
