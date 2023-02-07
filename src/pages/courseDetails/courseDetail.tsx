@@ -98,7 +98,7 @@ const CourseDetail = () => {
             </div>
           </div>
           <p className="cd-about-tutor">
-            {course.tutor.about ? course.tutor.about : null}
+            {course.description}
             
           </p>
         </div>
@@ -106,7 +106,7 @@ const CourseDetail = () => {
           
           <div className="ratings-container">
             <p className="cd-ratings">Ratings</p>
-            {ratings.length > 0 ? (
+            {ratings && ratings.length > 0 ? (
               ratings.map((rating) => (
                 <>
                   <hr />
