@@ -19,7 +19,7 @@ const CourseDetail = () => {
   const [course, setCourse] = useState<CourseModel>();
   const [ratings, setRatings] = useState<Rating[]>([]);
 
-  const { user, loggedInUser, loading } = useAuth();
+	const { user, loggedInUser, loading } = useAuth();
 
   // const [email, setEmail] = useState(user?.email);
   const params = useParams();
@@ -34,22 +34,22 @@ const CourseDetail = () => {
     loggedInUser();
   }, []);
 
-  const navigate = useNavigate();
-  const goBack = () => {
-    navigate(-1);
-  };
+	const navigate = useNavigate();
+	const goBack = () => {
+		navigate(-1);
+	};
 
-  const makePayment = () => {
-    setModalOpen(true);
-  };
+	const makePayment = () => {
+		setModalOpen(true);
+	};
 
-  return !user || !course ? (
-    <LoaderRings />
-  ) : (
-    <>
-      <button className="cd-rate_course_arrowButton" onClick={goBack}>
-        &#8249; Go Back
-      </button>
+	return user == null || course == null ? (
+		<LoaderRings />
+	) : (
+		<>
+			<button className="cd-rate_course_arrowButton" onClick={goBack}>
+				&#8249; Go Back
+			</button>
 
       <div className="heading-border">
         <h1 className="cd-heading"> About the course</h1>

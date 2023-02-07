@@ -23,7 +23,7 @@ interface formFieldType {
 	userType: string;
 	email: string;
 	password: string;
-	areaOfInterest: string | any[];
+	areaOfInterest: string[];
 	name: string;
 }
 const formField: formFieldType = {
@@ -31,7 +31,7 @@ const formField: formFieldType = {
 	userType: "",
 	email: "",
 	password: "",
-	areaOfInterest: "",
+	areaOfInterest: [],
 };
 
 function SignUpForm() {
@@ -91,10 +91,12 @@ function SignUpForm() {
 	const [isEmail, setIsEmail] = useState(false);
 	const [isPassword, setIsPassword] = useState(false);
 	const [isAreaOfInterest, setIsAreaOfInterest] = useState(false);
+	const [AreaOfInterest, setAreaOfInterests] = useState<string[]>([]);
+	const [interest, setInterest] = useState("");
 
 	const navigate = useNavigate();
 
-	const handleChange = async (
+	const handleChange = (
 		event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>
 	) => {
 		event.preventDefault();
@@ -102,18 +104,22 @@ function SignUpForm() {
 		setUserTypeError("");
 		setEmailError("");
 		setPassWordError("");
-		setInterestError("");
 		const { name, value } = event.target;
 		setFormDetails({ ...formDetails, [name]: value });
+	};
+	const handleArea = (
+		event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>
+	) => {
+		const { value } = event.target;
+		setInterestError("");
+		setInterest(event.target.value);
+		setIsAreaOfInterest(false);
+		setAreaOfInterests([interest]);
 	};
 
 	const { loading, setLoading } = useAuth() as any;
 	const handleLogin = () => {
 		// setLoading(true);
-	};
-
-	const display = () => {
-		setShow(!show);
 	};
 
 	const { name, userType, email, password, areaOfInterest } = formDetails;
@@ -126,7 +132,9 @@ function SignUpForm() {
 
 	const handleSubmit = async (event: ChangeEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		console.log(formDetails);
+
+		formDetails.areaOfInterest = [interest];
+
 		if (formDetails.name === "") {
 			setIsName(true);
 			return setNameError("Name field is required");
@@ -137,49 +145,40 @@ function SignUpForm() {
 			setIsEmail(true);
 			return setEmailError("Please provide a valid email");
 		} else if (
-			formDetails.password.length < 6 ||
+			formDetails.password.length < 8 ||
 			formDetails.password.match(/^[a-zA-Z][0-9]$/) !== null
 		) {
 			setIsPassword(true);
 			return setPassWordError(
 				"Password should be alphanumeric & not less than 8 characters"
 			);
-		} else if (formDetails.areaOfInterest === "") {
+		} else if (interest.length === 0) {
 			setIsAreaOfInterest(true);
+			setAreaOfInterests([]);
 			return setInterestError("Area of interest is required");
 		} else {
 			setLoading(true);
-
-			let areaArray: any[] = [];
-			const interestArea = formDetails.areaOfInterest;
-
-			if (interestArea === "") {
-				return null;
-			} else if (interestArea !== "" || !areaArray.includes(interestArea)) {
-				areaArray.push(interestArea);
-				formDetails.areaOfInterest = areaArray;
-			}
-			setTimeout(async () => {
-				try {
-					areaArray = [];
-					const response = await apiPost(`/users/signup`, formDetails);
-					if (response.status === 201) {
-						setLoading(false);
-						toast.success(response.data.message);
-					}
-					setIsSubmit(true);
-					areaArray = [];
-				} catch (err: any) {
-					areaArray = [];
-					console.log(err);
+			try {
+				// areaArray = [];
+				const response = await apiPost(`/users/signup`, formDetails);
+				if (response.status === 201) {
 					setLoading(false);
-					if (err.response?.data?.Error === "Internal server Error") {
-						toast.error("Something went wrong, please hang on");
-					} else {
-						toast.error(err.response?.data?.Error || "Something went wrong");
-					}
+					toast.success(response.data.message);
 				}
-			}, 4000);
+				setIsSubmit(true);
+				setAreaOfInterests([]);
+				// areaArray = [];
+			} catch (err: any) {
+				// areaArray = [];
+				setAreaOfInterests([]);
+				console.log(err);
+				setLoading(false);
+				if (err.response?.data?.Error === "Internal server Error") {
+					toast.error("Something went wrong, please hang on");
+				} else {
+					toast.error(err.response?.data?.Error || "Something went wrong");
+				}
+			}
 		}
 	};
 	useEffect(() => {
@@ -188,23 +187,27 @@ function SignUpForm() {
 	return (
 		<Fragment>
 			<div className="formContainer">
-				<div className="logo">
-					<div>
-						<img src={logo} alt="Logo" />
+				<Link to="/">
+					<div className="logo">
+						<div>
+							<img src={logo} alt="Logo" />
+						</div>
+						<div>
+							<h2>iLearn</h2>
+						</div>
 					</div>
-					<div>
-						<h2>iLearn</h2>
-					</div>
-				</div>
-				<div>
+				</Link>
+				<div className="signUpContainer">
 					<div className="formBody">
 						<div className="formHead">
 							<h2>Create an account </h2>
-							<p>Create your account to connect with students</p>
+							<p>Create an account to connect with students</p>
 						</div>
 						<form onSubmit={handleSubmit} className="formInputs">
 							<div className="formLabel">
-								<label>Full Name</label>
+								<label>
+									Full Name<span className="astericks">*</span>
+								</label>
 								<input
 									type="text"
 									name="name"
@@ -221,6 +224,7 @@ function SignUpForm() {
 								<label className="formLabel" id="userType">
 									User Type
 								</label>
+								<span className="astericks">*</span>
 								<select
 									id="userType"
 									name="userType"
@@ -239,6 +243,7 @@ function SignUpForm() {
 
 							<div className="formLabel">
 								<label>Email</label>
+								<span className="astericks">*</span>
 								<input
 									type="email"
 									name="email"
@@ -254,12 +259,14 @@ function SignUpForm() {
 
 							<div className="formLabel">
 								<label>Password</label>
+								<span className="astericks">*</span>
+
 								<input
 									type="password"
 									name="password"
 									value={password}
 									onChange={handleChange}
-									placeholder="Enter your password..."
+									placeholder="alphanumeric and not less than 8 characters.."
 									className="signUp-input"
 								/>
 							</div>
@@ -269,11 +276,13 @@ function SignUpForm() {
 
 							<div className="formLabel">
 								<label id="interest">Area of Interest</label>
+								<span className="astericks">*</span>
+
 								<select
 									id="interest"
 									name="areaOfInterest"
-									value={areaOfInterest}
-									onChange={handleChange}
+									value={interest}
+									onChange={handleArea}
 									className="signUp-select"
 								>
 									<option value="">Select</option>
@@ -303,7 +312,7 @@ function SignUpForm() {
 										stroke="black"
 										strokeOpacity={1}
 										height={45}
-										width={398}
+										width={491}
 									/>
 								</div>
 							)}

@@ -2,13 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
-import React, {
-	Fragment,
-	ChangeEvent,
-	useState,
-	useRef,
-	useEffect,
-} from "react";
+import React, { Fragment, ChangeEvent, useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "../signUp/signUp.css";
 import { FaFacebook } from "react-icons/fa";
@@ -22,8 +16,21 @@ import axios from "axios";
 
 const baseUrl: string = import.meta.env.VITE_SERVER_URL;
 
+interface formFieldType {
+	email: string;
+	password: string;
+}
+const formField: formFieldType = {
+	email: "",
+	password: "",
+};
 function LoginForm() {
 	const navigate = useNavigate();
+	const [inputField, setInputField] = useState(formField);
+	const [passWordError, setPassWordError] = useState("");
+	const [isPassword, setIsPassword] = useState(false);
+	const [emailError, setEmailError] = useState("");
+	const [isEmail, setIsEmail] = useState(false);
 
 	const firebaseAuth = getAuth(app);
 	const provider = new GoogleAuthProvider();
@@ -62,29 +69,29 @@ function LoginForm() {
 				console.log(err);
 			});
 	};
-	const emailRef = useRef<HTMLInputElement>(null);
-	const passwordRef = useRef<HTMLInputElement>(null);
-	const [error, setError] = useState("");
 
-	const validate = (email: string = "", password: string = "") => {
-		if (email.length === 0) return setError("Please Enter your email");
-		else if (password.length < 8)
-			return setError("Password character cannot be less than 8");
-	};
 	const { LoginConfig, loading, setLoading } = useAuth() as any;
 
-	const handleLogin = () => {
-		setLoading(true);
+	const handleInputChange = (
+		event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>
+	) => {
+		setEmailError("");
+		setPassWordError("");
+		const { name, value } = event.target;
+		setInputField({ ...inputField, [name]: value });
 	};
 	const handleSubmit = async (event: ChangeEvent<HTMLFormElement>) => {
 		event.preventDefault();
-
-		validate(emailRef.current?.value, passwordRef.current?.value);
-		const data = {
-			email: emailRef.current?.value,
-			password: passwordRef.current?.value,
-		};
-		LoginConfig(data);
+		if (inputField.email === "" || !inputField.email.includes("@")) {
+			setIsEmail(true);
+			return setEmailError("Please provide a valid email");
+		} else if (inputField.password.length < 8) {
+			setIsPassword(true);
+			return setPassWordError("Password should not be less than 8 characters");
+		} else {
+			setLoading(true);
+			LoginConfig(inputField);
+		}
 	};
 	useEffect(() => {
 		setLoading(false);
@@ -93,14 +100,16 @@ function LoginForm() {
 	return (
 		<Fragment>
 			<div className="formContainer">
-				<div className="logo">
-					<div>
-						<img src={logo} alt="Logo" />
+				<Link to="/">
+					<div className="logo">
+						<div>
+							<img src={logo} alt="Logo" />
+						</div>
+						<div>
+							<h2> iLearn </h2>
+						</div>
 					</div>
-					<div>
-						<h2> iLearn </h2>
-					</div>
-				</div>
+				</Link>
 				<div>
 					<div className="formBody">
 						<div className="formHead">
@@ -109,53 +118,41 @@ function LoginForm() {
 
 						{/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
 						<form onSubmit={handleSubmit} className="formInputs">
-							{error.length > 0 && error.includes("user") && (
-								<div className="errorMsg">{error}</div>
-							)}
 							<div className="formLabel">
 								<label>Email</label>
 								<input
 									type="email"
 									name="email"
-									ref={emailRef}
+									value={inputField.email}
+									onChange={handleInputChange}
 									placeholder="Enter your email"
-									required
 									className="signUp-input"
 								/>
 							</div>
-							{error.length > 0 && error.includes("email") && (
-								<div className="errorMsg">{error}</div>
+							{isEmail && emailError.length > 0 && (
+								<div className="errorMsg">{emailError}</div>
 							)}
 							<div className="formLabel">
 								<label>Password</label>
 								<input
 									type="password"
 									name="password"
-									ref={passwordRef}
+									value={inputField.password}
+									onChange={handleInputChange}
 									placeholder="Enter your password..."
-									required
 									className="signUp-input"
 								/>
 							</div>
+							{isPassword && passWordError.length > 0 && (
+								<div className="errorMsg">{passWordError}</div>
+							)}
 							<h5 id="forgot">
 								<Link to="/reset-password" className="forgot-link">
 									Forgot password?
 								</Link>
 							</h5>
-							{error.length > 0 && error.includes("Password") && (
-								<div className="errorMsg">{error}</div>
-							)}
 
-							{error.length > 0 && error.includes("Interest") && (
-								<div className="errorMsg">{error}</div>
-							)}
-							{/* //true */}
-
-							<button
-								type="submit"
-								className="signUp-button"
-								onClick={handleLogin}
-							>
+							<button type="submit" className="signUp-button">
 								Login
 							</button>
 
@@ -166,7 +163,7 @@ function LoginForm() {
 										stroke="black"
 										strokeOpacity={1}
 										height={45}
-										width={398}
+										width={511}
 									/>
 								</div>
 							)}
@@ -177,18 +174,10 @@ function LoginForm() {
 								</Link>
 							</div>
 						</form>
-						{/* <div className="socialIcons"> */}
-						{/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
-						{/* <button type="submit" onClick={googleSignIn}>
-								<FcGoogle />
-							</button> */}
-
-						{/* <a href="https:localhost:4000/facebook">
-								<button className="fbBtn"> */}
 
 						<div className="socialIcons">
 							{/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
-							<button type="submit" onClick={signInWithGoogle}>
+							<button type="button" onClick={signInWithGoogle}>
 								<FcGoogle />
 							</button>
 							<a href={`${import.meta.env.VITE_SERVER_URL}/facebook`}>

@@ -6,7 +6,8 @@ interface LayoutProps {
 const Card: FC<LayoutProps> = ({ children }) => {
 	return (
 		<div className="Card-Area">
-			<div>{children}</div>
+			{" "}
+			<div className="noti_p">{children}</div>{" "}
 		</div>
 	);
 };

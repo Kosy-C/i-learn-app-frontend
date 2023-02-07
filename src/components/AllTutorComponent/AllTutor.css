@@ -121,6 +121,12 @@ padding: 0;
   order: 1;
   flex-grow: 0;
 }
+.unique_all_courses_search{
+  width: 70%;
+  border-radius: 7px;
+  height: 42px;
+  padding-left: 1em;
+}
 
 @media (max-width: 480px) and (min-width: 320px) {
   .allTutor-header div {

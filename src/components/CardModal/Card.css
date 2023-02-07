@@ -9,29 +9,16 @@
   margin-top: 48px;
   box-shadow: 0 12px 15px 0 rgb(0 0 0 / 25%);
 }
-
-@media (max-width: 768px) {
-  .Card-Area {
-    position: relative;
-    left: 25%;
-    top: 20px;
+@media screen and (min-width: 300px) and (max-width: 1000px) {
+  .Card-Area{
+    width: 60%;
+    height: 3%;
+    text-align: center;
+    top: 5%;
+    right: 10%;
     background-color: #ffffff;
-    width: 100%;
+  }
+  .noti_p{
+    font-size: small;
   }
 }
-@media ((min-width: 500px) and (max-width: 1000px)) {
-  .Card-Area {
-    position: relative;
-    left: 25%;
-    top: 300px;
-    /* line-height: 70rem */
-    background-color: #ffffff;
-    width: 100%;
-  }
-}
-
-/*
- left: 66%;
-  top: 80px;
-  width: 25%; 
- */
