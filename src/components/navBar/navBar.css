@@ -119,6 +119,8 @@ h3 {
     left: 35px;
     padding-left: 10px;
     padding-top: 10px;
+    margin: 0;
+    font-size: 26px;
   }
   .navlinks {
     display: none;
@@ -135,6 +137,7 @@ h3 {
     transition: all 0.5s ease-in-out;
     width: 100%;
     background-color: white;
+    z-index: 1;
     /* opacity: 80%; */
   }
 
