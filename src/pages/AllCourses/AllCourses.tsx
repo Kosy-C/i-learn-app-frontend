@@ -120,7 +120,7 @@ const AllCourses = () => {
 								return (
 									<div key={index} className="allCourses_Cards">
 										<div id="all_courses_cat">
-											<h2>{course.category} courses</h2>
+											{/* <h2>{course.category} courses</h2> */}
 										</div>
 										<div className="all_courses_card">
 											{/* {course.course.slice(0, 6).map((c: any, index: number) => ( */}
@@ -140,11 +140,12 @@ const AllCourses = () => {
 														/>
 													</div>
 													<div className="all_courses_features">
-														<h3 className="all_coursesTitleHeading">
-															{course.title} by {course?.tutor?.name}
-														</h3>
-														<p>{course.description}</p>
-														<p><span>&#x20A6;</span>{course.pricing}</p>
+														<h4 className="all_coursesTitleHeading">
+															{course.title}
+														</h4>
+
+														<p>{course?.tutor?.name}</p>
+														<h4>₦{Number(course.pricing).toLocaleString()}</h4>
 														<div className="all_coursesRating">
 															<p>
 																<Rating
