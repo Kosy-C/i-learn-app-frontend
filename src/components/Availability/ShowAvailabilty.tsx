@@ -48,6 +48,8 @@ const TutorAvailability: React.FC<Props> = ({ tutor, title, id, onClick }) => {
 
 	const userType = localStorage.getItem("userType");
 
+	// const { user, loggedInUser } = useAuth();
+
 	const getAvailable = async () => {
 		if (id !== undefined) {
 			try {
@@ -105,6 +107,8 @@ const TutorAvailability: React.FC<Props> = ({ tutor, title, id, onClick }) => {
 		console.log(availabilityId, pickedTime);
 
 		try {
+			console.log(availabilities);
+
 			await apiPost("/users/book-session", {
 				availabilityId,
 				pickedTime,
@@ -191,21 +195,32 @@ const TutorAvailability: React.FC<Props> = ({ tutor, title, id, onClick }) => {
 						<hr />
 					</div>
 					<div className="tutorAvailability-buttonContainer2">
-						{availabletime.map((timeslot: any, index: number) => (
-							<button
-								key={index}
-								onClick={() => handleTimeClick(timeslot, index)}
-								className={index === activeSlotIndex ? ` button-active` : ""}
-							>
-								{timeslot}
-							</button>
-						))}
+						{availabletime.length === 0 ? (
+							<div>This tutor has no available time</div>
+						) : (
+							availabletime.map((timeslot: any, index: number) => (
+								<button
+									key={index}
+									onClick={() => handleTimeClick(timeslot, index)}
+									className={index === activeSlotIndex ? ` button-active` : ""}
+								>
+									{timeslot}
+								</button>
+							))
+						)}
 					</div>
-					<div className="tutorAvailability-submitButton">
+					<div
+						className={
+							availabilities.length === 0
+								? "disabled"
+								: "tutorAvailability-submitButton"
+						}
+					>
 						{userType && userType === "Tutor" ? (
 							<button onClick={onClick}>set Availability</button>
 						) : (
 							<button
+								disabled={availabilities.length === 0}
 								onClick={async () =>
 									await handleBookSession(pickedDateId, pickedTime)
 								}

@@ -36,40 +36,55 @@ const Notification: React.FC = () => {
 
 	return (
 		<div>
-			<Card>
-				{notifications.slice(0, 5).map((notification: NotificationM, index) => {
-					return (
-						<>
-							<div
-								key={index}
-								className="notification-user"
-								style={
-									notification.status === "unread"
-										? { backgroundColor: "rgba(20, 168, 0, 0.05)" }
-										: { backgroundColor: "#ffffff" }
-								}
-							>
-								<img
-									src={
-										notification.theSender.image === ""
-											? avatar
-											: notification.theSender.image
-									}
-									alt="userImage"
-								/>
-								<div className="notification-profile">
-									<h1>{notification.theSender.name}</h1>
-									<p>{moment().startOf("date").fromNow()}</p>
-									<div className="notification-message">
-										<p>{notification.description}</p>
-									</div>
-								</div>
-							</div>
-							<hr className="notification-line" />
-						</>
-					);
-				})}
-			</Card>
+			{" "}
+			{notifications.length <= 0 ? (
+				<Card>
+					{" "}
+					<p>No new notification</p>{" "}
+				</Card>
+			) : (
+				<Card>
+					{" "}
+					{notifications
+						.slice(0, 5)
+						.map((notification: NotificationM, index) => {
+							return (
+								<>
+									{" "}
+									<div
+										key={index}
+										className="notification-user"
+										style={
+											notification.status === "unread"
+												? { backgroundColor: "rgba(20, 168, 0, 0.05)" }
+												: { backgroundColor: "#ffffff" }
+										}
+									>
+										{" "}
+										<img
+											src={
+												notification.theSender.image === ""
+													? avatar
+													: notification.theSender.image
+											}
+											alt="userImage"
+										/>{" "}
+										<div className="notification-profile">
+											{" "}
+											<h1>{notification.theSender.name}</h1>{" "}
+											<p>{moment().startOf("date").fromNow()}</p>{" "}
+											<div className="notification-message">
+												{" "}
+												<p>{notification.description}</p>{" "}
+											</div>{" "}
+										</div>{" "}
+									</div>{" "}
+									<hr className="notification-line" />{" "}
+								</>
+							);
+						})}
+				</Card>
+			)}
 		</div>
 	);
 };
