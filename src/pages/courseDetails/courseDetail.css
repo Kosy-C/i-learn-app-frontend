@@ -26,11 +26,8 @@
 }
 
 .cd-course-container {
-  display: flex;
-  flex-direction: column;
   align-items: flex-start;
   margin-top: 30px;
-  padding: 10px 40px;
   text-align: left;
   gap: 8px;
   width: 900px;
@@ -42,13 +39,37 @@
   filter: blur(px);
 }
 
+.course-overlay {
+  height: 100%;
+  width: 100%;
+  padding: 10px 40px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.course--container__content {
+  display: flex;
+  flex-direction: column;
+  line-height: 40%;
+  gap: 10px;
+}
+
+.tutor--image__container {
+  height: 70px;
+  width: 70px;
+}
+.tutor--image {
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+}
+
 .cd-tutor-title {
   width: 500px;
   text-align: left;
   font-family: "Inter";
   font-style: normal;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 20px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.16);
   padding-bottom: 10px;
 }

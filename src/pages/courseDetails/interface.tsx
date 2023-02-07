@@ -7,10 +7,11 @@ export interface CourseModel {
   pricing: string;
   category: string;
   course_material: string;
-  rating: string;
+  rating: number;
   createdAt: Date;
   updatedAt: string;
   tutor: TutorModel;
+  tutorCoursesCount: number;
 }
 
 export interface TutorModel {
@@ -27,7 +28,7 @@ export interface TutorModel {
   createdAt: string;
   updatedAt: string;
   location: string;
-  about: string
+  about: string;
 }
 
 // export const initialTutorState = {
