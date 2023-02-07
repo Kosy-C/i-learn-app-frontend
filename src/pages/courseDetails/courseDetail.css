@@ -53,6 +53,16 @@
   gap: 10px;
 }
 
+.tutor--image__container {
+  height: 70px;
+  width: 70px;
+}
+.tutor--image {
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+}
+
 .cd-tutor-title {
   width: 500px;
   text-align: left;

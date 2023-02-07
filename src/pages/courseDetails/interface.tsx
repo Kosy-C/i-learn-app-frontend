@@ -11,6 +11,7 @@ export interface CourseModel {
   createdAt: Date;
   updatedAt: string;
   tutor: TutorModel;
+  tutorCoursesCount: number;
 }
 
 export interface TutorModel {
