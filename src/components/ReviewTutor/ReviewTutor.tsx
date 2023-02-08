@@ -33,7 +33,7 @@ const ReviewTutor: React.FC<ReviewTutorProps> = ({ tutorId }) => {
 							<div className="tutor-review-block" key={data.id}>
 								<img
 									src={
-										data.student.image === null
+										data.student.image !== null
 											? data.student.image
 											: studentImage
 									}

@@ -12,12 +12,15 @@ export interface LoginData {
 }
 export interface GlobalStateInterface {
 	LoginConfig: (data: LoginData) => Promise<void>;
+	checkIsPaid: (id: string) => Promise<void>;
 	user: User | undefined;
 	loading: Boolean;
 	error: null | String;
 	loggedInUser: () => Promise<void>;
 	setLoading: React.Dispatch<React.SetStateAction<Boolean>> | any;
 	areasOfInterests: string[];
+	isPaid: Boolean;
+	setIsPaid: React.Dispatch<React.SetStateAction<Boolean>> | any;
 	setAreasOfInterests: React.Dispatch<React.SetStateAction<string[]>>;
 }
 export const dataContext = createContext<GlobalStateInterface | null>(null);
@@ -27,6 +30,7 @@ const DataProvider = ({ children }: { children: React.ReactNode }) => {
 	const [loading, setLoading] = useState<boolean>(true);
 	const [error, setError] = useState<String | null>(null);
 	const [areasOfInterests, setAreasOfInterests] = useState<string[]>([]);
+	const [isPaid, setIsPaid] = useState<boolean>(false);
 	/** ==============Login======= **/
 	const LoginConfig: (data: LoginData) => Promise<void> = async (
 		data: LoginData
@@ -62,6 +66,17 @@ const DataProvider = ({ children }: { children: React.ReactNode }) => {
 		setLoading(false);
 	};
 
+	const checkIsPaid = async (id: string) => {
+		try {
+			const response = await apiGet(`/users/student/courses/${id}`);
+			if (response.data.message === "course found") {
+				setIsPaid(true);
+			}
+		} catch (error) {
+			//   console.log(error);
+		}
+	};
+
 	return (
 		<dataContext.Provider
 			value={{
@@ -73,6 +88,9 @@ const DataProvider = ({ children }: { children: React.ReactNode }) => {
 				error,
 				areasOfInterests,
 				setAreasOfInterests,
+				isPaid,
+				setIsPaid,
+				checkIsPaid,
 			}}
 		>
 			{children}

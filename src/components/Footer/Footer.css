@@ -6,21 +6,6 @@
 }
 #reserved{
     color: white;
-    position: absolute;
-    left: 8.3%;
-    /* right: 8.54%; */
-    top: 91%;
-}
-.divider{
-    position: absolute;
-    left: 8.68%;
-    right: 8.54%;
-    top: 90%;
-    /* bottom: 12.14%; */
-    height: .2em;
-    /* margin-bottom: -1.3em; */
-    background: #F5FAFA;
-    opacity: 0.2;  
 }
 .socialImage{
     width: 38px;
@@ -28,28 +13,23 @@
     border-radius: 50%;
     /* border: 2px solid red; */
     padding-top: 10px;
-    /* background-color:#21312F; */
-    /* opacity: 0.5; */
 }
 #footerHolder{
-    position: absolute;
+    /* position: absolute; */
     display: flex;
     width: 16em;
     justify-content: space-around;
     /* border: 2px solid white; */
-    left: 70.68%;
-    /* right: 80.54%; */
-    top: 92%;
+    width: 12em;
+   
 }
-#footerGroup{
-    position: absolute;
-    display: flex;
-    width: 10em;
-    justify-content: space-around;
-    /* border: 2px solid white; */
-    left: 44%;
-    /* right: 80.54%; */
-    top: 80%;
+.footerGroup{
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    text-align: center;
+    padding: 3em 0;
+    /* margin: 2em 0em; */
 }
 #footerText{
     color: white;
@@ -57,5 +37,48 @@
     font-size: 16px;
     line-height: 29px;
     padding: 0;
-    margin: auto;
+    margin-left: .1em;
+}
+.footer-All-rightsFlexContainer{
+    display: flex;
+    width: 80vw;
+    margin: 0 10em;
+    /* background-color: red; */
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.footerHr{
+    width: 80vw;
+    margin: 0 9em;
+}
+.footer-allRightsContainer{
+}
+@media (max-width: 1262px ) and (min-width: 603px) {
+    .footer-All-rightsFlexContainer{
+    display: flex;
+    width: 80vw;
+    margin: 0 5em;
+    /* background-color: red; */
+    align-items: center;
+    justify-content: space-between;
+}
+.footerHr{
+    width: 80vw;
+    margin: 0 5em;
+}
+}
+@media (max-width: 602px ) and (min-width: 320px) {
+    .footer-All-rightsFlexContainer{
+    display: flex;
+    width: 80vw;
+    margin: 0 2em;
+    /* background-color: red; */
+    align-items: flex-start;
+    justify-content: space-evenly;
+}
+.footerHr{
+    width: 100vw;
+    margin: 0 0em;
+}
 }

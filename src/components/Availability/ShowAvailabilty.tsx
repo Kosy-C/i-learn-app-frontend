@@ -49,7 +49,6 @@ const TutorAvailability: React.FC<Props> = ({ tutor, title, id, onClick }) => {
 	const userType = localStorage.getItem("userType");
 
 	// const { user, loggedInUser } = useAuth();
-
 	const getAvailable = async () => {
 		if (id !== undefined) {
 			try {

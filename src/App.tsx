@@ -37,6 +37,7 @@ import StudentProfile from "./pages/StudentProfile/StudentProfile ";
 import TutorNotification from "./pages/TutorPage/TutorPage";
 import TutorCoursesPage from "./pages/TutorCoursePage/TutorCoursePage";
 import UserProfile from "./pages/userprofile/UserProfile";
+import Footer from "./components/Footer/Footer";
 
 function App() {
 	return (
@@ -196,6 +197,7 @@ function App() {
 						/>
 					</Routes>
 				</Router>
+				<Footer />
 			</DataProvider>
 		</React.Fragment>
 	);
