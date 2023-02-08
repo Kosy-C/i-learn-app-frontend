@@ -10,6 +10,8 @@
 
 .review-class{
   margin-top: 40px;
+  display: flex;
+  margin-bottom: 40px;
 }
 .tutorHeader-img {
   margin-right: 50px;
