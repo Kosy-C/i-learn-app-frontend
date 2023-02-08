@@ -23,7 +23,7 @@ const Auth = () => {
 			console.log(response);
 			localStorage.setItem("signature", token);
 			localStorage.setItem("user", "backend");
-			localStorage.setItem("userType", response.data.userDetails.userType)
+			localStorage.setItem("userType", response.data.userDetails.userType);
 			navigate("/dashboard");
 		} catch (error) {
 			console.log(error);
@@ -31,9 +31,7 @@ const Auth = () => {
 		}
 	};
 	useEffect(() => {
-		return () => {
-			void getUserProfile();
-		};
+		void getUserProfile();
 	});
 	return <div>{message}</div>;
 };
