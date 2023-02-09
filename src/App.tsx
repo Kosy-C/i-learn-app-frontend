@@ -82,7 +82,7 @@ function App() {
 							}
 						/>
 						<Route
-							path="/all-tutors"
+							path="/all-tutors/:id?"
 							element={
 								<ProtectedRoute>
 									<AllTutor />
