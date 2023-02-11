@@ -1,8 +1,9 @@
 .container {
      margin: 0 4rem;
      width: 100vw;
-     height: 70vh;
-    overflow: scroll;  
+     padding-bottom: 50px;
+     /* height: 70vh;
+    overflow: scroll;   */
 }
 
 

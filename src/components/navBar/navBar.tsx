@@ -54,31 +54,31 @@ const NavBar = () => {
         {getSignature === null ? (
           <>
             <Link to={"/tutors"} className="nav-link">
-              <li> Tutors</li>
+              <li className="navbarUlList"> Tutors</li>
             </Link>
 
             <Link to={"/about"} className="nav-link">
-              <li> About Us</li>
+              <li className="navbarUlList"> About Us</li>
             </Link>
 
             <Link to={"/login"} className="nav-link">
-              <li> Login</li>
+              <li className="navbarUlList"> Login</li>
             </Link>
 
             <Link to={"/getstarted"} className="nav-link">
-              <li> Get Started</li>
+              <li className="navbarUlList"> Get Started</li>
             </Link>
           </>
         ) : (
           <>
             <Link to={"/dashboard"} className="nav-link">
-              <li> Dashboard</li>
+              <li className="navbarUlList"> Dashboard</li>
             </Link>
 
             <Link to={"/reminder"} className="nav-link">
-              <li> Reminder</li>
+              <li className="navbarUlList"> Reminder</li>
             </Link>
-            <li>
+            <li className="navbarUlList">
               <button onClick={toggleModal}>Notification</button>
               <Modal
                 open={notificationModal}
@@ -96,7 +96,7 @@ const NavBar = () => {
             </li>
           </>
         )}
-        <li>
+        <li className="navbarUlList">
           <button onClick={togglePopup}>
             {showModal && (
               <ProfileModal

@@ -1,7 +1,8 @@
 import React from "react";
 import Modal from "../Modal/Modal";
 import "./ProfileModal.css";
-import ellipse from "../../assets/ellipse.svg";
+// import ellipse from "../../assets/ellipse.svg";
+import avatar from "../../assets/avatar.jpeg";
 import { BiCategory } from "react-icons/bi";
 import { RiAccountCircleLine } from "react-icons/ri";
 import { FiLogOut } from "react-icons/fi";
@@ -32,7 +33,7 @@ const ProfileModal: React.FC<Props> = ({
 				<div className="profile-modal">
 					<div className="profile-profile">
 						<img
-							src={userPicture || ellipse}
+							src={userPicture === "" ? avatar : userPicture}
 							alt=""
 							className="modal-profile-pic"
 						/>
