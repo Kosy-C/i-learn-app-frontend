@@ -5,7 +5,6 @@
   width: 60%;
   margin: 0px auto;
 }
-
 .cd-heading {
   padding-bottom: 5px;
   position: relative;
@@ -19,12 +18,10 @@
   width: 60%;
   margin: 0px auto;
 }
-
 .heading-border {
   border-bottom: 2px solid rgba(0, 0, 0, 0.16);
   width: 100vw;
 }
-
 .cd-course-container {
   align-items: flex-start;
   margin-top: 30px;
@@ -73,7 +70,6 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.16);
   padding-bottom: 10px;
 }
-
 .cd-tutor-container {
   display: flex;
   flex-direction: column;
@@ -86,13 +82,11 @@
   top: 1px;
   padding-left: 0;
 }
-
 .ratings-container {
   border: 1px solid rgba(0, 0, 0, 0.16);
   padding: 10px 0px 30px 10px;
   margin-top: 5px;
 }
-
 .cd-tutor-name {
   padding-bottom: 23px;
   width: 132px;
@@ -104,12 +98,10 @@
   line-height: 17px;
   color: #21334f;
 }
-
 .cd-tutor-profile {
   padding-top: 17px;
   display: flex;
 }
-
 .cd-name-courses {
   display: flex;
   flex-direction: column;
@@ -118,7 +110,6 @@
   left: 15px;
   top: 8px;
 }
-
 .course-no {
   padding-left: 0px;
   padding-right: 29px;
@@ -130,38 +121,31 @@
   line-height: 17px;
   color: #21334f;
 }
-
 .cd-about-tutor {
   padding-top: 10px;
 }
-
 .cd-schedule-time {
   display: flex;
   padding-top: 10px;
 }
-
 .carlendar-icon {
   padding-left: 10px;
   padding-top: 5px;
   color: #fd2959;
 }
-
 .cd-icon {
   padding-top: 3px;
   font-size: 30px;
   color: #fd2959;
 }
-
 .cd-time-container {
   text-align: left;
   width: 900px;
 }
-
 .cd-ratings {
   font-weight: 600;
   padding-bottom: 10px;
 }
-
 .cd-rating {
   width: 76px;
   height: 17px;
@@ -171,7 +155,6 @@
   font-size: 15px;
   line-height: 17px;
 }
-
 .rating-heading {
   height: 15px;
   font-family: "Inter";
@@ -180,11 +163,9 @@
   font-size: 14px;
   line-height: 15px;
 }
-
 .rating-body {
   padding: 12px 0px;
 }
-
 .cal-button {
   padding-top: 4px;
   width: 900px;
@@ -200,12 +181,9 @@
 .cd-title {
   padding-top: 30px;
 }
-
 .cd-rate_course_arrowButton {
   font-size: 20px;
-
-  /* /* margin-right: .4em; */
-  padding-top: 25px;
+  /* /* margin-right: .4em; */  padding-top: 25px;
   margin-left: 60px;
   position: relative;
   text-align: left;
@@ -214,8 +192,7 @@
   font-style: normal;
   font-weight: 600;
 }
-/* Global styles */
-button {
+/* Global styles */button {
   cursor: pointer;
 }
 a {
@@ -232,3 +209,63 @@ a {
   border-radius: 50%;
   object-fit: cover;
 }
+
+
+@media (max-width: 768px) {
+.cd-container{
+  width: 100%;
+  margin: 0 auto;
+}
+
+  .cd-course-container {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    padding: 0 20px 20px 20px;
+  }
+
+  .cd-tutor-title {
+    width: 100%;
+    text-align: left;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.16);
+    padding-bottom: 10px;
+  }
+
+  .cd-heading{
+    margin: 0 20px;
+  }
+
+  .cd-rate_course_arrowButton{
+    margin-left: 20px;
+  }
+
+  .cd-tutor-container{
+    padding: 20px;
+    width: auto;
+  }
+
+  .cd-time-container{
+    width: 100%;
+  }
+
+  .cd-buttons{
+    margin: 10px auto !important;
+    width: 80%;
+  }
+
+  .cal-button{
+    width: 100%;
+  }
+
+  .cd-tutorImgContainer {
+    width: 6em;
+    height: 6em;
+    border-radius: 50%;
+}
+
+}
+

@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./courseDetail.css";
 import Rating from "../../components/Rating/Rating";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { apiGet } from "../../utils/api/axios";
 import { CourseModel } from "./interface";
-
 import MakePayment from "../../components/Payments/MakePayment";
 import { useAuth } from "../../useContext";
 import LoaderRings from "../../components/Loader/LoaderRings";
@@ -21,7 +20,6 @@ const CourseDetail = () => {
 
 	const { user, loggedInUser, loading } = useAuth();
 
-  // const [email, setEmail] = useState(user?.email);
   const params = useParams();
   useEffect(() => {
     const getCourseDetail = async () => {
@@ -52,9 +50,11 @@ const CourseDetail = () => {
 			</button>
 
       <div className="heading-border">
+        
         <h1 className="cd-heading"> About the course</h1>
       </div>
       <div className="cd-container">
+        
         <div
           className="cd-course-container"
           style={{
@@ -79,7 +79,6 @@ const CourseDetail = () => {
             </div>
           </div>
         </div>
-
         <div className="cd-tutor-container">
           <h2 className="cd-tutor-title">About the Tutor</h2>
           <div className="cd-tutor-profile">
@@ -91,19 +90,23 @@ const CourseDetail = () => {
               />
             </div>
             <div className="cd-name-courses">
+              
               <span className="cd-tutor-name">{course.tutor.name}</span>
               <span className="course-no">
                 {course.tutorCoursesCount} Courses
               </span>
             </div>
           </div>
-          <p className="cd-about-tutor">{course.description}</p>
+          <p className="cd-about-tutor">
+            {course.description}
+            
+          </p>
         </div>
-
         <div className="cd-time-container">
+          
           <div className="ratings-container">
             <p className="cd-ratings">Ratings</p>
-            {ratings.length > 0 ? (
+            {ratings && ratings.length > 0 ? (
               ratings.map((rating) => (
                 <>
                   <hr />
@@ -124,11 +127,13 @@ const CourseDetail = () => {
           </div>
         </div>
         <div className="cd-buttons">
+          
           <button className="cal-button" onClick={makePayment}>
+            
             Pay Now
           </button>
           <MakePayment
-            course={course!}
+            course={course}
             openModal={modalOpen}
             closeModal={() => setModalOpen(false)}
             email={user.email}
@@ -138,5 +143,4 @@ const CourseDetail = () => {
     </>
   );
 };
-
 export default CourseDetail;
