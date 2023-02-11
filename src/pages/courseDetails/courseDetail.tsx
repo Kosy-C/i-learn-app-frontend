@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./courseDetail.css";
 import Rating from "../../components/Rating/Rating";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { apiGet } from "../../utils/api/axios";
 import { CourseModel } from "./interface";
-
 import MakePayment from "../../components/Payments/MakePayment";
 import { useAuth } from "../../useContext";
 import LoaderRings from "../../components/Loader/LoaderRings";
@@ -145,5 +144,4 @@ const CourseDetail = () => {
 		</>
 	);
 };
-
 export default CourseDetail;
